@@ -1,0 +1,32 @@
+doctype html
+html(ng-app,lamg="zh")
+    head
+        meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+        title= title
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        //link(rel='stylesheet', href='/css/magic-bootstrap.css')
+        link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/css/todc-bootstrap.min.css')
+        link(rel='stylesheet', href='/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/css/basic.css')
+        -var css = String(cssfile).split(',')
+        if(cssfile!=="" && jsfile!==cssfile && cssfile!==undefined)
+            each item in css
+                link(rel='stylesheet', href='#{siteUrl}css/app/'+item)
+        script(src='/js/jquery.min.js')
+        script(src='/js/bootstrap.js')
+        script(src='/js/dropzone.min.js')
+        script(src='/js/masonry.pkgd.min.js')
+        script(src='/js/basic.js')
+        script(src='/js/main.js')
+        -var j = String(jsfile).split(',')
+        if(jsfile!=="" && jsfile!==undefind)
+            each item in j
+                script(src='#{siteUrl}/js/app/'+item)
+        script.
+            var siteUrl = '#{siteUrl}';
+            var app = '#{app}';
+    body
+        include header
+        block content
+        include footer

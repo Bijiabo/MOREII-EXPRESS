@@ -1,0 +1,28 @@
+extends ../layout
+block content
+    div.container
+        div.row
+            div.col-md-12#shop-classify
+                //p 全部颜色
+                ul#shop-classify-colorbox.mii-boxborder
+                    li(style="background-color:#EB3342;")
+                    li(style="background-color:#BCB5AC;")
+                    li(style="background-color:#EAE6DF;")
+                    li(style="background-color:#DCD1BF;")
+                    li(style="background-color:#f0d282;")
+                    li(style="background-color:#359c8f;")
+                    li(style="background-color:#030000;")
+        div.row#shop-goodlist
+            - each item in goodData
+                div.col-sm-4.col-md-3.col-xs-6.shop-list-item
+                    div.thumbnail
+                        div.item-imgbox
+                            a(href="#{siteUrl}shop/detail/#{item._id}").shop-list-item-a
+                                img.shop-list-pic.mii-ani(src="#{siteUrl}#{item.picture[0]}",style="width:100%;")
+                                div.item-imgbox-shadow.mii-ani
+                        div.caption
+                            p #{item.name}
+                                span.fa.fa-rmb.pull-right  #{item.price}
+                            //p #{item}
+                            //p price:#{item.price}
+

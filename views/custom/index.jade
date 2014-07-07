@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            -for(var i=0;i<customData.styleCount;i++)
+                div.col-sm-4.col-md-3.col-xs-6.shop-list-item
+                    div.thumbnail
+                        div.item-imgbox
+                            a(href="#{siteUrl}custom/make/#{customData.styleArray[i]}").shop-list-item-a
+                                img.shop-list-pic.mii-ani(src="#{siteUrl}img/custom/#{customData.styleArray[i]}/info/demo.jpg",style="width:100%;")
+                                div.item-imgbox-shadow.mii-ani
+                        div.caption
+                            p #{customData.styleArray[i]}
+                                a(href="#{siteUrl}custom/make/chair/#{customData.styleArray[i]}")
+                                    span.fa.fa-flask.pull-right &nbsp;chair
+            //-for(var i=0;i<customData.styleCount;i++)
+                div.col-sm-4.col-md-3.col-xs-6.shop-list-item
+                    div.thumbnail
+                        div.item-imgbox
+                            a(href="#{siteUrl}custom/make/chair/#{customData.styleArray[i]}").shop-list-item-a
+                                img.shop-list-pic.mii-ani(src="#{siteUrl}img/custom/#{customData.styleArray[i]}/info/demo.jpg",style="width:100%;")
+                                div.item-imgbox-shadow.mii-ani
+                        div.caption
+                            p #{customData.styleArray[i]}
+                                span.fa.fa-flask.pull-right &nbsp;4chair

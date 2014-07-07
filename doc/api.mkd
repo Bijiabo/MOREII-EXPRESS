@@ -1,0 +1,129 @@
+#API
+------
+#User system
+
+##ifUser/:query
+ - 方法：get
+ - 查询条件：邮箱/用户名
+ - 返回：
+ 
+        {
+                _id: "537b7a3e48901b457c6f4119",
+                name: "bijiabo",
+                mail: "hu@cafa.me",
+                __v: 0,
+                address: [ ]
+        }
+        
+##register
+ - 方法：post
+ - 提交内容：
+ 
+        {
+                name: String,
+                mail: String,
+                password:String   
+         }
+         
+ - 返回：
+ 
+        {
+                success:1,
+                description:"注册成功"
+         }
+         
+##login
+ - 方法：post
+ - 提交内容：
+
+        {
+                name: String,
+                mail: String
+        }
+        
+ - 返回：
+
+        {
+                success:1,
+                description:"登陆成功"
+         }
+
+##logout
+ - get
+ - 返回：
+
+        {
+                success:1,
+                description:"退出成功"
+         }
+
+##iflogin
+ - get
+ - 返回：
+
+        {
+                login:true,
+                userInfo:{
+                        name: String,
+                        mail: String
+                }
+         }
+
+
+------
+
+#Notice System
+
+##getUnreadNotice
+
+- get
+- return:
+
+        [
+                {
+                        _id: "538ad312c666d9901aecf713",
+                        uid: "537e1f6d0793e6ce7850e39a",
+                        content: "this is test notice Sun Jun 01 2014 15:15:30 GMT+0800 (CST)",
+                        type: "test",
+                        read: false,
+                        __v: 0
+                },
+                {
+                        _id: "538ad5e1a808ab791b1997aa",
+                        uid: "537e1f6d0793e6ce7850e39a",
+                        content: "this is test notice Sun Jun 01 2014 15:27:29 GMT+0800 (CST)",
+                        type: "test",
+                        read: false,
+                        __v: 0
+                },
+                {
+                        _id: "538ad5e2a808ab791b1997ab",
+                        uid: "537e1f6d0793e6ce7850e39a",
+                        content: "this is test notice Sun Jun 01 2014 15:27:30 GMT+0800 (CST)",
+                        type: "test",
+                        read: false,
+                        __v: 0
+                }
+        ]
+        
+##addTestNotice
+
+- get 
+- return: 
+
+        {
+                error: false,
+                description: "添加测试通知成功:)"
+        }
+        
+------
+
+#shop
+
+#addGood
+
+ - post
+ - return: 
+ 
+        {error:false} 
+ 

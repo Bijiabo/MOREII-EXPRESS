@@ -1,0 +1,27 @@
+extends ../layout
+block content
+    div.container
+        div.row
+            div.col-md-12.hidden-xs(style="height:100px;")
+            div#user-registerbox.col-md-8.col-md-offset-2
+                form(role="form",method="post",action="/api/register")
+                    div.form-group
+                        div.input-group
+                            span.input-group-addon
+                                span.fa.fa-user.user-input-group-addon
+                            input.form-control(type="text",name="name",placeholder="昵称")
+                    div.form-group
+                        div.input-group
+                            span.input-group-addon
+                                span.fa.fa-envelope.user-input-group-addon
+                            input.form-control(type="email",name="mail",placeholder="邮箱")
+                    div.form-group
+                        div.input-group
+                            span.input-group-addon
+                                span.fa.fa-lock.user-input-group-addon
+                            input.form-control(type="password",name="password",placeholder="密码")
+                    div.form-group
+                        button.btn.btn-primary.btn-block.mii-jshide(type="submit") 注册
+                        button#doregister.btn.btn-primary.btn-block.mii-jsshow.mii-formsubmit(type="button") 注册
+            div.col-md-12.text-center#user-toggle-login
+                a(href="#{siteUrl}user/login") 已有账户？

@@ -1,0 +1,42 @@
+div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
+    div
+        div.navbar-header
+            button.navbar-toggle(type="button",data-toggle="collapse",data-target="#mii-header-links")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href="/") Moreii
+                //img(src="/img/logo_120x80.png")
+        div.collapse.navbar-collapse#mii-header-links
+            ul.nav.navbar-nav
+                li.applink.applink-index.active
+                    a(href="/") 首页
+                li.applink.applink-shop
+                    a(href="/shop/list") 壁纸
+                li.applink.applink-custom
+                    a(href="/custom") 定制
+
+                li.applink.applink-blog
+                    a(href="/blog") 博客
+            ul.nav.navbar-nav.navbar-right
+                li#header-login.hidden
+                    a(href="/user") 登陆 / 注册
+                li#header-user.dropdown(style="display:none;").hidden
+                    a.dropdown-toggle(href="#",data-toggle="dropdown")
+                        span#header-user-name 用户名
+                        b.caret(style="margin-left:5px;")
+                    ul.dropdown-menu
+                        li
+                            a(href="#{siteUrl}user/account") 我的资料
+                        li
+                            a(href="#") 我的订单
+                        li
+                            a(href="#{siteUrl}user/logout") 退出
+                li
+                    button.btn.btn-default(type="button").fa.fa-university#previewroombutton
+                li
+                    button.btn.btn-default(type="button").fa.fa-eye#previewbutton
+                li
+                    button.btn.btn-primary(type="button").fa.fa-check#uploadbutton
+//- div#header-placeholder

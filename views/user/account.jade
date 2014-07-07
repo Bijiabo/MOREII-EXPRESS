@@ -1,0 +1,134 @@
+extends ../layout
+block content
+    div.container
+        div.row
+            div.col-md-12.hidden-xs(style="height:100px;")
+            div.col-md-12#user-account-box
+                form.form-horizontal(role="form")
+                    div.form-group
+                        label.col-xs-2.control-label(for="name") 昵称
+                        div.col-xs-10
+                            input.form-control(type="text",name="name",value="#{userData.name}")
+                    div.form-group
+                        label.col-xs-2.control-label(for="mail") 邮箱
+                        div.col-xs-10
+                            input.form-control(type="email",name="mail",value="#{userData.mail}")
+                    div.form-group
+                        label.col-xs-2.control-label(for="phone") 手机
+                        div.col-xs-10
+                            -if(userData.phone===undefind){userData.phone='';}
+                            input.form-control(type="tel",name="phone",value="#{userData.phone}")
+                    -var addressCount = userData.address.length
+                    -if(addressCount===0)
+                        div.form-group
+                            label.col-xs-2.control-label(for="address")
+                                span.visible-xs 地址
+                                span.hidden-xs 收货地址
+                            div.col-xs-10
+                                button.btn.btn-primary.btn-red-o.mii-ani(type="button") 保存
+                    -else
+                        -for(var i=0;i<addressCount;i++)
+                            if(i===0)
+                                div.form-group.user-account-addressitem
+                                    label.col-xs-2.control-label(for="address")
+                                        span.visible-xs 地址
+                                        span.hidden-xs 收货地址
+                                    div.col-xs-10
+                                        div.input-group
+                                            input.form-control.user-account-address-input(disabled,type="text",value="#{userData.address[i].province.name}--#{userData.address[i].areaType.name}--#{userData.address[i].area.name}    #{userData.address[i].address}    #{userData.address[i].name}    #{userData.address[i].tel}")
+                                            div.input-group-btn
+                                                button.btn.btn-default.dropdown-toggle.mii-ani(type="button",data-toggle="dropdown") 编辑&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu.pull-right
+                                                    li
+                                                        a.user-account-modifyaddress(href="#",data-index="#{i}",data-province="#{userData.address[i].province.index}",data-areatype="#{userData.address[i].areaType.index}",data-area="#{userData.address[i].area.index}",data-address="#{userData.address[i].address}",data-name="#{userData.address[i].name}",data-tel="#{userData.address[i].tel}") 修改
+                                                    li
+                                                        a.user-account-deleteaddress(href="#",data-index="#{i}") 删除
+                            else
+                                div.form-group.user-account-addressitem
+                                    label.col-xs-2.control-label(for="address")
+                                    div.col-xs-10
+                                        div.input-group
+                                            input.form-control.user-account-address-input(disabled,type="text",value="#{userData.address[i].province.name}--#{userData.address[i].areaType.name}--#{userData.address[i].area.name}    #{userData.address[i].address}    #{userData.address[i].name}    #{userData.address[i].tel}")
+                                            div.input-group-btn
+                                                button.btn.btn-default.dropdown-toggle.mii-ani(type="button",data-toggle="dropdown") 编辑&nbsp;
+                                                    span.caret
+                                                ul.dropdown-menu.pull-right
+                                                    li
+                                                        a.user-account-modifyaddress(href="#",data-index="#{i}",data-province="#{userData.address[i].province.index}",data-areatype="#{userData.address[i].areaType.index}",data-area="#{userData.address[i].area.index}",data-address="#{userData.address[i].address}",data-name="#{userData.address[i].name}",data-tel="#{userData.address[i].tel}") 修改
+                                                    li
+                                                        a.user-account-deleteaddress(href="#",data-index="#{i}") 删除
+                        div.form-group
+                            label.col-xs-2.control-label(for="addaddress")
+                            div.col-xs-10
+                                button.btn.btn-default.btn-block.mii-ani(type="button",data-toggle="modal",data-target="#add-address") + 添加
+                    div.form-group
+                        label.col-xs-2.control-label(for="name")
+                        div.col-xs-10
+                            button.btn.btn-primary.btn-red-o.mii-ani(type="button") 保存
+    //- 添加地址modal
+    div.modal.fade#add-address(role="dialog",aria-labelledby="add-address-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#add-address-title 添加收货地址
+                div.modal-body
+                    form.form-horizontal(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="name") 城市
+                            div.col-xs-4
+                                select.form-control.user-address-province
+                            div.col-xs-3(style="padding:0;")
+                                select.form-control.user-address-areatype
+                            div.col-xs-3
+                                select.form-control.user-address-area
+                        div.form-group
+                            label.col-xs-2.control-label(for="address") 地址
+                            div.col-xs-10
+                                input.form-control#user-address-address(type="text",name="address",value="")
+                        div.form-group
+                            label.col-xs-2.control-label.visible-xs(for="receiver") 姓名
+                            label.col-xs-2.control-label.hidden-xs(for="receiver") 收件人
+                            div.col-xs-10
+                                input.form-control#user-address-name(type="text",name="receiver",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="tel") 电话
+                            div.col-xs-10
+                                input.form-control#user-address-tel(type="tel",name="tel",value="")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#user-account-addaddress(type="button") 添加
+    //- 修改地址modal
+    div.modal.fade#modify-address(role="dialog",aria-labelledby="modify-address-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#modify-address-title 修改收货地址
+                div.modal-body
+                    form.form-horizontal(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="city") 城市
+                            div.col-xs-4
+                                select.form-control.user-address-province
+                            div.col-xs-3(style="padding:0;")
+                                select.form-control.user-address-areatype
+                            div.col-xs-3
+                                select.form-control.user-address-area
+                        div.form-group
+                            label.col-xs-2.control-label(for="address") 地址
+                            div.col-xs-10
+                                input.form-control#user-modifyaddress-address(type="text",name="address",value="")
+                        div.form-group
+                            label.col-xs-2.control-label.visible-xs(for="receiver") 姓名
+                            label.col-xs-2.control-label.hidden-xs(for="receiver") 收件人
+                            div.col-xs-10
+                                input.form-control#user-modifyaddress-name(type="text",name="receiver",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="tel") 电话
+                            div.col-xs-10
+                                input.form-control#user-modifyaddress-tel(type="tel",name="tel",value="")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#user-account-modifyaddress(type="button") 修改

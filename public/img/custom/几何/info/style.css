@@ -1,0 +1,12 @@
+#toolbar{
+    background: #3F3A39;
+}
+#toolbar #tab .tabitem.active {
+    background: #3F3A39;
+}
+#toolbar #tab .tabitem {
+    background: #4c4c4c;
+}
+#toolbar #tab .tabitem:hover{
+    background: #504a46;
+}

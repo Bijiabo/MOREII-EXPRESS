@@ -1,0 +1,22 @@
+doctype html
+html(ng-app)
+    head
+        title= title
+        link(rel='stylesheet', href='/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/css/slick.css')
+        link(rel='stylesheet', href='/css/basic.css')
+        link(rel='stylesheet/less',type="text/css",href='/css/custom.less')
+        script(src='/js/jquery.min.js')
+        script(src='/js/dropzone.min.js')
+        script(src='/js/bootstrap.js')
+        script(src='/js/angular.min.js')
+        script(src='/js/basic.js')
+        script(src='/js/main.js')
+        script(src='/js/less.min.js')
+        -var j = String(jsfile).split(',')
+        if(jsfile!=="")
+            each item in j
+                script(src='/js/app/'+item)
+
+    body
+        block content

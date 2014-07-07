@@ -1,0 +1,34 @@
+doctype html
+html(ng-app)
+    head
+        title= title
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        //link(rel='stylesheet', href='/css/magic-bootstrap.css')
+        link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/css/todc-bootstrap.min.css')
+        link(rel='stylesheet', href='/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/css/slick.css')
+        link(rel='stylesheet', href='/css/basic.css')
+        link(rel='stylesheet/less',type="text/css",href='/css/custom.less')
+        -var css = String(cssfile).split(',')
+        if(cssfile!=="" && jsfile!==cssfile && cssfile!==undefined)
+            each item in css
+                link(rel='stylesheet', href='#{siteUrl}css/app/'+item)
+        script(src='/js/jquery.min.js')
+        script(src='/js/bootstrap.js')
+        //script(src='/js/angular.min.js')
+        script(src='/js/dropzone.min.js')
+        script(src='/js/basic.js')
+        script(src='/js/main.js')
+        script(src='/js/less.min.js')
+        -var j = String(jsfile).split(',')
+        if(jsfile!=="")
+            each item in j
+                script(src='/js/app/'+item)
+        script.
+            var siteUrl = '#{siteUrl}';
+            var app = '#{app}';
+
+    body
+        include ./header
+        block content

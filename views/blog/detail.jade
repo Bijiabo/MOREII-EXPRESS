@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            div.col-md-9
+                div.row
+                    div.col-md-12#blog-main.mii-boxborder
+                        h2= blogData.info.title
+                        article!= blogData.content
+                        -if(blogData.hasMoreContent)
+                            a.btn.btn-default.btn-block(href="#{blogData.nextPage}") 阅读更多
+                        button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
+                        div.blog-userinfo= blogData.info.user.name
+                        div.row
+                            div.col-md-12#comment-box
+                                h4 评论
+                                form(role="form",data-app="#{app}",data-apppageid="#{blogData.info._id}")
+                                    div.form-group
+                                        textarea.form-control#comment-content(placeholder="评论内容...",name="content")
+                                    div.form-group
+                                        a.btn.btn-primary.pull-right#comment-submit 提交
+                            div.col-md-12#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{blogData.info._id}/")
+
+            div.col-md-3#blog-sidebar
+                div.blog-sidebar-item
+                    div.input-group
+                        input.form-control(type="text")
+                        div.input-group-btn
+                            button.btn.btn-default(type="button") Search
+
+

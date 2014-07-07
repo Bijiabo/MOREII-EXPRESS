@@ -1,0 +1,79 @@
+extends ./layout
+block content
+    link(rel='stylesheet', href='#{siteUrl}img/custom/#{customData.style}/info/style.css')
+    script(src='#{siteUrl}img/custom/#{customData.style}/info/style.js')
+    div#loading
+        div#loading-box
+            div#loading-info
+                h1 Moreii Custom
+                    span#loading-number  5
+                    span %
+            div.progress#loading-progress
+                div#loading-progress-bar.progress-bar.progress-bar-danger(role="progressbar",aria-valuenow="5",aria-valuemin="0",aria-valuemax="100",style="width: 5%")
+                    span.sr-only Loading...
+    div#wall
+        div#canvas
+        div#chairpic
+    div#toolbar
+        div#tab
+            div.tabitem.active#elementList 元素
+            div.tabitem#setbackgroundcolor 背景色
+        div#panel
+            div#styleelementlist
+                - for(var i=0;i<customData.elementCount;i++)
+                    if(customData.elmentArray[i]!=='info')
+                        div.item
+                            div.box
+                                div.img
+                                    img(src='#{siteUrl}img/custom/#{customData.style}/#{customData.elmentArray[i]}')
+                                div.shadow
+                                    div.text
+                                        span.fa.fa-plus
+
+            div#backgroundcolor
+                div.bgcoloritem.active(style="background-color:#ffffff")
+                div.bgcoloritem(style="background-color:#c9bc9c")
+                div.bgcoloritem(style="background-color:#a7a897")
+                div.bgcoloritem(style="background-color:#7a837f")
+                div.bgcoloritem(style="background-color:#989a9c")
+                div.bgcoloritem(style="background-color:#bab7bb")
+                div.bgcoloritem(style="background-color:#c3b7b8")
+    div#preview
+        div.fa.fa-eye-slash#closepreview
+    div#previewbutton
+        div.fa.fa-eye
+    div#uploadbutton
+        div.fa.fa-check
+    div#resize
+        div#resize-0
+        div#resize-1
+        div#resize-2
+        div#resize-3
+        div#resize-4
+    div#redraw
+        canvas#redrawcanvas(width=660,height=580) 你用的浏览器是史前的吧，不支持canvas我擦。。。
+    div#contextmenu
+        ul
+            li(data-miido="delete")
+                span.fa.fa-trash-o
+                span  删除
+            li(data-miido="up")
+                span.fa.fa-arrow-up
+                span  上移一层
+            li(data-miido="down")
+                span.fa.fa-arrow-down
+                span  下移一层
+    div.modal.fade#uploaddata(role="dialog",aria-labelledby="uploaddatatitle",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#uploaddatatitle ProgressBarTitle
+                div.modal-body
+                    div.progress.progress-striped.active
+                        div.progress-bar#uploaddata-bar(role="progressbar",aria-valuenow="0",aria-valuemin="0",aria-valuemax="100",style="width: 0%")
+                            span.sr-only 100% Complete
+                    div#picturenumber(style="display:none;")
+                        p 存储编号为：007
+                //div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 关闭

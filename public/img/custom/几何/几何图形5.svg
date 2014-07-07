@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1200px" height="1200px" viewBox="0 0 1200 1200" enable-background="new 0 0 1200 1200" xml:space="preserve">
+<g>
+	<g>
+		<polygon fill="#FCD489" points="0,600.006 150.001,750.007 150.001,449.999 		"/>
+		<polygon fill="#FDE3B3" points="150.001,449.999 150.001,750.007 300.002,600.006 		"/>
+		<polygon fill="#F5B090" points="150.001,449.999 450.004,450.004 300.002,300.002 		"/>
+		<polygon fill="#EF845D" points="300.002,600.006 450.004,450.004 150.001,449.999 		"/>
+		<polygon fill="#6FB8E7" points="150.001,750.007 450.004,750.002 300.002,600.006 		"/>
+		<polygon fill="#9BCAED" points="300.002,900.008 450.004,750.002 150.001,750.007 		"/>
+		<polygon fill="#FFF9B1" points="450.004,750.002 450.004,450.004 300.002,600.006 		"/>
+		<polygon fill="#FFF67F" points="600.006,600.006 450.004,450.004 450.004,750.002 		"/>
+	</g>
+	<g>
+		<polygon fill="#FCD489" points="300.002,300.002 450.004,450.004 449.999,150.001 		"/>
+		<polygon fill="#FDE3B3" points="449.999,150.001 450.004,450.004 600.006,300.002 		"/>
+		<polygon fill="#F5B090" points="449.999,150.001 750.002,150.006 600,0 		"/>
+		<polygon fill="#EF845D" points="600.006,300.002 750.002,150.006 449.999,150.001 		"/>
+		<polygon fill="#6FB8E7" points="450.004,450.004 750.002,450.004 600.006,300.002 		"/>
+		<polygon fill="#9BCAED" points="600.006,600.006 750.002,450.004 450.004,450.004 		"/>
+		<polygon fill="#FFF9B1" points="750.002,450.004 750.002,150.006 600.006,300.002 		"/>
+		<polygon fill="#FFF67F" points="900.004,300.002 750.002,150.006 750.002,450.004 		"/>
+	</g>
+	<g>
+		<polygon fill="#FCD489" points="300.002,900.008 449.999,1050.004 450.004,750.002 		"/>
+		<polygon fill="#FDE3B3" points="450.004,750.002 449.999,1050.004 600.006,899.998 		"/>
+		<polygon fill="#F5B090" points="450.004,750.002 750.002,750.002 600.006,600.006 		"/>
+		<polygon fill="#EF845D" points="600.006,899.998 750.002,750.002 450.004,750.002 		"/>
+		<polygon fill="#6FB8E7" points="449.999,1050.004 750.002,1050.004 600.006,899.998 		"/>
+		<polygon fill="#9BCAED" points="600,1200.006 750.002,1050.004 449.999,1050.004 		"/>
+		<polygon fill="#FFF9B1" points="750.002,1050.004 750.002,750.002 600.006,899.998 		"/>
+		<polygon fill="#FFF67F" points="900.004,900.004 750.002,750.002 750.002,1050.004 		"/>
+	</g>
+	<g>
+		<polygon fill="#FCD489" points="600.006,600.006 750.002,750.002 750.002,450.004 		"/>
+		<polygon fill="#FDE3B3" points="750.002,450.004 750.002,750.002 899.998,600.006 		"/>
+		<polygon fill="#F5B090" points="750.002,450.004 1050.004,449.999 900.004,300.002 		"/>
+		<polygon fill="#EF845D" points="899.998,600.006 1050.004,449.999 750.002,450.004 		"/>
+		<polygon fill="#6FB8E7" points="750.002,750.002 1050.004,750.002 899.998,600.006 		"/>
+		<polygon fill="#9BCAED" points="900.004,900.004 1050.004,750.002 750.002,750.002 		"/>
+		<polygon fill="#FFF9B1" points="1050.004,750.002 1050.004,449.999 899.998,600.006 		"/>
+		<polygon fill="#FFF67F" points="1200,600.006 1050.004,449.999 1050.004,750.002 		"/>
+	</g>
+</g>
+</svg>

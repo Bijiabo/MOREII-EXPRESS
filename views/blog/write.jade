@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            div.col-md-9
+                form(role="form")
+                    div.form-group
+                        input.form-control(type="text",name="title",placeholder="日志标题",value="#{blogData.title}")
+                    div.form-group
+                        textarea.form-control(name="content",placeholder="日志内容...",rows="30") #{blogData.content}
+            div.col-md-3
+                div.row
+                    input.form-control.hide(type="hidden",name="_id",value="#{blogData._id}")
+                    div.input-group
+                        input.form-control#tag(type="text",name="tag",placeholder="标签")
+                        span.input-group-btn
+                            button.btn.btn-default(type="button")
+                                span.fa.fa-plus
+                    div#tagbox(style="margin-top:15px;")
+                        -for(var i=0;i<blogData.tag.length;i++)
+                            a.btn.btn-info.blog-tags #{blogData.tag[i]}
+                div.row
+                    button.btn.btn-primary#blog-save Save

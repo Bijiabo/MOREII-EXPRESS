@@ -1,0 +1,23 @@
+#wall #canvas{
+    width: 660px;
+    height: 580px;
+    margin-left: -330px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+}
+#wall #canvas.active{
+    margin-left: -332px;
+}
+#chairpic{
+    border: 1px solid #555555;
+    position: absolute;
+    left: 50%;
+    top: 65px;
+    z-index: 99;
+    margin-left: -365px;
+    width: 730px;
+    height: 650px;
+    background-color: rgba(117, 108, 68, 0.39);
+    overflow: hidden;
+    border-radius: 30px;
+}

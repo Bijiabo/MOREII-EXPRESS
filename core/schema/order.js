@@ -1,0 +1,80 @@
+/**
+ * Created by boooo on 14-5-17.
+ */
+var mongoose = require('mongoose'),
+    db = require('../db');
+var orderSchema = new mongoose.Schema({
+    uid:String,
+    goodId:String,
+    goodData:{
+        name:String,
+        picture:Array,
+        description:String,
+        color:Array,
+        price:Number,
+        count:{
+            favorite:Number,
+            view:Number,
+            comment:Number
+        },
+        type:String,
+        same_good:Array,
+        index:Number
+    },
+    price:Number,
+    count:Number,
+    goodType:String,
+    address:{
+        country:String,
+        provice:String,
+        city:String,
+        detailed:String
+    },
+    phoneNumber:String,
+    remark:String,
+    state:String
+});
+var orderModel = db.model('order',orderSchema);
+
+module.exports = {
+    add:function(data,callback){
+        orderModel.create(data,function(err){
+            callback(err);
+        })
+    },
+    update:function(_id,data,callback){
+        orderModel.update({_id:_id},{$set:data},function(err){
+            callback(err);
+        })
+    },
+    list:function(queryData,skip,limit,callback){
+        orderModel.find(queryData)
+            .skip(skip)
+            .limit(limit)
+            .sort({'_id':-1})
+            .exec(function(err,data){
+                callback(err,data);
+            });
+    },
+    detail:function(id,callback){
+        orderModel.findById(id)
+            .exec(function(err,data){
+                callback(err,data);
+            });
+    },
+    cancel:function(id,cb){
+        orderModel.update({_id:id},{$set:{state:'cancel'}},function(err){
+            cb(err);
+        })
+    },
+    paid:function(id,cb){
+        orderModel.update({_id:id},{$set:{state:'paid'}},function(err){
+            cb(err);
+        })
+    },
+    waitingPaid:function(id,cb){
+        orderModel.update({_id:id},{$set:{state:'waitingPaid'}},function(err){
+            cb(err);
+        })
+    }
+}

@@ -1,0 +1,18 @@
+/*blog*/
+#blog-main{
+    background: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+.blog-tags{
+    margin: 0 5px 5px 0;
+}
+#blog-sidebar{
+
+}
+.blog-sidebar-item{
+    /*background: #ffffff;*/
+}
+#blog-main article{
+    line-height: 2em;
+}

@@ -1,0 +1,410 @@
+/*basic*/
+.border-radius(@radius: 50%){
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+/*style page - index*/
+/*#header{
+    margin: 30px 0 20px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+    #header #logo{
+        font-size: 30px;
+    }
+    #header #nav{
+        padding: 0;
+    }
+    #header #nav ul li{
+        float: right;
+    }*/
+#stylebox{
+    margin: 50px 0 0 0;
+}
+    #stylebox #list .slick-prev:before,#stylebox #list .slick-next:before{color: #ccc;}
+    #stylebox #list .item .box{
+        width: 80%;
+        margin: 0 auto;
+    }
+        #stylebox #list .item .box .img img{
+            width: 100%;
+            border-radius:  50%;
+            overflow: hidden;
+        }
+
+/*custom make page*/
+body,div{
+  padding:0;
+  margin: 0;
+}
+body{
+  overflow: hidden;
+}
+#wall{
+    background-color: #ffffff;
+    width:100%;
+    height: 600px;
+    margin: -20px 0 0 0;
+    position: relative;
+}
+  #wall:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+//    background-color: rgba(0,0,0,0.1);
+    background-image: url("../img/custom_bg.jpg");
+    background-repeat: repeat;
+    opacity: 0.3;
+  }
+  #wall #canvas{
+//    border: 1px dashed #475148;
+    border: none;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    z-index:100;
+    margin-left: -250px;
+    width: 500px;
+    height: 500px;
+    background-color: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  }
+  #wall #canvas.active{
+    border: 2px dashed #475148;
+    margin-left: -252px;
+    margin-top: -2px;
+  }
+  #wall #canvas>div{
+    position: absolute;
+  }
+    #wall #canvas>div>img{
+      width: 100px;
+    }
+#toolbar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index:300;
+    width:100%;
+    height: 0;
+//    background-color: #76857e;
+    background-color: #5d5d5d;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+  #toolbar #tab{
+    height: 30px;
+    width: 100%;
+    clear: both;
+    background-color: #4c4c4c;
+  }
+    #toolbar #tab .tabitem{
+      float: left;
+      height: 100%;
+      background: #2C2C2C;
+      color: rgb(204, 204, 204);
+      padding: 0 15px;
+      line-height: 30px;
+      cursor: pointer;
+    }
+    #toolbar #tab .tabitem:hover{
+      background-color: #76857e;
+      color: #ffffff;
+    }
+    #toolbar #tab .tabitem.active{
+      background-color: #5d5d5d;
+    }
+  #toolbar #styleelementlist .item .box{
+    margin: 15px;
+    position: relative;
+  }
+    #toolbar #styleelementlist{
+      margin: 0;
+    }
+    #toolbar #styleelementlist .item .box .img{
+      text-align: center;
+    }
+    #toolbar #styleelementlist .item .box .img img{
+      width: 100%;
+      max-height: 100px;
+//      border-radius:  50%;
+      overflow: hidden;
+    }
+    #toolbar #styleelementlist .item .box .shadow{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+//      border-radius:  50%;
+      text-align: center;
+      overflow: hidden;
+    }
+    #toolbar #styleelementlist .item .box .shadow:hover{
+      cursor: move;
+      background-color: rgba(0,0,0,0.3);
+    }
+    #toolbar #styleelementlist .item .box .shadow:hover .text{
+      display: block;
+    }
+      #toolbar #styleelementlist .item .box .shadow .text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 30px;
+        width: 100px;
+        margin: -15px 0 0 -50px;
+        font-size: 24px;
+        line-height: 30px;
+        color: #fff3d7;
+        display: none;
+      }
+    #panel{
+      height: 100%;
+    }
+    #backgroundcolor{
+      padding: 15px 0;
+      display: none;
+    }
+    #backgroundcolor .bgcoloritem{
+      float: left;
+      width: 60px;
+      height: 60px;
+      margin: 0 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -o-border-radius: 50%;
+      -ms-border-radius: 50%;
+    }
+    #backgroundcolor .bgcoloritem.active{
+      border: 4px solid #d2e8de;
+      position: relative;
+      top: -4px;
+      left: -4px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    }
+#addElement{
+  position: fixed;
+  z-index:200;
+}
+  #addElement img{
+    width: 100px;
+  }
+
+#preview{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 500;
+  display: none;
+}
+/*  #preview div,#previewbutton div,#uploadbutton div{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    color: #555555;
+    cursor: pointer;
+  }
+#previewbutton{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background-color: none;
+  z-index: 499;
+}*/
+#resize{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  border: 1px dashed #4c4c4c;
+  display: none;
+  z-index: 301;
+}
+  .resize-circle{
+    .border-radius(50%);
+    background-color: #ffffff;
+    border: 1px solid #555555;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+  }
+  #resize-0{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #resize-1{
+    .resize-circle;
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+  }
+  #resize-2{
+    .resize-circle;
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+  }
+  #resize-3{
+    .resize-circle;
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+  }
+  #resize-4{
+    .resize-circle;
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+  }
+#redraw{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  width: 500px;
+  height: 500px;
+  display: none;
+}
+/*loading*/
+#loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 999;
+}
+#loading-box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  margin-left: -40%;
+  margin-top: -100px;
+}
+#loading-info p{
+  color: #eb3342;
+}
+#loading-progress{
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+}
+#loading-progress .progress-bar-danger{
+  background-color: rgb(235, 51, 66);
+
+}
+/*context menu*/
+#contextmenu{
+  position: fixed;
+  background: #ffffff;
+  width: 200px;
+  z-index: 600;
+  box-shadow: 0 5px 50px rgba(0,0,0,0.2);
+  display: none;
+}
+#contextmenu ul{
+  list-style: none;
+  padding: 4px 0;
+  margin: 0;
+}
+#contextmenu ul li{
+  line-height: 2em;
+  padding: 4px 10px;
+}
+#contextmenu ul li:hover{
+  color: #ffffff;
+  background: #eb3342;
+  cursor: pointer;
+}
+#contextmenu ul li span.fa{
+  margin-right: 10px;
+}
+/*#uploadbutton{
+  position: fixed;
+  top: 50px;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background-color: none;
+  z-index: 499;
+}*/
+/*header bar*/
+#header li .btn{
+  margin-left: 3px;
+  margin-right: 2px;
+  line-height: 18px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/*previewroom*/
+#previewroom-body{
+  position: relative;
+  top:0;
+  left: 0;
+}
+#previewroom-loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  color: #76857e;
+}
+#previewroom .modal-dialog{
+  width:840px;
+}
+#previewroom-resize{
+  opacity: 0.8;
+  position: relative;
+  border: 1px solid #CECECE;
+  overflow: visible;
+  border-radius: 8px;
+}
+#previewroom-resize .progress-bar{
+  border-radius: 8px;
+  opacity: 0.6;
+}
+#previewroom-resizehandle{
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  cursor: pointer;
+}

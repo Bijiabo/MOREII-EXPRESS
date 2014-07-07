@@ -1,0 +1,177 @@
+html{
+    background: #EBECED;
+}
+body{
+    background: none;
+}
+/*fix bs*/
+/*.form-control[type="color"]{padding:0 2px;}
+.clearboth{clear: both;display: block;}
+.navbar-inverse .navbar-nav > li > a {
+    color: #CCCCCC;
+}
+::selection {
+    background-color:none;
+    color:#eb3342;
+}
+::-moz-selection { *//* FF *//*
+    background-color:none;
+    color:#eb3342;
+}
+.btn-red-o,.btn-primary-o {
+    color: #eb3342;
+    background-color: #ffffff;
+    border-color: #e91c2c;
+}
+.btn-success-o{
+    color: #1abc9c;
+    background-color: #ffffff;
+    border-color: #1abc9c;
+}
+.btn-info-o{
+    color: #1f2231;
+    background-color: #ffffff;
+    border-color: #1f2231;
+}
+.jumbotron-white{
+    background: white;
+    border: 1px solid #cccccc;
+}
+.jumbotron-none{
+    background: none;
+    border: none;
+}*/
+/*todc*/
+.carousel-caption{
+    background: none;
+    color: #555555;
+}
+#header.navbar-toolbar.navbar-inverse .navbar-nav>.active>a:after {
+    border-bottom: 7px solid #EBECED;
+}
+.btn-primary{
+    background: rgb(238,91,83);
+    border-color: rgb(238,91,83);
+    cursor: pointer;
+    position: relative;
+    top: 0;
+}
+.btn-primary:hover{
+    background: rgb(238, 74, 62);
+    border-color: rgb(238, 74, 62);
+    border-bottom: 1px solid rgb(255, 80, 68);
+    cursor: pointer;
+}
+.btn-primary:focus {
+    background: rgb(238, 74, 62);
+    border-color: rgb(238, 74, 62);
+    cursor: pointer;
+}
+.btn-default{
+    color: #555555;
+    letter-spacing: 2px;
+}
+/*mii*/
+.jsshow{display: none;}
+#uploadImageDropbox{
+    width: 100%;
+    /*height: 300px;*/
+    /*background-color: rgba(0,0,0,0.5);*/
+}
+.mii-ani{
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+}
+.mii-boxborder{
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06),0 0 0 1px rgba(0,0,0,0.04),0 -1px 0 0 rgba(0,0,0,0.05);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06),0 0 0 1px rgba(0,0,0,0.04),0 -1px 0 0 rgba(0,0,0,0.05);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06),0 0 0 1px rgba(0,0,0,0.04),0 -1px 0 0 rgba(0,0,0,0.05);
+}
+@media (min-width: 992px){
+    #header-placeholder{
+        height: 38px;
+        width: 100%;
+        clear: both;
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 992px){
+    #header-placeholder{
+        height: 38px;
+        width: 100%;
+        clear: both;
+        margin-bottom: 15px;
+    }
+
+}
+@media (max-width: 768px){
+    #header.navbar-toolbar.navbar-inverse .navbar-nav>.active>a:after,#header.navbar-toolbar.navbar-inverse .navbar-nav>.active>a:before {
+        display: none;
+    }
+
+}
+#header{
+    /*height: 70px;*/
+    /*padding: 17px 0 6px 0;*/
+    /*border: none;*/
+    z-index: 990;
+    width: 100%;
+    /*background: rgba(255,255,255,0.9);*/
+    /*margin-bottom: 0;*/
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#header .navbar-nav > li > a{
+    color: #A0A0A0;
+    font-size: 1em;
+}
+#header .navbar-nav > li > a:hover{
+    color: #eae6df;
+}
+#header .navbar-brand{
+    /*padding: 5px 15px;*/
+    font-family: impact;
+    font-weight: normal;
+    color: #eeeeee;
+    letter-spacing: 0.5px;
+}
+
+/*user*/
+#user-account-box{
+    margin-bottom: 30px;
+}
+#user-account-box .tab-pane{
+    padding-top: 30px;
+}
+/*comment*/
+#comment-box{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+/*footer*/
+#footer{
+    margin-top:30px;
+    padding: 30px 0;
+    border-top: 1px solid #e3eae3;
+}

@@ -1,0 +1,157 @@
+extends ../layout
+block content
+    script.
+        shop.cache.goodId = '#{goodData._id}';
+        shop.cache.goodPrice = #{goodData.price};
+    div.container
+        div.row#shop-detail-goodData
+            div.col-md-8
+                div#shop-detail-main
+                    div.col-md-12
+                        div#shop-detail-bigpic-carousel.carousel.slide(data-ride="carousel")
+                            ol.carousel-indicators
+                                - each img,index in goodData.picture
+                                    if(index===0)
+                                        li.active(data-target="#shop-detail-bigpic-carousel",data-slide-to="#{index}")
+                                    else
+                                        li(data-target="#shop-detail-bigpic-carousel",data-slide-to="#{index}")
+                            div.carousel-inner
+                                - each img,index in goodData.picture
+                                    if(index===0)
+                                        div.item.active
+                                            img(src="#{siteUrl}#{img}",alt="#{goodData.title}")
+                                            div.carousel-caption
+                                                //just a test
+                                    else
+                                        div.item
+                                            img(src="#{siteUrl}#{img}",alt="#{goodData.title}")
+                                            div.carousel-caption
+                                                just a test
+
+                            a.left.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="prev")
+                                span.glyphicon.glyphicon-chevron-left
+                            a.right.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="next")
+                                span.glyphicon.glyphicon-chevron-right
+                    div.col-md-12#shop-gooddetail-content
+                        hr.visible-xs.visible-sm
+                        h4#shop-detail-goodTitle #{goodData.name}
+                            - each color in goodData.color
+                                span.fa.fa-circle(style="color:#{color};")
+                        div#shop-detail-buttons
+                            button.btn.btn-default(type="button")
+                                span.fa.fa-share-alt
+                                span &nbsp;分享
+                            button.btn.btn-default(type="button")
+                                span.fa.fa-superscript
+                                span &nbsp;计算面积
+                            button.btn.btn-default(type="button")
+                                span.fa.fa-shopping-cart
+                                span &nbsp;添加到购物车
+                        //- h4 商品介绍
+                        //- p #{goodData.description}
+                    div.col-md-12.visible-xs.visible-sm#shop-detail-xs-pricebox
+                        hr
+                        form.form-horizontal(role="form")
+                            div.form-group
+                                label(for="goodprice").col-xs-2.control-label 售价
+                                div.col-xs-10#shop-detail-price
+                                    span.fa.fa-rmb
+                                    span.price #{goodData.price}
+                            div.form-group
+                                label(for="goodtype").col-xs-2.control-label 规格
+                                div.col-xs-10
+                                    select.form-control
+                                        option 30cm宽 10米
+                                        option 50cm宽 6米
+                                        option 100cm宽 2米
+                            div.form-group
+                                label(for="goodcount").col-xs-2.control-label 数量
+                                div.col-xs-10
+                                    input.form-control(type="number",value="1",max="100",min="1",name="goodcount")
+                            div.form-group
+                                div.col-xs-10.col-xs-offset-2
+                                    button.btn.btn-primary.btn-red-o.btn-block.mii-ani.shop-btn-buynow(type="button") 立即购买
+                    div.col-md-12#comment-box
+                        h4 评论
+                        form(role="form",data-app="#{app}",data-apppageid="#{goodData._id}")
+                            div.form-group
+                                textarea.form-control#comment-content(placeholder="评论内容...",name="content")
+                            div.form-group
+                                a.btn.btn-default.pull-right.mii-ani#comment-submit 提交
+                        div.col-md-12.row#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{goodData._id}/")
+
+
+
+
+
+            div.col-md-4#shop-gooddetail-sidebar.hidden-xs.hidden-sm
+                div.row
+                    div.col-md-12.shop-sidebar-item
+                        form.form-horizontal(role="form")
+                            div.form-group
+                                label(for="goodintro").col-sm-2.control-label 介绍
+                                div.col-sm-10#shop-detail-intro(style="padding-top:5px;line-height: 1.6em;")
+                                    p #{goodData.description}
+                            div.form-group
+                                label(for="goodprice").col-sm-2.control-label 售价
+                                div.col-sm-10#shop-detail-price
+                                    span.fa.fa-rmb
+                                    span.price #{goodData.price}
+                            div.form-group
+                                label(for="goodtype").col-sm-2.control-label 规格
+                                div.col-sm-10
+                                    select.form-control
+                                        option 53cm宽 6米
+                                        option 30cm宽 10米
+                                        option 100cm宽 2米
+                            div.form-group
+                                label(for="goodcount").col-sm-2.control-label 数量
+                                div.col-sm-10
+                                    input.form-control(type="number",value="1",max="100",min="1",name="goodcount")
+                            div.form-group
+                                div.col-sm-10.col-sm-offset-2
+                                    button.btn.btn-primary.btn-red-o.btn-block.mii-ani.shop-btn-buynow(type="button") 立即购买
+    div.modal.fade#confirm-order(role="dialog",aria-labelledby="confirm-order",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title 确认订单
+                div.modal-body
+                    table.table.table-striped.table-hover#confirm-order-table(style="margin:0;")
+                        tbody
+                            tr
+                                td 商品
+                                td #{goodData.name}
+                            tr
+                                td 单价
+                                td
+                                    span.fa.fa-rmb &nbsp;
+                                    span #{goodData.price}
+                            tr
+                                td 数量
+                                td#confirm-order-goodcount 1
+                            tr
+                                td 总价
+                                td
+                                    span.fa.fa-rmb &nbsp;
+                                    span#confirm-order-price #{goodData.price}
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary(type="button")#shop-btn-toconfirmaddress 下一步
+
+    div.modal.fade#confirm-address(role="dialog",aria-labelledby="confirm-address",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title 确认收货地址
+                div.modal-body#confirm-address-body
+                    div.text-center
+                        span.fa.fa-spin.fa-spinner.fa-5x(style="color:#cccccc;")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary(type="button")#shop-btn-confirmaddress 下一步
+
+
+

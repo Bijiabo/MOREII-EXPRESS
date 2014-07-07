@@ -1,0 +1,24 @@
+CACHE MANIFEST
+
+CACHE:
+/js/jquery.min.js
+/js/bootstrap.js
+/js/dropzone.min.js
+/js/basic.js
+/js/main.js
+/js/app/mobile.js
+/css/bootstrap.min.css
+/css/magic-bootstrap.css
+/css/font-awesome.min.css
+/css/basic.css
+/css/app/mobile.css
+/fonts/fontawesome-webfont.woff
+/fonts/fontawesome-webfont.woff?v=4.1.0
+/img/mobile/robot/0.svg
+/img/mobile/robot/1.svg
+/img/mobile/robot/2.svg
+/img/mobile/robot/3.svg
+/img/mobile/robot/4.svg
+/img/shake.png
+
+

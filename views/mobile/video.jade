@@ -1,0 +1,10 @@
+extends ../layout_noheader_mobile_video
+
+block content
+    //div#video-loading
+        div#loading-tip loading
+    div#videobox(style="display:none;")
+        canvas#videocanvas
+    video#video
+        source(src="/img/video/out.ogv")
+    div#laptop

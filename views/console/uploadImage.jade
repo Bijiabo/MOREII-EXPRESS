@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+    link(rel='stylesheet', href='/css/dropzone.css')
+    div.container
+        div.jumbotron
+            h1= title
+        div.row
+            div.col-md-12
+                form(role="form",method="post",action="/api/uploadGoodImage",enctype="multipart/form-data")
+                    div.form-group
+                        label(for="picture") 图片
+                        input.form-control(type="file",name="picture")
+                    div.form-group
+                        button.btn.btn-primary(type="submit") 上传
+                        //button.btn.btn-primary.mii-jshide(type="submit") 上传
+                        //button#doLogin.btn.btn-primary.mii-jsshow.mii-formsubmit(type="button") 上传
+            div.col-md-12
+                script(src="#{siteUrl}js/dropzone.js")
+                div#uploadImageDropbox.miidropzone
+                    div.dz-default.dz-message

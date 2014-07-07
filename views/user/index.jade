@@ -1,0 +1,10 @@
+extends ../layout
+block content
+    div.container
+        div.jumbotron.jumbotron-white
+            h1= title
+            p 欢迎来到#{title}
+            div.row
+                div.col-md-12
+                    a.btn.btn-primary(href="/user/register") 注册
+                    a.btn.btn-default(href="/user/login",style="margin:0 10px") 登陆

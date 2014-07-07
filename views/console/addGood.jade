@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+    link(rel='stylesheet', href='/css/dropzone.css')
+    div.container
+        div.row
+            div.col-md-12
+                ol.breadcrumb
+                    li
+                        a(href="#") Home
+                    li
+                        a(href="#") Console
+                    li
+                        a(href="#") addGood
+            div.col-md-12
+                form(role="form",method="post",action="/api/addGood")
+                    div.form-group
+                        label(for="name") 商品名称
+                        input.form-control(type="text",name="name")
+                    div.form-group
+                        label(for="description") 描述
+                        textarea#description-area.form-control(name="description",rows=6)
+                    div.form-group
+                        label(for="price") 价格
+                        input.form-control(type="number",name="price",min=0)
+                    div.form-group
+                        div.row
+                            div.col-md-12
+                                label(for="color") 颜色
+                            div.col-xs-3
+                                input.form-control(type="color",name="color1",value="#ffffff")
+                            div.col-xs-3
+                                input.form-control(type="color",name="color2",value="#ffffff")
+                            div.col-xs-3
+                                input.form-control(type="color",name="color3",value="#ffffff")
+                            div.col-xs-3
+                                input.form-control(type="color",name="color4",value="#ffffff")
+                    div.form-group
+                        label(for="picture") 图片
+                        script(src="#{siteUrl}js/dropzone.js")
+                        div#uploadImageDropbox.miidropzone.form-control
+                            div.dz-default.dz-message
+                    div.form-group
+                        div.col-xs-4.center-block(style="float:none;")
+                            button#addGoodBtn.btn.btn-primary.btn-lg.btn-block(type="button") 添加

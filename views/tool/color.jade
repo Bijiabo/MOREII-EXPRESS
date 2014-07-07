@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            //div.col-md-6
+            //    div.colorbox
+            //        div.colorbox-center
+            //        -for(var i=0;i<36;i++)
+            //            div.colorbox-item.mii-ani(style="-webkit-transform:rotate("+ i*10 +"deg);")
+            //                div.color(style="background:hsl("+i*10+",30%,80%);")
+            div.col-md-6
+                div.colorbox
+                    //div.colorbox-center
+                    -for(var i=0;i<360/10;i++)
+                        -var col = i%10
+                        div.colorbox-item.mii-ani(style="top:#{col*50}px;left:#{Math.floor(i/10)*50}px;")
+                            div.color(style="background:hsl("+i*10+",50%,80%);width:100%;")
