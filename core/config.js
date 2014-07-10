@@ -15,7 +15,7 @@ var encryptCookie = function(data){//加密cookie
 module.exports = {
     cookieSecret: cookieSecret,
     domain: 'localhost',
-    siteUrl:'http://192.168.0.105:3001/',
+    siteUrl:'http://localhost:3001/',
     siteName:'moreii',
     logo:'moreii',
     encryptCookie:encryptCookie,
