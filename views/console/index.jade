@@ -2,6 +2,19 @@ extends ../layout
 
 block content
     div.container
-        div.jumbotron
-            h1= title
-            p 少年，欢迎来到#{title} =_=
+        div.row
+            div.col-md-12
+                ol.breadcrumb
+                    li
+                        a(href="#") Home
+                    li
+                        a(href="#") Console
+                    li
+                        a(href="#") index
+            div.col-md-12#console-indexbtns
+                a.btn.btn-default(type="button",href="#{siteUrl}#{app}/addGood")
+                    span.fa.fa-plus &nbsp;
+                    span 添加商品
+                a.btn.btn-default(type="button",href="#{siteUrl}#{app}/user")
+                    span.fa.fa-user &nbsp;
+                    span 用户管理

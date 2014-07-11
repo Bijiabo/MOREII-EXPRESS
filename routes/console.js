@@ -18,11 +18,17 @@ var dataToLowerCase = function(obj){
     }
     return obj;
 }
-
-var renderData = {
-    title:'Console',
-    jsfile:'console.js',
-    siteUrl:config.siteUrl
+var renderData = function(data){
+    if(data===undefined){
+        var data = {};
+    }
+    this.title = data.title || 'Moreii Blog';
+    this.jsfile = data.jsfile ||'console.js';
+    this.cssfile = data.cssfile || 'console.css';
+    this.siteUrl = config.siteUrl;
+    this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
+    this.app = 'console';
+    this.pretty = true;
 }
 
 router.use(function(req,res,next){
@@ -53,18 +59,21 @@ router.use(function(req,res,next){
 });
 
 router.get('/', function(req, res) {
-    var data = renderData;
-    data.title = '控制台首页';
+    var data = new renderData({
+        title:'控制台首页'
+    });
     res.render('console/index',data);
 });
 router.get('/addGood',function(req,res){
-    var data = renderData;
-    data.title = '添加商品';
+    var data = new renderData({
+        title:'添加商品'
+    });
     res.render('console/addGood',data);
 });
 router.get('/uploadImage',function(req,res){
-    var data = renderData;
-    data.title = '上传图片';
+    var data = new renderData({
+        title:'上传图片'
+    });
     res.render('console/uploadImage',data);
 });
 

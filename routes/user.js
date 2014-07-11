@@ -164,4 +164,28 @@ router.get('/api/getOwnInfo',function(req,res){
         }
     });
 });
+
+/**
+ * administrator
+ * api
+ * */
+router.use(function(req,res,next){
+    userSchema.isAdmin(req,function(admin){
+        if(admin){
+            next();
+        }else{
+            res.render('404',{
+                title:'404错误',
+                path:'/blog'+req.path,
+                errorname:'404'
+            });
+        }
+    });
+});
+router.get('/console',function(req,res){
+    var data = new renderData();
+    res.render('user/console/index',data);
+});
+
+
 module.exports = router;
