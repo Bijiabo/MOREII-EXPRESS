@@ -22,7 +22,7 @@ html(ng-app,lamg="zh")
         -var j = String(jsfile).split(',')
         if(jsfile!=="" && jsfile!==undefind)
             each item in j
-                script(src='#{siteUrl}/js/app/'+item)
+                script(src='#{siteUrl}js/app/'+item)
         script.
             var siteUrl = '#{siteUrl}';
             var app = '#{app}';

@@ -1,0 +1,46 @@
+extends ../../layout
+
+block content
+    div.container
+        h2 #{title}
+        table.table
+            thead
+                tr
+                    th 课程名称
+                    th 课程人数
+                    th 开始时间
+                    th 结束时间
+            tbody
+        div.col-md-12#classlist-noclass
+            h2 暂无课程
+        div.col-md-12.row
+            button.btn.btn-default(type="button",data-toggle="modal",data-target="#class-addclass")
+                span.fa.fa-plus &nbsp;&nbsp;添加课程
+    //- 添加课程模态框
+    div.modal.fade#class-addclass(role="dialog",aria-labelledby="class-addclass-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#class-addclass-title 添加课程
+                div.modal-body
+                    form.form-horizontal(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="name") 名称
+                            div.col-xs-10
+                                input.form-control#class-add-name(type="text",name="name",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="intro") 简介
+                            div.col-xs-10
+                                textarea.form-control#class-add-intro(rows="12",name="intro")
+                        div.form-group
+                            label.col-xs-2.control-label(for="starttime") 开始
+                            div.col-xs-10
+                                input.form-control.class-add-time#class-add-starttime(type="text")
+                        div.form-group
+                            label.col-xs-2.control-label(for="endtime") 结束
+                            div.col-xs-10
+                                input.form-control.class-add-time#class-add-endtime(type="text")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#class-addclass-true(type="button") 修改

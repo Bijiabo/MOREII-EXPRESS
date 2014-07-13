@@ -1,0 +1,12 @@
+#classlist-noclass{
+    box-sizing: border-box;
+    height: 270px;
+    padding: 100px;
+    margin-bottom: 20px;
+    background: rgba(0,0,0,0.05);
+    text-align: center;
+}
+#classlist-noclass h2{
+    color: rgba(0,0,0,0.7);
+    text-shadow: 0 2px 1px rgba(255,255,255,0.7);
+}

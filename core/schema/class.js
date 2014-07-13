@@ -5,8 +5,11 @@ var mongoose = require('mongoose'),
     db = require('../db');
 var classSchema = new mongoose.Schema({
     name:String,
+    intro:String,
     studentsCount:Number,
-    time:Date
+    createTime:Date,
+    startTime:Date,
+    endTime:Date
 });
 var classModel = db.model('class',classSchema);
 
