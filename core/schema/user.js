@@ -45,6 +45,7 @@ var userSchema = new mongoose.Schema({
                 edit:Boolean
             },
             blog:{
+                write:Boolean,
                 comment:Boolean,
                 edit:Boolean
             }
@@ -129,10 +130,12 @@ var appGrade = {
     },
     blog:{
         user:{
+            write:false,
             comment:true,
             edit:false
         },
         admin:{
+            write:true,
             comment:true,
             edit:true
         }
@@ -341,5 +344,19 @@ module.exports = {
         userModel.findById(id,function(err,data){
            callback(err,data);
         });
+    },
+    editUserById:function(id,data,callback){
+        userModel.findById(id,function(err,userData){
+            if(err===null && data!==null){
+                userData.name=data.name;
+                userData.mail=data.mail;
+                userData.permission=data.permission;
+                userData.save(function(err){
+                    callback(err);
+                })
+            }else{
+                callback(err);
+            }
+        })
     }
 }

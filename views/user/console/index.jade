@@ -5,16 +5,16 @@ block content
         table.table.table-striped
             thead
                 tr
-                    th # id
+                    th.hidden-sm.hidden-xs # id
                     th # name
                     th # mail
                     th # edit
             tbody
                 - for user in userData
-                    tr
-                        td #{user._id}
-                        td #{user.name}
-                        td #{user.mail}
+                    tr(id="userlist-#{user._id}")
+                        td.hidden-sm.hidden-xs #{user._id}
+                        td.userlist-name #{user.name}
+                        td.userlist-mail #{user.mail}
                         td
                             button.btn.btn-default.btn-xs.user-console-modifyuser(type="button",data-id="#{user._id}",data-name="#{user.name}",data-mail="#{user.mail}") edit
     //- 修改账号模态框
@@ -34,6 +34,10 @@ block content
                             label.col-xs-2.control-label(for="receiver") 邮件
                             div.col-xs-10
                                 input.form-control#user-modifyuserdata-mail(type="text",name="mail",value="")
+                        br
+                        h4 权限
+                        hr
+                        div#modify-userpermission
                 div.modal-footer(style="margin-top: 0;")
                     button.btn.btn-default(type="button",data-dismiss="modal") 取消
-                    button.btn.btn-primary.btn-primary-o.mii-ani#user-account-modifyaddress(type="button") 修改
+                    button.btn.btn-primary.btn-primary-o.mii-ani#user-console-edituserdata(type="button") 修改

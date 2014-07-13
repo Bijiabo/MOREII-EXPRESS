@@ -12,21 +12,6 @@ var renderData = function(data){
     this.app = 'user';
     this.pretty = true;
 }
-var resError = function(req,res,des){
-    if(req.query.ajax === 'true'){
-        res.send(JSON.stringify({
-            err:true,
-            des:des
-        }));
-    }else{
-        res.render('505',{
-            title:'505',
-            path:'/blog'+req.path,
-            errorname:'505',
-            des:des
-        });
-    }
-}
 /* GET users listing. */
 router.get('/', function(req, res) {
     var data = new renderData({
@@ -55,22 +40,19 @@ router.get('/login',function(req,res){
 });
 
 /**
- * 已登陆用户功能
+ * 已登陆用户功能-----------------------------------------------------------------------------------
  * */
 router.use(function(req,res,next){
     userSchema.checkLogin(req,res,function(login){
         if(login){
             next();
         }else{
-            if(req.query.ajax !== 'true'){
+            config.resError(req,res,'请登录。',config.siteUrl+'user/login');
+            /*if(req.query.ajax !== 'true'){
                 res.redirect('/user/login');
             }else{
-                res.send(JSON.stringify({
-                    err:true,
-                    des:'请登陆。',
-                    redirect:config.siteUrl+'user/login'
-                }))
-            }
+                config.resError(req,res,'请登录。');
+            }*/
         }
     });
 });
@@ -189,7 +171,7 @@ router.get('/api/getOwnInfo',function(req,res){
 });
 
 /**
- * user admin
+ * user admin---------------------------------------------------------------------------------------
  * api
  * */
 router.use(function(req,res,next){
@@ -201,23 +183,12 @@ router.use(function(req,res,next){
             if(userData.permission.user.editUser){//拥有修改用户的权限
                 next();
             }else{//无修改用户的权限
-                resError(req,res,'权限不足。');
+                config.resError(req,res,'权限不足。');
             }
         }else{
-            resError(req,res,'数据错误。');
+            config.resError(req,res,'数据错误。');
         }
     });
-    /*userSchema.isAdmin(req,function(admin){
-        if(admin){
-            next();
-        }else{
-            res.render('404',{
-                title:'404错误',
-                path:'/blog'+req.path,
-                errorname:'404'
-            });
-        }
-    });*/
 });
 // console
 router.get('/console',function(req,res){
@@ -250,5 +221,30 @@ router.get('/api/getUserInfo/:id',function(req,res){
         }
     });
 });
+router.get('/api/getUserPermission/:id',function(req,res){
+    userSchema.getUserInfoById(String(req.params.id),function(err,userData){
+        if(!err && userData!==null){
+            var data = userData.permission;
+            res.send(JSON.stringify(data));
+        }else{
+            res.send(JSON.stringify({
+                err:true
+            }));
+        }
+    });
+});
+router.post('/api/editUser/:id',function(req,res){
+    userSchema.editUserById(req.params.id,req.body.userData,function(err){
+        if(err!==null){
+            res.send(JSON.stringify({
+                err:false
+            }));
+        }else{
+            res.send(JSON.stringify({
+                err:true
+            }));
+        }
+    })
+})
 
 module.exports = router;

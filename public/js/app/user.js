@@ -194,8 +194,8 @@ var user = {
 $(function(){
     $(document).on('click','#doregister',function(){
         basic.submitForm($(this),function(data){
-            if(data.success==='1'){
-                window.location.href = siteUrl;
+            if(data.success=='1'){
+                window.location.href = siteUrl+'user/login';
             }else{
                 alert('注册失败，请检查表单后重试。');
             }

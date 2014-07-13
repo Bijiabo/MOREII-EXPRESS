@@ -11,6 +11,7 @@ var appList = [
     'blog',
     'mobile',
     'tool',
-    'comment'
+    'comment',
+    'class'
 ];
 module.exports = appList;
