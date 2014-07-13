@@ -20,7 +20,35 @@ var userSchema = new mongoose.Schema({
         },
         phone:String,
         address:Array,
-        permission:String
+        permission:{
+            user:{
+                login:Boolean,
+                editAddress:Boolean,
+                changeName:Boolean,
+                changeMail:Boolean,
+                changePassword:Boolean,
+                editUser:Boolean
+            },
+            message:{
+                read:Boolean,
+                send:Boolean,
+                remove:Boolean
+            },
+            shop:{
+                buy:Boolean,
+                comment:Boolean,
+                editGood:Boolean
+            },
+            class:{
+                read:Boolean,
+                add:Boolean,
+                edit:Boolean
+            },
+            blog:{
+                comment:Boolean,
+                edit:Boolean
+            }
+        }
     });
 var addressSchema = function(data){
     if(data===undefined){
@@ -43,17 +71,112 @@ var addressSchema = function(data){
     this.tel = data.tel || '';
 };
 var userModel = db.model('user',userSchema);
+//定义用户权限
+var appGrade = {
+    user:{
+        user:{
+            login:true,
+            editAddress:true,
+            changeName:true,
+            changeMail:false,
+            changePassword:true,
+            editUser:false
+        },
+        admin:{
+            login:true,
+            editAddress:true,
+            changeName:true,
+            changeMail:true,
+            changePassword:true,
+            editUser:true
+        }
+    },
+    message:{
+        user:{
+            read:true,
+            send:true,
+            remove:false
+        },
+        admin:{
+            read:true,
+            send:true,
+            remove:true
+        }
+    },
+    shop:{
+        user:{
+            buy:true,
+            comment:false,
+            editGood:false
+        },
+        admin:{
+            buy:true,
+            comment:true,
+            editGood:true
+        }
+    },
+    class:{
+        user:{
+            read:true,
+            add:false,
+            edit:false
+        },
+        admin:{
+            read:true,
+            add:true,
+            edit:true
+        }
+    },
+    blog:{
+        user:{
+            comment:true,
+            edit:false
+        },
+        admin:{
+            comment:true,
+            edit:true
+        }
+    }
+}
+var userGrade = {
+    admin:{
+        user:appGrade.user.admin,
+        message:appGrade.message.admin,
+        shop:appGrade.shop.admin,
+        class:appGrade.class.admin,
+        blog:appGrade.blog.admin,
+    },
+    user:{
+        user:appGrade.user.user,
+        message:appGrade.message.user,
+        shop:appGrade.shop.user,
+        class:appGrade.class.user,
+        blog:appGrade.blog.user,
+    },
+    blogEditor:{
+        user:appGrade.user.user,
+        message:appGrade.message.user,
+        shop:appGrade.shop.user,
+        class:appGrade.class.user,
+        blog:appGrade.blog.admin,
+    },
+    shopAssistant:{
+        user:appGrade.user.user,
+        message:appGrade.message.user,
+        shop:appGrade.shop.admin,
+        class:appGrade.class.user,
+        blog:appGrade.blog.user,
+    }
+}
 
 module.exports = {
     addressSchema:addressSchema,
     register:function (userData,callback){
-//        console.log(userData);
         userModel.findOne({name:userData.name},function(err,user){
-//            console.log(user);
             if(user===null){
                 userModel.findOne({mail:userData.mail},function(err,user){
                    if(user===null){
-                       userData.permission = 'user';
+                       userData.permission = userGrade.user;
                        var addUserData = new userModel(userData);
                        addUserData.save(function(err){
                            callback(err);
@@ -69,7 +192,6 @@ module.exports = {
     },
     getUserInfo:function (userData,callback){
         userModel.findOne(userData,function(err,user){
-//            user.password = undefined;
             callback(err,user);
         });
     },
@@ -205,6 +327,19 @@ module.exports = {
             data.save(function(err,data){
                 callback(err,data);
             });
+        });
+    },
+    getUserList:function(findData,skip,limit,callback){
+        userModel.find(findData)
+            .skip(skip)
+            .limit(limit)
+            .exec(function(err,data){
+                callback(err,data);
+            })
+    },
+    getUserInfoById:function(id,callback){
+        userModel.findById(id,function(err,data){
+           callback(err,data);
         });
     }
 }

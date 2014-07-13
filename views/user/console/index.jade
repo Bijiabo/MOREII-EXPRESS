@@ -2,3 +2,38 @@ extends ../../layout
 block content
     div.container
         h1 user console index
+        table.table.table-striped
+            thead
+                tr
+                    th # id
+                    th # name
+                    th # mail
+                    th # edit
+            tbody
+                - for user in userData
+                    tr
+                        td #{user._id}
+                        td #{user.name}
+                        td #{user.mail}
+                        td
+                            button.btn.btn-default.btn-xs.user-console-modifyuser(type="button",data-id="#{user._id}",data-name="#{user.name}",data-mail="#{user.mail}") edit
+    //- 修改账号模态框
+    div.modal.fade#modify-userdata(role="dialog",aria-labelledby="modify-userdata-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#modify-userdata-title 修改用户资料
+                div.modal-body
+                    form.form-horizontal(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="address") 昵称
+                            div.col-xs-10
+                                input.form-control#user-modifyuserdata-name(type="text",name="name",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="receiver") 邮件
+                            div.col-xs-10
+                                input.form-control#user-modifyuserdata-mail(type="text",name="mail",value="")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#user-account-modifyaddress(type="button") 修改

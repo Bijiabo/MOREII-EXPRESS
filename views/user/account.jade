@@ -25,7 +25,7 @@ block content
                                 span.visible-xs 地址
                                 span.hidden-xs 收货地址
                             div.col-xs-10
-                                button.btn.btn-primary.btn-red-o.mii-ani(type="button") 保存
+                                button.btn.btn-default.btn-block.mii-ani(type="button",data-toggle="modal",data-target="#add-address") + 添加
                     -else
                         -for(var i=0;i<addressCount;i++)
                             if(i===0)

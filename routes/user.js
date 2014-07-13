@@ -7,10 +7,25 @@ var renderData = function(data){
         var data = {};
     }
     this.title = data.title || '用户中心';
-    this.jsfile = data.jsfile ||'user.js';
+    this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
     this.siteUrl = config.siteUrl;
     this.app = 'user';
     this.pretty = true;
+}
+var resError = function(req,res,des){
+    if(req.query.ajax === 'true'){
+        res.send(JSON.stringify({
+            err:true,
+            des:des
+        }));
+    }else{
+        res.render('505',{
+            title:'505',
+            path:'/blog'+req.path,
+            errorname:'505',
+            des:des
+        });
+    }
 }
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -47,7 +62,15 @@ router.use(function(req,res,next){
         if(login){
             next();
         }else{
-            res.redirect('/user/login');
+            if(req.query.ajax !== 'true'){
+                res.redirect('/user/login');
+            }else{
+                res.send(JSON.stringify({
+                    err:true,
+                    des:'请登陆。',
+                    redirect:config.siteUrl+'user/login'
+                }))
+            }
         }
     });
 });
@@ -166,11 +189,25 @@ router.get('/api/getOwnInfo',function(req,res){
 });
 
 /**
- * administrator
+ * user admin
  * api
  * */
 router.use(function(req,res,next){
-    userSchema.isAdmin(req,function(admin){
+    userSchema.getUserInfo({
+        name:req.cookies.name,
+        mail:req.cookies.mail
+    },function(err,userData){
+        if(err===null && userData!==null){
+            if(userData.permission.user.editUser){//拥有修改用户的权限
+                next();
+            }else{//无修改用户的权限
+                resError(req,res,'权限不足。');
+            }
+        }else{
+            resError(req,res,'数据错误。');
+        }
+    });
+    /*userSchema.isAdmin(req,function(admin){
         if(admin){
             next();
         }else{
@@ -180,12 +217,38 @@ router.use(function(req,res,next){
                 errorname:'404'
             });
         }
+    });*/
+});
+// console
+router.get('/console',function(req,res){
+    userSchema.getUserList({},0,10,function(err,userData){
+        if(!err){
+            var data = new renderData({
+                jsfile:'user_console.js'
+            });
+            data.userData = userData;
+            res.render('user/console/index',data);
+        }else{
+            res.render('505',{
+                title:'505',
+                path:'/blog'+req.path,
+                errorname:'505'
+            });
+        }
     });
 });
-router.get('/console',function(req,res){
-    var data = new renderData();
-    res.render('user/console/index',data);
+router.get('/api/getUserInfo/:id',function(req,res){
+    userSchema.getUserInfoById(String(req.params.id),function(err,userData){
+        if(!err && userData!==null){
+            var data = userData;
+            data.password = undefined;
+            res.send(JSON.stringify(data));
+        }else{
+            res.send(JSON.stringify({
+                err:true
+            }));
+        }
+    });
 });
-
 
 module.exports = router;

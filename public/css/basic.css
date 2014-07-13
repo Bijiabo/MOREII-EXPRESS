@@ -69,7 +69,7 @@ body{
 }
 .btn-default{
     color: #555555;
-    letter-spacing: 2px;
+    /*letter-spacing: 2px;*/
 }
 /*mii*/
 .jsshow{display: none;}
