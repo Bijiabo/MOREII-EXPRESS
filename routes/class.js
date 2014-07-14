@@ -9,7 +9,7 @@ var renderData = function(data){
     }
     this.title = data.title || 'Moreii';
     this.cssfile=data.cssfile || 'datepicker3.css,class.css';
-    this.jsfile = data.jsfile || 'bootstrap-datepicker.js,locales/bootstrap-datepicker.zh-CN.js,class.js';
+    this.jsfile = data.jsfile || 'class.js';
     this.siteUrl = config.siteUrl;
     this.app = 'class';
     this.pretty = true;
@@ -101,7 +101,8 @@ router.post('/api/addClass',function(req,res){
                 if(err===null){
                     res.send(JSON.stringify({
                         err:false,
-                        des:'添加课程成功！'
+                        des:'添加课程成功！',
+                        classId:classDataSaved._id
                     }))
                 }else{
                     res.send(JSON.stringify({
@@ -138,6 +139,35 @@ router.get('/api/getClassInfoById/:id',function(req,res){
             }));
         }
     });
+});
+//修改课程信息
+router.post('/api/modifyClass/:id',function(req,res){
+    var classData = req.body.classData;
+    for(var key in classData){
+        classData[key] = config.securityFilter(classData[key]);
+    }
+    if(/^[0-9]+年[0-9]+月[0-9]+日$/.test(classData.startTime) && /^[0-9]+年[0-9]+月[0-9]+日$/.test(classData.endTime)){//检测起止日期格式
+        classData.startTime = new Date(classData.startTime.split(/[\u4e00-\u9fa5]/).join('/'));
+        classData.endTime = new Date(classData.endTime.split(/[\u4e00-\u9fa5]/).join('/'));
+        classSchema.modifyById(req.params.id,classData,function(err,savedDate){
+            if(err===null){
+                res.send(JSON.stringify({
+                    err:false,
+                    des:'修改课程信息成功。'
+                }));
+            }else{
+                res.send(JSON.stringify({
+                    err:err,
+                    des:'修改课程信息失败，请重试。'
+                }));
+            }
+        });
+    }else{
+        res.send(JSON.stringify({
+            err:true,
+            des:'起止日期格式出错，请检查。'
+        }));
+    }
 });
 
 module.exports = router;

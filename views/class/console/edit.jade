@@ -11,15 +11,17 @@ block content
                     th # 开始时间
                     th # 结束时间
                     th # 编辑
-            tbody
+            tbody#class-list-tbody
                 -for classData in data
-                    tr
+                    tr(id="class-listitem-#{classData._id}")
                         td #{classData.name}
                         td #{classData.studentsCount}
                         td #{classData.startTime.getFullYear()+'年'+(classData.startTime.getMonth()+1)+'月'+classData.startTime.getDate()+'日'}
                         td #{classData.endTime.getFullYear()+'年'+(classData.endTime.getMonth()+1)+'月'+classData.endTime.getDate()+'日'}
                         td
                             button.btn.btn-default.btn-xs.class-modify(type="button",data-id="#{classData._id}") 编辑
+                            //button.btn.btn-default.btn-xs
+                            //    span.fa.fa-trash-o
         -if(data.length===0)
             div.col-md-12#classlist-noclass
                 h2 暂无课程
@@ -84,3 +86,5 @@ block content
                 div.modal-footer(style="margin-top: 0;")
                     button.btn.btn-default(type="button",data-dismiss="modal") 取消
                     button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改
+    script(src="#{siteUrl}js/bootstrap-datepicker.js")
+    script(src="#{siteUrl}js/locales/bootstrap-datepicker.zh-CN.js")

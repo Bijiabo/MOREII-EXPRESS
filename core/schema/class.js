@@ -11,6 +11,10 @@ var classSchema = new mongoose.Schema({
     startTime:Date,
     endTime:Date
 });
+var studentClassSchema = new mongoose.Schema({
+    uid:String,
+    class:Array
+});
 var classModel = db.model('class',classSchema);
 
 module.exports = {
@@ -24,6 +28,7 @@ module.exports = {
         classModel.find(find)
             .skip(skip)
             .limit(limit)
+            .sort({"_id":1})
             .exec(function(err,data){
                 callback(err,data);
             });
@@ -31,6 +36,21 @@ module.exports = {
     getClassInfoById:function(id,callback){
         classModel.findById(id,function(err,classData){
             callback(err,classData);
+        });
+    },
+    modifyById:function(id,data,callback){
+        classModel.findById(id,function(err,classData){
+            if(err===null && classData!==null){
+                classData.name = data.name;
+                classData.intro= data.intro;
+                classData.startTime = data.startTime;
+                classData.endTime = data.endTime;
+                classData.save(function(err,savedData){
+                    callback(err,savedData);
+                })
+            }else{
+                callback(err);
+            }
         });
     }
 }

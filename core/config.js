@@ -48,5 +48,11 @@ module.exports = {
         }else{
             res.redirect(redirectUrl);
         }
+    },
+    securityFilter:function(x){
+        if(typeof x==='string') {//过滤字符串
+            x= x.replace(/[\<\>\&\#]+/ig,'');
+        }
+        return x;
     }
 };
