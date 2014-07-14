@@ -19,5 +19,18 @@ module.exports = {
         classData.save(function(err,classDataSaved){
             callback(err,classDataSaved);
         });
+    },
+    list:function(find,skip,limit,callback){
+        classModel.find(find)
+            .skip(skip)
+            .limit(limit)
+            .exec(function(err,data){
+                callback(err,data);
+            });
+    },
+    getClassInfoById:function(id,callback){
+        classModel.findById(id,function(err,classData){
+            callback(err,classData);
+        });
     }
 }

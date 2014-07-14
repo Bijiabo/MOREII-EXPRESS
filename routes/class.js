@@ -16,8 +16,15 @@ var renderData = function(data){
 }
 /* GET home page. */
 router.get('/', function(req, res) {
-    var data = new renderData();
-    res.render('class/index', data);
+    classSchema.list({},0,20,function(err,classData){
+        if(err===null){
+            var data = new renderData();
+            data.data = classData;
+            res.render('class/index', data);
+        }else{
+            res.redirect(config.siteUrl+'500');
+        }
+    });
 });
 
 /**
@@ -55,17 +62,31 @@ router.use(function(req,res,next){
 });
 //控制台首页
 router.get('/console',function(req,res){
-    var data = new renderData({
-        title:'class console index'
+    classSchema.list({},0,20,function(err,classData){
+        if(err===null){
+            var data = new renderData({
+                title:'class console index'
+            });
+            data.data = classData;
+            res.render('class/console/index',data);
+        }else{
+            res.redirect(config.siteUrl+'500');
+        }
     });
-    res.render('class/console/index',data);
 });
 //编辑课程
 router.get('/console/edit',function(req,res){
-    var data = new renderData({
-        title:'class console edit'
+    classSchema.list({},0,20,function(err,classData){
+        if(err===null){
+            var data = new renderData({
+                title:'class console edit'
+            });
+            data.data = classData;
+            res.render('class/console/edit',data);
+        }else{
+            res.redirect(config.siteUrl+'500');
+        }
     });
-    res.render('class/console/edit',data);
 });
 //添加课程api
 router.post('/api/addClass',function(req,res){
@@ -101,6 +122,22 @@ router.post('/api/addClass',function(req,res){
             des:'课程名称和简介不能为空。'
         }));
     }
+});
+//获取课程详细信息
+router.get('/api/getClassInfoById/:id',function(req,res){
+    classSchema.getClassInfoById(req.params.id,function(err,classData){
+        if(err===null && classData!==null){
+            res.send(JSON.stringify({
+                err:false,
+                data:classData
+            }));
+        }else{
+            res.send(JSON.stringify({
+                err:true,
+                des:'数据错误。'
+            }));
+        }
+    });
 });
 
 module.exports = router;

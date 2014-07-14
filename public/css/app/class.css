@@ -10,3 +10,13 @@
     color: rgba(0,0,0,0.7);
     text-shadow: 0 2px 1px rgba(255,255,255,0.7);
 }
+#class-modify-form{
+    display: none;
+}
+#class-modify-loading{
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    font-size: 3em;
+    color: #555;
+}

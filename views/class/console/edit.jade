@@ -3,16 +3,26 @@ extends ../../layout
 block content
     div.container
         h2 #{title}
-        table.table
+        table.table.table-striped
             thead
                 tr
-                    th 课程名称
-                    th 课程人数
-                    th 开始时间
-                    th 结束时间
+                    th # 课程名称
+                    th # 课程人数
+                    th # 开始时间
+                    th # 结束时间
+                    th # 编辑
             tbody
-        div.col-md-12#classlist-noclass
-            h2 暂无课程
+                -for classData in data
+                    tr
+                        td #{classData.name}
+                        td #{classData.studentsCount}
+                        td #{classData.startTime.getFullYear()+'年'+(classData.startTime.getMonth()+1)+'月'+classData.startTime.getDate()+'日'}
+                        td #{classData.endTime.getFullYear()+'年'+(classData.endTime.getMonth()+1)+'月'+classData.endTime.getDate()+'日'}
+                        td
+                            button.btn.btn-default.btn-xs.class-modify(type="button",data-id="#{classData._id}") 编辑
+        -if(data.length===0)
+            div.col-md-12#classlist-noclass
+                h2 暂无课程
         div.col-md-12.row
             button.btn.btn-default(type="button",data-toggle="modal",data-target="#class-addclass")
                 span.fa.fa-plus &nbsp;&nbsp;添加课程
@@ -44,3 +54,33 @@ block content
                 div.modal-footer(style="margin-top: 0;")
                     button.btn.btn-default(type="button",data-dismiss="modal") 取消
                     button.btn.btn-primary.btn-primary-o.mii-ani#class-addclass-true(type="button") 修改
+    //- 修改课程模态框
+    div.modal.fade#class-modify(role="dialog",aria-labelledby="class-modify-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#class-modify-title 修改课程
+                div.modal-body
+                    form.form-horizontal#class-modify-form(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="name") 名称
+                            div.col-xs-10
+                                input.form-control#class-modify-name(type="text",name="name",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="intro") 简介
+                            div.col-xs-10
+                                textarea.form-control#class-modify-intro(rows="12",name="intro")
+                        div.form-group
+                            label.col-xs-2.control-label(for="starttime") 开始
+                            div.col-xs-10
+                                input.form-control.class-modify-time#class-modify-starttime(type="text")
+                        div.form-group
+                            label.col-xs-2.control-label(for="endtime") 结束
+                            div.col-xs-10
+                                input.form-control.class-modify-time#class-modify-endtime(type="text")
+                    div#class-modify-loading
+                        span.fa.fa-spin.fa-spinner
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改
