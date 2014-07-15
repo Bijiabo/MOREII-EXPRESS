@@ -43,7 +43,10 @@ var classObj = {
                     $('#class-list-tbody').append([
                         '<tr>',
                         '<td>'+classObj.cache.classData.name+'</td>',
-                        '<td>0</td>',
+                        '<td>',
+                        '<span class="class-listitem-studentcount">0</span>',
+                        '<span class="class-modify-student fa fa-pencil">&nbsp;编辑</span>',
+                        '</td>',
                         '<td>'+classObj.formatTime(startTime,false)+'</td>',
                         '<td>'+classObj.formatTime(endTime,false)+'</td>',
                         '<td><button class="btn btn-default btn-xs class-modify" type="button" data-id="'+data.classId+'">编辑</button></td>',
@@ -120,6 +123,10 @@ var classObj = {
                 alert('数据传输错误，请重试。');
             }
         });
+    },
+    openModifyStudent:function(el,e){
+        //#class-modifystudent
+        $('#class-modifystudent').modal('show');
     }
 };
 $(function(){
@@ -139,5 +146,8 @@ $(function(){
     });
     $(document).on('click','#class-modify-true',function(e){
         classObj.modifyClass($(this),e);
+    });
+    $(document).on('click','.class-modify-student',function(e){//编辑学生名单
+        classObj.openModifyStudent($(this),e);
     });
 });

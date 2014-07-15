@@ -6,16 +6,32 @@ var mongoose = require('mongoose'),
 var classSchema = new mongoose.Schema({
     name:String,
     intro:String,
-    studentsCount:Number,
-    createTime:Date,
+    students:[
+        {
+            uid:String,
+            name:String,
+            remark:String,
+            score:Number
+        }
+    ],
+    createTime:{ type : Date, default: Date.now },
     startTime:Date,
     endTime:Date
 });
 var studentClassSchema = new mongoose.Schema({
-    uid:String,
-    class:Array
+    uid:{type:String,index:true},
+    course:[
+        {
+            classId:String,
+            name:String,
+            remark:String,
+            score:Number
+        }
+    ],
+    state:{ type : String, default: '在校' ,index:true}
 });
-var classModel = db.model('class',classSchema);
+var classModel = db.model('class',classSchema),
+    studentClassModel = db.model('studentclass',studentClassSchema);
 
 module.exports = {
     add:function(data,callback){
@@ -52,5 +68,14 @@ module.exports = {
                 callback(err);
             }
         });
+    },
+    listStudents:function(find,skip,limit,callback){
+        studentClassModel.find(find)
+            .skip(skip)
+            .limit(limit)
+            .sort({"_id":1})
+            .exec(function(err,data){
+                callback(err,data);
+            });
     }
 }

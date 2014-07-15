@@ -20,3 +20,19 @@
     font-size: 3em;
     color: #555;
 }
+.class-modify-student{
+    margin-left: 15px;
+    color: #767676;
+    cursor: pointer;
+    display: none;
+}
+.class-listitem:hover .class-modify-student{
+    display: inline;
+}
+#class-listtable .class-listtabel-checkbox,#class-userlist .class-listtabel-checkbox{
+    line-height: 1.2em;
+    width: 2em;
+}
+#class-student-tabnav li.active a{
+    background: none;
+}

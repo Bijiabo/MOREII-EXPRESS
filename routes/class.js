@@ -169,5 +169,38 @@ router.post('/api/modifyClass/:id',function(req,res){
         }));
     }
 });
+//编辑学生成员
+router.get('/console/student',function(req,res){
+    classSchema.listStudents({},0,20,function(err,studentsData){
+        if(err===null){
+            userSchema.getUserList({},0,20,function(userErr,userData){
+                if(userErr===null){
+                    var data = new renderData({
+                        title:'class console students'
+                    });
+                    data.studentsData = studentsData;
+                    data.userData = userData;
+                    var uidArray = [];
+                    for(var i= 0,userDataLen=userData.length;i>userDataLen;i++){
+                        uidArray.push(userData[i]._id);
+                        userData[i].password=undefined;
+                    }
+                    classSchema.listStudents({"_id":{$in:uidArray}},0,uidArray.length,function(usErr,userStudentData){
+                        if(usErr===null){
+                            data.userStudentData = userStudentData;
+                            res.render('class/console/student',data);
+                        }else{
+                            res.redirect(config.siteUrl+'500');
+                        }
+                    });
+                }else{
+                    res.redirect(config.siteUrl+'500');
+                }
+            });
+        }else{
+            res.redirect(config.siteUrl+'500');
+        }
+    });
+});
 
 module.exports = router;

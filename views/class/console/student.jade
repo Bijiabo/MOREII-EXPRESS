@@ -3,33 +3,59 @@ extends ../../layout
 block content
     div.container
         h2 #{title}
-        table.table.table-striped
-            thead
-                tr
-                    th # 课程名称
-                    th # 课程人数
-                    th.hidden-xs.hidden-sm # 开始时间
-                    th.hidden-xs.hidden-sm # 结束时间
-                    th # 编辑
-            tbody#class-list-tbody
-                -for classData in data
-                    tr.class-listitem(id="class-listitem-#{classData._id}")
-                        td #{classData.name}
-                        td
-                           span.class-listitem-studentcount #{classData.students.length}
-                           span.class-modify-student.fa.fa-pencil &nbsp;编辑
-                        td.hidden-xs.hidden-sm #{classData.startTime.getFullYear()+'年'+(classData.startTime.getMonth()+1)+'月'+classData.startTime.getDate()+'日'}
-                        td.hidden-xs.hidden-sm #{classData.endTime.getFullYear()+'年'+(classData.endTime.getMonth()+1)+'月'+classData.endTime.getDate()+'日'}
-                        td
-                            button.btn.btn-default.btn-xs.class-modify(type="button",data-id="#{classData._id}") 编辑
-                            //button.btn.btn-default.btn-xs
-                            //    span.fa.fa-trash-o
-        -if(data.length===0)
-            div.col-md-12#classlist-noclass
-                h2 暂无课程
-        div.col-md-12.row
-            button.btn.btn-default(type="button",data-toggle="modal",data-target="#class-addclass")
-                span.fa.fa-plus &nbsp;&nbsp;添加课程
+        ul.nav.nav-tabs#class-student-tabnav(role="tablist")
+            li.active
+                a(href="#class-studentlist",role="tab",data-toggle="tab") 现有学生
+            li
+                a(href="#class-userlist",role="tab",data-toggle="tab") 所有会员
+        div.tab-content
+            div.tab-pane.active#class-studentlist
+                table.table.table-striped#class-listtable-student
+                    thead
+                        tr
+                            th.class-listtabel-checkbox
+                                input(type="checkbox",value="all")
+                            th # 姓名
+                            th # 参加课程
+                            th # 状态
+                    tbody#class-liststudent-tbody
+                -if(studentsData.length===0)
+                    div.col-md-12#classlist-noclass
+                        h2 暂无学生成员
+                div.col-md-12.row
+                    button.btn.btn-default(type="button",data-toggle="modal",data-target="#class-addclass")
+                        span.fa.fa-plus &nbsp;&nbsp;添加课程
+            div.tab-pane#class-userlist
+                table.table.table-striped#class-listtable-user
+                    thead
+                        tr
+                            th.class-listtabel-checkbox
+                                input(type="checkbox",value="all")
+                            th # 姓名
+                            th # 状态
+                    tbody#class-listuser-tbody
+                        -for user in userData
+                            tr
+                                td.class-listtabel-checkbox
+                                    input(type="checkbox",value="#{user._id}")
+                                td #{user.name}
+                                td
+                                    //- 显示用户身份状态
+                                    -var usState = ""
+                                    -for us in userStudentData
+                                        -if(us._id==user._id)
+                                            -usState = us.state
+                                    -if(usState==="")
+                                        span.fa.fa-times &nbsp;&nbsp;校外
+                                    -else
+                                        span.fa-mortar-board &nbsp;&nbsp;#{usState}
+
+                div.col-md-12.row
+                    button.btn.btn-default(type="button")
+                        span.fa.fa-plus &nbsp;&nbsp;添加学生身份
+                    button.btn.btn-default(type="button")
+                        span.fa.fa-minus &nbsp;&nbsp;移除学生身份
+
     //- 添加课程模态框
     div.modal.fade#class-addclass(role="dialog",aria-labelledby="class-addclass-title",aria-hidden="true")
         div.modal-dialog
