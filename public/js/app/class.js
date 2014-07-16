@@ -127,6 +127,13 @@ var classObj = {
     openModifyStudent:function(el,e){
         //#class-modifystudent
         $('#class-modifystudent').modal('show');
+    },
+    addUserToStudent:function(el,e){
+        var userIdArray = [];
+        $.each($('.class-listtabel-checkbox-item:checked'),function(key,item){
+            userIdArray.push($(item).val());
+        });
+        console.log(userIdArray);
     }
 };
 $(function(){
@@ -149,5 +156,9 @@ $(function(){
     });
     $(document).on('click','.class-modify-student',function(e){//编辑学生名单
         classObj.openModifyStudent($(this),e);
+    });
+    //添加学生身份
+    $(document).on('click','#class-add-user2student',function(e){
+        classObj.addUserToStudent($(this),e);
     });
 });

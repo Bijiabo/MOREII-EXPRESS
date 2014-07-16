@@ -37,7 +37,7 @@ block content
                         -for user in userData
                             tr
                                 td.class-listtabel-checkbox
-                                    input(type="checkbox",value="#{user._id}")
+                                    input.class-listtabel-checkbox-item(type="checkbox",value="#{user._id}")
                                 td #{user.name}
                                 td
                                     //- 显示用户身份状态
@@ -51,7 +51,7 @@ block content
                                         span.fa-mortar-board &nbsp;&nbsp;#{usState}
 
                 div.col-md-12.row
-                    button.btn.btn-default(type="button")
+                    button.btn.btn-default#class-add-user2student(type="button")
                         span.fa.fa-plus &nbsp;&nbsp;添加学生身份
                     button.btn.btn-default(type="button")
                         span.fa.fa-minus &nbsp;&nbsp;移除学生身份

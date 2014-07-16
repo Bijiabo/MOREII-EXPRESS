@@ -20,6 +20,7 @@ var classSchema = new mongoose.Schema({
 });
 var studentClassSchema = new mongoose.Schema({
     uid:{type:String,index:true},
+    name:{type:String,index:true},
     course:[
         {
             classId:String,
@@ -76,6 +77,36 @@ module.exports = {
             .sort({"_id":1})
             .exec(function(err,data){
                 callback(err,data);
+            });
+    },
+    addUserToStudent:function(userIdArray,callback){
+        studentClassModel.find({'_id':{$in:userIdArray}})
+            .select('_id name')
+            .exec(function(err,userData){
+                if(err===null){
+                    if(userData!==null){//去重，防止重复添加
+                        for(var i= 0,dataLen=userData.length;i<dataLen;i++){
+                            for(var j= 0,userIdArrayLen=userIdArray.length;j<userIdArrayLen;i++){
+                                if(userIdArray[j]==userData[i]._id.toString()){
+                                    userData.splice(i,1);
+                                }
+                            }
+                        }
+                    }
+                    //添加学生数据
+                    var studentClassModelArray = [];
+                    for(var k= 0,uDataLen = userData.length;i<uDataLen;i++){
+                        studentClassModelArray.push(new studentClassModel({
+                            uid:userData[k]._id.toString(),
+                            name:userData[k].name
+                        }));
+                    }
+                    studentClassModel.create(studentClassModelArray,function(err,savedData){
+                        callback(err,savedData);
+                    });
+                }else{
+                    callback(err);
+                }
             });
     }
 }
