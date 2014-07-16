@@ -213,11 +213,9 @@ router.get('/api/getUserInfo/:id',function(req,res){
         if(!err && userData!==null){
             var data = userData;
             data.password = undefined;
-            res.send(JSON.stringify(data));
+            res.json(data);
         }else{
-            res.send(JSON.stringify({
-                err:true
-            }));
+            res.json({err:true});
         }
     });
 });

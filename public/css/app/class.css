@@ -29,7 +29,7 @@
 .class-listitem:hover .class-modify-student{
     display: inline;
 }
-#class-listtable .class-listtabel-checkbox,#class-userlist .class-listtabel-checkbox{
+#class-listtable .class-listtabel-checkbox,#class-userlist .class-listtabel-checkbox,#class-liststudent-tbody .class-listtabel-checkbox{
     line-height: 1.2em;
     width: 2em;
 }

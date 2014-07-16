@@ -8,6 +8,8 @@ block content
                 a(href="#class-studentlist",role="tab",data-toggle="tab") 现有学生
             li
                 a(href="#class-userlist",role="tab",data-toggle="tab") 所有会员
+            li
+                a(href="#class-teacherlist",role="tab",data-toggle="tab") 教师
         div.tab-content
             div.tab-pane.active#class-studentlist
                 table.table.table-striped#class-listtable-student
@@ -18,13 +20,20 @@ block content
                             th # 姓名
                             th # 参加课程
                             th # 状态
+                            th # 编辑
                     tbody#class-liststudent-tbody
+                        -for student in studentsData
+                            tr
+                                td.class-listtabel-checkbox
+                                    input(type="checkbox",value="all")
+                                td #{student.name}
+                                td #{student.course}
+                                td #{student.state}
+                                td
+                                    button.btn.btn-default.btn-xs(type="button") 编辑
                 -if(studentsData.length===0)
                     div.col-md-12#classlist-noclass
                         h2 暂无学生成员
-                div.col-md-12.row
-                    button.btn.btn-default(type="button",data-toggle="modal",data-target="#class-addclass")
-                        span.fa.fa-plus &nbsp;&nbsp;添加课程
             div.tab-pane#class-userlist
                 table.table.table-striped#class-listtable-user
                     thead
@@ -43,77 +52,24 @@ block content
                                     //- 显示用户身份状态
                                     -var usState = ""
                                     -for us in userStudentData
-                                        -if(us._id==user._id)
+                                        -if(us.uid==user._id)
                                             -usState = us.state
                                     -if(usState==="")
-                                        span.fa.fa-times &nbsp;&nbsp;校外
+                                        span.text-muted.fa.fa-times &nbsp;&nbsp;校外
                                     -else
-                                        span.fa-mortar-board &nbsp;&nbsp;#{usState}
+                                        span.text-success.fa.fa-mortar-board &nbsp;&nbsp;#{usState}
 
                 div.col-md-12.row
                     button.btn.btn-default#class-add-user2student(type="button")
                         span.fa.fa-plus &nbsp;&nbsp;添加学生身份
-                    button.btn.btn-default(type="button")
+                    button.btn.btn-default#class-remove-user2student(type="button")
                         span.fa.fa-minus &nbsp;&nbsp;移除学生身份
-
-    //- 添加课程模态框
-    div.modal.fade#class-addclass(role="dialog",aria-labelledby="class-addclass-title",aria-hidden="true")
-        div.modal-dialog
-            div.modal-content
-                div.modal-header
-                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
-                    h4.modal-title#class-addclass-title 添加课程
-                div.modal-body
-                    form.form-horizontal(role="form")
-                        div.form-group
-                            label.col-xs-2.control-label(for="name") 名称
-                            div.col-xs-10
-                                input.form-control#class-add-name(type="text",name="name",value="")
-                        div.form-group
-                            label.col-xs-2.control-label(for="intro") 简介
-                            div.col-xs-10
-                                textarea.form-control#class-add-intro(rows="12",name="intro")
-                        div.form-group
-                            label.col-xs-2.control-label(for="starttime") 开始
-                            div.col-xs-10
-                                input.form-control.class-add-time#class-add-starttime(type="text")
-                        div.form-group
-                            label.col-xs-2.control-label(for="endtime") 结束
-                            div.col-xs-10
-                                input.form-control.class-add-time#class-add-endtime(type="text")
-                div.modal-footer(style="margin-top: 0;")
-                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
-                    button.btn.btn-primary.btn-primary-o.mii-ani#class-addclass-true(type="button") 修改
-    //- 修改课程模态框
-    div.modal.fade#class-modify(role="dialog",aria-labelledby="class-modify-title",aria-hidden="true")
-        div.modal-dialog
-            div.modal-content
-                div.modal-header
-                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
-                    h4.modal-title#class-modify-title 修改课程
-                div.modal-body
-                    form.form-horizontal#class-modify-form(role="form")
-                        div.form-group
-                            label.col-xs-2.control-label(for="name") 名称
-                            div.col-xs-10
-                                input.form-control#class-modify-name(type="text",name="name",value="")
-                        div.form-group
-                            label.col-xs-2.control-label(for="intro") 简介
-                            div.col-xs-10
-                                textarea.form-control#class-modify-intro(rows="12",name="intro")
-                        div.form-group
-                            label.col-xs-2.control-label(for="starttime") 开始
-                            div.col-xs-10
-                                input.form-control.class-modify-time#class-modify-starttime(type="text")
-                        div.form-group
-                            label.col-xs-2.control-label(for="endtime") 结束
-                            div.col-xs-10
-                                input.form-control.class-modify-time#class-modify-endtime(type="text")
-                    div#class-modify-loading
-                        span.fa.fa-spin.fa-spinner
-                div.modal-footer(style="margin-top: 0;")
-                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
-                    button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改
+            div.tab-pane#class-teacherlist
+                div.col-md-6.row(style="margin-top:15px;")
+                    div.input-group
+                        input.form-control(type="text")
+                        span.input-group-btn
+                            button.btn.btn-default(type="button") 搜索
     //- 修改课程学生成员
     div.modal.fade#class-modifystudent(role="dialog",aria-labelledby="class-modifystudent-title",aria-hidden="true")
         div.modal-dialog
@@ -145,5 +101,17 @@ block content
                 div.modal-footer(style="margin-top: 0;")
                     button.btn.btn-default(type="button",data-dismiss="modal") 取消
                     button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改
+    //- 移除用户学生权限确认框
+    div.modal.fade#class-removeusertostudent(role="dialog",aria-labelledby="class-removeusertostudent-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#class-removeusertostudent-title 删除学生身份
+                div.modal-body
+                    p 一旦删除学生身份，被删除学生的数据将不可恢复，是否继续？
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#class-removeusertostudent-true(type="button") 继续删除
     script(src="#{siteUrl}js/bootstrap-datepicker.js")
     script(src="#{siteUrl}js/locales/bootstrap-datepicker.zh-CN.js")

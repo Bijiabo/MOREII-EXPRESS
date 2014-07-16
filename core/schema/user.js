@@ -42,7 +42,9 @@ var userSchema = new mongoose.Schema({
             class:{
                 read:Boolean,
                 add:Boolean,
-                edit:Boolean
+                editClass:{type:Boolean,default:false},
+                editStudent:{type:Boolean,default:false},
+                editTeacher:{type:Boolean,default:false}
             },
             blog:{
                 write:Boolean,
@@ -334,6 +336,7 @@ module.exports = {
     },
     getUserList:function(findData,skip,limit,callback){
         userModel.find(findData)
+            .sort({'_id':1})
             .skip(skip)
             .limit(limit)
             .exec(function(err,data){
@@ -341,7 +344,9 @@ module.exports = {
             })
     },
     getUserInfoById:function(id,callback){
-        userModel.findById(id,function(err,data){
+        userModel.findById(id)
+            .sort({'_id':1})
+            .exec(function(err,data){
            callback(err,data);
         });
     },

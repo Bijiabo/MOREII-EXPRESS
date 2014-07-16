@@ -50,7 +50,7 @@ router.use(function(req,res,next){
         mail:req.cookies.mail
     },function(err,userData){
         if(err===null && userData!==null){
-            if(userData.permission.user.editUser){//拥有修改用户的权限
+            if(userData.permission.class.editClass && userData.permission.class.editStudent && userData.permission.class.editTeacher){//拥有修改用户的权限
                 next();
             }else{//无修改用户的权限
                 config.resError(req,res,'权限不足。');
@@ -181,11 +181,12 @@ router.get('/console/student',function(req,res){
                     data.studentsData = studentsData;
                     data.userData = userData;
                     var uidArray = [];
-                    for(var i= 0,userDataLen=userData.length;i>userDataLen;i++){
+                    for(var i=0;i<userData.length;i++){
                         uidArray.push(userData[i]._id);
                         userData[i].password=undefined;
                     }
-                    classSchema.listStudents({"_id":{$in:uidArray}},0,uidArray.length,function(usErr,userStudentData){
+                    classSchema.listStudents(uidArray,0,uidArray.length,function(usErr,userStudentData){
+                        console.log(userStudentData);
                         if(usErr===null){
                             data.userStudentData = userStudentData;
                             res.render('class/console/student',data);
@@ -202,5 +203,66 @@ router.get('/console/student',function(req,res){
         }
     });
 });
-
+//添加用户的学生权限
+router.post('/api/addUserToStudent',function(req,res){
+    classSchema.addUserToStudent(req.body.userIdArray,function(err,savedData){
+        if(err===null){
+            res.json({
+                err:false,
+                des:'添加学生成功！'
+            })
+        }else{
+            res.json({err:err});
+        }
+    });
+});
+//移除用户的学生权限
+router.post('/api/removeUserToStudent',function(req,res){
+    classSchema.removeUserToStudent(req.body.userIdArray,function(err,savedData){
+        if(err===null){
+            res.json({
+                err:false,
+                des:'移除学生权限成功！'
+            })
+        }else{
+            res.json({err:err});
+        }
+    });
+});
+//搜索用户
+router.get('/api/getUserInfo/:id',function(req,res){
+    userSchema.getUserInfoById(String(req.params.id),function(err,userData){
+        if(!err && userData!==null){
+            var data = {
+                _id:userData._id,
+                name:userData.name
+            };
+            res.json({err:false,data:data});
+        }else{
+            res.json({err:true});
+        }
+    });
+});
+//获取教师列表
+router.get('/api/getTeacherList/:name?/:page?',function(req,res){
+    if(req.params.name){
+        var find = {name:req.params.name};
+    }else{
+        var find = {};
+    }
+    console.log(find);
+    classSchema.findTeacher(find,0,1,function(err,data){
+        console.log(err);
+        if(err===null){
+            res.json({
+                err:false,
+                data:data
+            });
+        }else{
+            res.json({
+                err:true
+            })
+        }
+    });
+});
 module.exports = router;

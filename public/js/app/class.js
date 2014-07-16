@@ -130,10 +130,57 @@ var classObj = {
     },
     addUserToStudent:function(el,e){
         var userIdArray = [];
-        $.each($('.class-listtabel-checkbox-item:checked'),function(key,item){
+        $.each($('#class-listtable-user .class-listtabel-checkbox-item:checked'),function(key,item){
             userIdArray.push($(item).val());
         });
-        console.log(userIdArray);
+        $.ajax({
+            url:siteUrl+'class/api/addUserToStudent',
+            method:'POST',
+            dataType:'json',
+            data:{
+                userIdArray:userIdArray
+            },
+            success:function(data){
+                if(!data.err){
+                    $.each($('#class-listtable-user .class-listtabel-checkbox-item:checked'),function(key,item){
+                        $($(item).parents('tr').find('td:last')).html('<span class="text-success fa fa-mortar-board">&nbsp;&nbsp;在校</span>');
+                    });
+                    $('#class-removeusertostudent').modal('hide');
+                }else{
+                    alert('添加学生失败，请重试。');
+                }
+            },
+            error:function(err){
+                alert('提交数据错误，请重试。');
+            }
+        });
+    },
+    removeUserToStudent:function(el,e){
+        var userIdArray = [];
+        $.each($('#class-listtable-user .class-listtabel-checkbox-item:checked'),function(key,item){
+            userIdArray.push($(item).val());
+        });
+        $.ajax({
+            url:siteUrl+'class/api/removeUserToStudent',
+            method:'POST',
+            dataType:'json',
+            data:{
+                userIdArray:userIdArray
+            },
+            success:function(data){
+                if(!data.err){
+                    $.each($('#class-listtable-user .class-listtabel-checkbox-item:checked'),function(key,item){
+                        $($(item).parents('tr').find('td:last')).html('<span class="fa fa-times">&nbsp;&nbsp;校外</span>');
+                    });
+                    $('#class-removeusertostudent').modal('hide');
+                }else{
+                    alert('删除学生失败，请重试。');
+                }
+            },
+            error:function(err){
+                alert('提交数据错误，请重试。');
+            }
+        });
     }
 };
 $(function(){
@@ -160,5 +207,12 @@ $(function(){
     //添加学生身份
     $(document).on('click','#class-add-user2student',function(e){
         classObj.addUserToStudent($(this),e);
+    });
+    //删除学生身份
+    $(document).on('click','#class-remove-user2student',function(e){
+        $('#class-removeusertostudent').modal('show');
+    });
+    $(document).on('click','#class-removeusertostudent-true',function(e){
+        classObj.removeUserToStudent($(this),e);
     });
 });
