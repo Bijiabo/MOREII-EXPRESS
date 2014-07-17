@@ -2,6 +2,7 @@ var express = require('express'),
     config = require('../core/config'),
     userSchema = require('../core/schema/user'),
     blogSchema = require('../core/schema/blog'),
+    noticeSchema = require('../core/schema/notice'),
     short = require('short'),
     markdown = require( "markdown" ).markdown;
 short.connect('mongodb://localhost/moreii');
@@ -90,7 +91,6 @@ router.get('/detail/:id/:page?', function(req, res) {
             var data = new renderData();
             blogSchema.blogDetail(req.params.id,function(err,blogData){
                 if(err===null){
-                    console.log(blogData);
                     if(page<blogData.content.length){
                         if(page<blogData.content.length-1){
                             blogData.hasMoreContent = true;
@@ -119,6 +119,7 @@ router.get('/detail/:id/:page?', function(req, res) {
         }
     })
 });
+//短连接神马的，最有爱了 >3</
 router.get('/article/:shorturl/:page?',function(req,res){
     var page = Number(req.params.page);
     if(req.params.page===undefined || isNaN(page)){
@@ -151,9 +152,9 @@ router.get('/article/:shorturl/:page?',function(req,res){
                         shortURLPromise.then(function(mongodbDoc) {
                             short.retrieve(mongodbDoc.hash).then(function(result) {
                                 //process.exit(0);
-                                if(result.hash!==req.params.shorturl){
-                                    res.redirect(config.siteUrl+'blog/article/'+result.hash);
-                                }else{
+//                                if(result.hash!==req.params.shorturl){//非私有链接，跳转到会员自己的私有链接
+//                                    res.redirect(config.siteUrl+'blog/article/'+result.hash);
+//                                }else{
                                     blogSchema.blogDetail(result.data.blogId,function(err,blogData){
                                         if(err===null){
                                             if(page<blogData.content.length){
@@ -168,7 +169,7 @@ router.get('/article/:shorturl/:page?',function(req,res){
                                                 /**
                                                 * 编辑和修订权限 - 前台显示
                                                 * */
-                                                if(userData._id.toString()===blogData.info.user.id){//判断是否为用户自己的文章
+                                                if(userData._id.toString()===blogData.info.author.id){//判断是否为用户自己的文章
                                                     data.blogData.isMyArticle = true;
                                                 }else if(userData.permission.blog.revise){//判断是否有修订权限
                                                     data.blogData.hasRevisePermission = true;
@@ -189,7 +190,7 @@ router.get('/article/:shorturl/:page?',function(req,res){
                                             });
                                         }
                                     });
-                                }
+//                                }
                             }, function(error) {
                                 if (error) {
 //                                    throw new Error(error);
@@ -254,10 +255,10 @@ router.use(function(req,res,next){
             next();
         }else{
             if(req.query.ajax === 'true'){
-                res.send(JSON.stringify({
+                res.json({
                     err:true,
                     des:'请登陆啊亲>_<'
-                }));
+                });
             }else{
                 res.redirect('/user/login');
             }
@@ -273,9 +274,9 @@ router.get('/getShareUrl/:id',function(req,res){
     },function(err,userData){
         if(err===null){
             var sendErr = function(r,err){
-                r.send(JSON.stringify({
+                r.json({
                     err:true
-                }));
+                });
             }
             var shortURLPromise = short.generate({
                 URL : config.siteUrl+'blog/detail/'+req.params.id+'?userId='+String(userData._id),
@@ -304,10 +305,10 @@ router.get('/getShareUrl/:id',function(req,res){
                 }
             });
         }else{
-            res.send(JSON.stringify({
+            res.json({
                 error:true,
                 des:'请登录啊亲'
-            }));
+            });
         }
     });
 });
@@ -343,14 +344,13 @@ router.get('/write',function(req,res){
 });
 router.get('/edit/:blogId',function(req,res){
     blogSchema.blogDetail(req.params.blogId,function(err,blogData){
-        console.log(blogData);
         if(err===null){
             var rData = new renderData({
                 title : 'Moreii团队博客 - 编辑日志',
                 jsfile: 'blog_admin.js',
                 blogData : blogData
             });
-            res.render('blog/write', rData);
+            res.render('blog/edit', rData);
         }else{
             res.send(JSON.stringify({
                 error:true,
@@ -369,33 +369,29 @@ router.post('/api/add',function(req,res){
                 title:req.body.title,
                 content:req.body.content,
                 tag:req.body.tag,
-                user:{
+                author:{
                     id:userData._id,
                     name:userData.name
-                },
-                count:{
-                    digg:0,
-                    view:0
-                },
-                time:new Date()
+                }
             };
-            blogSchema.add(blogData,function(err){
+            blogSchema.add(blogData,function(err,blogSaved){
                 if(err===null){
-                    res.send(JSON.stringify({
-                        error:false
-                    }));
+                    res.json({
+                        error:false,
+                        blogId:blogSaved._id.toString()
+                    });
                 }else{
-                    res.send(JSON.stringify({
+                    res.json({
                         error:true,
                         errorInfo:err
-                    }));
+                    });
                 }
             });
         }else{
-            res.send(JSON.stringify({
+            res.json({
                 error:true,
                 errorInfo:err
-            }));
+            });
         }
     });
 });
@@ -404,35 +400,101 @@ router.post('/api/update/:id',function(req,res){
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
-        if(err===null){
-            var blogData = {
-                title:req.body.title,
-                content:req.body.content,
-                tag:req.body.tag
-            };
-            blogSchema.update(req.params.id,blogData,function(err){
-                if(err===null){
-                    res.send(JSON.stringify({
-                        error:false
-                    }));
+        if(err===null && userData!==null){
+            /**
+             * 判断是否为本人文章
+             * */
+            blogSchema.blogDetail(req.params.id,function(err1,originalBlogData){
+                if(err1===null && originalBlogData!==null){
+                    if(originalBlogData.info.author.id === userData._id.toString()){//本人文章
+                        var blogData = {
+                            title:req.body.title,
+                            content:req.body.content,
+                            tag:req.body.tag
+                        };
+                        blogSchema.update(req.params.id,blogData,userData,function(err2){
+                            if(err===null){
+                                res.json({
+                                    error:false,
+                                    blogId:req.params.id
+                                });
+                            }else{
+                                res.json({
+                                    error:true,
+                                    errorInfo:err2
+                                });
+                            }
+                        });
+                    }else if(userData.permission.blog.revise===true){//非本人文章，但有修订权限,我不会说这两种情况下代码是暂时一样的...
+                        var blogData = {
+                            title:req.body.title,
+                            content:req.body.content,
+                            tag:req.body.tag
+                        };
+                        blogSchema.update(req.params.id,blogData,userData,function(err,version){
+                            if(err===null){
+                                /*
+                                * 添加消息到notice
+                                * */
+                                noticeSchema.send(originalBlogData.info.author.id,originalBlogData.info.author.name,
+                                    'blog',
+                                    {
+                                        type:'修订',
+                                        blogId:req.params.id
+                                    },
+                                        '您的文章"'+originalBlogData.info.title+'"被"'+userData.name+'"修订，版本号：'+ version,
+                                    'systemInfo',
+                                        config.siteUrl+'blog/detail/'+req.params.id,
+                                    function(err){
+                                        if(err===null){
+                                            res.json({
+                                                error:false,
+                                                blogId:req.params.id
+                                            });
+                                        }else{
+                                            res.json({
+                                                error:true,
+                                                errorInfo:err
+                                            });
+                                        }
+                                    });
+                            }else{
+                                res.json({
+                                    error:true,
+                                    errorInfo:err
+                                });
+                            }
+                        });
+                    }else{
+                        res.json({
+                            err:true,
+                            des:'权限不足。'
+                        });
+                    }
                 }else{
-                    res.send(JSON.stringify({
-                        error:true,
-                        errorInfo:err
-                    }));
+                    res.json({
+                        err:true,
+                        des:'目标文章不存在。'
+                    });
                 }
             });
+
         }else{
-            res.send(JSON.stringify({
+            res.json({
                 error:true,
-                errorInfo:err
-            }));
+                des:err
+            });
         }
     });
 });
 //内容管理列表
 router.get('/console/bloglist/:page?',function(req,res){
-    blogSchema.listBlog({},0,20,function(err,blogData){
+    var page = 0,
+        logNumPerPage = 20;
+    if(req.params.page && !isNaN(Number(req.params.page))){
+        page = Number(req.params.page);
+    }
+    blogSchema.listBlog({},page*logNumPerPage,logNumPerPage,function(err,blogData){
         var data = new renderData({
             title:'blog console list'
         });

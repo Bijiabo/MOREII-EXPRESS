@@ -156,7 +156,78 @@ body{
     color: #eeeeee;
     letter-spacing: 0.5px;
 }
-
+#header-messagebox-light{
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-animation-name: headerbarTip;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-play-state: running;
+    -moz-animation-name: headerbarTip;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-delay: 0;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: alternate;
+    -moz-animation-play-state: running;
+    -o-animation-name: headerbarTip;
+    -o-animation-duration: 2s;
+    -o-animation-timing-function: linear;
+    -o-animation-delay: 0;
+    -o-animation-iteration-count: infinite;
+    -o-animation-direction: alternate;
+    -o-animation-play-state: running;
+    -ms-animation-name: headerbarTip;
+    -ms-animation-duration: 2s;
+    -ms-animation-timing-function: linear;
+    -ms-animation-delay: 0;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-direction: alternate;
+    -ms-animation-play-state: running;
+    animation-name: headerbarTip;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-delay: 0;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-play-state: running;
+}
+    @keyframes headerbarTip
+    {
+        0% {color: red;}
+        50% {color: yellow;}
+        100% {color: red;}
+    }
+    @-webkit-keyframes headerbarTip
+    {
+        0% {color: red;}
+        50% {color: yellow;}
+        100% {color: red;}
+    }
+    @-moz-keyframes headerbarTip
+    {
+        0% {color: red;}
+        50% {color: yellow;}
+        100% {color: red;}
+    }
+    @-o-keyframes headerbarTip
+    {
+        0% {color: red;}
+        50% {color: yellow;}
+        100% {color: red;}
+    }
+    @-ms-keyframes headerbarTip
+    {
+        0% {color: red;}
+        50% {color: yellow;}
+        100% {color: red;}
+    }
 /*user*/
 #user-account-box{
     margin-bottom: 30px;
@@ -174,4 +245,19 @@ body{
     margin-top:30px;
     padding: 30px 0;
     border-top: 1px solid #e3eae3;
+}
+/*messagebox*/
+#modal-loading{
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    font-size: 3em;
+    color: #555;
+}
+#messageboxlist td,#messagebox .table>thead>tr>th{
+    border: none;
+}
+#messagebox .tablecheckbox{
+    line-height: 1.2em;
+    width: 2em;
 }

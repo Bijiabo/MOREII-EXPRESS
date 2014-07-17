@@ -2,6 +2,7 @@
  * Created by boooo on 14-6-8.
  */
 var blog = {
+    appPath:'blog',
     update:function(id){
         var tags = $('.blog-tags');
         var tagArray = [];
@@ -13,18 +14,19 @@ var blog = {
             content:$(':input[name="content"]').val(),
             tag:tagArray
         };
+        console.log(blogData);
         var success = function(data){
             if(!data.error){
-                window.location.href = '/blog';
+                window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+//                console.log(siteUrl+blog.appPath+'/detail/'+data.blogId);
             }else{
                 alert('提交错误，详情请查看控制台。');
-                console.log(data);
             }
         };
         if(id===''){
-            var url = '/blog/api/add';
+            var url = siteUrl+blog.appPath+'/api/add';
         }else{
-            var url = '/blog/api/update/'+id
+            var url = siteUrl+blog.appPath+'/api/update/'+id
         }
         $.ajax({
             url:url,

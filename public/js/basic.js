@@ -2,7 +2,8 @@
  * Created by boooo on 14-5-20.
  */
 var cache = {
-    uploadImageFiles:[]
+    uploadImageFiles:[],
+    login:false
 };
 var basic = {
     ready:function(){
@@ -350,7 +351,11 @@ var basic = {
                 if(data.login===true){
                     $('#header-user-name').text(data.userInfo.name);
                     $('#header-login').hide();
-                    $('#header-user').show();
+                    $('#header-user,#header-messagebox').fadeIn();
+                    cache.login = true;
+                    basic.checkMessageBox();
+                }else{
+                    cache.login = false;
                 }
             },
             err:function(){
@@ -362,6 +367,43 @@ var basic = {
         if($('.applink').length>0){
             $('.applink').removeClass('active');
             $('.applink-'+app).addClass('active');
+        }
+    },
+    checkMessageBox:function(){
+        if(cache.login){
+            console.log('logined');
+            $.ajax({
+               url:siteUrl+'notice/api/getUnread',
+                method:'GET',
+                dataType:'json',
+                success:function(data){
+                    if(!data.err){
+                        if(data.data.length>0){
+                            $('#modal-loading').hide();
+                            $('#header-messagebox-light').fadeIn();
+                            var listTable = $('#messageboxlist>table>tbody');
+                            listTable.html('');
+                            for(var i= 0,dLength=data.data.length;i<dLength;i++){
+                                listTable.append([
+                                    '<tr>',
+                                        '<td class="tablecheckbox">',
+                                            '<input type="checkbox",value="'+data.data[i]._id+'">',
+                                        '</td>',
+                                        '<td>',
+                                            data.data[i].content,
+                                        '</td>',
+                                        '<td>',
+                                            data.data[i].app,
+                                        '</td>',
+                                    '</tr>'].join('\n'));
+                            }
+                        }
+                    }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
         }
     }
 }

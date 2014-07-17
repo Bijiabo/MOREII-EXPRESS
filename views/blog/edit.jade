@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            div.col-md-9
+                form(role="form")
+                    div.form-group
+                        input.form-control(type="text",name="title",placeholder="日志标题",value="#{blogData.info.title}")
+                    div.form-group
+                        -var contentAll = ""
+                        -if(blogData.content)
+                            -for contentItem in blogData.content
+                                -contentAll+=contentItem.content
+                            textarea.form-control(name="content",placeholder="日志内容...",rows="30") #{contentAll}
+            div.col-md-3
+                div.row
+                    input.form-control.hide(type="hidden",name="_id",value="#{blogData.info._id}")
+                    div.input-group
+                        input.form-control#tag(type="text",name="tag",placeholder="标签")
+                        span.input-group-btn
+                            button.btn.btn-default(type="button")
+                                span.fa.fa-plus
+                    div#tagbox(style="margin-top:15px;")
+                        -for(var i=0;i<blogData.info.tag.length;i++)
+                            a.btn.btn-info.blog-tags #{blogData.info.tag[i]}
+                div.row
+                    button.btn.btn-primary#blog-save Save

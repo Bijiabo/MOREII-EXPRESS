@@ -5,6 +5,7 @@ var appList = [
     'index',
     'user',
     'api',
+    'notice',
     'custom',
     'shop',
     'console',

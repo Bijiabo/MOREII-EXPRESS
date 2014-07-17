@@ -11,7 +11,8 @@ block content
                         -if(blogData.hasMoreContent)
                             a.btn.btn-default.btn-block(href="#{blogData.nextPage}") 阅读更多
                         button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
-                        div.blog-userinfo= blogData.info.user.name
+                        div.blog-userinfo= blogData.info.author.name
+
                         div.row
                             div.col-md-12#comment-box
                                 h4 评论
@@ -30,9 +31,9 @@ block content
                             button.btn.btn-default(type="button") Search
                     -if(blogData.isMyArticle===true)
                         br
-                        button.btn.btn-default(type="button") 编辑
+                        a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
                     -else if(blogData.hasRevisePermission===true)
                         br
-                        button.btn.btn-default(type="button") 修订
+                        a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
 
 

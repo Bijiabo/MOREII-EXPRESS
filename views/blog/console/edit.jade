@@ -11,19 +11,24 @@ block content
                     th.hidden-xs.hidden-sm # 创建时间
                     th # 最后修改
                     th # 作者
-                    th.hidden-xs.hidden-sm # 修订
+                    th.hidden-xs.hidden-sm # 最后修订
                     th # 版本
             tbody
                 -for blogItem in blogData
-                    -var createTime = new Date(blogItem.time)
+                    -var createTime = new Date(blogItem.createTime)
+                    -var lastModifyName = '',lastModifyTime=''
+                    -if(blogItem.modify.length>0)
+                        -lastModifyName = blogItem.modify[blogItem.modify.length-1].name
+                        -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
+                        -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
                     tr
                         td #{blogItem.title}
                         td #{blogItem.tag}
                         td #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
-                        td
-                        td #{blogItem.user.name}
-                        td
-                        td
+                        td #{lastModifyTime}
+                        td #{blogItem.author.name}
+                        td #{lastModifyName}
+                        td #{blogItem.version}
 
     //- 修改课程学生成员
     div.modal.fade#class-modifystudent(role="dialog",aria-labelledby="class-modifystudent-title",aria-hidden="true")

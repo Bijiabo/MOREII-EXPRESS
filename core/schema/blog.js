@@ -6,20 +6,31 @@ var mongoose = require('mongoose'),
 var blogSchema = new mongoose.Schema({
     title:String,
     content:String,
-    tag:Array,
-    user:{
+    tag:{type:Array,index:true},
+    author:{
         id:String,
         name:String
     },
     count:{
-        digg:Number,
-        view:Number
+        digg:{ type : Number, default: 0},
+        view:{ type : Number, default: 0}
     },
-    time:Date
+    createTime:{ type : Date, default: Date.now },
+    version:{ type : Number, default: 1},
+    modify:[
+        {
+            uid:{type:String,index:true},
+            name:{type:String,index:true},
+            time:{type : Date, default: Date.now},
+            version:{ type : Number, default: 2}
+        }
+    ]
 });
 var blogContentSchema = new mongoose.Schema({
-    blogId:String,
-    content:String
+    blogId:{type:String,index:true},
+    contentIndex:{type:Number,index:true},
+    content:String,
+    version:{type:Number,index:true}
 });
 var blogModel = db.model('blog',blogSchema);
 var blogContentModel = db.model('blogContent',blogContentSchema);
@@ -39,7 +50,9 @@ module.exports = {
                 for(var i=0;i<contentSliceCount;i++){
                     blogContentData = new blogContentModel({
                         blogId:blogDataSaved._id,
-                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)
+                        contentIndex:i,
+                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength),
+                        version:1
                     });
                     blogContentData.save(function(err){
                         contentSaved++;
@@ -50,21 +63,71 @@ module.exports = {
                             if(contentSavedError>0){
                                 callback(true);
                             }else{
-                                callback(null);
+                                callback(null,blogDataSaved);
                             }
                         }
                     });
                 }
-
             }else{
                 callback(err);
             }
         });
     },
-    update:function(_id,blogData,callback){
-        blogModel.update({_id:_id},{$set:blogData},function(err){
-            callback(err);
-        })
+    update:function(_id,blogData,userData,callback){
+        blogModel.findById(_id)
+            .exec(function(err,originalData){
+                if(err===null && originalData!==null){
+                    originalData.title = blogData.title;
+                    originalData.tag = blogData.tag;
+                    var versionNow = originalData.version + 1;
+                    originalData.version = versionNow;
+                    originalData.modify.push({
+                        uid:userData._id.toString,
+                        name:userData.name,
+                        time:new Date(),
+                        version:versionNow
+                    });
+                    var originalContent = blogData.content;
+                    originalData.content = originalContent.cutStrButUrl(300,'......');
+                    originalData.save(function(err1,savedData){
+                        if(err1===null){
+                            /**
+                             * 保存博客概要成功，开始存储文章内容
+                             * */
+                            var slicePerLength = 1000,
+                                contentSliceCount = Math.ceil(originalContent.length / slicePerLength),
+                                contentSaved = 0,
+                                contentSavedError = 0,
+                                blogContentData;
+                            for(var i=0;i<contentSliceCount;i++){
+                                blogContentData = new blogContentModel({
+                                    blogId:savedData._id.toString(),
+                                    contentIndex:i,
+                                    content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength),
+                                    version:versionNow
+                                });
+                                blogContentData.save(function(err){
+                                    contentSaved++;
+                                    if(err!==null){
+                                        contentSavedError++;
+                                    }
+                                    if(contentSaved === contentSliceCount){
+                                        if(contentSavedError>0){
+                                            callback(true);
+                                        }else{
+                                            callback(null,versionNow);
+                                        }
+                                    }
+                                });
+                            }
+                          }else{
+                            callback(err1);
+                        }
+                    });
+                }else{
+                    callback(err,originalData);
+                }
+            });
     },
     listBlog:function(queryData,skip,limit,callback){
         blogModel.find(queryData)
@@ -79,7 +142,7 @@ module.exports = {
         blogModel.findById(id)
             .exec(function(err,doc){
                 if(err===null){
-                    blogContentModel.find({blogId:id})
+                    blogContentModel.find({blogId:id,version:doc.version})
                         .sort({'_id':1})
                         .exec(function(err,data){
                             callback(err,{

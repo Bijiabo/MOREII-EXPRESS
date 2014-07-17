@@ -20,6 +20,10 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
                 li.applink.applink-blog
                     a(href="/blog") 博客
             ul.nav.navbar-nav.navbar-right
+                li#header-messagebox(style="display:none;")
+                    a(href="javascript:;")
+                        span.fa.fa-circle#header-messagebox-light
+                        span &nbsp;&nbsp;消息盒子
                 li#header-login
                     a(href="/user") 登陆 / 注册
                 li#header-user.dropdown(style="display:none;")
@@ -34,3 +38,32 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
                         li
                             a(href="#{siteUrl}user/logout") 退出
 div#header-placeholder
+//- 消息盒子
+div.modal.fade#messagebox(role="dialog",aria-labelledby="messagebox-title",aria-hidden="true")
+    div.modal-dialog
+        div.modal-content
+            div.modal-header
+                button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                h4.modal-title#messagebox-title 消息盒子
+            div.modal-body
+                div#modal-loading
+                    span.fa.fa-spin.fa-spinner
+                div#messageboxlist
+                    table.table.table-hover
+                        thead
+                            tr
+                                th.tablecheckbox
+                                    input.thead-checkbox(type="checkbox",value="all")
+                                th # 内容
+                                th # 来源
+                        tbody
+                    div(style="padding-left:8px;padding-right:8px;")
+                        button.btn.btn-default.btn-sm(type="button") 标记为已读
+                        div.btn-group.pull-right
+                            button.btn.btn-default.btn-sm(type="button")
+                                span.fa.fa-chevron-left
+                            button.btn.btn-default.btn-sm(type="button")
+                                span.fa.fa-chevron-right
+            //div.modal-footer(style="margin-top: 0;")
+                button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改

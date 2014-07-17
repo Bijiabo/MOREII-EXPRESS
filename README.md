@@ -10,6 +10,8 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
 
 跳转方法：引入config.js后使用**config.resError(req,res,descriptionForJson,redirectUrl);**
 
+------
+
 ##class模块
 
  - 课程管理功能。
@@ -19,9 +21,24 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
  - 成长记录。
  - 课程及学生成长优化建议。
 
+------
+
 ##Blog模块
 
  - 关于update：新建修订副本，原版本不删除。
  - 内容可由团队成员修订，发布修订版。
  - 默认使用Markdown语法。
  - 企业模板内容定制。
+
+ 更新进度：
+
+ - 文章分页逻辑
+ - 数据库模型优化
+
+------
+
+##Notice模块*
+
+*系统必备模块* 主要负责承载消息业务。
+
+ - 发送消息：*noticeModel.send(uid,name,from,content,type,link,callback)*
