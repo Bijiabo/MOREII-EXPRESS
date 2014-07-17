@@ -1,0 +1,58 @@
+extends ../../layout
+
+block content
+    div.container
+        h2 #{title}
+        table.table.table-striped
+            thead
+                tr
+                    th # 标题
+                    th.hidden-xs.hidden-sm # 标签
+                    th.hidden-xs.hidden-sm # 创建时间
+                    th # 最后修改
+                    th # 作者
+                    th.hidden-xs.hidden-sm # 修订
+                    th # 版本
+            tbody
+                -for blogItem in blogData
+                    -var createTime = new Date(blogItem.time)
+                    tr
+                        td #{blogItem.title}
+                        td #{blogItem.tag}
+                        td #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
+                        td
+                        td #{blogItem.user.name}
+                        td
+                        td
+
+    //- 修改课程学生成员
+    div.modal.fade#class-modifystudent(role="dialog",aria-labelledby="class-modifystudent-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#class-modifystudent-title
+                        span "
+                        span#class-m-t-name 课程名称
+                        span " 的名单
+                div.modal-body
+                    div.row
+                        div.col-md-6
+                            p 所有学生
+                            select.form-control(multiple)
+                                option 111
+                                option 222
+                            p
+                            p
+                                button.btn.btn-default.btn-block 添加
+                        div.col-md-6
+                            p 该课程学生
+                            select.form-control(multiple)
+                                option 111
+                                option 222
+                            p
+                            p
+                                button.btn.btn-default.btn-block 移除
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改

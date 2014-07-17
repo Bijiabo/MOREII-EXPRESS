@@ -28,5 +28,11 @@ block content
                         input.form-control(type="text")
                         div.input-group-btn
                             button.btn.btn-default(type="button") Search
+                    -if(blogData.isMyArticle===true)
+                        br
+                        button.btn.btn-default(type="button") 编辑
+                    -else if(blogData.hasRevisePermission===true)
+                        br
+                        button.btn.btn-default(type="button") 修订
 
 

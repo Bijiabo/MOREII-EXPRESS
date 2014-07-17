@@ -47,9 +47,10 @@ var userSchema = new mongoose.Schema({
                 editTeacher:{type:Boolean,default:false}
             },
             blog:{
-                write:Boolean,
-                comment:Boolean,
-                edit:Boolean
+                write:{type:Boolean,default:false},
+                comment:{type:Boolean,default:true},
+                edit:{type:Boolean,default:false},
+                revise:{type:Boolean,default:false}
             }
         }
     });
@@ -134,12 +135,14 @@ var appGrade = {
         user:{
             write:false,
             comment:true,
-            edit:false
+            edit:false,
+            revise:false
         },
         admin:{
             write:true,
             comment:true,
-            edit:true
+            edit:true,
+            revise:true
         }
     }
 }

@@ -17,7 +17,7 @@ var renderData = function(data){
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'blog';
     this.pretty = true;
-}
+    };
 /* GET home page. */
 router.get('/', function(req, res) {
     var data = new renderData({
@@ -52,6 +52,10 @@ router.get('/detail/:id/:page?', function(req, res) {
                             err:true
                         }));
                     }
+                    /*
+                    * 搞起文章url跳转
+                    * for 小胡老师
+                    * */
                     var shortURLPromise = short.generate({
                         URL : config.siteUrl+'blog/detail/'+req.params.id+'?userId='+String(userData._id),
                         data:{
@@ -161,6 +165,14 @@ router.get('/article/:shorturl/:page?',function(req,res){
                                                 }
                                                 blogData.content= markdown.toHTML(blogData.content[page].content);
                                                 data.blogData = blogData;
+                                                /**
+                                                * 编辑和修订权限 - 前台显示
+                                                * */
+                                                if(userData._id.toString()===blogData.info.user.id){//判断是否为用户自己的文章
+                                                    data.blogData.isMyArticle = true;
+                                                }else if(userData.permission.blog.revise){//判断是否有修订权限
+                                                    data.blogData.hasRevisePermission = true;
+                                                }
                                                 res.render('blog/detail', data);
                                             }else{
                                                 res.render('404',{
@@ -252,50 +264,8 @@ router.use(function(req,res,next){
         }
     });
 });
-router.get('/write',function(req,res){
-    userSchema.isAdmin(req,function(admin){
-        if(admin){
-            var rData = new renderData({
-                title : 'Moreii团队博客 - 书写日志',
-                jsfile: 'blog_admin.js'
-            });
-            res.render('blog/write', rData);
-        }else{
-            res.render('404',{
-                title:'404错误',
-                path:'/blog'+req.path,
-                errorname:'404',
-            });
-        }
-    });
-});
-router.get('/edit/:blogId',function(req,res){
-    userSchema.isAdmin(req,function(admin){
-        if(admin){
-            blogSchema.blogDetail(req.params.blogId,function(err,blogData){
-                if(err===null){
-                    var rData = new renderData({
-                        title : 'Moreii团队博客 - 编辑日志',
-                        jsfile: 'blog_admin.js',
-                        blogData : blogData
-                    });
-                    res.render('blog/write', rData);
-                }else{
-                    res.send(JSON.stringify({
-                        error:true,
-                        errorInfo:err
-                    }));
-                }
-            });
-        }else{
-            res.render('404',{
-                title:'404错误',
-                path:'/blog'+req.path,
-                errorname:'404',
-            });
-        }
-    });
-});
+
+
 router.get('/getShareUrl/:id',function(req,res){
     userSchema.getUserInfo({
         name:req.cookies.name,
@@ -343,21 +313,49 @@ router.get('/getShareUrl/:id',function(req,res){
 });
 
 
-
 /**
- * administrator
+ * editor----------------------------------------------------------------------------------
  * api
  * */
 router.use(function(req,res,next){
-    userSchema.isAdmin(req,function(admin){
-        if(admin){
-            next();
+    userSchema.getUserInfo({
+        name:req.cookies.name,
+        mail:req.cookies.mail
+    },function(err,userData){
+        if(err===null && userData!==null){
+            if(userData.permission.blog.edit){//拥有修改文章的权限
+                next();
+            }else{//无修改文章的权限
+                config.resError(req,res,'权限不足。');
+            }
         }else{
-            res.render('404',{
-                title:'404错误',
-                path:'/blog'+req.path,
-                errorname:'404'
+            config.resError(req,res,'数据错误。');
+        }
+    });
+});
+
+router.get('/write',function(req,res){
+    var rData = new renderData({
+        title : 'Moreii团队博客 - 书写日志',
+        jsfile: 'blog_admin.js'
+    });
+    res.render('blog/write', rData);
+});
+router.get('/edit/:blogId',function(req,res){
+    blogSchema.blogDetail(req.params.blogId,function(err,blogData){
+        console.log(blogData);
+        if(err===null){
+            var rData = new renderData({
+                title : 'Moreii团队博客 - 编辑日志',
+                jsfile: 'blog_admin.js',
+                blogData : blogData
             });
+            res.render('blog/write', rData);
+        }else{
+            res.send(JSON.stringify({
+                error:true,
+                errorInfo:err
+            }));
         }
     });
 });
@@ -430,6 +428,16 @@ router.post('/api/update/:id',function(req,res){
                 errorInfo:err
             }));
         }
+    });
+});
+//内容管理列表
+router.get('/console/bloglist/:page?',function(req,res){
+    blogSchema.listBlog({},0,20,function(err,blogData){
+        var data = new renderData({
+            title:'blog console list'
+        });
+        data.blogData = blogData;
+        res.render('blog/console/edit',data);
     });
 });
 
