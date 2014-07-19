@@ -14,7 +14,14 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0",
-    "connect-multiparty":"*"
+    "connect-multiparty":"*",
+    "short":"*",
+      "mongoose":"*",
+      "markdown-js":"*",
+      "rd":"*",
+      "markdown":"*",
+      "wechat":"*",
+      "express-session":"*"
   },
   "devDependencies": {
     "browserify": "^4.1.5",

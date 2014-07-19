@@ -6,13 +6,14 @@ var appList = [
     'user',
     'api',
     'notice',
-    'custom',
-    'shop',
+//    'custom',
+//    'shop',
     'console',
     'blog',
-    'mobile',
-    'tool',
+//    'mobile',
+//    'tool',
     'comment',
-    'class'
+    'class',
+    'wechat'
 ];
 module.exports = appList;

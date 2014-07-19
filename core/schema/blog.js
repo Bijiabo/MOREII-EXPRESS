@@ -15,6 +15,7 @@ var blogSchema = new mongoose.Schema({
         digg:{ type : Number, default: 0},
         view:{ type : Number, default: 0}
     },
+    random:{ type : Number, default: Math.random(),index:true},
     createTime:{ type : Date, default: Date.now },
     version:{ type : Number, default: 1},
     modify:[
@@ -39,6 +40,7 @@ module.exports = {
     add:function(data,callback){
         var originalContent = data.content;
         data.content = originalContent.cutStrButUrl(300,'......');
+        data.random = Math.random();
         var blogData = new blogModel(data);
         blogData.save(function(err,blogDataSaved){
             if(err===null){
@@ -49,7 +51,7 @@ module.exports = {
                     blogContentData;
                 for(var i=0;i<contentSliceCount;i++){
                     blogContentData = new blogContentModel({
-                        blogId:blogDataSaved._id,
+                        blogId:blogDataSaved._id.toString(),
                         contentIndex:i,
                         content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength),
                         version:1
@@ -162,6 +164,20 @@ module.exports = {
                 doc.save(function(err,doc){
                     callback(err,doc);
                 });
+            });
+    },
+    randomBlog:function(callback){
+        var random = Math.random();
+        blogModel.findOne({"random" : {"$gt" : random}})
+            .exec(function(err,data){
+                if(err===null && data===null){
+                    blogModel.findOne({"random" : {"$lt" : random}})
+                        .exec(function(err,data){
+                            callback(err,data);
+                        });
+                }else{
+                    callback(err,data);
+                }
             });
     }
 }

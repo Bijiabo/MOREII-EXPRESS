@@ -5,8 +5,9 @@ html(ng-app,lamg="zh")
         title= title
         link(rel='stylesheet', href='/css/bootstrap.min.css')
         //link(rel='stylesheet', href='/css/magic-bootstrap.css')
-        link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
-        link(rel='stylesheet', href='/css/todc-bootstrap.min.css')
+        //- link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+        //- link(rel='stylesheet', href='/css/todc-bootstrap.min.css')
+        link(rel='stylesheet', href='/css/flat-ui.css')
         link(rel='stylesheet', href='/css/font-awesome.min.css')
         link(rel='stylesheet', href='/css/basic.css')
         -var css = String(cssfile).split(',')
@@ -29,4 +30,14 @@ html(ng-app,lamg="zh")
     body
         include header
         block content
+        script(src='/js/jquery-ui-1.10.3.custom.min.js')
+        script(src='/js/jquery.ui.touch-punch.min.js')
+        script(src="/js/bootstrap-select.js")
+        script(src="/js/bootstrap-switch.js")
+        script(src="/js/flatui-checkbox.js")
+        script(src="/js/flatui-radio.js")
+        script(src="/js/jquery.tagsinput.js")
+        script(src="/js/jquery.placeholder.js")
+        script(src="/js/typeahead.js")
+        script(src="/js/application.js")
         include footer

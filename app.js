@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    expressSession = require('express-session');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -23,6 +24,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(expressSession({secret: 'speedyCat'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next){

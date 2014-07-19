@@ -1,9 +1,9 @@
-html{
+/*html{
     background: #EBECED;
 }
 body{
     background: none;
-}
+}*/
 /*fix bs*/
 /*.form-control[type="color"]{padding:0 2px;}
 .clearboth{clear: both;display: block;}
@@ -42,7 +42,7 @@ body{
     border: none;
 }*/
 /*todc*/
-.carousel-caption{
+/*.carousel-caption{
     background: none;
     color: #555555;
 }
@@ -69,8 +69,8 @@ body{
 }
 .btn-default{
     color: #555555;
-    /*letter-spacing: 2px;*/
-}
+    *//*letter-spacing: 2px;*//*
+}*/
 /*mii*/
 .jsshow{display: none;}
 #uploadImageDropbox{
@@ -108,7 +108,7 @@ body{
 }
 @media (min-width: 992px){
     #header-placeholder{
-        height: 38px;
+        height: 53px;
         width: 100%;
         clear: both;
         margin-bottom: 30px;
@@ -116,10 +116,10 @@ body{
 }
 @media (max-width: 992px){
     #header-placeholder{
-        height: 38px;
+        height: 53px;
         width: 100%;
         clear: both;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
 }
@@ -142,7 +142,7 @@ body{
     top: 0;
     left: 0;
 }
-#header .navbar-nav > li > a{
+/*#header .navbar-nav > li > a{
     color: #A0A0A0;
     font-size: 1em;
 }
@@ -150,11 +150,14 @@ body{
     color: #eae6df;
 }
 #header .navbar-brand{
-    /*padding: 5px 15px;*/
+    *//*padding: 5px 15px;*//*
     font-family: impact;
     font-weight: normal;
     color: #eeeeee;
     letter-spacing: 0.5px;
+}*/
+.modal-header .close {
+    font-size: 2em;
 }
 #header-messagebox-light{
     -webkit-transform: translate3d(0, 0, 0);

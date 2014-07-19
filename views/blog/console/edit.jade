@@ -6,6 +6,8 @@ block content
         table.table.table-striped
             thead
                 tr
+                    th.tablecheckbox
+                        input.thead-checkbox(type="checkbox",value="all")
                     th # 标题
                     th.hidden-xs.hidden-sm # 标签
                     th.hidden-xs.hidden-sm # 创建时间
@@ -22,6 +24,8 @@ block content
                         -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
                         -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
                     tr
+                        td.tablecheckbox
+                            input(type="checkbox",value="#{blogItem._id}")
                         td #{blogItem.title}
                         td #{blogItem.tag}
                         td #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}

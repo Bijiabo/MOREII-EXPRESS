@@ -397,6 +397,11 @@ var basic = {
                                         '</td>',
                                     '</tr>'].join('\n'));
                             }
+                        }else{
+                            $('#modal-loading').hide();
+                            $('#header-messagebox-light').fadeIn();
+                            var listTable = $('#messageboxlist>table>tbody');
+                            listTable.html('<tr><td></td><td>暂无未读消息。</td></tr>');
                         }
                     }
                 },
