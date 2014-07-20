@@ -35,6 +35,34 @@ var blog = {
             data:blogData,
             success:success
         });
+    },
+    deleteBlogs:function(el,e){
+        var idArray = [];
+        $.each($('#blog-bloglisttable :checkbox:checked'),function(index,item){
+            idArray.push($(item).val());
+        });
+        //debug
+//        console.log(idArray);
+        $.ajax({
+            url:siteUrl+blog.appPath+'/api/deleteBlogs',
+            method:'POST',
+            dataType:'json',
+            data:{
+                idArray:idArray
+            },
+            success:function(data){
+                if(!data.err){
+                    $.each($('#blog-bloglisttable:checkbox:checked'),function(index,item){
+                        $(item).parents('tr').remove();
+                    });
+                }else{
+                    alert(data.des);
+                }
+            },
+            error:function(XHR){
+                alert('网络连接错误。');
+            }
+        });
     }
 }
 $(function(){
@@ -59,6 +87,10 @@ $(function(){
                 }
             }
         }
+    });
+    //删除日志
+    $(document).on('click','#blog-deleteblogs',function(e){
+        blog.deleteBlogs($(this),e);
     });
 })
 

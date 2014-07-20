@@ -386,17 +386,20 @@ var basic = {
                             for(var i= 0,dLength=data.data.length;i<dLength;i++){
                                 listTable.append([
                                     '<tr>',
-                                        '<td class="tablecheckbox">',
-                                            '<input type="checkbox",value="'+data.data[i]._id+'">',
+                                        '<td>',
+                                            '<label class="checkbox">',
+                                                '<input type="checkbox",value="'+data.data[i]._id+'",data-toggle="checkbox">',
+                                            '</label>',
                                         '</td>',
                                         '<td>',
-                                            data.data[i].content,
+                                            '<a href="'+data.data[i].link+'">'+data.data[i].content+'</a>',
                                         '</td>',
                                         '<td>',
                                             data.data[i].app,
                                         '</td>',
                                     '</tr>'].join('\n'));
                             }
+                            $(':checkbox').checkbox();
                         }else{
                             $('#modal-loading').hide();
                             $('#header-messagebox-light').fadeIn();
@@ -409,6 +412,13 @@ var basic = {
                     console.log(err);
                 }
             });
+        }
+    },
+    tableAllCheck:function(el,e){
+        if(el[0].checked){
+            $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('check');
+        }else{
+            $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('uncheck');
         }
     }
 }

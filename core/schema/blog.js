@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose'),
     db = require('../db');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 var blogSchema = new mongoose.Schema({
     title:String,
     content:String,
@@ -18,6 +19,7 @@ var blogSchema = new mongoose.Schema({
     random:{ type : Number, default: Math.random(),index:true},
     createTime:{ type : Date, default: Date.now },
     version:{ type : Number, default: 1},
+    state:{type : Number, default: 1,index:true},
     modify:[
         {
             uid:{type:String,index:true},
@@ -179,12 +181,13 @@ module.exports = {
                     callback(err,data);
                 }
             });
+    },
+    deleteBlogs:function(idArray,callback){
+        blogModel.update({_id:{$in:idArray}},{$set:{state:0}},function(err,data){
+            callback(err,data);
+        });
     }
 }
-
-
-
-
 
 
 

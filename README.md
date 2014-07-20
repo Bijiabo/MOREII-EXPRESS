@@ -42,3 +42,19 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
 *系统必备模块* 主要负责承载消息业务。
 
  - 发送消息：*noticeModel.send(uid,name,from,content,type,link,callback)*
+
+------
+
+######更新列表
+
+ - *消息盒子*
+  - 显示样式优化
+ - *blog模块*
+  - 分享功能 ==
+ - *statistics模块*
+  - 数据结构设计 ==
+  - 前端基础代码 ==
+ - *面料预览模块*(定制)
+  - 数据结构设计 ==
+  - 后端交互 ==
+  - 前段交互 ==

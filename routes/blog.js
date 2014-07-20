@@ -24,7 +24,7 @@ router.get('/', function(req, res) {
     var data = new renderData({
         title : 'Moreii团队博客'
     });
-    blogSchema.listBlog({},0,10,function(err,blogData){
+    blogSchema.listBlog({state:1},0,10,function(err,blogData){
         if(err===null){
             for(var i=0;i<blogData.length;i++){
                 blogData[i].content = markdown.toHTML(String(blogData[i].content));
@@ -66,17 +66,17 @@ router.get('/detail/:id/:page?', function(req, res) {
                     });
                     shortURLPromise.then(function(mongodbDoc) {
                         short.retrieve(mongodbDoc.hash).then(function(result) {
-//            process.exit(0);
+                        //process.exit(0);
                             res.redirect(config.siteUrl+'blog/article/'+result.hash);
                         }, function(error) {
                             if (error) {
-//                throw new Error(error);
+                                //throw new Error(error);
                                 sendErr(res);
                             }
                         });
                     }, function(error) {
                         if (error) {
-//            throw new Error(error);
+                            //throw new Error(error);
                             sendErr(res);
                         }
                     });
@@ -90,30 +90,30 @@ router.get('/detail/:id/:page?', function(req, res) {
         }else{
             var data = new renderData();
             blogSchema.blogDetail(req.params.id,function(err,blogData){
-                if(err===null){
-                    if(page<blogData.content.length){
-                        if(page<blogData.content.length-1){
-                            blogData.hasMoreContent = true;
-                            blogData.nextPage = config.siteUrl+data.app+'/detail/'+req.params.id+'/'+(page+1);
+                if(err===null && blogData!==null){
+                    if(blogData.info.state===1){
+                        if(page<blogData.content.length){
+                            if(page<blogData.content.length-1){
+                                blogData.hasMoreContent = true;
+                                blogData.nextPage = config.siteUrl+data.app+'/detail/'+req.params.id+'/'+(page+1);
+                            }else{
+                                blogData.hasMoreContent = false;
+                            }
+                            blogData.content= markdown.toHTML(blogData.content[page].content);
+                            data.blogData = blogData;
+                            res.render('blog/detail', data);
                         }else{
-                            blogData.hasMoreContent = false;
+                            res.render('404',{
+                                title:'404错误',
+                                path:'/blog'+req.path,
+                                errorname:'404'
+                            });
                         }
-                        blogData.content= markdown.toHTML(blogData.content[page].content);
-                        data.blogData = blogData;
-                        res.render('blog/detail', data);
                     }else{
-                        res.render('404',{
-                            title:'404错误',
-                            path:'/blog'+req.path,
-                            errorname:'404'
-                        });
+                        res.redirect(config.siteUrl+'404');
                     }
                 }else{
-                    res.render('404',{
-                        title:'404错误',
-                        path:'/blog'+req.path,
-                        errorname:'404'
-                    });
+                    res.redirect(config.siteUrl+'404');
                 }
             });
         }
@@ -156,55 +156,51 @@ router.get('/article/:shorturl/:page?',function(req,res){
 //                                    res.redirect(config.siteUrl+'blog/article/'+result.hash);
 //                                }else{
                                     blogSchema.blogDetail(result.data.blogId,function(err,blogData){
-                                        if(err===null){
-                                            if(page<blogData.content.length){
-                                                if(page<blogData.content.length-1){
-                                                    blogData.hasMoreContent = true;
-                                                    blogData.nextPage = config.siteUrl+data.app+'/article/'+req.params.shorturl+'/'+(page+1);
+                                        if(err===null && blogData!==null){
+                                            if(blogData.info.state===1){
+                                                if(page<blogData.content.length){
+                                                    if(page<blogData.content.length-1){
+                                                        blogData.hasMoreContent = true;
+                                                        blogData.nextPage = config.siteUrl+data.app+'/article/'+req.params.shorturl+'/'+(page+1);
+                                                    }else{
+                                                        blogData.hasMoreContent = false;
+                                                    }
+                                                    blogData.content= markdown.toHTML(blogData.content[page].content);
+                                                    data.blogData = blogData;
+                                                    /**
+                                                     * 编辑和修订权限 - 前台显示
+                                                     * */
+                                                    if(userData._id.toString()===blogData.info.author.id){//判断是否为用户自己的文章
+                                                        data.blogData.isMyArticle = true;
+                                                    }else if(userData.permission.blog.revise){//判断是否有修订权限
+                                                        data.blogData.hasRevisePermission = true;
+                                                    }
+                                                    res.render('blog/detail', data);
                                                 }else{
-                                                    blogData.hasMoreContent = false;
+                                                    res.redirect(config.siteUrl+'404');
                                                 }
-                                                blogData.content= markdown.toHTML(blogData.content[page].content);
-                                                data.blogData = blogData;
-                                                /**
-                                                * 编辑和修订权限 - 前台显示
-                                                * */
-                                                if(userData._id.toString()===blogData.info.author.id){//判断是否为用户自己的文章
-                                                    data.blogData.isMyArticle = true;
-                                                }else if(userData.permission.blog.revise){//判断是否有修订权限
-                                                    data.blogData.hasRevisePermission = true;
-                                                }
-                                                res.render('blog/detail', data);
                                             }else{
-                                                res.render('404',{
-                                                    title:'404错误',
-                                                    path:'/blog'+req.path,
-                                                    errorname:'404'
-                                                });
+                                                res.redirect(config.siteUrl+'404');
                                             }
                                         }else{
-                                            res.render('404',{
-                                                title:'404错误',
-                                                path:'/blog'+req.path,
-                                                errorname:'404'
-                                            });
+                                            res.redirect(config.siteUrl+'404');
                                         }
                                     });
 //                                }
                             }, function(error) {
                                 if (error) {
 //                                    throw new Error(error);
-                                    sendErr(res);
+                                    res.redirect(config.siteUrl+'404');
                                 }
                             });
                         }, function(error) {
                             if (error) {
 //                                throw new Error(error);
-                                sendErr(res);
+                                res.redirect(config.siteUrl+'404');
                             }
                         });
                     }else{
-                        sendErr(res);
+                        res.redirect(config.siteUrl+'404');
                     }
                 });
             }else{
@@ -240,7 +236,7 @@ router.get('/article/:shorturl/:page?',function(req,res){
     },function(error) {
         if (error) {
 //          throw new Error(error);
-            sendErr(res);
+            res.redirect(config.siteUrl+'404');
         }
     });
 });
@@ -494,13 +490,43 @@ router.get('/console/bloglist/:page?',function(req,res){
     if(req.params.page && !isNaN(Number(req.params.page))){
         page = Number(req.params.page);
     }
-    blogSchema.listBlog({},page*logNumPerPage,logNumPerPage,function(err,blogData){
+    blogSchema.listBlog({state:1},page*logNumPerPage,logNumPerPage,function(err,blogData){
         var data = new renderData({
-            title:'blog console list'
+            title:'blog console list',
+            jsfile:'blog_admin.js'
         });
         data.blogData = blogData;
         res.render('blog/console/edit',data);
     });
+});
+//删除日志
+router.post('/api/deleteBlogs',function(req,res){
+    if(req.body.idArray){
+        if(req.body.idArray.constructor.toString().match('Array') && req.body.idArray!==[]){
+            blogSchema.deleteBlogs(req.body.idArray,function(err,data){
+                if(err===null){
+                    res.json({
+                        err:false
+                    });
+                }else{
+                    res.json({
+                        err:true,
+                        des:'数据错误。'
+                    });
+                }
+            });
+        }else{
+            res.json({
+                err:true,
+                des:'提交数据错误，请刷新后重试。'
+            });
+        }
+    }else{
+        res.json({
+            err:true,
+            des:'提交数据错误，请刷新后重试。'
+        });
+    }
 });
 
 module.exports = router;

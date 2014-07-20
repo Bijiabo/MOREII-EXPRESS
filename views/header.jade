@@ -30,7 +30,8 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
                     a.dropdown-toggle(href="#",data-toggle="dropdown")
                         span#header-user-name 用户名
                         b.caret(style="margin-left:5px;")
-                    ul.dropdown-menu
+                    span.dropdown-arrow.dropdown-arrow-inverse
+                    ul.dropdown-menu.dropdown-inverse
                         li
                             a(href="#{siteUrl}user/account") 我的资料
                         li
@@ -50,12 +51,13 @@ div.modal.fade#messagebox(role="dialog",aria-labelledby="messagebox-title",aria-
                     span.fa.fa-spin.fa-spinner
                 div#messageboxlist
                     table.table.table-hover
-                        thead
-                            tr
-                                th.tablecheckbox
-                                    input.thead-checkbox(type="checkbox",value="all")
-                                th # 内容
-                                th # 来源
+                        //thead
+                        //    tr
+                        //        th
+                        //            label.checkbox
+                        //                input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                        //        th # 内容
+                        //        th # 来源
                         tbody
                     div(style="padding-left:8px;padding-right:8px;")
                         button.btn.btn-default.btn-sm(type="button") 标记为已读
