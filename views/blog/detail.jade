@@ -3,21 +3,22 @@ extends ../layout
 block content
     div.container
         div.row
-            div.col-md-9
+            div.col-md-8
                 div.row
                     div.col-md-12#blog-main
                         a(href="#")
                             h4= blogData.info.title
                         article!= blogData.content
                         -if(blogData.hasMoreContent)
-                            a.btn.btn-default.btn-block(href="#{blogData.nextPage}") 阅读更多
-                        hr
+                            a.btn.btn-default.btn-block#blog-readmore(href="#{blogData.nextPage}")
+                                span.fa.fa-plus &nbsp;&nbsp;阅读更多
+                        p
                         button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
                         div.blog-userinfo= blogData.info.author.name
 
                         div.row
                             div.col-md-12#comment-box
-                                h4 评论
+                                h6 评论
                                 form(role="form",data-app="#{app}",data-apppageid="#{blogData.info._id}")
                                     div.form-group
                                         textarea.form-control#comment-content(placeholder="评论内容...",name="content")
@@ -25,7 +26,7 @@ block content
                                         a.btn.btn-primary.pull-right#comment-submit 提交
                             div.col-md-12#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{blogData.info._id}/")
 
-            div.col-md-3#blog-sidebar
+            div.col-md-4.hidden-sm.hidden-xs#blog-sidebar
                 div.blog-sidebar-item
                     div.form-group
                         div.input-group
@@ -33,11 +34,16 @@ block content
                             span.input-group-btn
                                 button.btn(type="submit")
                                     span.fui-search
-                    -if(blogData.isMyArticle===true)
-                        br
-                        a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
-                    -else if(blogData.hasRevisePermission===true)
-                        br
-                        a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
+                div.panel.panel-default
+                    div.panel-heading 关于作者
+                    div.panel-body
+                        p #{blogData.info.author.name}
+                div.panel.panel-default
+                    div.panel-heading 管理选项
+                    div.panel-body
+                        -if(blogData.isMyArticle===true)
+                            a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
+                        -else if(blogData.hasRevisePermission===true)
+                            a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
 
 

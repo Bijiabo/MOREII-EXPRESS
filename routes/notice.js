@@ -13,7 +13,7 @@ var renderData = function(data){
     this.cssfile = data.cssfile || 'mobile.css';
     this.jsfile = data.jsfile ||'mobile.js';
     this.siteUrl = config.siteUrl;
-    this.app = 'mobile';
+    this.app = 'notice';
     this.pretty = true;
 }
 /**

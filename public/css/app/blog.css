@@ -1,8 +1,10 @@
 /*blog*/
 #blog-main{
     background: #ffffff;
-    padding-top: 15px;
     padding-bottom: 30px;
+}
+#blog-main h4{
+    margin-top: 0;
 }
 .blog-tags{
     margin: 0 5px 5px 0;
@@ -10,9 +12,26 @@
 #blog-sidebar{
 
 }
+#blog-sidebar .panel{
+    border: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+#blog-sidebar .panel .panel-heading,#blog-sidebar .panel .panel-body{
+    background: none;
+    padding-left: 0;
+    padding-right: 0;
+}
 .blog-sidebar-item{
     /*background: #ffffff;*/
 }
 #blog-main article{
     line-height: 2em;
+}
+#blog-readmore{
+    background: #ffffff;
+    color: #767676;
+    border: 1px solid #eeeeee;
 }

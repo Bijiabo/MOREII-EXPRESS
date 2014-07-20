@@ -25,8 +25,9 @@ html(ng-app,lamg="zh")
             each item in j
                 script(src='#{siteUrl}js/app/'+item)
         script.
-            var siteUrl = '#{siteUrl}';
-            var app = '#{app}';
+            var siteUrl = '#{siteUrl}',
+                app = '#{app}',
+                loadTime_Start = new Date();
     body
         include header
         block content

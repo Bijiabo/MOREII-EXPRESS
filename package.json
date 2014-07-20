@@ -21,7 +21,8 @@
       "rd":"*",
       "markdown":"*",
       "wechat":"*",
-      "express-session":"*"
+      "express-session":"*",
+      "ua-parser-js":"*"
   },
   "devDependencies": {
     "browserify": "^4.1.5",

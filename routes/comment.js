@@ -11,6 +11,7 @@ var renderData = function(data){
     this.cssfile = data.cssfile || 'comment.css';
     this.jsfile = data.jsfile ||'comment.js';
     this.siteUrl = config.siteUrl;
+    this.app = 'comment';
     this.pretty = true;
 }
 

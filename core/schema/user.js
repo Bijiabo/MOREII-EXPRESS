@@ -51,6 +51,10 @@ var userSchema = new mongoose.Schema({
                 comment:{type:Boolean,default:true},
                 edit:{type:Boolean,default:false},
                 revise:{type:Boolean,default:false}
+            },
+            statistics:{
+                view:{type:Boolean,default:false},
+                memberInfo:{type:Boolean,default:false}
             }
         }
     });
@@ -144,6 +148,20 @@ var appGrade = {
             edit:true,
             revise:true
         }
+    },
+    statistics:{
+        user:{
+            view:false,
+            memberInfo:false
+        },
+        editor:{
+            view:true,
+            memberInfo:false
+        },
+        admin:{
+            view:true,
+            memberInfo:true
+        }
     }
 }
 var userGrade = {
@@ -153,6 +171,7 @@ var userGrade = {
         shop:appGrade.shop.admin,
         class:appGrade.class.admin,
         blog:appGrade.blog.admin,
+        statistics:appGrade.statistics.admin
     },
     user:{
         user:appGrade.user.user,
@@ -160,6 +179,7 @@ var userGrade = {
         shop:appGrade.shop.user,
         class:appGrade.class.user,
         blog:appGrade.blog.user,
+        statistics:appGrade.statistics.user
     },
     blogEditor:{
         user:appGrade.user.user,
@@ -167,6 +187,7 @@ var userGrade = {
         shop:appGrade.shop.user,
         class:appGrade.class.user,
         blog:appGrade.blog.admin,
+        statistics:appGrade.statistics.editor
     },
     shopAssistant:{
         user:appGrade.user.user,
@@ -174,6 +195,7 @@ var userGrade = {
         shop:appGrade.shop.admin,
         class:appGrade.class.user,
         blog:appGrade.blog.user,
+        statistics:appGrade.statistics.editor
     }
 }
 

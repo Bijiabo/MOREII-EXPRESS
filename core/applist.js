@@ -14,6 +14,7 @@ var appList = [
 //    'tool',
     'comment',
     'class',
-    'wechat'
+    'wechat',
+    'statistics'
 ];
 module.exports = appList;

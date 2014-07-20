@@ -371,7 +371,6 @@ var basic = {
     },
     checkMessageBox:function(){
         if(cache.login){
-            console.log('logined');
             $.ajax({
                url:siteUrl+'notice/api/getUnread',
                 method:'GET',
