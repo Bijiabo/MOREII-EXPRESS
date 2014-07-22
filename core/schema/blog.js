@@ -55,7 +55,7 @@ module.exports = {
                     blogContentData = new blogContentModel({
                         blogId:blogDataSaved._id.toString(),
                         contentIndex:i,
-                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength),
+                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
                         version:1
                     });
                     blogContentData.save(function(err){
@@ -107,7 +107,7 @@ module.exports = {
                                 blogContentData = new blogContentModel({
                                     blogId:savedData._id.toString(),
                                     contentIndex:i,
-                                    content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength),
+                                    content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
                                     version:versionNow
                                 });
                                 blogContentData.save(function(err){
@@ -162,10 +162,14 @@ module.exports = {
     blogDetailView:function(id,callback){
         blogModel.findById(id)
             .exec(function(err,doc){
-                doc.count.view++;
-                doc.save(function(err,doc){
-                    callback(err,doc);
-                });
+                if(err===null && doc!==null){
+                    doc.count.view++;
+                    doc.save(function(err,doc){
+                        callback(err,doc);
+                    });
+                }else{
+                    callback(err);
+                }
             });
     },
     randomBlog:function(callback){

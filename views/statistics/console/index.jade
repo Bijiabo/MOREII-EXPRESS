@@ -1,58 +1,59 @@
-extends ../../layout
+extends ../../layout_console
 
 block content
-    div.container
-        h6= title
-        hr
-        div.row
-            div.col-md-3.col-sm-4.col-xs-6
-                div.media
-                    a.pull-left(href="#")
-                        span.fa.fa-home.fa-3x
-                    div.media-body
-                        h6.media-heading index
-                        p.text-muted
-                            span.fa.fa-eye &nbsp;
-                            span(style="margin-right:15px;") 639
-                            span.fa.fa-bolt &nbsp;
-                            span#loadingtime-index
-                            span ms
-            div.col-md-3.col-sm-4.col-xs-6
-                div.media
-                    a.pull-left(href="#")
-                        span.fa.fa-user.fa-3x
-                    div.media-body
-                        h6.media-heading user
-                        p.text-muted
-                            span.fa.fa-eye &nbsp;
-                            span(style="margin-right:15px;") 37
-                            span.fa.fa-bolt &nbsp;
-                            span#loadingtime-user
-                            span ms
-            div.col-md-3.col-sm-4.col-xs-6
-                div.media
-                    a.pull-left(href="#")
-                        span.fa.fa-leaf.fa-3x
-                    div.media-body
-                        h6.media-heading blog
-                        p.text-muted
-                            span.fa.fa-eye &nbsp;
-                            span(style="margin-right:15px;") 158
-                            span.fa.fa-bolt &nbsp;
-                            span#loadingtime-blog
-                            span ms
-            div.col-md-3.col-sm-4.col-xs-6
-                div.media
-                    a.pull-left(href="#")
-                        span.fa.fa-bell.fa-3x
-                    div.media-body
-                        h6.media-heading statistics
-                        p.text-muted
-                            span.fa.fa-eye &nbsp;
-                            span(style="margin-right:15px;") 744
-                            span.fa.fa-bolt &nbsp;
-                            span#loadingtime-statistics
-                            span ms
-        hr
-        p 今日浏览 #{data.todayViewCount}
+    div#console_main
+        div.container
+            h6= title
+            hr
+            div.row
+                div.col-md-3.col-sm-4.col-xs-6
+                    div.media
+                        a.pull-left(href="#")
+                            span.fa.fa-home.fa-3x
+                        div.media-body
+                            h6.media-heading index
+                            p.text-muted
+                                span.fa.fa-eye &nbsp;
+                                span(style="margin-right:15px;") 639
+                                span.fa.fa-bolt &nbsp;
+                                span#loadingtime-index
+                                span ms
+                div.col-md-3.col-sm-4.col-xs-6
+                    div.media
+                        a.pull-left(href="#")
+                            span.fa.fa-user.fa-3x
+                        div.media-body
+                            h6.media-heading user
+                            p.text-muted
+                                span.fa.fa-eye &nbsp;
+                                span(style="margin-right:15px;") 37
+                                span.fa.fa-bolt &nbsp;
+                                span#loadingtime-user
+                                span ms
+                div.col-md-3.col-sm-4.col-xs-6
+                    div.media
+                        a.pull-left(href="#")
+                            span.fa.fa-leaf.fa-3x
+                        div.media-body
+                            h6.media-heading blog
+                            p.text-muted
+                                span.fa.fa-eye &nbsp;
+                                span(style="margin-right:15px;") 158
+                                span.fa.fa-bolt &nbsp;
+                                span#loadingtime-blog
+                                span ms
+                div.col-md-3.col-sm-4.col-xs-6
+                    div.media
+                        a.pull-left(href="#")
+                            span.fa.fa-bell.fa-3x
+                        div.media-body
+                            h6.media-heading statistics
+                            p.text-muted
+                                span.fa.fa-eye &nbsp;
+                                span(style="margin-right:15px;") 744
+                                span.fa.fa-bolt &nbsp;
+                                span#loadingtime-statistics
+                                span ms
+            hr
+            p 今日浏览 #{data.todayViewCount}
 

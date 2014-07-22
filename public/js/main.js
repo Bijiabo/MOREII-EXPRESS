@@ -17,4 +17,7 @@ $(function(){
     $(':checkbox.thead-checkbox').on('toggle', function(e) {
         basic.tableAllCheck($(this),e);
     });
+    $(window).on('resize',function(){
+        basic.resize();
+    });
  });

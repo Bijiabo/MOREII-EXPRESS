@@ -10,6 +10,7 @@ var renderData = function(data){
     this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
     this.siteUrl = config.siteUrl;
     this.app = 'user';
+    this.apps = config.app;
     this.pretty = true;
 }
 /* GET users listing. */
@@ -195,6 +196,7 @@ router.get('/console',function(req,res){
     userSchema.getUserList({},0,10,function(err,userData){
         if(!err){
             var data = new renderData({
+                title:'用户管理',
                 jsfile:'user_console.js'
             });
             data.userData = userData;

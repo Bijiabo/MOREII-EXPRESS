@@ -10,6 +10,12 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
 
 跳转方法：引入config.js后使用**config.resError(req,res,descriptionForJson,redirectUrl);**
 
+##模块的添加与命名
+
+ - 英文名尽量为名字，全部小写
+ - 模块信息添加至core/config.js
+ - 模块控制台路径统一为： 模块路径/console
+
 ------
 
 ##class模块
@@ -61,6 +67,7 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - 显示样式优化
  - *blog模块*
   - 分享功能 ==
+  - 更新模板
  - *statistics模块*
   - 数据结构设计
   - 前端基础代码
@@ -69,3 +76,5 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - 数据结构设计 ==
   - 后端交互 ==
   - 前段交互 ==
+ - 调整模块载入方式，增加模块中文名称。
+ - 调整并统一后台样式。

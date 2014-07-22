@@ -1,0 +1,101 @@
+#console_sidebar{
+    position: fixed;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    padding-left: 0;
+    padding-right: 0;
+    background: #2c3e50;
+    box-shadow: inset -1px 0 3px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+#console_sidebar .list-group{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding-bottom: 150px;
+
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+}
+#console_sidebar .list-group .list-group-item{
+    position: relative;
+    border-radius: 0;
+    background: #34495e;
+    border: none;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #253546;
+    border-top: 1px solid #384E64;
+}
+#console_sidebar .list-group .list-group-item:hover{
+    background: #4e6c87;
+    color: #ffffff;
+}
+#console_sidebar .list-group .list-group-item:hover:before{
+    content: "\f0da";
+    position: absolute;
+    top: 10px;
+    right: -9px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.5em;
+    color: #4e6c87;
+}
+#console_sidebar .list-group .list-group-item.active{
+    color: #ffffff;
+    background: #3e5872;
+}
+#console_sidebar .list-group .list-group-item.active:before{
+    content: "\f0d9";
+    position: absolute;
+    top: 10px;
+    right: -1px;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.5em;
+    color: #ffffff;
+}
+#console_sidebar .list-group a.list-group-item,#console_sidebar .list-group a.list-group-item h6{
+    color: #d9d9d9;
+
+}
+#console_sidebar .list-group-name{
+    padding-left: 10px;
+}
+#console_main,.console_main{
+    box-sizing: border-box;
+    padding-left: 250px;
+    padding-top: 30px;
+}

@@ -17,7 +17,8 @@ var renderData = function(data){
     this.cssfile = data.cssfile || '';
     this.jsfile = data.jsfile ||'';
     this.siteUrl = config.siteUrl;
-    this.app = 'Statistics';
+    this.app = 'statistics';
+    this.apps = config.app;
     this.pretty = true;
 };
 

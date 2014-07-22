@@ -7,8 +7,16 @@ var cache = {
 };
 var basic = {
     ready:function(){
-        $('.mii-jshide').hide();
-        $('.mii-jsshow').removeClass('jsshow');
+        basic.initConsoleSidebar();
+        $(document).on('mousemove','#console_sidebar .list-group',function(e){
+            basic.listenConsoleSidebar(e);
+        });
+        $(document).on('mouseout','#console_sidebar .list-group',function(e){
+            basic.initConsoleSidebar(e);
+        });
+    },
+    resize:function(){
+        basic.initConsoleSidebar();
     },
     pwdencode:function(password){
         /*
@@ -418,6 +426,36 @@ var basic = {
             $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('check');
         }else{
             $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('uncheck');
+        }
+    },
+    initConsoleSidebar:function(){
+        var sidebarListgroup = $('#console_sidebar .list-group'),
+            transform3dY= $('#console_sidebar').height()/2;
+        sidebarListgroup.css({
+            '-webkit-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+            '-moz-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+            '-ms-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+            '-o-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+            'transform': 'translate3d(0,-'+transform3dY+'px,0)'
+        });
+        sidebarListgroup.data('transform3dY',transform3dY);
+    },
+    listenConsoleSidebar:function(e){
+        var sidebarListgroup = $('#console_sidebar .list-group'),
+            listHeight = $('#console_sidebar .list-group').height(),
+            sidebarHeight = $('#console_sidebar').height();
+        if(listHeight>sidebarHeight){
+            var transform3dY = Math.floor(e.pageY / sidebarHeight * listHeight - Number(sidebarListgroup.data('transform3dY')))+150;
+            console.log(transform3dY - Number(sidebarListgroup.data('transform3dY')) );
+            if(transform3dY - Number(sidebarListgroup.data('transform3dY')) > 0){
+                sidebarListgroup.css({
+                    '-webkit-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                    '-moz-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                    '-ms-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                    '-o-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                    'transform': 'translate3d(0,-'+transform3dY+'px,0)'
+                });
+            }
         }
     }
 }

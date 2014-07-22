@@ -1,13 +1,13 @@
 var express = require('express'),
-    expressSession = require('express-session');
-var path = require('path');
-var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var appList = require('./core/applist');
-var config = require('./core/config');
-var markdown = require('markdown-js');
+    expressSession = require('express-session'),
+    path = require('path'),
+    favicon = require('static-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser');
+//var appList = require('./core/applist');
+var config = require('./core/config'),
+    markdown = require('markdown-js');
 
 var app = express();
 //set port
@@ -38,13 +38,9 @@ app.use(function(req,res,next){
  * load Apps
  * */
 var appRouter = {};
-for(var i=0;i<appList.length;i++){
-    appRouter[appList[i]] = require('./routes/'+appList[i]);
-    if(appList[i]==='index'){
-        app.use('/', appRouter[appList[i]]);
-    }else{
-        app.use('/'+appList[i], appRouter[appList[i]]);
-    }
+for(var i=0;i<config.app.length;i++){
+    appRouter[config.app[i].name] = require('./routes/'+config.app[i].name);
+    app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
 }
 /*var routes = require('./routes/index'),
     user = require('./routes/user'),
