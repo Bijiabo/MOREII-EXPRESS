@@ -494,6 +494,27 @@ router.post('/api/update/:id',function(req,res){
         }
     });
 });
+//后台首页
+router.get('/console',function(req,res){
+    var data = new renderData({
+        title:'博客模块',
+        jsfile:'blog_admin.js'
+    });
+    res.render('blog/console/index',data);
+});
+//统计作者数据
+router.get('/console/authors',function(req,res){
+    var data = new renderData({
+        title:'博客作者统计',
+        jsfile:'blog_admin.js'
+    });
+    blogSchema.statisticAuthor(10,function(err,authorData){
+        if(err===null && authorData!==null){
+            data.authorData = authorData;
+        }
+        res.render('blog/console/authors',data);
+    });
+});
 //内容管理列表
 router.get('/console/bloglist/:page?',function(req,res){
     var page = 0,

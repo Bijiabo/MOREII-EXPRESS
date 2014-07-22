@@ -1,0 +1,44 @@
+extends ../../layout_console
+block content
+    div#console_main
+        div.container
+            h6 #{title}
+            table.table
+                thead
+                    th 作者
+                    th 文章数
+                    th 活跃度
+                    th 使用标签
+                    th 详情
+                tbody
+                    -var liveness = 0,dateNow = new Date()
+                    -var monthNow = dateNow.getMonth() + 1
+                    -for authorItem in authorData
+                        -liveness = 0
+                        -for(var i=0,len=authorItem.activeMonth.length;i<len;i++)
+                            -if(authorItem.activeMonth[i]===monthNow)
+                                -liveness +=3
+                            -else
+                                -liveness +=1
+                        tr
+                            td #{authorItem.name}
+                            td #{authorItem.blogCount}
+                            td #{liveness}
+                            td #{authorItem.tag.length}
+                            td
+                                a(href="#")
+                                    span.fa.fa-eye
+            div.row
+                div.col-md-4
+                    btn.btn.btn-default 刷新
+                div.col-md-8
+                    div.pagination.pull-right(style="margin:0;")
+                        ul
+                            li.previous
+                                a.fui-arrow-left(href="#")
+                            li.active
+                                a(href="#") 1
+                            li
+                                a(href="#") 2
+                            li.next
+                                a.fui-arrow-right(href="#")

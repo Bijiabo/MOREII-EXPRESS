@@ -190,6 +190,32 @@ module.exports = {
         blogModel.update({_id:{$in:idArray}},{$set:{state:0}},function(err,data){
             callback(err,data);
         });
+    },
+    //统计作者
+    statisticAuthor:function(limit,callback){
+        blogModel.aggregate(
+            {
+                "$project":{
+                    "author":1,
+                    'version':1,
+                    "createTime":1,
+                    "modify":1,
+                    "tag":1,
+                    "createdIn":{"$month":"$createTime"}
+                }
+            },
+            {
+                "$group":{
+                    "_id":"$author.id",
+                    "name":{"$addToSet":"$author.name"},
+                    "blogCount":{"$sum":1},
+                    "tag":{"$addToSet":"$tag"},
+                    "activeMonth":{"$push":"$createdIn"}
+                }
+            },{"$limit":10}
+        ).exec(function(err,data){
+                callback(err,data);
+            });
     }
 }
 

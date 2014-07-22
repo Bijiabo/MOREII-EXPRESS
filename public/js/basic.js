@@ -7,6 +7,7 @@ var cache = {
 };
 var basic = {
     ready:function(){
+        //初始化侧边菜单
         basic.initConsoleSidebar();
         $(document).on('mousemove','#console_sidebar .list-group',function(e){
             basic.listenConsoleSidebar(e);
@@ -446,7 +447,6 @@ var basic = {
             sidebarHeight = $('#console_sidebar').height();
         if(listHeight>sidebarHeight){
             var transform3dY = Math.floor(e.pageY / sidebarHeight * listHeight - Number(sidebarListgroup.data('transform3dY')))+150;
-            console.log(transform3dY - Number(sidebarListgroup.data('transform3dY')) );
             if(transform3dY - Number(sidebarListgroup.data('transform3dY')) > 0){
                 sidebarListgroup.css({
                     '-webkit-transform': 'translate3d(0,-'+transform3dY+'px,0)',
