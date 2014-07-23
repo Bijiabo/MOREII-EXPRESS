@@ -70,6 +70,8 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
  - *blog模块*
   - 分享功能 ==
   - 更新模板
+  - console 文章列表添加预览和编辑功能 50% doing
+  - console 头部栏目导航 doing
  - *statistics模块*
   - 数据结构设计
   - 前端基础代码
@@ -80,3 +82,22 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - 前段交互 ==
  - 调整模块载入方式，增加模块中文名称。
  - 调整并统一后台样式。
+ - 修复input[type="search"] css bug
+
+------
+
+##mongodb数据的备份以及恢复
+
+###mongodump（备份）
+
+`sudo mongodump -d moreii -o /home/boooo/data`
+
+ - \-d 指定要备份的数据库
+ - \-o 指定备份保存位置
+
+###mongorestore（恢复）
+
+`mongorestore --db moreiiii --drop --directoryperdb /home/boooo/data/moreii`
+
+
+

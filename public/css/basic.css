@@ -5,6 +5,9 @@
 .table tbody tr td{
     line-height: 2.2em;
 }
+.input-group input[type="search"]{
+    border-right: 0;
+}
 @media (min-width: 768px){
     #header .navbar-collapse .navbar-nav.navbar-right:last-child > .dropdown:last-child > a {
         border-radius: 0;

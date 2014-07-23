@@ -132,5 +132,31 @@ module.exports = {
             }).exec(function(err,data){
                 callback(err,data);
             });
+    },
+    //统计月份内应用浏览量
+    statisticBlogViewByMonth:function(year,month,callback){
+        statisticsModel.aggregate(
+            {
+                "$match":{
+                    "openTime":{"$gt":new Date(year+'/'+month+'/01'),"$lt":new Date(year+'/'+(month+1)+'/01')},
+                    "app":"blog"
+                }
+            },
+            {
+                "$project":{
+                    "loadingTime":1,
+                    "openTime":1,
+                    "time":{"$dayOfMonth":"$openTime"}
+                }
+            },
+            {
+                "$group":{
+                    "_id":"$time",
+                    "count":{"$sum":1}
+                }
+            }
+        ).exec(function(err,data){
+                callback(err,data);
+            });
     }
 }

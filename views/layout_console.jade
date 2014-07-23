@@ -29,9 +29,16 @@ html(ng-app,lamg="zh")
             var siteUrl = '#{siteUrl}',
                 app = '#{app}',
                 loadTime_Start = new Date();
+        //- 获取app信息
+        -for(var i=0,len=apps.length;i<len;i++)
+            -if(apps[i].name===app)
+                -var appInfo=apps[i]
     body
         include header_console
-        block content
+        div#console_main
+            div.container
+                include nav
+                block content
         script(src='/js/jquery-ui-1.10.3.custom.min.js')
         script(src='/js/jquery.ui.touch-punch.min.js')
         script(src="/js/bootstrap-select.js")
@@ -42,4 +49,6 @@ html(ng-app,lamg="zh")
         script(src="/js/jquery.placeholder.js")
         script(src="/js/typeahead.js")
         script(src="/js/application.js")
-        include footer
+        script(src="/js/markdown.js")
+        script(src="/js/Chart.min.js")
+        include footer_console

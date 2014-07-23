@@ -1,0 +1,73 @@
+extends ../../layout_console
+
+block content
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th
+                    label.checkbox
+                        input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                th 标题
+                th.hidden-xs.hidden-sm 创建时间
+                th.hidden-xs.hidden-sm 最后修改
+                th 作者
+                th.hidden-xs.hidden-sm 最后修订
+                th 版本
+                th 操作
+        tbody#blog-bloglisttable
+            -for blogItem in blogData
+                -var createTime = new Date(blogItem.createTime)
+                -var lastModifyName = '',lastModifyTime=''
+                -if(blogItem.modify.length>0)
+                    -lastModifyName = blogItem.modify[blogItem.modify.length-1].name
+                    -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
+                    -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
+                tr
+                    td
+                        label.checkbox
+                            input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
+                    td #{blogItem.title}
+                    td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
+                    td.hidden-xs.hidden-sm #{lastModifyTime}
+                    td #{blogItem.author.name}
+                    td.hidden-xs.hidden-sm #{lastModifyName}
+                    td #{blogItem.version}
+                    td.blog-tableedit
+                        a.blog-console-preview(href="javascript:;",data-blogid="#{blogItem._id}")
+                            span.fa.fa-eye
+                        a.blog-console-edit(href="javascript:;",data-blogid="#{blogItem._id}")
+                            span.fa.fa-edit
+    button.btn.btn-default#blog-deleteblogs(type="button")
+        span.fa.fa-trash-o &nbsp;&nbsp;删除
+    button#blog-write-new.btn.btn-primary.pull-right
+        span.fa.fa-plus &nbsp;&nbsp;新建
+    //- 文章预览层
+    div#blog-previewblog.console-modal
+        div.fa.fa-times.console-modal-close
+        h6
+        hr
+        div#blog-previewblog-content
+    //- 文章编辑层
+    div#blog-editblog.console-modal
+        div.fa.fa-times.console-modal-close
+        h6 编辑日志
+        hr
+        input#blog-editblog-title.form-control(placeholder="文章标题")
+        br
+        textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
+        br
+        input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
+        div.col-md-2.col-md-offset-5
+            button#blog-editblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="edit",data-id="") 提交修改
+    //- 文章书写层
+    div#blog-addblog.console-modal
+        div.fa.fa-times.console-modal-close
+        h6 新建日志
+        hr
+        input#blog-addblog-title.form-control(placeholder="文章标题")
+        br
+        textarea#blog-addblog-content.form-control(placeholder="文章标题",rows="20")
+        br
+        input#blog-addblog-tags.tagsinput(name="tagsinput",value="")
+        div.col-md-2.col-md-offset-5
+            button#blog-addblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="add",data-id="") 添加日志

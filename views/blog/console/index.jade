@@ -1,5 +1,87 @@
 extends ../../layout_console
 block content
-    div#console_main
-        div.container
-            h6 #{title}
+    canvas#blog-console-chart(width="400",height="400")
+    div.col-md-12
+        p.text-center.text-muted 文章访问与发布统计
+    -var statisticBlogDataString = '',blogViewString=''
+    -for blogChartItem,key in statisticBlogData
+        -if(key!==0)
+            -statisticBlogDataString+=','
+        -statisticBlogDataString+=JSON.stringify(blogChartItem)
+    -for blogViewItem,key in blogView
+        -if(key!==0)
+            -blogViewString+=','
+        -blogViewString+=JSON.stringify(blogViewItem)
+    script.
+        $(function(){
+            var blogConsoleChart = function(){
+                //生成日期队列
+                var dateNow = new Date(),
+                    chartLabel = [],
+                    blogChartDataArray = [],
+                    blogChartViewArray = [],
+                    statisticBlogData = [!{statisticBlogDataString}],
+                    blogView = [!{blogViewString}];
+                var month = dateNow.getMonth()+1,
+                    year = dateNow.getFullYear(),
+                    addDataStateCache=false,
+                    addViewStateCache=false,
+                    blogDataCache,
+                    dateCache;
+                for(var i=1;i<32;i++){
+                    dateCache = new Date(year+'/'+month+'/'+i);
+                    if(dateCache.getDate()>=i){
+                        chartLabel.push(dateCache.getDate());
+                    }
+
+                    addDataStateCache=false;
+                    for(var a=0;a<statisticBlogData.length;a++){
+                        if(statisticBlogData[a].time[0]===dateCache.getDate()){
+                            blogChartDataArray.push(statisticBlogData[a].blogCount);
+                            addDataStateCache=true;
+                        }
+                    }
+                    if(!addDataStateCache){
+                        blogChartDataArray.push(0);
+                    }
+
+                    addViewStateCache=false;
+                    for(var b=0;b<blogView.length;b++){
+                        if(blogView[b]._id===dateCache.getDate()){
+                            blogChartViewArray.push(blogView[b].count);
+                            addViewStateCache=true;
+                        }
+                    }
+                    if(!addViewStateCache){
+                        blogChartViewArray.push(0);
+                    }
+                }
+                console.log(statisticBlogData);
+                //console.log(chartLabel);
+                $("#blog-console-chart").attr('width',$('#console_main>.container').width());
+                var blogChartCtx = $("#blog-console-chart").get(0).getContext("2d");
+                var blogChartCtxChart = new Chart(blogChartCtx);
+                var data = {
+                    labels : chartLabel,
+                    datasets : [
+                        {
+                            fillColor : "rgba(226, 234, 233, 0.5)",
+                            strokeColor : "rgba(52, 152, 219,1)",
+                            pointColor : "rgba(52, 152, 219, 1)",
+                            pointStrokeColor : "#fff",
+                            data : blogChartDataArray
+                        },
+                        {
+                            fillColor : "rgba(226, 234, 233, 0.5)",
+                            strokeColor : "rgba(22, 160, 133, 0.5)",
+                            pointColor : "rgba(22, 160, 133, 0.5)",
+                            pointStrokeColor : "#fff",
+                            data : blogChartViewArray
+                        }
+                    ]
+                }
+                new Chart(blogChartCtx).Line(data);
+            }();
+
+        });
+

@@ -1,0 +1,9 @@
+.blog-tableedit a span:first-child{
+    margin-right: 10px;
+}
+.blog-tableedit a span{color: #34495e;}
+.blog-tableedit a span:hover{color: #1abc9c;}
+#console-appnav .navbar-brand{
+    font-size: 16px;
+    line-height: 1.5;
+}

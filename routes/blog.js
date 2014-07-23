@@ -3,6 +3,7 @@ var express = require('express'),
     userSchema = require('../core/schema/user'),
     blogSchema = require('../core/schema/blog'),
     noticeSchema = require('../core/schema/notice'),
+    statisticsSchema = require('../core/schema/statistics'),
     short = require('short'),
     markdown = require( "markdown" ).markdown;
 short.connect('mongodb://localhost/moreii');
@@ -18,6 +19,21 @@ var renderData = function(data){
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'blog';
     this.apps = config.app;
+    this.consoleNav = [
+        {
+            name:'管理首页',
+            path:''
+        },
+        {
+            name:'文章列表',
+            path:'bloglist'
+        },
+        {
+            name:'作者统计',
+            path:'authors'
+        }
+    ];
+    this.consoleNavActive = data.consoleNavActive || '';
     this.pretty = true;
     };
 /* GET home page. */
@@ -498,15 +514,37 @@ router.post('/api/update/:id',function(req,res){
 router.get('/console',function(req,res){
     var data = new renderData({
         title:'博客模块',
-        jsfile:'blog_admin.js'
+        jsfile:'blog_admin.js',
+        cssfile:'blog_console.css',
+        consoleNavActive:''
     });
-    res.render('blog/console/index',data);
+    var dateNow = new Date();
+    var month = dateNow.getMonth()+ 1,
+        year = dateNow.getFullYear();
+    blogSchema.statisticBlogByMonth(year,month,function(err,statisticBlogData){
+       if(err===null){
+           data.statisticBlogData = statisticBlogData;
+           statisticsSchema.statisticBlogViewByMonth(year,month,function(err1,statisticBlogView){
+                if(err1===null){
+                    console.log(statisticBlogView);
+                    data.blogView = statisticBlogView;
+                    res.render('blog/console/index',data);
+                }else{
+                    res.redirect(config.siteUrl+'500');
+                }
+           });
+       }else{
+           res.redirect(config.siteUrl+'500');
+       }
+    });
 });
 //统计作者数据
 router.get('/console/authors',function(req,res){
     var data = new renderData({
         title:'博客作者统计',
-        jsfile:'blog_admin.js'
+        jsfile:'blog_admin.js',
+        cssfile:'blog_console.css',
+        consoleNavActive:'authors'
     });
     blogSchema.statisticAuthor(10,function(err,authorData){
         if(err===null && authorData!==null){
@@ -525,10 +563,12 @@ router.get('/console/bloglist/:page?',function(req,res){
     blogSchema.listBlog({state:1},page*logNumPerPage,logNumPerPage,function(err,blogData){
         var data = new renderData({
             title:'文章列表',
-            jsfile:'blog_admin.js'
+            jsfile:'blog_admin.js',
+            cssfile:'blog_console.css',
+            consoleNavActive:'bloglist'
         });
         data.blogData = blogData;
-        res.render('blog/console/edit',data);
+        res.render('blog/console/loglist',data);
     });
 });
 //删除日志
@@ -559,6 +599,22 @@ router.post('/api/deleteBlogs',function(req,res){
             des:'提交数据错误，请刷新后重试。'
         });
     }
+});
+//获取日志内容api
+router.get('/api/getBlogDetail/:id',function(req,res){
+    blogSchema.blogDetail(req.params.id,function(err,blogData){
+        if(err===null && blogData!==null){
+            res.json({
+                err:false,
+                data:blogData
+            });
+        }else{
+            res.json({
+                err:true,
+                des:'数据错误。'
+            });
+        }
+    });
 });
 
 module.exports = router;

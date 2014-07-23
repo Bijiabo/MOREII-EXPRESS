@@ -216,6 +216,33 @@ module.exports = {
         ).exec(function(err,data){
                 callback(err,data);
             });
+    },
+    //统计月份内博客发布情况
+    statisticBlogByMonth:function(year,month,callback){
+        blogModel.aggregate(
+            {
+                "$match":{
+                    "createTime":{"$gt":new Date(year+'/'+month+'/01'),"$lt":new Date(year+'/'+(month+1)+'/01')}
+                }
+            },
+            {
+                "$project":{
+                    'version':1,
+                    "createTime":1,
+                    "modify":1,
+                    "createdDayOfMonth":{"$dayOfMonth":"$createTime"}
+                }
+            },
+            {
+                "$group":{
+                    "_id":"$createdDayOfMonth",
+                    "blogCount":{"$sum":1},
+                    "time":{"$addToSet":"$createdDayOfMonth"}
+                }
+            }
+        ).exec(function(err,data){
+            callback(err,data);
+        });
     }
 }
 

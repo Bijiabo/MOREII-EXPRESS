@@ -15,6 +15,7 @@ var basic = {
         $(document).on('mouseout','#console_sidebar .list-group',function(e){
             basic.initConsoleSidebar(e);
         });
+        basic.initConsoleModal();
     },
     resize:function(){
         basic.initConsoleSidebar();
@@ -271,7 +272,7 @@ var basic = {
                 data[$(item).attr('name')] = $(item).val();
             });
         $.ajax({
-           method:method,
+           type:method,
             url:url,
             data:data,
             dataType:'json',
@@ -343,7 +344,7 @@ var basic = {
 
             }
             $.ajax({
-                method:'GET',
+                type:'GET',
                 url:commentList.data('url')+skip+'/'+limit,
                 dataType:'json',
                 success:success,
@@ -353,7 +354,7 @@ var basic = {
     },
     checkLogin:function(){
         $.ajax({
-            method:'GET',
+            type:'GET',
             url:siteUrl+'api/iflogin',
             dataType:'json',
             success:function(data){
@@ -382,7 +383,7 @@ var basic = {
         if(cache.login){
             $.ajax({
                url:siteUrl+'notice/api/getUnread',
-                method:'GET',
+                type:'GET',
                 dataType:'json',
                 success:function(data){
                     if(!data.err){
@@ -456,6 +457,45 @@ var basic = {
                     'transform': 'translate3d(0,-'+transform3dY+'px,0)'
                 });
             }
+        }
+    },
+    initConsoleModal:function(){//初始化后台modal
+        $(document).on('click','.console-modal-close',function(e){
+            $(this).parents('.console-modal').removeClass('active');
+
+        });
+        /*$(document).on('scroll',function(e){
+            if($('.console-modal.active').length>0){
+                var header = $('.console-modal.active h6');
+                if(header.data('top') && header.data('left')){
+                    var h6Top = header.data('top'),
+                        h6Left = header.data('left');
+                    if(window.scrollY>38){
+                        header.css({
+                            'position':'fixed',
+                            'top':h6Top+'px',
+                            'left':h6Left+'px'
+                        });
+                    }else{
+                        header.removeAttr('style');
+                    }
+                }else{
+                    var header = $('.console-modal.active h6');
+                    var h6Offset= header.offset();
+                    header.data('top',h6Offset.top);
+                    header.data('left',h6Offset.left);
+                }
+            }
+        });*/
+    },
+    consoleModal:function(id,state,callback){
+        var el = $(id);
+        if(state==='show'){
+            el.addClass('active');
+            callback(el);
+        }else if(state==='hide'){
+            el.removeClass('active');
+            callback(el);
         }
     }
 }
