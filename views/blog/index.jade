@@ -7,10 +7,11 @@ block content
                 -for(var i=0;i<blogData.length;i++)
                     div.col-md-12.row
                         a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
-                            h4= blogData[i].title
-                        article!= blogData[i].content
-                        div.blog-userinfo= blogData[i].author.name
+                            h6= blogData[i].title
                         hr
+                        article!= blogData[i].content
+                        div.blog-userinfo.text-right.text-muted 作者：#{blogData[i].author.name}
+                        br
             div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
                 div.blog-sidebar-item
                     div.form-group

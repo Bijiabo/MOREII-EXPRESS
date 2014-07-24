@@ -7,14 +7,16 @@ block content
                 div.row
                     div.col-md-12#blog-main
                         a(href="#")
-                            h4= blogData.info.title
+                            h6= blogData.info.title
+                        hr
                         article!= blogData.content
                         -if(blogData.hasMoreContent)
                             a.btn.btn-default.btn-block#blog-readmore(href="#{blogData.nextPage}")
                                 span.fa.fa-plus &nbsp;&nbsp;阅读更多
                         p
-                        button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
-                        div.blog-userinfo= blogData.info.author.name
+                        //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
+                        hr
+                        div.text-right.text-muted.blog-userinfo 作者：#{blogData.info.author.name}
 
                         div.row
                             div.col-md-12#comment-box
@@ -34,10 +36,6 @@ block content
                             span.input-group-btn
                                 button.btn(type="submit")
                                     span.fui-search
-                div.panel.panel-default
-                    div.panel-heading 关于作者
-                    div.panel-body
-                        p #{blogData.info.author.name}
                 div.panel.panel-default
                     div.panel-heading 管理选项
                     div.panel-body

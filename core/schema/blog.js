@@ -124,7 +124,7 @@ module.exports = {
                                     }
                                 });
                             }
-                          }else{
+                        }else{
                             callback(err1);
                         }
                     });
@@ -241,8 +241,8 @@ module.exports = {
                 }
             }
         ).exec(function(err,data){
-            callback(err,data);
-        });
+                callback(err,data);
+            });
     }
 }
 
