@@ -243,6 +243,16 @@ module.exports = {
         ).exec(function(err,data){
                 callback(err,data);
             });
+    },
+    //搜索标签
+    findByTags:function(tagArray,sort,skip,limit,callback){
+        blogModel.find({tag:{"$all":tagArray}})
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec(function(err,data){
+                callback(err,data);
+            });
     }
 }
 

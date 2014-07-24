@@ -16,7 +16,13 @@ block content
                         p
                         //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
                         hr
-                        div.text-right.text-muted.blog-userinfo 作者：#{blogData.info.author.name}
+                        div.text-muted.blog-userinfo
+                            span 标签：#{blogData.info.tag} &nbsp;&nbsp;
+                            -if(blogData.isMyArticle===true)
+                                a.btn.btn-default.btn-xs(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
+                            -else if(blogData.hasRevisePermission===true)
+                                a.btn.btn-default.btn-xs(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
+                            span.pull-right 作者：#{blogData.info.author.name}
 
                         div.row
                             div.col-md-12#comment-box
@@ -39,9 +45,5 @@ block content
                 div.panel.panel-default
                     div.panel-heading 管理选项
                     div.panel-body
-                        -if(blogData.isMyArticle===true)
-                            a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
-                        -else if(blogData.hasRevisePermission===true)
-                            a.btn.btn-default(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
 
 

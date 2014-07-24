@@ -81,7 +81,8 @@ block content
                     ]
                 }
                 new Chart(blogChartCtx).Line(data);
-            }();
-
+            };
+            blogConsoleChart();
+            window.onresize = function(){blogConsoleChart();};
         });
 

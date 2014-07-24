@@ -73,9 +73,11 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - console 文章列表添加预览和编辑功能 50% doing
   - console 头部栏目导航 doing
   - 前台样式优化 2014.07.24
+  - console index 统计显示Bug 2014.07.24
   - 前台显示修订作者 2014.07.24 doing
-  - 前台显示标签 wait
+  - 前台显示标签 2014.07.24
   - 前台搜索标签 wait
+  - 各个页面翻页 todo
  - *statistics模块*
   - 数据结构设计
   - 前端基础代码
@@ -88,6 +90,7 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
  - 调整并统一后台样式。
  - 修复input[type="search"] css bug
  - 添加后台界面自适应，兼容笔记本低分辨率。 2014.07.24
+ - 修复后台横向导航Bug。 2014.07.24
 
 ------
 

@@ -433,20 +433,22 @@ var basic = {
     initConsoleSidebar:function(){
         var sidebarListgroup = $('#console_sidebar .list-group'),
             transform3dY= $('#console_sidebar').height()/2;
-        sidebarListgroup.css({
-            '-webkit-transform': 'translate3d(0,-'+transform3dY+'px,0)',
-            '-moz-transform': 'translate3d(0,-'+transform3dY+'px,0)',
-            '-ms-transform': 'translate3d(0,-'+transform3dY+'px,0)',
-            '-o-transform': 'translate3d(0,-'+transform3dY+'px,0)',
-            'transform': 'translate3d(0,-'+transform3dY+'px,0)'
-        });
-        sidebarListgroup.data('transform3dY',transform3dY);
+        if($(window).width()>748){
+            sidebarListgroup.css({
+                '-webkit-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                '-moz-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                '-ms-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                '-o-transform': 'translate3d(0,-'+transform3dY+'px,0)',
+                'transform': 'translate3d(0,-'+transform3dY+'px,0)'
+            });
+            sidebarListgroup.data('transform3dY',transform3dY);
+        }
     },
     listenConsoleSidebar:function(e){
         var sidebarListgroup = $('#console_sidebar .list-group'),
             listHeight = $('#console_sidebar .list-group').height(),
             sidebarHeight = $('#console_sidebar').height();
-        if(listHeight>sidebarHeight){
+        if(listHeight>sidebarHeight && $(window).width()>748){
             var transform3dY = Math.floor(e.pageY / sidebarHeight * listHeight - Number(sidebarListgroup.data('transform3dY')))+150;
             if(transform3dY - Number(sidebarListgroup.data('transform3dY')) > 0){
                 sidebarListgroup.css({

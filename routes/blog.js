@@ -37,19 +37,46 @@ var renderData = function(data){
     this.pretty = true;
     };
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/:page?', function(req, res) {
+    var page = 0,
+        limitPerPage = 10;
+    if(req.params.page!==undefined){
+        page = req.params.page;
+    }
     var data = new renderData({
         title : 'Moreii团队博客'
     });
-    blogSchema.listBlog({state:1},0,10,function(err,blogData){
-        if(err===null){
+    blogSchema.listBlog({state:1},limitPerPage*page,limitPerPage,function(err,blogData){
+        if(err===null && blogData.length!==0){
             for(var i=0;i<blogData.length;i++){
                 blogData[i].content = markdown.toHTML(String(blogData[i].content));
             }
             data.blogData = blogData;
             res.render('blog/index', data);
         }else{
+            res.redirect(config.siteUrl+'404');
+        }
+    });
+});
+router.get('/search/tag/:tags/:page?',function(req,res){
+    var page = 0,
+        limitPerPage = 10;
+    if(req.params.page!==undefined){
+        page = req.params.page;
+    }
+    var tagArray = req.params.tags.split('+');
+    var data = new renderData({
+        title : 'Moreii团队博客'
+    });
+    blogSchema.findByTags(tagArray,{"_id":1},0,10,function(err,blogData){
+        if(err===null && blogData.length!==0){
+            for(var i=0;i<blogData.length;i++){
+                blogData[i].content = markdown.toHTML(String(blogData[i].content));
+            }
+            data.blogData = blogData;
             res.render('blog/index', data);
+        }else{
+            res.redirect(config.siteUrl+'500');
         }
     });
 });

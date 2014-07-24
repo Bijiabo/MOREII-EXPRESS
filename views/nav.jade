@@ -1,10 +1,10 @@
 nav.navbar.navbar-default#console-appnav(role="navigation")
     div.container
         div.navbar-header
-            button.navbar-toggle(type="button",data-toggle="collapse",data-target="#navbar-collapse-01")
+            button.navbar-toggle(type="button",data-toggle="collapse",data-target="#console-appnav-collapse")
             a.span.fa.fa-navicon#console-sidebar-menubtn(href="javascript:;")
             a.navbar-brand(href="#") #{appInfo.cnName}
-        div.collapse.navbar-collapse
+        div.collapse.navbar-collapse#console-appnav-collapse
             ul.nav.navbar-nav
                 -if(consoleNav!==undefined)
                     -for navItem in consoleNav
