@@ -37,11 +37,11 @@ var renderData = function(data){
     this.pretty = true;
     };
 /* GET home page. */
-router.get('/:page?', function(req, res) {
+router.get('/', function(req, res) {
     var page = 0,
-        limitPerPage = 10;
-    if(req.params.page!==undefined){
-        page = req.params.page;
+        limitPerPage = 1;
+    if(req.query.page!==undefined){
+        page = Number(req.query.page) - 1;
     }
     var data = new renderData({
         title : 'Moreii团队博客'
@@ -52,7 +52,18 @@ router.get('/:page?', function(req, res) {
                 blogData[i].content = markdown.toHTML(String(blogData[i].content));
             }
             data.blogData = blogData;
-            res.render('blog/index', data);
+            blogSchema.getListItemCount({state:1},function(err1,countData){
+                if(err1===null){
+                    data.pageCount = Math.ceil(countData/limitPerPage);
+                    console.log(data.pageCount);
+                    data.pageNow = page+1;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    res.render('blog/index', data);
+                }else{
+                    res.redirect(config.siteUrl+'500');
+                }
+            });
         }else{
             res.redirect(config.siteUrl+'404');
         }

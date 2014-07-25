@@ -253,6 +253,14 @@ module.exports = {
             .exec(function(err,data){
                 callback(err,data);
             });
+    },
+    //统计列表分页数量
+    getListItemCount:function(find,callback){
+        blogModel.find(find)
+            .count()
+            .exec(function(err,data){
+                callback(err,data);
+            });
     }
 }
 
