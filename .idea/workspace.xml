@@ -44,7 +44,16 @@
       <file leaf-file-name="detail.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/blog/detail.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="71" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+            <state line="37" column="62" selection-start="1957" selection-end="1957" vertical-scroll-proportion="0.0" vertical-offset="293" max-vertical-offset="1206">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="basic.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="68" column="25" selection-start="1986" selection-end="1986" vertical-scroll-proportion="0.6356968" vertical-offset="964" max-vertical-offset="3582">
               <folding />
             </state>
           </provider>
@@ -86,10 +95,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="22" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.8365696" vertical-offset="923" max-vertical-offset="2142">
+            <state line="80" column="16" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="923" max-vertical-offset="2142">
               <folding />
             </state>
           </provider>
@@ -115,15 +124,16 @@
         <option value="$PROJECT_DIR$/views/blog/404.jade" />
         <option value="$PROJECT_DIR$/views/pager.jade" />
         <option value="$PROJECT_DIR$/views/blog/index.jade" />
-        <option value="$PROJECT_DIR$/views/blog/detail.jade" />
         <option value="$PROJECT_DIR$/routes/blog.js" />
         <option value="$PROJECT_DIR$/core/schema/blog.js" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/views/blog/detail.jade" />
+        <option value="$PROJECT_DIR$/public/css/basic.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="1430" />
     <option name="y" value="-7" />
     <option name="width" value="1303" />
     <option name="height" value="776" />
@@ -389,11 +399,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-7" width="1303" height="776" extended-state="6" />
+    <frame x="1430" y="-7" width="1303" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32253087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32253087" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -538,13 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="173" selection-end="173" vertical-scroll-proportion="0.23801653" vertical-offset="0" max-vertical-offset="3582">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/layout_console.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="29" selection-start="1725" selection-end="1725" vertical-scroll-proportion="0.21908894" vertical-offset="619" max-vertical-offset="1080">
@@ -614,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/blog/detail.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="71" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="320" column="23" selection-start="14224" selection-end="14224" vertical-scroll-proportion="0.0" vertical-offset="5502" max-vertical-offset="12420">
@@ -637,7 +633,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="22" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.8365696" vertical-offset="923" max-vertical-offset="2142">
+        <state line="80" column="16" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.0" vertical-offset="923" max-vertical-offset="2142">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/blog/detail.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="62" selection-start="1957" selection-end="1957" vertical-scroll-proportion="0.0" vertical-offset="293" max-vertical-offset="1206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="25" selection-start="1986" selection-end="1986" vertical-scroll-proportion="0.6356968" vertical-offset="964" max-vertical-offset="3582">
           <folding />
         </state>
       </provider>

@@ -15,6 +15,13 @@ block content
                                     a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
                         hr
                         article!= blogData.content
+                        p
+                        //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
+                        hr
+                        div.text-muted.blog-userinfo
+                            span 标签：#{blogData.info.tag} &nbsp;&nbsp;
+                            span.pull-right 作者：#{blogData.info.author.name}
+                        hr
                         div.row
                             div.col-md-2
                                 -if(pageNow>1)
@@ -29,13 +36,6 @@ block content
                                     a.btn.btn-primary.pull-right(href="#{pageUrl}#{pageNow+1}")
                                         span 下一页&nbsp;&nbsp;
                                         span.fa.fa-arrow-right
-                        p
-                        //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
-                        hr
-                        div.text-muted.blog-userinfo
-                            span 标签：#{blogData.info.tag} &nbsp;&nbsp;
-                            span.pull-right 作者：#{blogData.info.author.name}
-
                         div.row
                             div.col-md-12#comment-box
                                 h6 评论
