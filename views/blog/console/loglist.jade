@@ -37,10 +37,14 @@ block content
                             span.fa.fa-eye
                         a.blog-console-edit(href="javascript:;",data-blogid="#{blogItem._id}")
                             span.fa.fa-edit
-    button.btn.btn-default#blog-deleteblogs(type="button")
-        span.fa.fa-trash-o &nbsp;&nbsp;删除
-    button#blog-write-new.btn.btn-primary.pull-right
-        span.fa.fa-plus &nbsp;&nbsp;新建
+    div.row
+        div.col-md-4
+            button.btn.btn-default#blog-deleteblogs(type="button")
+                span.fa.fa-trash-o &nbsp;&nbsp;删除
+            button#blog-write-new.btn.btn-primary
+                span.fa.fa-plus &nbsp;&nbsp;新建
+        div.col-md-8.text-right
+            include ../../pager
     //- 文章预览层
     div#blog-previewblog.console-modal
         div.fa.fa-times.console-modal-close

@@ -109,5 +109,27 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
 
 `mongorestore --db moreiiii --drop --directoryperdb /home/boooo/data/moreii`
 
+------
 
+##分页功能使用
+
+router中定义：
+
+    var page = Number(req.query.page),
+        limitPerPage = 2;
+    if(isNaN(page) || page<1){
+        page=1;
+    }
+
+渲染设定：
+
+    data.pageUrl = config.siteUrl+data.app+'/?page=';
+    data.pageCount = Math.ceil(countData/limitPerPage);
+    data.pageNow = page+1;
+    data.limitPerPage = limitPerPage;
+    data.pagerLen = 5;//翻页控件显示页数
+
+引入分页模板(Jade)：
+
+    include ../pager
 

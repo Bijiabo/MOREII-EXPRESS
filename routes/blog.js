@@ -619,20 +619,39 @@ router.get('/console/authors',function(req,res){
 });
 //内容管理列表
 router.get('/console/bloglist/:page?',function(req,res){
-    var page = 0,
-        logNumPerPage = 20;
+    var page = Number(req.params.page),
+        limitPerPage = 10;
+    if(isNaN(page) || page<1){
+        page=1;
+    }
+//    page=page-1;
     if(req.params.page && !isNaN(Number(req.params.page))){
         page = Number(req.params.page);
     }
-    blogSchema.listBlog({state:1},page*logNumPerPage,logNumPerPage,function(err,blogData){
-        var data = new renderData({
-            title:'文章列表',
-            jsfile:'blog_admin.js',
-            cssfile:'blog_console.css',
-            consoleNavActive:'bloglist'
-        });
-        data.blogData = blogData;
-        res.render('blog/console/loglist',data);
+    blogSchema.listBlog({state:1},(page-1)*limitPerPage,limitPerPage,function(err,blogData){
+        if(err===null && blogData.length>0){
+            var data = new renderData({
+                title:'文章列表',
+                jsfile:'blog_admin.js',
+                cssfile:'blog_console.css',
+                consoleNavActive:'bloglist'
+            });
+            data.blogData = blogData;
+            blogSchema.getListItemCount({state:1},function(err1,countData){
+                if(err1===null){
+                    data.pageUrl = config.siteUrl+data.app+'/console/bloglist/';
+                    data.pageCount = Math.ceil(countData/limitPerPage);
+                    data.pageNow = page;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    res.render('blog/console/loglist',data);
+                }else{
+                    res.redirect(config.siteUrl+'500');
+                }
+            });
+        }else{
+            res.redirect(config.siteUrl+'500');
+        }
     });
 });
 //删除日志
