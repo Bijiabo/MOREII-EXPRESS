@@ -1,0 +1,55 @@
+div.pagination(style="margin:0;")
+    ul
+        -if(Number(pageNow)===1)
+            li.previous
+                a.fa.fa-home(href="#")
+        -else
+            li.previous
+                a.fui-arrow-left(href="#{siteUrl}#{app}/?page=#{pageNow-1}")
+        -if(pageCount>pagerLen)
+            -var pageListStart=Math.floor(pageNow/pagerLen)*pagerLen,pageNowIndex = pageNow-pageListStart,pagebeforCache;
+            -if(pageListStart+pagerLen>pageCount)
+                //-pagerLen-=(pageListStart+pagerLen-pageCount-1)
+                -if(pageNowIndex===0)
+                    -pagebeforeCache=pageListStart+pagerLen-pageCount-2
+                -else if(pageNowIndex===1)
+                    -pagebeforeCache=pageListStart+pagerLen-pageCount-1
+                -for(var i=0;i<pagebeforeCache;i++)
+                    script.
+                        console.log('#{pageListStart+pagerLen-pageCount}');
+                    li
+                        a(href="#{siteUrl}#{app}/?page=#{pageListStart-(pageListStart+pagerLen-pageCount-1)+i}") #{pageListStart-(pageListStart+pagerLen-pageCount-1)+i}
+            -if(pageNowIndex===1 && pageNow!=1)
+                -pagerLen-=1
+                li
+                    a(href="#{siteUrl}#{app}/?page=#{pageListStart}") #{pageListStart}
+
+            -else if(pageNowIndex===0 && pageNow!=1)
+                -pagerLen-=2
+                li
+                    a(href="#{siteUrl}#{app}/?page=#{pageListStart-1}") #{pageListStart-1}
+                li.active
+                    a(href="#{siteUrl}#{app}/?page=#{pageListStart}") #{pageListStart}
+            -for(var i=1;i<pagerLen+1;i++)
+                -if(i+pageListStart<=pageCount)
+                    -if(i===pageNowIndex)
+                        li.active
+                            a(href="#{siteUrl}#{app}/?page=#{pageListStart+i}") #{i+pageListStart}
+                    -else
+                        li
+                            a(href="#{siteUrl}#{app}/?page=#{pageListStart+i}") #{i+pageListStart}
+        -else
+            -var pageListStart=Math.floor(pageNow/limitPerPage),pageNowIndex = pageNow;
+            -for(var i=0;i<pageCount;i++)
+                -if(i==pageNowIndex)
+                    li.active
+                        a(href="#{siteUrl}#{app}/?page=#{i}")
+                -else
+                    li
+                        a(href="#{siteUrl}#{app}/?page=#{i}")
+        -if(pageNow<pageCount)
+            li.next
+                a.fui-arrow-right(href="#{siteUrl}#{app}/?page=#{pageNow+1}")
+        -else
+            li.next
+                a 到头了
