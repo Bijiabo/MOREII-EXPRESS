@@ -10,9 +10,20 @@ block content
                             h6= blogData.info.title
                         hr
                         article!= blogData.content
-                        -if(blogData.hasMoreContent)
-                            a.btn.btn-default.btn-block#blog-readmore(href="#{blogData.nextPage}")
-                                span.fa.fa-plus &nbsp;&nbsp;阅读更多
+                        div.row
+                            div.col-md-3
+                                -if(pageNow>1)
+                                    a.btn.btn-default.pull-left(href="#{pageUrl}#{pageNow-1}")
+                                        span.fa.fa-arrow-left
+                                        span &nbsp;&nbsp; 上一页
+                            div.col-md-6.text-center
+                                include ../pager
+                            div.col-md-3
+                                -if(pageNow<pageCount)
+                                    //#blog-readmore
+                                    a.btn.btn-primary.pull-right(href="#{pageUrl}#{pageNow+1}")
+                                        span 下一页&nbsp;&nbsp;
+                                        span.fa.fa-arrow-right
                         p
                         //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
                         hr
