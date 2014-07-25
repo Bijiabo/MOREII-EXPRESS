@@ -7,18 +7,23 @@ block content
                 div.row
                     div.col-md-12#blog-main
                         a(href="#")
-                            h6= blogData.info.title
+                            h6
+                                span #{blogData.info.title}
+                                -if(blogData.isMyArticle===true)
+                                    a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
+                                -else if(blogData.hasRevisePermission===true)
+                                    a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
                         hr
                         article!= blogData.content
                         div.row
-                            div.col-md-3
+                            div.col-md-2
                                 -if(pageNow>1)
                                     a.btn.btn-default.pull-left(href="#{pageUrl}#{pageNow-1}")
                                         span.fa.fa-arrow-left
                                         span &nbsp;&nbsp; 上一页
-                            div.col-md-6.text-center
+                            div.col-md-8.text-center
                                 include ../pager
-                            div.col-md-3
+                            div.col-md-2
                                 -if(pageNow<pageCount)
                                     //#blog-readmore
                                     a.btn.btn-primary.pull-right(href="#{pageUrl}#{pageNow+1}")
@@ -29,10 +34,6 @@ block content
                         hr
                         div.text-muted.blog-userinfo
                             span 标签：#{blogData.info.tag} &nbsp;&nbsp;
-                            -if(blogData.isMyArticle===true)
-                                a.btn.btn-default.btn-xs(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
-                            -else if(blogData.hasRevisePermission===true)
-                                a.btn.btn-default.btn-xs(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
                             span.pull-right 作者：#{blogData.info.author.name}
 
                         div.row

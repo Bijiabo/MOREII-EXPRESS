@@ -172,9 +172,10 @@ module.exports = {
                 }
             });
     },
-    randomBlog:function(callback){
+    randomBlog:function(limit,callback){
         var random = Math.random();
-        blogModel.findOne({"random" : {"$gt" : random}})
+        blogModel.find({"random" : {"$gt" : random}})
+            .limit(limit)
             .exec(function(err,data){
                 if(err===null && data===null){
                     blogModel.findOne({"random" : {"$lt" : random}})

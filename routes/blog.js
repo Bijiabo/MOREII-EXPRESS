@@ -311,6 +311,26 @@ router.get('/article/:shorturl/:page?',function(req,res){
         }
     });
 });
+//随机日志api
+router.get('/api/randomBlog/:limit?',function(req,res){
+    var limit = Number(req.params.limit);
+    if(isNaN(limit) || limit<=0){
+        limit = 10;
+    }
+    blogSchema.randomBlog(limit,function(err,data){
+        if(err===null){
+            res.json({
+                err:false,
+                data:data
+            });
+        }else{
+            res.json({
+                err:true,
+                des:'数据错误。'
+            });
+        }
+    });
+});
 
 
 /**

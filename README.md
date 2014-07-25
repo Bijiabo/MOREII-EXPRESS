@@ -78,6 +78,7 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - 前台显示标签 2014.07.24
   - 前台搜索标签 wait
   - 各个页面翻页 todo
+  - 随机日志api 2014.07.25
  - *statistics模块*
   - 数据结构设计
   - 前端基础代码
@@ -91,6 +92,7 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
  - 修复input[type="search"] css bug
  - 添加后台界面自适应，兼容笔记本低分辨率。 2014.07.24
  - 修复后台横向导航Bug。 2014.07.24
+ - 添加全局分页逻辑
 
 ------
 
