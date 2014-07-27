@@ -16,6 +16,7 @@ var basic = {
             basic.initConsoleSidebar(e);
         });
         basic.initConsoleModal();
+        basic.initDropbox();
     },
     resize:function(){
         basic.initConsoleSidebar();
@@ -286,38 +287,43 @@ var basic = {
             }
         });
     },
-    uploadGoodImage:function(){
-        $("div#uploadImageDropbox").dropzone({
-            url: "/api/uploadGoodImage",
-            paramName: "file",
-            maxFilesize: 2,
-            acceptedFiles:'image/*',
-            addRemoveLinks:true,
-            success:function(file,data){
-                data = JSON.parse(data);
-                cache.uploadImageFiles.push({originalname:file.name,path:data.path});
-                /**
-                 * default skin
-                 * */
-                if (file.previewElement) {
-                    return file.previewElement.classList.add("dz-success");
-                }
-            },
-            removedfile:function(file){
-                for(var i=1;i<cache.uploadImageFiles.length;i++){
-                    if(cache.uploadImageFiles[i].originalname === file.name){
-                        cache.uploadImageFiles.splice(i,1);
-                        break;
+    initDropbox:function(){
+        $.each($("div.uploadImageDropbox"),function(index,item){
+            var url = $(item).data('url');
+            $("div.uploadImageDropbox").dropzone({
+                url: url,
+                paramName: "file",
+                maxFilesize: 2,
+                acceptedFiles:'image/*',
+                addRemoveLinks:true,
+                success:function(file,data){
+                    data = JSON.parse(data);
+                    cache.uploadImageFiles.push({originalname:file.name,path:data.path});
+                    /**
+                     * default skin
+                     * */
+                    if (file.previewElement) {
+                        console.log(file.previewElement);
+                        return file.previewElement.classList.add("dz-success");
+                    }
+                },
+                removedfile:function(file){
+                    for(var i=1;i<cache.uploadImageFiles.length;i++){
+                        if(cache.uploadImageFiles[i].originalname === file.name){
+                            cache.uploadImageFiles.splice(i,1);
+                            break;
+                        }
+                    }
+                    var _ref;
+                    if (file.previewElement) {
+                        if ((_ref = file.previewElement) != null) {
+                            _ref.parentNode.removeChild(file.previewElement);
+                        }
                     }
                 }
-                var _ref;
-                if (file.previewElement) {
-                    if ((_ref = file.previewElement) != null) {
-                        _ref.parentNode.removeChild(file.previewElement);
-                    }
-                }
-            }
+            });
         });
+
     },
     getComment:function(skip,limit){
         var commentList = $('#comment-list');

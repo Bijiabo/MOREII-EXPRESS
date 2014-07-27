@@ -6,6 +6,7 @@ block content
             th 文章数
             th 活跃度
             th 使用标签
+            th 浏览量
             th 详情
         tbody
             -var liveness = 0,dateNow = new Date()
@@ -22,6 +23,7 @@ block content
                     td #{authorItem.blogCount}
                     td #{liveness}
                     td #{authorItem.tag.length}
+                    td #{authorItem.articelView}
                     td
                         a(href="#")
                             span.fa.fa-eye

@@ -34,25 +34,30 @@ var renderData = function(data){
 router.use(function(req,res,next){
     userSchema.checkLogin(req,res,function(login){
        if(login){
-           userSchema.checkAdministratorPermission({
+           userSchema.getUserInfo({
                name:req.cookies.name,
                mail:req.cookies.mail
-           },function(err,data){
-                if(err===null && data!==null){
-                    next();
+           },function(err,userData){
+                if(err===null && userData!==null){
+                    if(userData.permission.shop.editGood){
+                        next();
+                    }else{
+                        res.render('no_permission',{
+                            title:'权限不足',
+                            des:'您没有此页面浏览权限。'
+                        });
+                    }
                 }else{
-                    res.render('404',{
-                        title:'404错误',
-                        path:'/console'+req.path,
-                        errorname:'404'
+                    res.render('500',{
+                        title:'数据错误',
+                        des:'请检查您的登录状态，刷新页面后重试。'
                     });
                 }
            });
        }else{
-           res.render('404',{
-               title:'404错误',
-               path:'/console'+req.path,
-               errorname:'404',
+           res.render('no_permission',{
+               title:'权限不足',
+               des:'此页面仅登录用户可见。',
            });
        }
     });

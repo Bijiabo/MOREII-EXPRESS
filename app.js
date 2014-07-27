@@ -39,16 +39,11 @@ app.use(function(req,res,next){
  * */
 var appRouter = {};
 for(var i=0;i<config.app.length;i++){
-    appRouter[config.app[i].name] = require('./routes/'+config.app[i].name);
-    app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
+    if(config.app[i].state===1){
+        appRouter[config.app[i].name] = require('./routes/'+config.app[i].name);
+        app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
+    }
 }
-/*var routes = require('./routes/index'),
-    user = require('./routes/user'),
-    api = require('./routes/api');*/
-/*app.use('/', routes);
-app.use('/user', user);
-app.use('/api',api);*/
-
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

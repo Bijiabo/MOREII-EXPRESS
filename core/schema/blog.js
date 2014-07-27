@@ -202,6 +202,7 @@ module.exports = {
                     "createTime":1,
                     "modify":1,
                     "tag":1,
+                    "count":1,
                     "createdIn":{"$month":"$createTime"}
                 }
             },
@@ -211,7 +212,8 @@ module.exports = {
                     "name":{"$addToSet":"$author.name"},
                     "blogCount":{"$sum":1},
                     "tag":{"$addToSet":"$tag"},
-                    "activeMonth":{"$push":"$createdIn"}
+                    "activeMonth":{"$push":"$createdIn"},
+                    "articelView":{"$sum":"$count.view"}
                 }
             },{"$limit":10}
         ).exec(function(err,data){

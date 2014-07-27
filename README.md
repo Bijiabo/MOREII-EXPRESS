@@ -77,8 +77,11 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
   - 前台显示修订作者 2014.07.24 doing
   - 前台显示标签 2014.07.24
   - 前台搜索标签 wait
-  - 各个页面翻页 todo
+   - API 2014.07.25
+  - 各个页面翻页 2014.07.25
   - 随机日志api 2014.07.25
+  - 后台作者统计数据显示优化 2014.07.25
+
  - *statistics模块*
   - 数据结构设计
   - 前端基础代码
@@ -92,7 +95,8 @@ ajax请求需在末尾追加**?ajax=true**,程序依靠**req.query.ajax==='true'
  - 修复input[type="search"] css bug
  - 添加后台界面自适应，兼容笔记本低分辨率。 2014.07.24
  - 修复后台横向导航Bug。 2014.07.24
- - 添加全局分页逻辑
+ - 添加全局分页逻辑 2014.07.25
+ - 添加全局上传图片接口 waiting
 
 ------
 
@@ -133,3 +137,16 @@ router中定义：
 
     include ../pager
 
+------
+
+##图片上传
+
+Jade代码：
+
+        script(src="#{siteUrl}js/dropzone.js")
+        div#uploadImageDropbox.miidropzone.form-control
+            div.dz-default.dz-message
+
+初始化dropBox:
+
+    basic.initDropbox();

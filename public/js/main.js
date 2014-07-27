@@ -7,7 +7,6 @@ $(function(){
     $(document).on('change','input[type="password"]',function(){
         $(this).val(basic.pwdencode($(this).val()));
     });
-    basic.uploadGoodImage();
     basic.getComment();
     basic.checkLogin();
     $(document).on('click','#header-messagebox',function(e){

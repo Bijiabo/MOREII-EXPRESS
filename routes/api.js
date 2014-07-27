@@ -273,7 +273,7 @@ router.get('/addTestNotice',function(req,res){
 /**
  * console
  * */
-router.post('/uploadGoodImage',checkAdministratorPermission);
+//router.post('/uploadGoodImage',checkAdministratorPermission);
 router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
     var filename = req.files.file.path.match(/[\w\-]+.\w+$/)[0];
     var is = fs.createReadStream(req.files.file.path);

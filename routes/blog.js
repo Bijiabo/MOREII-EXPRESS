@@ -336,7 +336,7 @@ router.get('/api/randomBlog/:limit?',function(req,res){
 /**
  * 已登陆用户功能
  * */
-router.use(function(req,res,next){
+var isLogin = function(req,res,next){
     userSchema.checkLogin(req,res,function(login){
         if(login){
             next();
@@ -351,9 +351,25 @@ router.use(function(req,res,next){
             }
         }
     });
-});
+}
+/*router.use(function(req,res,next){
+    userSchema.checkLogin(req,res,function(login){
+        if(login){
+            next();
+        }else{
+            if(req.query.ajax === 'true'){
+                res.json({
+                    err:true,
+                    des:'请登陆啊亲>_<'
+                });
+            }else{
+                res.redirect('/user/login');
+            }
+        }
+    });
+});*/
 
-
+router.get('/getShareUrl/:id',isLogin);
 router.get('/getShareUrl/:id',function(req,res){
     userSchema.getUserInfo({
         name:req.cookies.name,
@@ -405,7 +421,8 @@ router.get('/getShareUrl/:id',function(req,res){
  * editor----------------------------------------------------------------------------------
  * api
  * */
-router.use(function(req,res,next){
+
+var isEditor = function(req,res,next){
     userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
@@ -420,8 +437,24 @@ router.use(function(req,res,next){
             config.resError(req,res,'数据错误。');
         }
     });
-});
-
+}
+/*router.use(function(req,res,next){
+    userSchema.getUserInfo({
+        name:req.cookies.name,
+        mail:req.cookies.mail
+    },function(err,userData){
+        if(err===null && userData!==null){
+            if(userData.permission.blog.edit){//拥有修改文章的权限
+                next();
+            }else{//无修改文章的权限
+                config.resError(req,res,'权限不足。');
+            }
+        }else{
+            config.resError(req,res,'数据错误。');
+        }
+    });
+});*/
+router.get('/write',isEditor);
 router.get('/write',function(req,res){
     var rData = new renderData({
         title : 'Moreii团队博客 - 书写日志',
@@ -429,6 +462,8 @@ router.get('/write',function(req,res){
     });
     res.render('blog/write', rData);
 });
+
+router.get('/edit/:blogId',isEditor);
 router.get('/edit/:blogId',function(req,res){
     blogSchema.blogDetail(req.params.blogId,function(err,blogData){
         if(err===null){
@@ -446,6 +481,8 @@ router.get('/edit/:blogId',function(req,res){
         }
     });
 });
+
+router.post('/api/add',isEditor);
 router.post('/api/add',function(req,res){
     userSchema.getUserInfo({
         name:req.cookies.name,
@@ -482,6 +519,7 @@ router.post('/api/add',function(req,res){
         }
     });
 });
+router.post('/api/update/:id',isEditor);
 router.post('/api/update/:id',function(req,res){
     userSchema.getUserInfo({
         name:req.cookies.name,
@@ -575,6 +613,7 @@ router.post('/api/update/:id',function(req,res){
     });
 });
 //后台首页
+router.get('/console',isEditor);
 router.get('/console',function(req,res){
     var data = new renderData({
         title:'博客模块',
@@ -603,6 +642,7 @@ router.get('/console',function(req,res){
     });
 });
 //统计作者数据
+router.get('/console/authors',isEditor);
 router.get('/console/authors',function(req,res){
     var data = new renderData({
         title:'博客作者统计',
@@ -618,6 +658,7 @@ router.get('/console/authors',function(req,res){
     });
 });
 //内容管理列表
+router.get('/console/bloglist/:page?',isEditor);
 router.get('/console/bloglist/:page?',function(req,res){
     var page = Number(req.params.page),
         limitPerPage = 10;
@@ -655,6 +696,7 @@ router.get('/console/bloglist/:page?',function(req,res){
     });
 });
 //删除日志
+router.post('/api/deleteBlogs',isEditor);
 router.post('/api/deleteBlogs',function(req,res){
     if(req.body.idArray){
         if(req.body.idArray.constructor.toString().match('Array') && req.body.idArray!==[]){
@@ -684,6 +726,7 @@ router.post('/api/deleteBlogs',function(req,res){
     }
 });
 //获取日志内容api
+router.get('/api/getBlogDetail/:id',isEditor);
 router.get('/api/getBlogDetail/:id',function(req,res){
     blogSchema.blogDetail(req.params.id,function(err,blogData){
         if(err===null && blogData!==null){
