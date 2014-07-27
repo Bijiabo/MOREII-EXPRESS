@@ -275,9 +275,11 @@ router.get('/addTestNotice',function(req,res){
  * */
 //router.post('/uploadGoodImage',checkAdministratorPermission);
 router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
-    var filename = req.files.file.path.match(/[\w\-]+.\w+$/)[0];
+//    console.log(req.files);
+    config.saveFile('blog','log',req,res);
+    /*var filename = req.files.file.path.match(/[\w\-]+\.\w+$/)[0];
     var is = fs.createReadStream(req.files.file.path);
-    var os = fs.createWriteStream(path.join(__dirname,"../public/image/good/"+filename));
+    var os = fs.createWriteStream(path.join(__dirname,"../public/upload/good/"+filename));
 
     util.pump(is, os, function() {
         fs.unlinkSync(req.files.file.path);
@@ -287,7 +289,7 @@ router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
             path:'image/good/'+filename,
             url:config.siteUrl+'image/good/'+filename
         }));
-    });
+    });*/
 });
 router.post('/addGood',checkAdministratorPermission);
 router.post('/addGood',function(req,res){

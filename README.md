@@ -150,3 +150,9 @@ Jade代码：
 初始化dropBox:
 
     basic.initDropbox();
+
+nodejs保存图片并返回数据:
+    //引入中间件
+    var multipart = require('connect-multiparty');
+    var multipartMiddleware = multipart();
+    //调用config.saveFile()

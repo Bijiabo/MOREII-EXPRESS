@@ -22,10 +22,10 @@
       <content type="file-editors">
         <state>
           <leaf>
-            <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+            <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/README.md">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="151" column="24" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.8448276" vertical-offset="2326" max-vertical-offset="2826">
+                  <state line="154" column="11" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.61206895" vertical-offset="2488" max-vertical-offset="2952">
                     <folding />
                   </state>
                 </provider>
@@ -45,21 +45,57 @@
       <file leaf-file-name="addGood.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/console/addGood.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="105" selection-start="1913" selection-end="1913" vertical-scroll-proportion="0.0" vertical-offset="282" max-vertical-offset="900">
+            <state line="40" column="41" selection-start="1836" selection-end="1849" vertical-scroll-proportion="0.0" vertical-offset="403" max-vertical-offset="900">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basic.js" pinned="false" current="false" current-in-tab="true">
+      <file leaf-file-name="api.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/api.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="278" column="31" selection-start="8765" selection-end="8765" vertical-scroll-proportion="0.0" vertical-offset="4736" max-vertical-offset="6732">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="175" column="44" selection-start="4499" selection-end="4499" vertical-scroll-proportion="0.79458237" vertical-offset="2798" max-vertical-offset="5346">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="basic.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/basic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="305" column="57" selection-start="7460" selection-end="7460" vertical-scroll-proportion="0.57355374" vertical-offset="5143" max-vertical-offset="9252">
+            <state line="320" column="44" selection-start="8327" selection-end="8327" vertical-scroll-proportion="0.0" vertical-offset="5472" max-vertical-offset="9756">
               <folding>
-                <marker date="1406442572072" expanded="true" signature="8675:9797" placeholder="..." />
-                <marker date="1406442572072" expanded="true" signature="8731:9797" placeholder="..." />
-                <marker date="1406442572072" expanded="true" signature="9917:9973" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7497:7790" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7497:7899" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7497:7923" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7497:7617" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7497:8279" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7543:7790" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7543:7617" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7615:7617" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="7737:7755" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="10187:11309" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="10243:11309" placeholder="..." />
+                <marker date="1406474095741" expanded="true" signature="11429:11485" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="basic.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="196" column="23" selection-start="5156" selection-end="5156" vertical-scroll-proportion="0.0" vertical-offset="3152" max-vertical-offset="3654">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -67,7 +103,7 @@
       <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="7" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="486">
+            <state line="8" column="7" selection-start="222" selection-end="222" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="486">
               <folding />
             </state>
           </provider>
@@ -93,27 +129,27 @@
         <option value="$PROJECT_DIR$/views/pager.jade" />
         <option value="$PROJECT_DIR$/views/blog/index.jade" />
         <option value="$PROJECT_DIR$/views/blog/detail.jade" />
-        <option value="$PROJECT_DIR$/public/css/basic.css" />
         <option value="$PROJECT_DIR$/views/blog/console/loglist.jade" />
         <option value="$PROJECT_DIR$/core/schema/blog.js" />
         <option value="$PROJECT_DIR$/views/blog/console/authors.jade" />
-        <option value="$PROJECT_DIR$/core/config.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/no_permission.jade" />
         <option value="$PROJECT_DIR$/views/404.jade" />
         <option value="$PROJECT_DIR$/views/500.jade" />
         <option value="$PROJECT_DIR$/routes/console.js" />
-        <option value="$PROJECT_DIR$/routes/api.js" />
         <option value="$PROJECT_DIR$/routes/blog.js" />
-        <option value="$PROJECT_DIR$/views/console/addGood.jade" />
         <option value="$PROJECT_DIR$/public/js/main.js" />
-        <option value="$PROJECT_DIR$/public/js/basic.js" />
+        <option value="$PROJECT_DIR$/views/console/addGood.jade" />
+        <option value="$PROJECT_DIR$/public/css/basic.css" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/public/js/basic.js" />
+        <option value="$PROJECT_DIR$/routes/api.js" />
+        <option value="$PROJECT_DIR$/core/config.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="1430" />
     <option name="y" value="-7" />
     <option name="width" value="1303" />
     <option name="height" value="776" />
@@ -163,7 +199,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -256,25 +291,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Moreii-express" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Moreii-express" />
+              <option name="myItemId" value="upload" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="shop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -312,6 +333,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -330,14 +352,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.bin/www">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -348,15 +362,23 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -380,14 +402,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-7" width="1303" height="776" extended-state="6" />
+    <frame x="1430" y="-7" width="1303" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31944445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27006173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942098" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -395,11 +417,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -416,9 +438,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -440,16 +462,12 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/core/schema/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="22" selection-start="6912" selection-end="6912" vertical-scroll-proportion="0.0" vertical-offset="2936" max-vertical-offset="6156">
-          <folding />
-        </state>
+        <state line="176" column="22" selection-start="6912" selection-end="6912" vertical-scroll-proportion="0.0" vertical-offset="2936" max-vertical-offset="6156" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="23" selection-start="14224" selection-end="14224" vertical-scroll-proportion="0.0" vertical-offset="5502" max-vertical-offset="12420">
-          <folding />
-        </state>
+        <state line="320" column="23" selection-start="14224" selection-end="14224" vertical-scroll-proportion="0.0" vertical-offset="5502" max-vertical-offset="12420" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/detail.jade">
@@ -481,9 +499,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/console/authors.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="828">
-          <folding />
-        </state>
+        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="828" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -493,16 +509,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/schema/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="257" column="34" selection-start="9507" selection-end="9507" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6138">
-          <folding />
-        </state>
+        <state line="257" column="34" selection-start="9507" selection-end="9507" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6138" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="40" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="11934">
-          <folding />
-        </state>
+        <state line="58" column="40" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.0" vertical-offset="648" max-vertical-offset="11934" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/index.jade">
@@ -512,9 +524,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/console/authors.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="828">
-          <folding />
-        </state>
+        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="828" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -524,16 +534,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/schema/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="261" column="35" selection-start="9638" selection-end="9638" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6138">
-          <folding />
-        </state>
+        <state line="261" column="35" selection-start="9638" selection-end="9638" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6138" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="40" selection-start="1951" selection-end="1963" vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="11916">
-          <folding />
-        </state>
+        <state line="58" column="40" selection-start="1951" selection-end="1963" vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="11916" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/index.jade">
@@ -543,9 +549,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/console/authors.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="828">
-          <folding />
-        </state>
+        <state line="22" column="34" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="828" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -555,16 +559,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/core/schema/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="6" selection-start="9167" selection-end="9167" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5994">
-          <folding />
-        </state>
+        <state line="245" column="6" selection-start="9167" selection-end="9167" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5994" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="5" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0" vertical-offset="588" max-vertical-offset="11754">
-          <folding />
-        </state>
+        <state line="65" column="5" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.0" vertical-offset="588" max-vertical-offset="11754" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -639,93 +639,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/console/authors.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="36" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="864">
-          <folding />
-        </state>
+        <state line="25" column="36" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="864" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/console/loglist.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.56528926" vertical-offset="486" max-vertical-offset="1494">
-          <folding />
-        </state>
+        <state line="46" column="13" selection-start="2376" selection-end="2376" vertical-scroll-proportion="0.56528926" vertical-offset="486" max-vertical-offset="1494" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/404.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="14" selection-start="84" selection-end="84" vertical-scroll-proportion="0.15177065" vertical-offset="0" max-vertical-offset="593">
-          <folding />
-        </state>
+        <state line="5" column="14" selection-start="84" selection-end="84" vertical-scroll-proportion="0.15177065" vertical-offset="0" max-vertical-offset="593" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/schema/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="30" selection-start="7690" selection-end="7690" vertical-scroll-proportion="5.187184" vertical-offset="506" max-vertical-offset="6192">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="280" column="0" selection-start="8914" selection-end="8914" vertical-scroll-proportion="0.49636364" vertical-offset="4767" max-vertical-offset="6696">
-          <folding />
-        </state>
+        <state line="199" column="30" selection-start="7690" selection-end="7690" vertical-scroll-proportion="5.187184" vertical-offset="506" max-vertical-offset="6192" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/console.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="23" selection-start="1650" selection-end="1650" vertical-scroll-proportion="0.58090615" vertical-offset="595" max-vertical-offset="1620">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="1" selection-start="1244" selection-end="1244" vertical-scroll-proportion="0.69902915" vertical-offset="378" max-vertical-offset="1692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="29" selection-start="1201" selection-end="1201" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2952">
-          <folding />
-        </state>
+        <state line="53" column="23" selection-start="1650" selection-end="1650" vertical-scroll-proportion="0.58090615" vertical-offset="595" max-vertical-offset="1620" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/no_permission.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="14" selection-start="84" selection-end="84" vertical-scroll-proportion="0.14563107" vertical-offset="0" max-vertical-offset="618">
-          <folding />
-        </state>
+        <state line="5" column="14" selection-start="84" selection-end="84" vertical-scroll-proportion="0.14563107" vertical-offset="0" max-vertical-offset="618" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/blog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="371" column="39" selection-start="15305" selection-end="15305" vertical-scroll-proportion="0.80991733" vertical-offset="6188" max-vertical-offset="13536">
-          <folding />
-        </state>
+        <state line="371" column="39" selection-start="15305" selection-end="15305" vertical-scroll-proportion="0.80991733" vertical-offset="6188" max-vertical-offset="13536" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/500.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="110" selection-end="110" vertical-scroll-proportion="0.17475729" vertical-offset="0" max-vertical-offset="618">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="28" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.19173554" vertical-offset="964" max-vertical-offset="3582">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/console/addGood.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="105" selection-start="1913" selection-end="1913" vertical-scroll-proportion="0.0" vertical-offset="282" max-vertical-offset="900">
-          <folding />
-        </state>
+        <state line="6" column="19" selection-start="110" selection-end="110" vertical-scroll-proportion="0.17475729" vertical-offset="0" max-vertical-offset="618" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/main.js">
@@ -735,20 +684,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/basic.js">
+    <entry file="file://$PROJECT_DIR$/views/console/addGood.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="305" column="57" selection-start="7460" selection-end="7460" vertical-scroll-proportion="0.57355374" vertical-offset="5143" max-vertical-offset="9252">
-          <folding>
-            <marker date="1406442572072" expanded="true" signature="8675:9797" placeholder="..." />
-            <marker date="1406442572072" expanded="true" signature="8731:9797" placeholder="..." />
-            <marker date="1406442572072" expanded="true" signature="9917:9973" placeholder="..." />
-          </folding>
+        <state line="40" column="41" selection-start="1836" selection-end="1849" vertical-scroll-proportion="0.0" vertical-offset="403" max-vertical-offset="900">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="196" column="23" selection-start="5156" selection-end="5156" vertical-scroll-proportion="0.0" vertical-offset="3152" max-vertical-offset="3654">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="47" selection-start="781" selection-end="781" vertical-scroll-proportion="0.20316027" vertical-offset="378" max-vertical-offset="1692">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="24" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.8448276" vertical-offset="2326" max-vertical-offset="2826">
+        <state line="154" column="11" selection-start="2352" selection-end="2352" vertical-scroll-proportion="0.61206895" vertical-offset="2488" max-vertical-offset="2952">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/basic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="320" column="44" selection-start="8327" selection-end="8327" vertical-scroll-proportion="0.0" vertical-offset="5472" max-vertical-offset="9756">
+          <folding>
+            <marker date="1406474095741" expanded="true" signature="7497:7790" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7497:7899" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7497:7923" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7497:7617" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7497:8279" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7543:7790" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7543:7617" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7615:7617" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="7737:7755" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="10187:11309" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="10243:11309" placeholder="..." />
+            <marker date="1406474095741" expanded="true" signature="11429:11485" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="278" column="31" selection-start="8765" selection-end="8765" vertical-scroll-proportion="0.0" vertical-offset="4736" max-vertical-offset="6732">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="175" column="44" selection-start="4499" selection-end="4499" vertical-scroll-proportion="0.79458237" vertical-offset="2798" max-vertical-offset="5346">
           <folding />
         </state>
       </provider>

@@ -288,22 +288,45 @@ var basic = {
         });
     },
     initDropbox:function(){
-        $.each($("div.uploadImageDropbox"),function(index,item){
+        $.each($("div.uploadDropbox"),function(index,item){
             var url = $(item).data('url');
-            $("div.uploadImageDropbox").dropzone({
+            $(item).dropzone({
                 url: url,
                 paramName: "file",
                 maxFilesize: 2,
                 acceptedFiles:'image/*',
                 addRemoveLinks:true,
+                clickable:true,
+                dictFallbackMessage:'亲，你的浏览器不支持上传控件。',
+                dictInvalidFileType:'文件类型不支持。',
+                dictFileTooBig:'文件太大了亲。',
+                dictResponseError:'服务器反馈错误。',
+                dictCancelUpload:'取消上传',
+                dictCancelUploadConfirmation:'取消上传中...',
+                dictRemoveFile:'移除文件',
+                previewTemplate:'<div class="dz-preview dz-file-preview">\
+                    <div class="dz-details">\
+                    <div class="dz-filename text-center text-primary">\
+                        <span data-dz-name-hide></span>\
+                        <span class="fa fa-plus fa-5x" style="line-height: 90px;"></span>\
+                    </div>\
+                    <div class="dz-size" data-dz-size></div>\
+                    <img data-dz-thumbnail />\
+                </div>\
+                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\
+                    <div class="dz-success-mark"><span>✔</span></div>\
+                <div class="dz-error-mark"><span>✘</span></div>\
+                    <div class="dz-error-message"><span data-dz-errormessage></span></div>\
+                </div>',
                 success:function(file,data){
-                    data = JSON.parse(data);
+//                    data = JSON.parse(data);
                     cache.uploadImageFiles.push({originalname:file.name,path:data.path});
                     /**
                      * default skin
                      * */
                     if (file.previewElement) {
-                        console.log(file.previewElement);
+                        var fileBox= $(file.previewElement);
+                        fileBox.data('path',data.path);
                         return file.previewElement.classList.add("dz-success");
                     }
                 },
@@ -323,7 +346,12 @@ var basic = {
                 }
             });
         });
-
+        //监听图片预览点击
+        $(document).on('click','div.uploadImageDropbox .dz-details',function(e){
+            var filebox = $($(this).parents('.dz-preview'));
+            var imagePath = filebox.data('path');
+            console.log(imagePath);
+        });
     },
     getComment:function(skip,limit){
         var commentList = $('#comment-list');
