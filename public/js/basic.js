@@ -306,16 +306,16 @@ var basic = {
                 dictRemoveFile:'移除文件',
                 previewTemplate:'<div class="dz-preview dz-file-preview">\
                     <div class="dz-details">\
-                    <div class="dz-filename text-center text-primary">\
-                        <span data-dz-name-hide></span>\
-                        <span class="fa fa-plus fa-5x" style="line-height: 90px;"></span>\
+                        <div class="dz-filename text-center text-primary">\
+                            <span data-dz-name-hide></span>\
+                            <span class="fa fa-plus fa-5x" style="line-height: 90px;"></span>\
+                        </div>\
+                        <div class="dz-size" data-dz-size></div>\
+                        <img data-dz-thumbnail />\
                     </div>\
-                    <div class="dz-size" data-dz-size></div>\
-                    <img data-dz-thumbnail />\
-                </div>\
-                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\
+                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>\
                     <div class="dz-success-mark"><span>✔</span></div>\
-                <div class="dz-error-mark"><span>✘</span></div>\
+                    <div class="dz-error-mark"><span>✘</span></div>\
                     <div class="dz-error-message"><span data-dz-errormessage></span></div>\
                 </div>',
                 success:function(file,data){

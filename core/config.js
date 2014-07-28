@@ -4,6 +4,7 @@
 var crypto = require('crypto'),
     fs = require('fs'),
     util = require('util'),
+    mkdirp = require('mkdirp'),
     path = require('path'),
     cookieSecret = 'hcblhy10260326',
     encryptCookie = function(data){//加密cookie
@@ -166,9 +167,12 @@ module.exports = {
         fs.exists(savedPath,function(exists){
             if(!exists){
                 //no such path,create it
-                //TODO:problems!!!
-                mkdirs(savedPath,'664',function(err){
-                    if(!err){
+                var pathArray = savePath.split(path.sep);
+                mkdirp(savedPath, function (err) {
+                    if(err){
+                        console.error(err);
+                    }else{
+                        console.log('pow!');
                         var os = fs.createWriteStream(path.join(savedPath,filename));
                         util.pump(is, os, function() {
                             fs.unlinkSync(req.files.file.path);
@@ -178,11 +182,6 @@ module.exports = {
                                 path:'upload/'+app+'/'+savePath+'/'+filename,
                                 url:'http://'+domain+':'+port+'/'+'upload/'+app+'/'+savePath+'/'+filename
                             });
-                        });
-                    }else{
-                        res.json({
-                            error:true,
-                            des:'服务器存储路径错误。'
                         });
                     }
                 });
@@ -202,91 +201,3 @@ module.exports = {
 
     }
 };
-
-//创建多层文件夹 异步
-function mkdirs(dirpath, mode, callback) {
-    callback = callback ||
-        function() {};
-
-    fs.exists(dirpath,
-        function(exitsmain) {
-            if (!exitsmain) {
-                //目录不存在
-                var pathtmp;
-                var pathlist = dirpath.split(path.sep);
-                var pathlistlength = pathlist.length;
-                var pathlistlengthseed = 0;
-
-                mkdir_auto_next(mode, pathlist, pathlist.length,
-                    function(callresult) {
-                        if (callresult) {
-                            callback(true);
-                        }
-                        else {
-                            callback(false);
-                        }
-                    });
-
-            }
-            else {
-                callback(true);
-            }
-
-        });
-}
-
-// 异步文件夹创建 递归方法
-function mkdir_auto_next(mode, pathlist, pathlistlength, callback, pathlistlengthseed, pathtmp) {
-    callback = callback ||
-        function() {};
-    if (pathlistlength > 0) {
-
-        if (!pathlistlengthseed) {
-            pathlistlengthseed = 0;
-        }
-
-        if (pathlistlengthseed >= pathlistlength) {
-            callback(true);
-        }
-        else {
-
-            if (pathtmp) {
-                pathtmp = path.join(pathtmp, pathlist[pathlistlengthseed]);
-            }
-            else {
-                pathtmp = pathlist[pathlistlengthseed];
-            }
-
-            fs.exists(pathtmp,
-                function(exists) {
-                    if (!exists) {
-                        fs.mkdir(pathtmp, mode,
-                            function(isok) {
-                                if (!isok) {
-                                    mkdir_auto_next(mode, pathlist, pathlistlength,
-                                        function(callresult) {
-                                            callback(callresult);
-                                        },
-                                        pathlistlengthseed + 1, pathtmp);
-                                }
-                                else {
-                                    callback(false);
-                                }
-                            });
-                    }
-                    else {
-                        mkdir_auto_next(mode, pathlist, pathlistlength,
-                            function(callresult) {
-                                callback(callresult);
-                            },
-                            pathlistlengthseed + 1, pathtmp);
-                    }
-                });
-
-        }
-
-    }
-    else {
-        callback(true);
-    }
-}

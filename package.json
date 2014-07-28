@@ -22,7 +22,8 @@
       "markdown":"*",
       "wechat":"*",
       "express-session":"*",
-      "ua-parser-js":"*"
+      "ua-parser-js":"*",
+      "mkdirp":"*"
   },
   "devDependencies": {
     "browserify": "^4.1.5",
