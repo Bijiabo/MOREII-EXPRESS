@@ -1,14 +1,14 @@
 -if(pageCount>1)
     script.
         console.log('#{pageCount}');
-    div.pagination(style="margin:0;")
-        ul
+    div(style="margin:0;")
+        ul.pagination(style="margin:0;")
             -if(Number(pageNow)===1)
                 li.previous
                     a.fa.fa-home(href="#")
             -else
                 li.previous
-                    a.fui-arrow-left(href="#{pageUrl}#{pageNow-1}")
+                    a.fa.fa-chevron-left(href="#{pageUrl}#{pageNow-1}") &nbsp;&nbsp;上一页
             -if(pageCount>pagerLen)
                 -var pageListStart=Math.floor(pageNow/pagerLen)*pagerLen,pageNowIndex = pageNow-pageListStart,pagebeforCache=0,pageAdded=0;
                 -if(pageListStart+pagerLen>pageCount)
@@ -55,7 +55,9 @@
                             a(href="#{pageUrl}#{i}") #{i}
             -if(pageNow<pageCount)
                 li.next
-                    a.fui-arrow-right(href="#{pageUrl}#{pageNow+1}")
+                    a(href="#{pageUrl}#{pageNow+1}")
+                        span 下一页&nbsp;&nbsp;
+                        span.fa.fa-chevron-right
             -else
                 li.next
                     a 到头了

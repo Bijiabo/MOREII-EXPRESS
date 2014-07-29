@@ -661,7 +661,7 @@ router.get('/console/authors',function(req,res){
 router.get('/console/bloglist/:page?',isEditor);
 router.get('/console/bloglist/:page?',function(req,res){
     var page = Number(req.params.page),
-        limitPerPage = 10;
+        limitPerPage = 3;
     if(isNaN(page) || page<1){
         page=1;
     }

@@ -1,9 +1,9 @@
-nav.navbar.navbar-default#console-appnav(role="navigation")
+nav.navbar.navbar-inverse#console-appnav(role="navigation")
     div.container
         div.navbar-header
             button.navbar-toggle(type="button",data-toggle="collapse",data-target="#console-appnav-collapse")
             a.span.fa.fa-navicon#console-sidebar-menubtn(href="javascript:;")
-            a.navbar-brand(href="#") #{appInfo.cnName}
+            a.navbar-brand(href="#",style="font-size:14px;") #{appInfo.cnName}
         div.collapse.navbar-collapse#console-appnav-collapse
             ul.nav.navbar-nav
                 -if(consoleNav!==undefined)
@@ -14,14 +14,6 @@ nav.navbar.navbar-default#console-appnav(role="navigation")
                         -else
                             li
                                 a(href="#{siteUrl}#{app}/console/#{navItem.path}") #{navItem.name}
-            form.navbar-form.navbar-right(action="#",role="search")
-                div.form-group
-                    div.input-group
-                        input.form-control(type="search",placeholder="搜索")
-                        span.input-group-btn
-                            button.btn(type="button")
-                                span.fui-search
-
 
 
 

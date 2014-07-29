@@ -7,7 +7,7 @@ block content
                 div.row
                     div.col-md-12#blog-main
                         a(href="#")
-                            h6
+                            h4
                                 span #{blogData.info.title}
                                 -if(blogData.isMyArticle===true)
                                     a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
@@ -23,14 +23,14 @@ block content
                             span.pull-right 作者：#{blogData.info.author.name}
                         hr
                         div.row
-                            div.col-md-2
+                            //div.col-md-2
                                 -if(pageNow>1)
                                     a.btn.btn-default.pull-left(href="#{pageUrl}#{pageNow-1}")
                                         span.fa.fa-arrow-left
                                         span &nbsp;&nbsp; 上一页
-                            div.col-md-8.text-center
+                            div.col-md-8.text-center.col-md-offset-2
                                 include ../pager
-                            div.col-md-2
+                            //div.col-md-2
                                 -if(pageNow<pageCount)
                                     //#blog-readmore
                                     a.btn.btn-primary.pull-right(href="#{pageUrl}#{pageNow+1}")
@@ -47,15 +47,5 @@ block content
                             div.col-md-12#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{blogData.info._id}/")
 
             div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
-                div.blog-sidebar-item
-                    div.form-group
-                        div.input-group
-                            input.form-control(type="text",style="border-right: 0;")
-                            span.input-group-btn
-                                button.btn(type="submit")
-                                    span.fui-search
-                div.panel.panel-default
-                    div.panel-heading 管理选项
-                    div.panel-body
 
 

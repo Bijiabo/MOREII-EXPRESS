@@ -7,7 +7,7 @@ block content
                 -for(var i=0;i<blogData.length;i++)
                     div.col-md-12.row
                         a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
-                            h6= blogData[i].title
+                            h4= blogData[i].title
                         hr
                         article!= blogData[i].content
                         div.blog-userinfo.text-right.text-muted 作者：#{blogData[i].author.name}

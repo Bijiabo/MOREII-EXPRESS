@@ -156,3 +156,4 @@ nodejs保存图片并返回数据:
     var multipart = require('connect-multiparty');
     var multipartMiddleware = multipart();
     //调用config.saveFile()
+    config.saveFile(app,savePath,req,res);
