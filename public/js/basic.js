@@ -17,6 +17,22 @@ var basic = {
         });
         basic.initConsoleModal();
         basic.initDropbox();
+        $('.summernote').summernote({
+            height: 300,                 // set editor height
+            lang:'zh-CN',
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            airMode: true,
+            airPopover: [
+                ['color', ['color']],
+                ['style', ['fontname']],
+                ['fontsize',['fontsize']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture','video','hr']]
+            ]
+        });
     },
     resize:function(){
         basic.initConsoleSidebar();

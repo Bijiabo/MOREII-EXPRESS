@@ -4,23 +4,21 @@ block content
     div.container
         div.row
             div.col-md-9#blog-main
-                -for(var i=0;i<blogData.length;i++)
-                    div.col-md-12.row
-                        a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
-                            h4= blogData[i].title
-                        hr
-                        article!= blogData[i].content
-                        div.blog-userinfo.text-right.text-muted 作者：#{blogData[i].author.name}
-                        br
+                -if(blogData.length>0)
+                    -for(var i=0;i<blogData.length;i++)
+                        div.col-md-12.row
+                            a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
+                                h3= blogData[i].title
+                            hr
+                            article!= blogData[i].content
+                            div.blog-userinfo.text-right.text-muted 作者：#{blogData[i].author.name}
+                            br
+                -else
+                    div.jumbotron
+                        h2 没有文章
+                        p 可能管理员还没有开放可供阅读的内容，或者还没有添加。
                 div.col-md-12.row
                     hr
                     div.col-md-8.col-md-offset-2.text-center
                         include ../pager
             div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
-                div.blog-sidebar-item
-                    div.form-group
-                        div.input-group
-                            input.form-control(type="text",style="border-right: 0;")
-                            span.input-group-btn
-                                button.btn(type="submit")
-                                    span.fui-search

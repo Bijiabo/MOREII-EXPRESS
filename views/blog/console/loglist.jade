@@ -66,12 +66,12 @@ block content
     //- 文章书写层
     div#blog-addblog.console-modal
         div.fa.fa-times.console-modal-close
-        h6 新建日志
-        hr
+        //h6 新建日志
         input#blog-addblog-title.form-control(placeholder="文章标题")
-        br
-        textarea#blog-addblog-content.form-control(placeholder="文章标题",rows="20")
-        br
+        hr
+        div#blog-addblog-content
+            div.summernote 文章内容...
+        hr
         input#blog-addblog-tags.tagsinput(name="tagsinput",value="")
         div.col-md-2.col-md-offset-5
             button#blog-addblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="add",data-id="") 添加日志

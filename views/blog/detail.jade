@@ -7,7 +7,7 @@ block content
                 div.row
                     div.col-md-12#blog-main
                         a(href="#")
-                            h4
+                            h3
                                 span #{blogData.info.title}
                                 -if(blogData.isMyArticle===true)
                                     a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑

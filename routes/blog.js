@@ -38,8 +38,9 @@ var renderData = function(data){
     };
 /* GET home page. */
 router.get('/', function(req, res) {
+//    console.log('here');
     var page = 0,
-        limitPerPage = 2;
+        limitPerPage = 5;
     if(req.query.page!==undefined){
         page = Number(req.query.page) - 1;
     }
@@ -47,23 +48,32 @@ router.get('/', function(req, res) {
         title : 'Moreii团队博客'
     });
     blogSchema.listBlog({state:1},limitPerPage*page,limitPerPage,function(err,blogData){
-        if(err===null && blogData.length!==0){
-            for(var i=0;i<blogData.length;i++){
+        if(err===null && blogData.length!==0) {
+            for (var i = 0; i < blogData.length; i++) {
                 blogData[i].content = markdown.toHTML(String(blogData[i].content));
             }
             data.blogData = blogData;
-            blogSchema.getListItemCount({state:1},function(err1,countData){
-                if(err1===null){
-                    data.pageUrl = config.siteUrl+data.app+'/?page=';
-                    data.pageCount = Math.ceil(countData/limitPerPage);
-                    data.pageNow = page+1;
+            blogSchema.getListItemCount({state: 1}, function (err1, countData) {
+                if (err1 === null) {
+                    data.pageUrl = config.siteUrl + data.app + '/?page=';
+                    data.pageCount = Math.ceil(countData / limitPerPage);
+                    data.pageNow = page + 1;
                     data.limitPerPage = limitPerPage;
                     data.pagerLen = 5;//翻页控件显示页数
                     res.render('blog/index', data);
-                }else{
-                    res.redirect(config.siteUrl+'500');
+                } else {
+                    res.redirect(config.siteUrl + '500');
                 }
             });
+        }else if(err===null && blogData.length===0){
+            console.log(blogData);
+            data.blogData = blogData;
+            data.pageUrl = config.siteUrl + data.app + '/?page=';
+            data.pageCount = 0;
+            data.pageNow = page + 1;
+            data.limitPerPage = limitPerPage;
+            data.pagerLen = 5;//翻页控件显示页数
+            res.render('blog/index', data);
         }else{
             res.redirect(config.siteUrl+'404');
         }

@@ -1,4 +1,4 @@
-/*main style for flatUI*/
+/*main style for flatUI || todc*/
 .table thead tr th{
     line-height: 2.5em;
 }
@@ -17,7 +17,9 @@
         padding-bottom: 9px;
     }
 }
-
+.btn-group>.btn-sm.dropdown-toggle {
+    padding: 3px 8px;
+}
 /*mii*/
 .jsshow{display: none;}
 #uploadImageDropbox{

@@ -20,6 +20,7 @@ var blogSchema = new mongoose.Schema({
     createTime:{ type : Date, default: Date.now },
     version:{ type : Number, default: 1},
     state:{type : Number, default: 1,index:true},
+    format:{type:String,default:'html',index:true},
     modify:[
         {
             uid:{type:String,index:true},
