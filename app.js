@@ -7,6 +7,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 //var appList = require('./core/applist');
 var config = require('./core/config'),
+    site = require('./core/schema/site'),
     markdown = require('markdown-js');
 
 var app = express();

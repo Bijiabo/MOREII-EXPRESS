@@ -54,14 +54,14 @@ var crypto = require('crypto'),
             cnName:'壁纸定制',
             path:'custom',
             ico:'fa-lemon-o',
-            state:1
+            state:0
         },
         {
             name:'shop',
             cnName:'商城',
             path:'shop',
             ico:'fa-shopping-cart',
-            state:1
+            state:0
         },
         {
             name:'console',
@@ -82,14 +82,14 @@ var crypto = require('crypto'),
             cnName:'移动版',
             path:'mobile',
             ico:'fa-building-o',
-            state:1
+            state:0
         },
         {
             name:'tool',
             cnName:'工具箱',
             path:'tool',
             ico:'fa-plus-square',
-            state:1
+            state:0
         },
         {
             name:'comment',

@@ -5,7 +5,7 @@ var renderData = function(data){
     if(data===undefined){
         var data = {};
     }
-    this.title = data.title || 'Moreii';
+    this.title = data.title || config.siteName;
     this.jsfile = data.jsfile || '';
     this.siteUrl = config.siteUrl;
     this.app = 'index';
