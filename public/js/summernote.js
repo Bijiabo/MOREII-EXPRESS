@@ -2073,14 +2073,21 @@
      * @param {jQuery} $editable
      * @param {String} sValue
      * @param {jQuery} $target - target element
+     * 针对图片缩放做出优化
      */
-    this.resize = function ($editable, sValue, $target) {
+    this.resize = function ($editable, sValue, $target,isImageResize) {
       recordUndo($editable);
-
-      $target.css({
-        width: $editable.width() * sValue + 'px',
-        height: ''
-      });
+      if(isImageResize==undefined){
+          $target.css({
+              width: $editable.width() * sValue + 'px',
+              height: ''
+          });
+      }else{
+          $target.css({
+              width: 100 * sValue + '%',
+              height: ''
+          });
+      }
     };
 
     /**
@@ -3010,7 +3017,7 @@
         if (editor[sEvent]) { // on command
           var $editable = oLayoutInfo.editable();
           $editable.trigger('focus');
-          editor[sEvent]($editable, sValue, $target);
+          editor[sEvent]($editable, sValue, $target,true);
         } else if (commands[sEvent]) {
           commands[sEvent].call(this, oLayoutInfo);
         }
