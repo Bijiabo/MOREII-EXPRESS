@@ -22,8 +22,9 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
             ul.nav.navbar-nav.navbar-right
                 li#header-messagebox(style="display:none;")
                     a(href="javascript:;")
-                        span.fa.fa-circle#header-messagebox-light
-                        span &nbsp;&nbsp;消息盒子
+                        //span.fa.fa-circle#header-messagebox-light
+                        span(style="margin-right:4px;") 消息盒子
+                        span.badge.label-success.pull-right 0
                 li#header-login
                     a(href="/user") 登陆 / 注册
                 li#header-user.dropdown(style="display:none;")

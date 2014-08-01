@@ -50,7 +50,10 @@ router.get('/', function(req, res) {
     blogSchema.listBlog({state:1},limitPerPage*page,limitPerPage,function(err,blogData){
         if(err===null && blogData.length!==0) {
             for (var i = 0; i < blogData.length; i++) {
-                blogData[i].content = markdown.toHTML(String(blogData[i].content));
+                console.log(blogData[i].format);
+                if(blogData[i].format !== 'html'){
+                    blogData[i].content = markdown.toHTML(String(blogData[i].content));
+                }
             }
             data.blogData = blogData;
             blogSchema.getListItemCount({state: 1}, function (err1, countData) {
@@ -92,7 +95,9 @@ router.get('/search/tag/:tags/:page?',function(req,res){
     blogSchema.findByTags(tagArray,{"_id":1},0,10,function(err,blogData){
         if(err===null && blogData.length!==0){
             for(var i=0;i<blogData.length;i++){
-                blogData[i].content = markdown.toHTML(String(blogData[i].content));
+                if(blogData[i].format !== 'html'){
+                    blogData[i].content = markdown.toHTML(String(blogData[i].content));
+                }
             }
             data.blogData = blogData;
             blogSchema.getListItemCount({tag:{"$all":tagArray}},function(err1,countData){
@@ -169,7 +174,11 @@ router.get('/detail/:id/:page?', function(req, res) {
                     if(blogData.info.state===1){
                         if(page<=blogData.content.length){
                             blogData.pageCount = blogData.content.length;//获取分页数量
-                            blogData.content= markdown.toHTML(blogData.content[page-1].content);
+                            if(blogData.info.format !== 'html'){
+                                blogData.content= markdown.toHTML(blogData.content[page-1].content);
+                            }else{
+                                blogData.content= blogData.content[page-1].content;
+                            }
                             data.blogData = blogData;
                             blogSchema.blogDetailView(req.params.id,function(err1){
                                 if(err1===null){
@@ -241,7 +250,11 @@ router.get('/article/:shorturl/:page?',function(req,res){
                                             if(blogData.info.state===1){
                                                 if(page<=blogData.content.length){
                                                     blogData.pageCount = blogData.content.length;//获取分页数量
-                                                    blogData.content= markdown.toHTML(blogData.content[page-1].content);
+                                                    if(blogData.info.format !== 'html'){
+                                                        blogData.content= markdown.toHTML(blogData.content[page-1].content);
+                                                    }else{
+                                                        blogData.content= blogData.content[page-1].content;
+                                                    }
                                                     data.blogData = blogData;
                                                     /**
                                                      * 编辑和修订权限 - 前台显示
@@ -296,7 +309,11 @@ router.get('/article/:shorturl/:page?',function(req,res){
                 blogSchema.blogDetail(result.data.blogId,function(err,blogData){
                     if(err===null){
                         if(page<blogData.content.length){
-                            blogData.content= markdown.toHTML(blogData.content[page].content);
+                            if(blogData.info.format!=='html'){
+                                blogData.content= markdown.toHTML(blogData.content[page-1].content);
+                            }else{
+                                blogData.content= blogData.content[page-1].content;
+                            }
                             data.blogData = blogData;
                             blogSchema.blogDetailView(result.data.blogId,function(err1){
                                 if(err1===null){

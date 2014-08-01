@@ -2,6 +2,7 @@
  * Created by boooo on 14-6-8.
  */
 var blog = {
+    app:'blog',
     submitComment:function(el){
         var commentData = {
             content:$('#comment-content').val(),
@@ -16,7 +17,7 @@ var blog = {
         }
         console.log(commentData);
         $.ajax({
-            method:'POST',
+            type:'POST',
             url:siteUrl+'comment/api/add',
             data:commentData,
             dataType:'json',
@@ -26,14 +27,28 @@ var blog = {
     },
     getShareUrl:function(el,callback){
         $.ajax({
-            method:'GET',
-            url:siteUrl+'blog/getShareUrl/'+el.data('id'),
+            type:'GET',
+            url:siteUrl+blog.app+'/getShareUrl/'+el.data('id'),
             dataType:'json',
             success:function(data){
                 if(data.err===null){
                     callback(siteUrl+'blog/article/'+data.url);
                 }else{
                     alert('获取分享链接失败，请稍后重试:)');
+                }
+            }
+        })
+    },
+    randomBlog:function(el,callback){
+        $.ajax({
+            type:'GET',
+            url:siteUrl+blog.app+'/api/randomBlog',
+            dataType:'json',
+            success:function(data){
+                if(!data.err){
+                    callback(data.data);
+                }else{
+                    console.log('randomBlog载入失败');
                 }
             }
         })
@@ -54,5 +69,14 @@ $(function(){
             console.log(url);
         });
 
+    });
+    blog.randomBlog($('#randomblog'),function(data){
+        var html = '';
+        for(var i=0;i<data.length;i++){
+            html+=['<p>',
+                '<a href="'+siteUrl+blog.app+'/detail/'+data[i]._id+'">'+data[i].title+'</a>',
+            '</p>'].join('\n');
+        }
+        $('#randomblog').find('.panel-body').html(html);
     });
 });

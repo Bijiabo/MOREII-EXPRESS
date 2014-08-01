@@ -10,9 +10,9 @@ block content
                             h3
                                 span #{blogData.info.title}
                                 -if(blogData.isMyArticle===true)
-                                    a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
+                                    a.btn.btn-default.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 编辑
                                 -else if(blogData.hasRevisePermission===true)
-                                    a.btn.btn-default.btn-xs.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
+                                    a.btn.btn-default.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
                         hr
                         article!= blogData.content
                         p
@@ -47,5 +47,6 @@ block content
                             div.col-md-12#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{blogData.info._id}/")
 
             div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
+                include sidebar
 
 

@@ -5,15 +5,11 @@ var blog = {
     appPath:'blog',
     update:function(id,type){
         var tags = $('#blog-'+type+'blog-tags').val(),
-            tagArray = tags.split(',');
+            tagArray = tags.split(' ').unique();
 
-        /*var tagArray = [];
-        for(var i=0;i<tags.length;i++){
-            tagArray.push($(tags[i]).text());
-        };*/
         var blogData = {
             title:$('#blog-'+type+'blog-title').val(),
-            content:$('#blog-'+type+'blog-content').val(),
+            content:$('#blog-'+type+'blog-content>div').code(),
             tag:tagArray
         };
         var success = function(data){

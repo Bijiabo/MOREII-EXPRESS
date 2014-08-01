@@ -5,6 +5,10 @@
 .blog-tableedit a span:hover{color: #1abc9c;}
 #blog-addblog-content{
     min-height: 300px;
+    margin-bottom: 15px;
+}
+#blog-addblog-content>div{
+    min-height: 300px;
 }
 #blog-addblog-title{
     border: 0;

@@ -3,7 +3,7 @@
     background: #ffffff;
     padding-bottom: 30px;
 }
-#blog-main h4{
+#blog-main h3{
     margin-top: 0;
 }
 .blog-tags{
@@ -12,7 +12,7 @@
 #blog-sidebar{
 
 }
-#blog-sidebar .panel{
+/*#blog-sidebar .panel{
     border: 0;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -23,6 +23,14 @@
     background: none;
     padding-left: 0;
     padding-right: 0;
+}*/
+.panel-heading-mii{
+    padding: 15px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e5e5e5;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top: 0;
 }
 .blog-sidebar-item{
     /*background: #ffffff;*/

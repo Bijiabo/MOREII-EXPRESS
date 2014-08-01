@@ -71,7 +71,9 @@ block content
         hr
         div#blog-addblog-content
             div.summernote 文章内容...
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-addblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
         hr
-        input#blog-addblog-tags.tagsinput(name="tagsinput",value="")
-        div.col-md-2.col-md-offset-5
+        div.col-md-2.col-md-offset-5.row
             button#blog-addblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="add",data-id="") 添加日志
