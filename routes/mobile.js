@@ -13,6 +13,8 @@ var renderData = function(data){
     this.jsfile = data.jsfile ||'mobile.js';
     this.siteUrl = config.siteUrl;
     this.app = 'mobile';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 /* GET home page. */

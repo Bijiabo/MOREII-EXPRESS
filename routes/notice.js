@@ -14,6 +14,8 @@ var renderData = function(data){
     this.jsfile = data.jsfile ||'mobile.js';
     this.siteUrl = config.siteUrl;
     this.app = 'notice';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 /**

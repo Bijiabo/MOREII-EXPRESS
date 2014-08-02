@@ -28,6 +28,8 @@ var renderData = function(data){
     this.siteUrl = config.siteUrl;
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'console';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 

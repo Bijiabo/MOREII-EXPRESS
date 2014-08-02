@@ -10,15 +10,10 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
                 //img(src="/img/logo_120x80.png")
         div.collapse.navbar-collapse#mii-header-links
             ul.nav.navbar-nav
-                li.applink.applink-index.active
-                    a(href="/") 首页
-                //- li.applink.applink-shop
-                //-     a(href="/shop/list") 壁纸
-                //- li.applink.applink-custom
-                //-     a(href="/custom") 定制
-
-                li.applink.applink-blog
-                    a(href="/blog") 博客
+                -if(nav!==undefind)
+                    -for(var i=0,len=nav.length;i<len;i++)
+                        li.applink(class="applink-#{nav[i].app}")
+                            a(href="#{siteUrl}#{nav[i].href}") #{nav[i].text}
             ul.nav.navbar-nav.navbar-right
                 li#header-messagebox(style="display:none;")
                     a(href="javascript:;")

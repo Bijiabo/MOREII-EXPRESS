@@ -19,6 +19,8 @@ var renderData = function(data){
     this.siteUrl = config.siteUrl;
     this.customData = data.customData ||{};
     this.app = 'custom';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 /* GET users listing. */

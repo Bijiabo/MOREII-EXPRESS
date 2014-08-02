@@ -19,6 +19,7 @@ var renderData = function(data){
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'blog';
     this.apps = config.app;
+    this.nav = config.nav;
     this.consoleNav = [
         {
             name:'管理首页',

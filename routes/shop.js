@@ -15,6 +15,8 @@ var renderData = function(data){
     this.cssfile = data.cssfile || 'shop.css';
     this.siteUrl = config.siteUrl;
     this.app = 'shop';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 /* GET home page. */

@@ -30,6 +30,10 @@ var renderData = function(data){
             path:'cache'
         },
         {
+            name:'全局导航',
+            path:'nav'
+        },
+        {
             name:'关于',
             path:'about'
         }
@@ -98,6 +102,21 @@ router.get('/console/about', function(req, res) {
     var data = new renderData({
         title:'关于站点',
         consoleNavActive:'about',
+        data:{
+            cpus:os.cpus(),
+            osType:os.type(),
+            platform:os.platform(),
+            arch:os.arch(),
+            version:config.version
+        }
+
+    });
+    res.render('console/about',data);
+});
+router.get('/console/nav', function(req, res) {
+    var data = new renderData({
+        title:'关于站点',
+        consoleNavActive:'nav',
         data:{
             cpus:os.cpus(),
             osType:os.type(),

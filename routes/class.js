@@ -11,6 +11,8 @@ var renderData = function(data){
     this.cssfile=data.cssfile || 'datepicker3.css,class.css';
     this.jsfile = data.jsfile || 'class.js';
     this.siteUrl = config.siteUrl;
+    this.nav = config.nav;
+    this.apps = config.app;
     this.app = 'class';
     this.pretty = true;
 }

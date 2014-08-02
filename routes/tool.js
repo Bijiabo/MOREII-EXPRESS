@@ -10,6 +10,8 @@ var renderData = function(data){
     this.jsfile = data.jsfile ||'tool.js';
     this.siteUrl = config.siteUrl;
     this.app = 'tool';
+    this.nav = config.nav;
+    this.apps = config.app;
     this.pretty = true;
 }
 

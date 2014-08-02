@@ -278,10 +278,10 @@
     border-width: 1px;
 }
 /*for laptop*/
-#console-appnav .fa-navicon{
+#console-sidebar-menubtn,#console-nav-menubtn{
     display: none;
 }
-@media (max-width: 1200px) {
+@media (max-width: 1470px) {
     body{
         width: 100%;
         overflow-x: hidden;
@@ -315,16 +315,16 @@
         z-index: 1030;
         border-radius: 0;
     }
-    #console-appnav .fa-navicon{
+    #console-sidebar-menubtn{
         position: fixed;
         top: 0;
         left: 0;
-        height: 53px;
-        width: 53px;
-        font-size: 20px;
+        height: 28px;
+        width: 28px;
+        font-size: 14px;
         background-color: #CED5D6;
         color: #ffffff;
-        line-height: 53px;
+        line-height: 28px;
         text-align: center;
         display: block;
     }
@@ -334,6 +334,7 @@
     #console_sidebar .list-group .list-group-item.active:before{
         content: "";
     }
+    .navbar-header{padding-left: 28px;}
 }
 @media (max-width: 768px) {
     .navbar-collapse .navbar-form.navbar-right:last-child {
@@ -350,4 +351,5 @@
         -ms-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
+    #console-nav-menubtn{display: inline;}
 }

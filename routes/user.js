@@ -10,6 +10,7 @@ var renderData = function(data){
     this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
     this.siteUrl = config.siteUrl;
     this.app = 'user';
+    this.nav = config.nav;
     this.apps = config.app;
     this.pretty = true;
 }

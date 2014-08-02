@@ -130,6 +130,18 @@ module.exports = {
     logo:logo,
     app:app,
     version:'3.0.0',
+    nav:[
+        {
+            text:'首页',
+            app:'index',
+            href:''
+        },
+        {
+            text:'博客',
+            app:'blog',
+            href:'blog'
+        }
+    ],
     encryptCookie:encryptCookie,
     inArray:function (needle,array,bool){
         if(typeof needle=="string"||typeof needle=="number"){
