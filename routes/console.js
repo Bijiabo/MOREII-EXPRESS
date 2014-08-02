@@ -15,9 +15,10 @@ var renderData = function(data){
     }
     this.title = data.title || 'Moreii Console';
     this.jsfile = data.jsfile ||'console_console.js';
-    this.cssfile = data.cssfile || '';
+    this.cssfile = data.cssfile || 'console.css';
     this.siteUrl = config.siteUrl;
     this.data = data.data || {};
+    this.nav = config.nav;
     this.app = 'console';
     this.apps = config.app;
     this.consoleNav = [
@@ -118,14 +119,10 @@ router.get('/console/nav', function(req, res) {
         title:'关于站点',
         consoleNavActive:'nav',
         data:{
-            cpus:os.cpus(),
-            osType:os.type(),
-            platform:os.platform(),
-            arch:os.arch(),
-            version:config.version
+            logo:config.logo
         }
 
     });
-    res.render('console/about',data);
+    res.render('console/nav',data);
 });
 module.exports = router;

@@ -20,6 +20,7 @@
 .btn-group>.btn-sm.dropdown-toggle {
     padding: 3px 8px;
 }
+.navbar-toolbar.navbar-default .navbar-brand {color: #3078eb;}
 /*mii*/
 .jsshow{display: none;}
 #uploadImageDropbox{
