@@ -12,7 +12,7 @@ html(ng-app,lamg="zh")
         link(rel='stylesheet',href='/css/summernote.css')
         link(rel='stylesheet', href='/css/basic.css')
         link(rel='stylesheet', href='/css/basic_console.css')
-    -var css = String(cssfile).split(',')
+        -var css = String(cssfile).split(',')
         if(cssfile!=="" && jsfile!==cssfile && cssfile!==undefined)
             each item in css
                 link(rel='stylesheet', href='#{siteUrl}css/app/'+item)

@@ -198,3 +198,30 @@
 .uploadDropbox{
     overflow-y: scroll;
 }
+/*statemodal*/
+#statemodal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    z-index: 999;
+}
+#statemodal>div{
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    font-size: 100px;
+    line-height: 100px;
+    text-align: center;
+    color: #949494;
+}
+#statemodal>div.premary{color: #3079ed;}
+#statemodal>div.success{color: #35aa47;}
+#statemodal>div.danger{color: #dd4b39;}

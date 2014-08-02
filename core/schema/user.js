@@ -55,6 +55,9 @@ var userSchema = new mongoose.Schema({
             statistics:{
                 view:{type:Boolean,default:false},
                 memberInfo:{type:Boolean,default:false}
+            },
+            console:{
+                edit:{type:Boolean,default:false}
             }
         }
     });
@@ -162,6 +165,14 @@ var appGrade = {
             view:true,
             memberInfo:true
         }
+    },
+    console:{
+        user:{
+            edit:false
+        },
+        admin:{
+            edit:true
+        }
     }
 }
 var userGrade = {
@@ -171,7 +182,8 @@ var userGrade = {
         shop:appGrade.shop.admin,
         class:appGrade.class.admin,
         blog:appGrade.blog.admin,
-        statistics:appGrade.statistics.admin
+        statistics:appGrade.statistics.admin,
+        console:appGrade.console.admin
     },
     user:{
         user:appGrade.user.user,
@@ -179,7 +191,8 @@ var userGrade = {
         shop:appGrade.shop.user,
         class:appGrade.class.user,
         blog:appGrade.blog.user,
-        statistics:appGrade.statistics.user
+        statistics:appGrade.statistics.user,
+        console:appGrade.console.user
     },
     blogEditor:{
         user:appGrade.user.user,
@@ -187,7 +200,8 @@ var userGrade = {
         shop:appGrade.shop.user,
         class:appGrade.class.user,
         blog:appGrade.blog.admin,
-        statistics:appGrade.statistics.editor
+        statistics:appGrade.statistics.editor,
+        console:appGrade.console.user
     },
     shopAssistant:{
         user:appGrade.user.user,
@@ -195,7 +209,8 @@ var userGrade = {
         shop:appGrade.shop.admin,
         class:appGrade.class.user,
         blog:appGrade.blog.user,
-        statistics:appGrade.statistics.editor
+        statistics:appGrade.statistics.editor,
+        console:appGrade.console.user
     }
 }
 

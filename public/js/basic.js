@@ -492,6 +492,8 @@ var basic = {
                 'transform': 'translate3d(0,-'+transform3dY+'px,0)'
             });
             sidebarListgroup.data('transform3dY',transform3dY);
+        }else{
+            sidebarListgroup.removeAttr('style');
         }
     },
     listenConsoleSidebar:function(e){
@@ -548,6 +550,40 @@ var basic = {
         }else if(state==='hide'){
             el.removeClass('active');
             callback(el);
+        }
+    },
+    stateModal:function(state){
+        switch(state){
+            case 'wait':
+                $('#statemodal').remove();
+                $('body').append(['<div id="statemodal">',
+                    '<div>',
+                        '<span class="fa fa-spin fa-spinner"></span>',
+                    '</div>',
+                '</div>'].join('\n'));
+                break;
+            case 'success':
+                $('#statemodal').remove();
+                $('body').append(['<div id="statemodal">',
+                    '<div class="success">',
+                    '<span class="fa fa-check-circle"></span>',
+                    '</div>',
+                    '</div>'].join('\n'));
+                window.setTimeout(function(){
+                    $('#statemodal').remove();
+                },1000);
+                break;
+            case 'error':
+                $('#statemodal').remove();
+                $('body').append(['<div id="statemodal">',
+                    '<div class="danger">',
+                    '<span class="fa fa-exclamation-circle"></span>',
+                    '</div>',
+                    '</div>'].join('\n'));
+                window.setTimeout(function(){
+                    $('#statemodal').remove();
+                },1000);
+                break;
         }
     }
 }

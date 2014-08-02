@@ -65,7 +65,7 @@ var crypto = require('crypto'),
         },
         {
             name:'console',
-            cnName:'控制台',
+            cnName:'站点信息',
             path:'console',
             ico:'fa-terminal',
             state:1
@@ -125,9 +125,11 @@ module.exports = {
     cookieSecret: cookieSecret,
     domain: domain,
     siteUrl:'http://'+domain+':'+port+'/',
+    port:port,
     siteName:siteName,
     logo:logo,
     app:app,
+    version:'3.0.0',
     encryptCookie:encryptCookie,
     inArray:function (needle,array,bool){
         if(typeof needle=="string"||typeof needle=="number"){

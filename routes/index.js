@@ -16,5 +16,8 @@ router.get('/', function(req, res) {
     var data = new renderData();
     res.render('index', data);
 });
-
+router.get('/console', function(req, res) {
+    var data = new renderData();
+    res.render('index', data);
+});
 module.exports = router;
