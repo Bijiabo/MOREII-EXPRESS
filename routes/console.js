@@ -47,7 +47,6 @@ var renderData = function(data){
  * */
 var isLogin = function(req,res,next){
     userSchema.checkLogin(req,res,function(login){
-        console.log(login);
         if(login){
             next();
         }else{

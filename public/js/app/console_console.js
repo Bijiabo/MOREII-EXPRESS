@@ -45,12 +45,11 @@ var consoleObj = {
                     if(!data.err){
                         basic.stateModal('success');
                     }else{
-                        basic.stateModal('danger');
+                        basic.stateModal('danger',data.des);
                     }
                 },
                 error:function(err){
-                    alert('提交错误，请检查网络。');
-                    basic.stateModal('danger');
+                    basic.stateModal('danger','提交错误，请检查网络。');
                 }
             });
         },
@@ -114,11 +113,11 @@ var consoleObj = {
                     if(!data.err){
                         basic.stateModal('success');
                     }else{
-                        basic.stateModal('error');
+                        basic.stateModal('error',data.des);
                     }
                 },
                 error:function(err){
-                    basic.stateModal('error');
+                    basic.stateModal('error','提交错误，请检查网络。');
                 }
             });
         }

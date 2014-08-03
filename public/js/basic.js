@@ -3,7 +3,8 @@
  */
 var cache = {
     uploadImageFiles:[],
-    login:false
+    login:false,
+    stateModalId:0
 };
 var basic = {
     ready:function(){
@@ -34,6 +35,9 @@ var basic = {
             ]
         });
         $('.tip').tooltip();
+        $(document).on('click','#statemodal',function(){
+            $('#statemodal').remove();
+        });
     },
     resize:function(){
         basic.initConsoleSidebar();
@@ -553,13 +557,16 @@ var basic = {
             callback(el);
         }
     },
-    stateModal:function(state){
+    stateModal:function(state,text){
+        var tip = text || '';
+        window.clearTimeout(cache.stateModalId);
         switch(state){
             case 'wait':
                 $('#statemodal').remove();
                 $('body').append(['<div id="statemodal">',
                     '<div>',
                         '<span class="fa fa-spin fa-spinner"></span>',
+                        '<p>'+tip+'</p>',
                     '</div>',
                 '</div>'].join('\n'));
                 break;
@@ -567,10 +574,11 @@ var basic = {
                 $('#statemodal').remove();
                 $('body').append(['<div id="statemodal">',
                     '<div class="success">',
-                    '<span class="fa fa-check-circle"></span>',
+                        '<span class="fa fa-check-circle"></span>',
+                        '<p>'+tip+'</p>',
                     '</div>',
                     '</div>'].join('\n'));
-                window.setTimeout(function(){
+                cache.stateModalId = window.setTimeout(function(){
                     $('#statemodal').remove();
                 },1000);
                 break;
@@ -578,12 +586,13 @@ var basic = {
                 $('#statemodal').remove();
                 $('body').append(['<div id="statemodal">',
                     '<div class="danger">',
-                    '<span class="fa fa-exclamation-circle"></span>',
+                        '<span class="fa fa-exclamation-circle"></span>',
+                        '<p>'+tip+'</p>',
                     '</div>',
                     '</div>'].join('\n'));
-                window.setTimeout(function(){
+                /*cache.stateModalId = window.setTimeout(function(){
                     $('#statemodal').remove();
-                },1000);
+                },2000);*/
                 break;
         }
     }
