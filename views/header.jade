@@ -13,7 +13,10 @@ div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
                 -if(nav!==undefind)
                     -for(var i=0,len=nav.length;i<len;i++)
                         li.applink(class="applink-#{nav[i].app}")
-                            a(href="#{siteUrl}#{nav[i].href}") #{nav[i].text}
+                            -if(nav[i].app!=='')
+                                a(href="#{siteUrl}#{nav[i].href}") #{nav[i].text}
+                            -else
+                                a(href="#{nav[i].href}") #{nav[i].text}
             ul.nav.navbar-nav.navbar-right
                 li#header-messagebox(style="display:none;")
                     a(href="javascript:;")

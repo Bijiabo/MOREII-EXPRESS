@@ -11,6 +11,7 @@ var siteSchema = new mongoose.Schema({
     siteUrl:{type:String,default:config.siteUrl,index:true},
     logo:{type:String,default:config.logo},
     version:{type:String,default:config.version},
+    nav:{type:Array,default:config.nav},
     app:{type:Array,default:config.app}
 });
 var siteModel = db.model('sites',siteSchema);
@@ -42,6 +43,7 @@ var refreshSiteConfigure = function(callback){
             config.siteUrl = data.siteUrl;
             config.logo = data.logo;
             config.app = data.app;
+            config.nav = data.nav;
             console.log('>>>>>> recover site configure data successed!');
             cb(err,data);
         }
@@ -63,6 +65,18 @@ module.exports = {
                 refreshSiteConfigure(callback);
             }else{
                 callback(err,savedData);
+            }
+        });
+    },
+    updateNav:function(navArray,callback){
+        siteModel.findOne().sort({"_id":-1}).exec(function(err,data){
+            if(err===null){
+                data.nav = navArray;
+                data.save(function(err1,savedData){
+                    callback(err1,savedData);
+                })
+            }else{
+                callback(err,data);
             }
         });
     }

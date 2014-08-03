@@ -33,6 +33,7 @@ var basic = {
                 ['insert', ['link', 'picture','video','hr']]
             ]
         });
+        $('.tip').tooltip();
     },
     resize:function(){
         basic.initConsoleSidebar();
