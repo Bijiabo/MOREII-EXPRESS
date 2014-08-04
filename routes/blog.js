@@ -369,14 +369,7 @@ var isLogin = function(req,res,next){
         if(login){
             next();
         }else{
-            if(req.query.ajax === 'true'){
-                res.json({
-                    err:true,
-                    des:'请登陆啊亲>_<'
-                });
-            }else{
-                res.redirect('/user/login');
-            }
+            config.resError(req,res,'请登陆。','/user/login');
         }
     });
 }

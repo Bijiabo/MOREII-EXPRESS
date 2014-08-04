@@ -3,5 +3,8 @@ extends layout
 block content
     div.container
         div.jumbotron
-            h1 500错误
-            p #{des}
+            h3 500错误
+            -if(des)
+                p #{des}
+            -else
+                p 出错了，去其他页面看看吧。

@@ -118,6 +118,13 @@ var crypto = require('crypto'),
             path:'statistics',
             ico:'fa-eye',
             state:1
+        },
+        {
+            name:'hitcat',
+            cnName:'打猫猫',
+            path:'hitcat',
+            ico:'fa-github-alt',
+            state:1
         }
     ];
 
@@ -158,6 +165,9 @@ module.exports = {
         }
     },
     resError: function(req,res,des,redirectUrl){
+        if(redirectUrl===undefined){
+            var redirectUrl = '/500';
+        }
         if(req.query.ajax === 'true'){
             res.send(JSON.stringify({
                 err:true,
@@ -213,5 +223,23 @@ module.exports = {
             }
         });
 
+    },
+    changeRoute:function(app,originPath,newPath){
+//        app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
+        var routeRegexpCache = '',
+            matchCache = [];
+//        console.log(app._router);
+        for(var i= 0,len=app._router.stack.length;i<len;i++){
+//            console.log(app._router.stack[i].regexp.toString());
+            routeRegexpCache = app._router.stack[i].regexp.toString().replace('/^\\/','').replace('\\/?(?=/|$)/i','').replace('/^/','').replace('/?(?=/|$)/i','').replace('?(?=/|$)/i','');
+            if(routeRegexpCache!==''){
+//                console.log(routeRegexpCache);
+            }
+            matchCache = app._router.stack[i].regexp.toString().match(/\w{2,}/ig);
+            if(matchCache!==null){
+                matchCache = String(matchCache);
+                console.log(matchCache);
+            }
+        }
     }
 };

@@ -10,12 +10,16 @@ var config = require('./core/config'),
     site = require('./core/schema/site'),
     markdown = require('markdown-js');
 
-var app = express();
+global.app = express();
+//var app = express(),
+  var router = express.Router();
 //set port
 app.set('port',3001);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('trust proxy',true);
+app.set('env','production');
 
 app.use(bodyParser({
     limit: 1000000*20  //1m
@@ -45,6 +49,15 @@ for(var i=0;i<config.app.length;i++){
         app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
     }
 }
+app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
+//console.log(app._router.stack[app._router.stack.length-6]);
+config.changeRoute(app);
+app.get('/stack', function(req, res) {
+    res.json({
+        stack : app._router.stack[10]
+    });
+});
+
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -63,10 +76,10 @@ if (app.get('env') === 'development') {
             message: err.message,
             error: err
         });*/
-        res.render('404',{
-            title:'404错误',
+        res.render('500',{
+            title:'500错误',
             path:req.path,
-            errorname:'404',
+            errorname:'500',
         })
     });
 }
