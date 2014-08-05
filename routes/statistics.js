@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     ua_Parser_js = require('ua-parser-js'),
-    config = require('../core/config'),
     userSchema =  require('../core/schema/user'),
     statisticsSchema = require('../core/schema/statistics');
 var router = express.Router();
@@ -16,10 +15,10 @@ var renderData = function(data){
     this.title = data.title || '统计中心';
     this.cssfile = data.cssfile || '';
     this.jsfile = data.jsfile ||'';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'statistics';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 };
 
@@ -125,7 +124,7 @@ router.use(function(req,res,next){
         if(login){
             next();
         }else{
-            config.resError(req,res,'请登录。',config.siteUrl+'user/login');
+            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
         }
     });
 });
@@ -142,10 +141,10 @@ router.use(function(req,res,next){
             if(userData.permission.statistics.view){//拥有权限
                 next();
             }else{//无权限
-                config.resError(req,res,'权限不足。');
+                global.config.resError(req,res,'权限不足。');
             }
         }else{
-            config.resError(req,res,'数据错误。');
+            global.config.resError(req,res,'数据错误。');
         }
     });
 });

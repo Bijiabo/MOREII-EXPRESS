@@ -1,5 +1,4 @@
 var express = require('express'),
-    config = require('../core/config'),
     fs = require('fs'),
     path=require('path'),
     userSchema = require('../core/schema/user'),
@@ -12,10 +11,10 @@ var renderData = function(data){
     this.title = data.title || 'Moreii mobile';
     this.cssfile = data.cssfile || 'mobile.css';
     this.jsfile = data.jsfile ||'mobile.js';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'notice';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 /**

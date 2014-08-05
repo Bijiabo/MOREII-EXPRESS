@@ -1,5 +1,4 @@
 var express = require('express'),
-    config = require('../core/config'),
     userSchema = require('../core/schema/user'),
     classSchema = require('../core/schema/class'),
     router = express.Router();
@@ -10,9 +9,9 @@ var renderData = function(data){
     this.title = data.title || 'Moreii';
     this.cssfile=data.cssfile || 'datepicker3.css,class.css';
     this.jsfile = data.jsfile || 'class.js';
-    this.siteUrl = config.siteUrl;
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.siteUrl = global.config.siteUrl;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.app = 'class';
     this.pretty = true;
 }
@@ -24,7 +23,7 @@ router.get('/', function(req, res) {
             data.data = classData;
             res.render('class/index', data);
         }else{
-            res.redirect(config.siteUrl+'500');
+            res.redirect(global.config.siteUrl+'500');
         }
     });
 });
@@ -37,7 +36,7 @@ router.use(function(req,res,next){
         if(login){
             next();
         }else{
-            config.resError(req,res,'请登录。',config.siteUrl+'user/login');
+            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
         }
     });
 });
@@ -55,10 +54,10 @@ router.use(function(req,res,next){
             if(userData.permission.class.editClass && userData.permission.class.editStudent && userData.permission.class.editTeacher){//拥有修改用户的权限
                 next();
             }else{//无修改用户的权限
-                config.resError(req,res,'权限不足。');
+                global.config.resError(req,res,'权限不足。');
             }
         }else{
-            config.resError(req,res,'数据错误。');
+            global.config.resError(req,res,'数据错误。');
         }
     });
 });
@@ -72,7 +71,7 @@ router.get('/console',function(req,res){
             data.data = classData;
             res.render('class/console/index',data);
         }else{
-            res.redirect(config.siteUrl+'500');
+            res.redirect(global.config.siteUrl+'500');
         }
     });
 });
@@ -86,7 +85,7 @@ router.get('/console/edit',function(req,res){
             data.data = classData;
             res.render('class/console/edit',data);
         }else{
-            res.redirect(config.siteUrl+'500');
+            res.redirect(global.config.siteUrl+'500');
         }
     });
 });
@@ -146,7 +145,7 @@ router.get('/api/getClassInfoById/:id',function(req,res){
 router.post('/api/modifyClass/:id',function(req,res){
     var classData = req.body.classData;
     for(var key in classData){
-        classData[key] = config.securityFilter(classData[key]);
+        classData[key] = global.config.securityFilter(classData[key]);
     }
     if(/^[0-9]+年[0-9]+月[0-9]+日$/.test(classData.startTime) && /^[0-9]+年[0-9]+月[0-9]+日$/.test(classData.endTime)){//检测起止日期格式
         classData.startTime = new Date(classData.startTime.split(/[\u4e00-\u9fa5]/).join('/'));
@@ -193,15 +192,15 @@ router.get('/console/student',function(req,res){
                             data.userStudentData = userStudentData;
                             res.render('class/console/student',data);
                         }else{
-                            res.redirect(config.siteUrl+'500');
+                            res.redirect(global.config.siteUrl+'500');
                         }
                     });
                 }else{
-                    res.redirect(config.siteUrl+'500');
+                    res.redirect(global.config.siteUrl+'500');
                 }
             });
         }else{
-            res.redirect(config.siteUrl+'500');
+            res.redirect(global.config.siteUrl+'500');
         }
     });
 });

@@ -3,8 +3,7 @@
  */
 var express = require('express'),
     shopSchema = require('../core/schema/shop'),
-    orderSchema = require('../core/schema/order'),
-    config = require('../core/config');
+    orderSchema = require('../core/schema/order');
 var router = express.Router();
 var renderData = function(data){
     if(data===undefined){
@@ -13,10 +12,10 @@ var renderData = function(data){
     this.title = data.title || 'Moreii store';
     this.jsfile = data.jsfile ||'shop.js';
     this.cssfile = data.cssfile || 'shop.css';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'shop';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 /* GET home page. */

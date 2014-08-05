@@ -2,17 +2,16 @@
  * Created by boooo on 14-8-2.
  */
 var mongoose = require('mongoose'),
-    config = require('../config'),
     db = require('../db');
 var siteSchema = new mongoose.Schema({
-    siteName:{type:String,default:config.siteName,index:true},
-    domain:{type:String,default:config.domain,index:true},
-    port:{type:Number,default:config.port,index:true},
-    siteUrl:{type:String,default:config.siteUrl,index:true},
-    logo:{type:String,default:config.logo},
-    version:{type:String,default:config.version},
-    nav:{type:Array,default:config.nav},
-    app:{type:Object,default:config.app}
+    siteName:{type:String,default:global.config.siteName,index:true},
+    domain:{type:String,default:global.config.domain,index:true},
+    port:{type:Number,default:global.config.port,index:true},
+    siteUrl:{type:String,default:global.config.siteUrl,index:true},
+    logo:{type:String,default:global.config.logo},
+    version:{type:String,default:global.config.version},
+    nav:{type:Array,default:global.config.nav},
+    app:{type:Object,default:global.config.app}
 });
 var siteModel = db.model('sites',siteSchema);
 
@@ -25,7 +24,7 @@ var refreshSiteConfigure = function(callback){
     siteModel.findOne().sort({"_id":-1}).exec(function(err,data){
         if(err===null && data===null){
             var siteData = new siteModel({
-                siteName:config.siteName
+                siteName:global.config.siteName
             });
             siteData.save(function(err1,savedData){
                 if(err1===null){
@@ -37,13 +36,13 @@ var refreshSiteConfigure = function(callback){
                 cb(err1,data);
             });
         }else{
-            config.siteName = data.siteName;
-            config.domain = data.domain;
-            config.port = data.port;
-            config.siteUrl = data.siteUrl;
-            config.logo = data.logo;
-            config.app = data.app;
-            config.nav = data.nav;
+            global.config.siteName = data.siteName;
+            global.config.domain = data.domain;
+            global.config.port = data.port;
+            global.config.siteUrl = data.siteUrl;
+            global.config.logo = data.logo;
+            global.config.app = data.app;
+            global.config.nav = data.nav;
             console.log('>>>>>> recover site configure data successed!');
             cb(err,data);
         }

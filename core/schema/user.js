@@ -3,7 +3,6 @@
  */
 var mongoose = require('mongoose'),
     crypto = require('crypto'),
-    config = require('../config'),
     db = require('../db');
 var userSchema = new mongoose.Schema({
         name:{
@@ -283,7 +282,7 @@ module.exports = {
                 name:req.cookies.name
             },function(err,user){
                 if(user!==null){
-                    var mii_login = config.encryptCookie({
+                    var mii_login = global.config.encryptCookie({
                         name:user.name,
                         mail:user.mail,
                         password:user.password
@@ -314,8 +313,8 @@ module.exports = {
                 mail:req.cookies.mail
             },function(err,user){
                 if(user!==null){
-                    console.log(config.cookieSecret);
-                    var mii_login = config.encryptCookie({
+                    console.log(global.config.cookieSecret);
+                    var mii_login = global.config.encryptCookie({
                         name:user.name,
                         mail:user.mail,
                         password:user.password

@@ -1,6 +1,5 @@
 var express = require('express'),
-    config = require('../core/config');
-var router = express.Router();
+    router = express.Router();
 var renderData = function(data){
     if(data===undefined){
         var data = {};
@@ -8,10 +7,10 @@ var renderData = function(data){
     this.title = data.title || 'Moreii tool';
     this.cssfile = data.cssfile || 'tool.css';
     this.jsfile = data.jsfile ||'tool.js';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'tool';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 

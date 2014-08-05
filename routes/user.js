@@ -1,5 +1,4 @@
 var express = require('express'),
-    config = require('../core/config'),
     router = express.Router(),
     userSchema = require('../core/schema/user');
 var renderData = function(data){
@@ -8,10 +7,10 @@ var renderData = function(data){
     }
     this.title = data.title || '用户中心';
     this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'user';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 /* GET users listing. */
@@ -49,11 +48,11 @@ router.use(function(req,res,next){
         if(login){
             next();
         }else{
-            config.resError(req,res,'请登录。',config.siteUrl+'user/login');
+            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
             /*if(req.query.ajax !== 'true'){
                 res.redirect('/user/login');
             }else{
-                config.resError(req,res,'请登录。');
+                global.config.resError(req,res,'请登录。');
             }*/
         }
     });
@@ -185,10 +184,10 @@ router.use(function(req,res,next){
             if(userData.permission.user.editUser){//拥有修改用户的权限
                 next();
             }else{//无修改用户的权限
-                config.resError(req,res,'权限不足。');
+                global.config.resError(req,res,'权限不足。');
             }
         }else{
-            config.resError(req,res,'数据错误。');
+            global.config.resError(req,res,'数据错误。');
         }
     });
 });

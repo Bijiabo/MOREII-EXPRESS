@@ -5,9 +5,9 @@ var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
-//var appList = require('./core/applist');
-var config = require('./core/config'),
-    site = require('./core/schema/site'),
+global.config = require('./core/config');
+var site = require('./core/schema/site'),
+    userSchema = require('./core/schema/user'),
     markdown = require('markdown-js');
 
 global.app = express();
@@ -32,12 +32,34 @@ app.use(cookieParser());
 app.use(expressSession({secret: 'speedyCat'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * 验证登陆 & 权限
+ * */
 app.use(function(req,res,next){
     res.set({
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'
     });
-    next();
+    userSchema.checkLogin(req,res,function(login){
+        if(login){
+            req.login = true;
+            userSchema.getUserInfo({
+                name:req.cookies.name,
+                mail:req.cookies.mail
+            },function(err,userData){
+                if(err===null && userData!==null){
+                    req.permission = userData.permission;
+                }else{
+                    req.permission = false;
+                }
+                next();
+            });
+        }else{
+            req.login = false;
+            req.permission = false;
+            next();
+        }
+    });
 });
 /**
  * load Apps
@@ -49,22 +71,6 @@ for(var item in config.app){
         app.use('/'+config.app[item].path,appRouter[item]);
     }
 }
-/*for(var i=0;i<config.app.length;i++){
-    if(config.app[i].state===1){
-        appRouter[config.app[i].name] = require('./routes/'+config.app[i].name);
-        app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
-    }
-}*/
-//app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
-//console.log(app._router.stack[app._router.stack.length-6]);
-
-//config.changeRoute('blog','b');
-/*app.get('/stack', function(req, res) {
-    res.json({
-        stack : app._router.stack[10]
-    });
-});*/
-
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

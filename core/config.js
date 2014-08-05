@@ -234,6 +234,41 @@ var crypto = require('crypto'),
             state:1
         }
     ];*/
+var resError = function(req,res,des,redirectUrl,renderFile,renderData){
+    if(redirectUrl===undefined || redirectUrl===false){
+        var redirectUrl = '/500';
+    }
+    if(req.query.ajax === 'true' || req.get('X-Requested-With')!==undefined){
+        res.send(JSON.stringify({
+            err:true,
+            des:des,
+            redirectUrl:redirectUrl
+        }));
+    }else{
+        if(renderFile!==undefined){
+            var renderDataModel = function(data){
+                if(data===undefined){
+                    var data = {};
+                }
+                this.title = data.title || 'Moreii Error';
+                this.cssfile=data.cssfile || '';
+                this.jsfile = data.jsfile || '';
+                this.siteUrl = global.config.siteUrl;
+                this.nav = global.config.nav;
+                this.apps = global.config.app;
+                this.error = data;
+                this.app = 'error';
+                this.pretty = true;
+            };
+            var data = new renderDataModel({
+                error:renderData
+            });
+            res.render(renderFile,renderData);
+        }else{
+            res.redirect(redirectUrl);
+        }
+    }
+}
 
 module.exports = {
     cookieSecret: cookieSecret,
@@ -271,20 +306,7 @@ module.exports = {
             return false;
         }
     },
-    resError: function(req,res,des,redirectUrl){
-        if(redirectUrl===undefined){
-            var redirectUrl = '/500';
-        }
-        if(req.query.ajax === 'true' || req.get('X-Requested-With')!==undefined){
-            res.send(JSON.stringify({
-                err:true,
-                des:des,
-                redirectUrl:redirectUrl
-            }));
-        }else{
-            res.redirect(redirectUrl);
-        }
-    },
+    resError: resError,
     securityFilter:function(x){
         if(typeof x==='string') {//过滤字符串
             x= x.replace(/[\<\>\&\#]+/ig,'');
@@ -344,6 +366,26 @@ module.exports = {
                     global.app._router.stack[i].regexp = new RegExp('^\/'+newPath+'\/?(?=/|$)','i');
                 }
 //                console.log(matchCache);
+            }
+        }
+    },
+    checkPermission:function(req,res,app,permission,redirect,callback){
+        if(req.login){
+            if(req.permission[app][permission]){
+                callback(true);
+            }else{
+                callback(false);
+                if(redirect){
+                    resError(req,res,'权限不足。',false,'error',{
+                        title:'权限不足',
+                        des:'您的档案库中无此项进入权限。'
+                    });
+                }
+            }
+        }else{
+            callback(false);
+            if(redirect){
+                resError(req,res,'请登录。','/user/login');
             }
         }
     }

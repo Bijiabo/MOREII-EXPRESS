@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     router = express.Router(),
-    config = require('../core/config'),
     userSchema = require('../core/schema/user'),
     noticeSchema = require('../core/schema/notice'),
     shopSchema = require('../core/schema/shop'),
@@ -90,7 +89,7 @@ router.post('/login',function(req,res){
             res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
             res.cookie('mail', user.mail,{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
 
-            res.cookie('mii_login',config.encryptCookie({
+            res.cookie('mii_login',global.config.encryptCookie({
                 name:user.name,
                 mail:user.mail,
                 password:user.password
@@ -123,7 +122,7 @@ router.get('/logout',function(req,res){
 router.get('/iflogin',function(req,res){
     userSchema.getUserInfo({name:req.cookies.name,mail:req.cookies.mail},function(err,user){
         if(user!==null){
-            var mii_login = config.encryptCookie({
+            var mii_login = global.config.encryptCookie({
                 name:user.name,
                 mail:user.mail,
                 password:user.password
@@ -276,7 +275,7 @@ router.get('/addTestNotice',function(req,res){
 //router.post('/uploadGoodImage',checkAdministratorPermission);
 router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
 //    console.log(req.files);
-    config.saveFile('blog','log',req,res);
+    global.config.saveFile('blog','log',req,res);
     /*var filename = req.files.file.path.match(/[\w\-]+\.\w+$/)[0];
     var is = fs.createReadStream(req.files.file.path);
     var os = fs.createWriteStream(path.join(__dirname,"../public/upload/good/"+filename));
@@ -287,7 +286,7 @@ router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
             error:false,
             filename:filename,
             path:'image/good/'+filename,
-            url:config.siteUrl+'image/good/'+filename
+            url:global.config.siteUrl+'image/good/'+filename
         }));
     });*/
 });

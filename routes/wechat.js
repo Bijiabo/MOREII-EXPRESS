@@ -1,5 +1,4 @@
 var express = require('express'),
-    config = require('../core/config'),
     blogSchema = require('../core/schema/blog'),
     wechat = require('wechat');
 var router = express.Router();
@@ -13,10 +12,10 @@ var renderData = function(data){
     this.title = data.title || 'Moreii Wechat';
     this.cssfile = data.cssfile || '';
     this.jsfile = data.jsfile ||'';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.app = 'wechat';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 
@@ -66,7 +65,7 @@ router.use('/api', wechat(token)
                                         title: blogData.title,
                                         description: '点击阅读全文',
                                         picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-                                        url: config.siteUrl+'blog/detail/'+blogData._id.toString()+'?openId='+message.FromUserName
+                                        url: global.config.siteUrl+'blog/detail/'+blogData._id.toString()+'?openId='+message.FromUserName
                                     }
                                 ]);
                             }else{
@@ -75,7 +74,7 @@ router.use('/api', wechat(token)
                                         title: '暂无日志',
                                         description: '某人又偷懒了，你懂得。',
                                         picurl: 'http://nodeapi.cloudfoundry.com/qrcode.jpg',
-                                        url: config.siteUrl+'blog/'+'?openId='+message.FromUserName
+                                        url: global.config.siteUrl+'blog/'+'?openId='+message.FromUserName
                                     }
                                 ]);
                             }

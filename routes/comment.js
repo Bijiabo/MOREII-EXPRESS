@@ -1,5 +1,4 @@
 var express = require('express'),
-    config = require('../core/config'),
     userSchema = require('../core/schema/user'),
     commentSchema = require('../core/schema/comment');
 var router = express.Router();
@@ -10,9 +9,9 @@ var renderData = function(data){
     this.title = data.title || 'Moreii comment';
     this.cssfile = data.cssfile || 'comment.css';
     this.jsfile = data.jsfile ||'comment.js';
-    this.siteUrl = config.siteUrl;
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.siteUrl = global.config.siteUrl;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.app = 'comment';
     this.pretty = true;
 }

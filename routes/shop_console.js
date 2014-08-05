@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     router = express.Router(),
-    config = require('../core/config'),
     userSchema = require('../core/schema/user'),
     noticeSchema = require('../core/schema/notice'),
     crypto = require('crypto');
@@ -25,11 +24,11 @@ var renderData = function(data){
     this.title = data.title || 'Moreii Blog';
     this.jsfile = data.jsfile ||'console.js';
     this.cssfile = data.cssfile || 'console.css';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'console';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 

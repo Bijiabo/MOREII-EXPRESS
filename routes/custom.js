@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     router = express.Router(),
-    config = require('../core/config'),
     fs = require('fs'),
     rd = require('rd'),//read-dir -> node-rd
     path = require('path'),
@@ -16,11 +15,11 @@ var renderData = function(data){
     this.title = data.title || 'Moreii Blog';
     this.jsfile = data.jsfile ||'slick.min.js';
     this.cssfile = data.cssfile || '';
-    this.siteUrl = config.siteUrl;
+    this.siteUrl = global.config.siteUrl;
     this.customData = data.customData ||{};
     this.app = 'custom';
-    this.nav = config.nav;
-    this.apps = config.app;
+    this.nav = global.config.nav;
+    this.apps = global.config.app;
     this.pretty = true;
 }
 /* GET users listing. */
@@ -39,7 +38,7 @@ router.get('/', function(req, res) {
             });
             res.render('custom/index',data);
         }else{
-            res.redirect(config.siteUrl+'404');
+            res.redirect(global.config.siteUrl+'404');
         }
     });
 });
@@ -58,7 +57,7 @@ router.get('/make/:style', function(req, res) {
             });
             res.render('custom/make',data);
         }else{
-            res.redirect(config.siteUrl+'404');
+            res.redirect(global.config.siteUrl+'404');
         }
     });
 });
@@ -78,7 +77,7 @@ router.get('/make/chair/:style', function(req, res) {
             });
             res.render('custom/makechair',data);
         }else{
-            res.redirect(config.siteUrl+'404');
+            res.redirect(global.config.siteUrl+'404');
         }
     });
 });
