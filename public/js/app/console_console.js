@@ -16,17 +16,17 @@ var consoleObj = {
                 domain:siteInfoForm.find(':input[name="domain"]').val(),
                 port:siteInfoForm.find(':input[name="port"]').val(),
                 logo:siteInfoForm.find(':input[name="logo"]').val(),
-                app:[]
+                app:{}
             };
             consoleObj.cache.siteInfo.siteUrl = 'http://'+consoleObj.cache.siteInfo.domain + ':'+consoleObj.cache.siteInfo.port+'/';
             $.each(appDataDom,function(key,item){
-                consoleObj.cache.siteInfo.app.push({
+                consoleObj.cache.siteInfo.app[$(item).data('app')] = {
                     name:$(item).data('app'),
                     ico:$(item).data('ico'),
                     path:$(item).find('.console-appdata-path').val(),
                     cnName:$(item).find('.console-appdata-cnname').val(),
                     state:Number($(item).find('.console-appdata-state').val())
-                });
+                };
             });
             return consoleObj.cache.siteInfo;
         },

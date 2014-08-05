@@ -43,20 +43,27 @@ app.use(function(req,res,next){
  * load Apps
  * */
 var appRouter = {};
-for(var i=0;i<config.app.length;i++){
+for(var item in config.app){
+    if(config.app[item].state===1){
+        appRouter[item] = require('./routes/'+config.app[item].name);
+        app.use('/'+config.app[item].path,appRouter[item]);
+    }
+}
+/*for(var i=0;i<config.app.length;i++){
     if(config.app[i].state===1){
         appRouter[config.app[i].name] = require('./routes/'+config.app[i].name);
         app.use('/'+config.app[i].path, appRouter[config.app[i].name]);
     }
-}
-app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
+}*/
+//app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
 //console.log(app._router.stack[app._router.stack.length-6]);
-config.changeRoute(app);
-app.get('/stack', function(req, res) {
+
+//config.changeRoute('blog','b');
+/*app.get('/stack', function(req, res) {
     res.json({
         stack : app._router.stack[10]
     });
-});
+});*/
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

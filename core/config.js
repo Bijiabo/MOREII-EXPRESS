@@ -20,7 +20,114 @@ var crypto = require('crypto'),
     port = '3001',
     siteName = 'Moreii',
     logo = 'Moreii',
-    app = [
+    app = {
+        index:{
+            name:'index',
+                cnName:'首页',
+            path:'',
+            ico:'fa-home',
+            state:1
+        },
+        user:{
+            name:'user',
+                cnName:'用户',
+            path:'user',
+            ico:'fa-user',
+            state:1
+        },
+        api:{
+            name:'api',
+                cnName:'核心接口',
+            path:'api',
+            ico:'fa-cloud',
+            state:1
+        },
+        notice:{
+            name:'notice',
+                cnName:'通知',
+            path:'notice',
+            ico:'fa-bell',
+            state:1
+        },
+        custom:{
+            name:'custom',
+                cnName:'壁纸定制',
+            path:'custom',
+            ico:'fa-lemon-o',
+            state:0
+        },
+        shop:{
+            name:'shop',
+                cnName:'商城',
+            path:'shop',
+            ico:'fa-shopping-cart',
+            state:0
+        },
+        console:{
+            name:'console',
+                cnName:'站点信息',
+            path:'console',
+            ico:'fa-terminal',
+            state:1
+        },
+        blog:{
+            name:'blog',
+                cnName:'博客',
+            path:'blog',
+            ico:'fa-leaf',
+            state:1
+        },
+        mobile:{
+            name:'mobile',
+                cnName:'移动版',
+            path:'mobile',
+            ico:'fa-building-o',
+            state:0
+        },
+        tool:{
+            name:'tool',
+                cnName:'工具箱',
+            path:'tool',
+            ico:'fa-plus-square',
+            state:0
+        },
+        comment:{
+            name:'comment',
+                cnName:'评论',
+            path:'comment',
+            ico:'fa-comment',
+            state:1
+        },
+        class:{
+            name:'class',
+                cnName:'课程',
+            path:'class',
+            ico:'fa-bomb',
+            state:1
+        },
+        wechat:{
+            name:'wechat',
+                cnName:'微信',
+            path:'wechat',
+            ico:'fa-wechat',
+            state:1
+        },
+        statistics:{
+            name:'statistics',
+                cnName:'统计',
+            path:'statistics',
+            ico:'fa-eye',
+            state:1
+        },
+        hitcat:{
+            name:'hitcat',
+                cnName:'打猫猫',
+            path:'hitcat',
+            ico:'fa-github-alt',
+            state:1
+        }
+    };
+    /*app = [
         {
             name:'index',
             cnName:'首页',
@@ -126,7 +233,7 @@ var crypto = require('crypto'),
             ico:'fa-github-alt',
             state:1
         }
-    ];
+    ];*/
 
 module.exports = {
     cookieSecret: cookieSecret,
@@ -136,7 +243,7 @@ module.exports = {
     siteName:siteName,
     logo:logo,
     app:app,
-    version:'3.0.0',
+    version:'3.0.1',
     nav:[
         {
             text:'首页',
@@ -224,21 +331,19 @@ module.exports = {
         });
 
     },
-    changeRoute:function(app,originPath,newPath){
-//        app._router.stack[app._router.stack.length-6].regexp = new RegExp('^\/blogs\/?(?=/|$)','i');
+    changeRoute:function(originPath,newPath){
         var routeRegexpCache = '',
             matchCache = [];
-//        console.log(app._router);
-        for(var i= 0,len=app._router.stack.length;i<len;i++){
-//            console.log(app._router.stack[i].regexp.toString());
-            routeRegexpCache = app._router.stack[i].regexp.toString().replace('/^\\/','').replace('\\/?(?=/|$)/i','').replace('/^/','').replace('/?(?=/|$)/i','').replace('?(?=/|$)/i','');
-            if(routeRegexpCache!==''){
-//                console.log(routeRegexpCache);
-            }
-            matchCache = app._router.stack[i].regexp.toString().match(/\w{2,}/ig);
+        for(var i= 0,len=global.app._router.stack.length;i<len;i++){
+            //routeRegexpCache = global.app._router.stack[i].regexp.toString().replace('/^\\/','').replace('\\/?(?=/|$)/i','').replace('/^/','').replace('/?(?=/|$)/i','').replace('?(?=/|$)/i','');
+            matchCache = global.app._router.stack[i].regexp.toString().match(/\w{2,}/ig);
             if(matchCache!==null){
-                matchCache = String(matchCache);
-                console.log(matchCache);
+                matchCache = matchCache[0];
+                if(matchCache === originPath){
+                    console.log(matchCache);
+                    global.app._router.stack[i].regexp = new RegExp('^\/'+newPath+'\/?(?=/|$)','i');
+                }
+//                console.log(matchCache);
             }
         }
     }

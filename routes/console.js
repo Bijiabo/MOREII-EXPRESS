@@ -119,9 +119,10 @@ router.get('/console/cache', function(req, res) {
 * */
 router.post('/api/modifySiteInfo',function(req,res){
     var siteData = req.body.data;
-    for(var i= 0,len=siteData.app.length;i<len;i++){
-        siteData.app[i].state = Number(siteData.app[i].state);
+    for(var item in siteData.app){
+        siteData.app[item].state = Number(siteData.app[item].state);
     }
+    console.log(siteData);
     if(siteData!==undefined && typeof siteData === 'object'){
         siteSchema.update(siteData,function(err,savedData){
             if(err===null){

@@ -650,7 +650,6 @@ router.get('/console',function(req,res){
            data.statisticBlogData = statisticBlogData;
            statisticsSchema.statisticBlogViewByMonth(year,month,function(err1,statisticBlogView){
                 if(err1===null){
-                    console.log(statisticBlogView);
                     data.blogView = statisticBlogView;
                     res.render('blog/console/index',data);
                 }else{

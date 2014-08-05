@@ -12,7 +12,7 @@ var siteSchema = new mongoose.Schema({
     logo:{type:String,default:config.logo},
     version:{type:String,default:config.version},
     nav:{type:Array,default:config.nav},
-    app:{type:Array,default:config.app}
+    app:{type:Object,default:config.app}
 });
 var siteModel = db.model('sites',siteSchema);
 
