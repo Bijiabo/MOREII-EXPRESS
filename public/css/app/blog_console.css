@@ -10,7 +10,7 @@
 #blog-addblog-content>div{
     min-height: 300px;
 }
-#blog-addblog-title{
+#blog-addblog-title,#blog-editblog-title{
     border: 0;
     box-shadow: none;
     padding: 0;

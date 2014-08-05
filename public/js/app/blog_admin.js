@@ -67,17 +67,23 @@ var blog = {
             url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId,
             type:'GET',
             beforeSend:function(XHR){
+                basic.stateModal('wait');
                 el.find('span').removeClass('fa-eye').addClass('fa-spinner fa-spin');
             },
             success:function(data){
+                basic.stateModal('hide');
                 el.find('span').addClass('fa-eye').removeClass('fa-spinner fa-spin');
                 if(!data.err){
-                    $('#blog-previewblog h6').text(data.data.info.title);
+                    $('#blog-previewblog h3').text(data.data.info.title);
                     var content = '';
                     for(var i=0;i<data.data.content.length;i++){
                         content+=data.data.content[i].content;
                     }
-                    $('#blog-previewblog-content').html(markdown.toHTML(content));
+                    if(data.data.info.format==='html'){
+                        $('#blog-previewblog-content').html(content);
+                    }else{
+                        $('#blog-previewblog-content').html(markdown.toHTML(content));
+                    }
                     $('#blog-previewblog').addClass('active');
                 }else{
                     alert(data.des);
@@ -137,22 +143,18 @@ $(function(){
                 url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId,
                 type:'GET',
                 beforeSend:function(XHR){
+                    basic.stateModal('wait');
                 },
                 success:function(data){
+                    basic.stateModal('hide');
                     if(!data.err){
                         $('#blog-editblog-title').val(data.data.info.title);
                         var content = '';
                         for(var i=0;i<data.data.content.length;i++){
                             content+=data.data.content[i].content;
                         }
-                        $('#blog-editblog-content').val(content);
+                        $('#blog-editblog-content>div.summernote').html(content);
                         $('#blog-editblog-tags').val(data.data.info.tag.join(','));
-                        var tagHtml = '';
-                        for(var i=0;i<data.data.info.tag.length;i++){
-                            tagHtml += '<span class="tag"><span>'+data.data.info.tag[i]+'</span><a class="tagsinput-remove-link"></a></span>';
-                        };
-                        $('#blog-editblog-tags_tagsinput .tag').remove();
-                        $('#blog-editblog-tags_tagsinput').prepend(tagHtml);
                         $('#blog-editblog-submit').data('id',data.data.info._id.toString());
                     }else{
                         alert(data.des);

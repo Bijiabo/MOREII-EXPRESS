@@ -256,14 +256,14 @@ var resError = function(req,res,des,redirectUrl,renderFile,renderData){
                 this.siteUrl = global.config.siteUrl;
                 this.nav = global.config.nav;
                 this.apps = global.config.app;
-                this.error = data;
+                this.error = data.error;
                 this.app = 'error';
                 this.pretty = true;
             };
             var data = new renderDataModel({
                 error:renderData
             });
-            res.render(renderFile,renderData);
+            res.render(renderFile,data);
         }else{
             res.redirect(redirectUrl);
         }

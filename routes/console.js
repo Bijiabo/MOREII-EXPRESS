@@ -43,8 +43,10 @@ var renderData = function(data){
 };
 //判断权限
 router.use(function(req,res,next){
-    global.config.checkPermission(req,res,'console','edit',true,function(){
-        next();
+    global.config.checkPermission(req,res,'console','edit',true,function(hasPermission){
+        if(hasPermission){
+            next();
+        }
     });
 });
 /*

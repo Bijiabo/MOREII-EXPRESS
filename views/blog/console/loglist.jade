@@ -48,19 +48,23 @@ block content
     //- 文章预览层
     div#blog-previewblog.console-modal
         div.fa.fa-times.console-modal-close
-        h6
+        h3
         hr
         div#blog-previewblog-content
     //- 文章编辑层
     div#blog-editblog.console-modal
         div.fa.fa-times.console-modal-close
-        h6 编辑日志
-        hr
+        //h6 编辑日志
         input#blog-editblog-title.form-control(placeholder="文章标题")
-        br
-        textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
-        br
-        input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
+        hr
+        div#blog-editblog-content
+            div.summernote
+        //-textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-editblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
+        //-input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
+        hr
         div.col-md-2.col-md-offset-5
             button#blog-editblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="edit",data-id="") 提交修改
     //- 文章书写层

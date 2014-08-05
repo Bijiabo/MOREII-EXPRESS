@@ -594,6 +594,12 @@ var basic = {
                     $('#statemodal').remove();
                 },2000);*/
                 break;
+            case 'hide':
+                $('#statemodal').remove();
+                break;
+            default :
+                $('#statemodal').remove();
+                break;
         }
     }
 }
