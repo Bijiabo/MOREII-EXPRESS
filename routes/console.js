@@ -43,6 +43,32 @@ var renderData = function(data){
     this.pretty = true;
 };
 /**
+ * 验证登陆 & 权限
+ * */
+router.use(function(req,res,next){
+    userSchema.checkLogin(req,res,function(login){
+        if(login){
+            req.login = true;
+            userSchema.getUserInfo({
+                name:req.cookies.name,
+                mail:req.cookies.mail
+            },function(err,userData){
+                if(err===null && userData!==null){
+                    req.permission = userData.permission;
+                }else{
+                    req.permission = false;
+                }
+                next();
+            });
+        }else{
+            req.login = false;
+            req.permission = false;
+            next();
+        }
+    });
+});
+
+/**
  * 已登陆用户功能
  * */
 var isLogin = function(req,res,next){
@@ -122,7 +148,6 @@ router.post('/api/modifySiteInfo',function(req,res){
     for(var item in siteData.app){
         siteData.app[item].state = Number(siteData.app[item].state);
     }
-    console.log(siteData);
     if(siteData!==undefined && typeof siteData === 'object'){
         siteSchema.update(siteData,function(err,savedData){
             if(err===null){

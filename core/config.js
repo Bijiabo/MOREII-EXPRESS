@@ -275,7 +275,7 @@ module.exports = {
         if(redirectUrl===undefined){
             var redirectUrl = '/500';
         }
-        if(req.query.ajax === 'true'){
+        if(req.query.ajax === 'true' || req.get('X-Requested-With')!==undefined){
             res.send(JSON.stringify({
                 err:true,
                 des:des,
