@@ -52,26 +52,52 @@ module.exports = {
                     contentSaved = 0,
                     contentSavedError = 0,
                     blogContentData;
-                for(var i=0;i<contentSliceCount;i++){
-                    blogContentData = new blogContentModel({
-                        blogId:blogDataSaved._id.toString(),
-                        contentIndex:i,
-                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
-                        version:1
-                    });
-                    blogContentData.save(function(err){
-                        contentSaved++;
-                        if(err!==null){
-                            contentSavedError++;
-                        }
-                        if(contentSaved === contentSliceCount){
-                            if(contentSavedError>0){
-                                callback(true);
-                            }else{
-                                callback(null,blogDataSaved);
+                if(data.format==='html'){
+                    var contentArray = getPagingMark(originalContent);
+                    contentSliceCount = contentArray.length;
+                    for(var i= 0;i<contentSliceCount;i++){
+                        blogContentData = new blogContentModel({
+                            blogId:blogDataSaved._id.toString(),
+                            contentIndex:i,
+                            content:contentArray[i],
+                            version:1
+                        });
+                        blogContentData.save(function(err){
+                            contentSaved++;
+                            if(err!==null){
+                                contentSavedError++;
                             }
-                        }
-                    });
+                            if(contentSaved === contentSliceCount){
+                                if(contentSavedError>0){
+                                    callback(true);
+                                }else{
+                                    callback(null,blogDataSaved);
+                                }
+                            }
+                        });
+                    }
+                }else{
+                    for(var i=0;i<contentSliceCount;i++){
+                        blogContentData = new blogContentModel({
+                            blogId:blogDataSaved._id.toString(),
+                            contentIndex:i,
+                            content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
+                            version:1
+                        });
+                        blogContentData.save(function(err){
+                            contentSaved++;
+                            if(err!==null){
+                                contentSavedError++;
+                            }
+                            if(contentSaved === contentSliceCount){
+                                if(contentSavedError>0){
+                                    callback(true);
+                                }else{
+                                    callback(null,blogDataSaved);
+                                }
+                            }
+                        });
+                    }
                 }
             }else{
                 callback(err);
@@ -104,26 +130,52 @@ module.exports = {
                                 contentSaved = 0,
                                 contentSavedError = 0,
                                 blogContentData;
-                            for(var i=0;i<contentSliceCount;i++){
-                                blogContentData = new blogContentModel({
-                                    blogId:savedData._id.toString(),
-                                    contentIndex:i,
-                                    content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
-                                    version:versionNow
-                                });
-                                blogContentData.save(function(err){
-                                    contentSaved++;
-                                    if(err!==null){
-                                        contentSavedError++;
-                                    }
-                                    if(contentSaved === contentSliceCount){
-                                        if(contentSavedError>0){
-                                            callback(true);
-                                        }else{
-                                            callback(null,versionNow);
+                            if(blogData.format==='html'){
+                                var contentArray = getPagingMark(originalContent);
+                                contentSliceCount = contentArray.length;
+                                for(var i= 0;i<contentSliceCount;i++){
+                                    blogContentData = new blogContentModel({
+                                        blogId:savedData._id.toString(),
+                                        contentIndex:i,
+                                        content:contentArray[i],
+                                        version:versionNow
+                                    });
+                                    blogContentData.save(function(err){
+                                        contentSaved++;
+                                        if(err!==null){
+                                            contentSavedError++;
                                         }
-                                    }
-                                });
+                                        if(contentSaved === contentSliceCount){
+                                            if(contentSavedError>0){
+                                                callback(true);
+                                            }else{
+                                                callback(null,savedData);
+                                            }
+                                        }
+                                    });
+                                }
+                            }else{
+                                for(var i=0;i<contentSliceCount;i++){
+                                    blogContentData = new blogContentModel({
+                                        blogId:savedData._id.toString(),
+                                        contentIndex:i,
+                                        content:originalContent.slice(i*slicePerLength,(i+1)*slicePerLength)+'\t\t\t',
+                                        version:versionNow
+                                    });
+                                    blogContentData.save(function(err){
+                                        contentSaved++;
+                                        if(err!==null){
+                                            contentSavedError++;
+                                        }
+                                        if(contentSaved === contentSliceCount){
+                                            if(contentSavedError>0){
+                                                callback(true);
+                                            }else{
+                                                callback(null,versionNow);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         }else{
                             callback(err1);
@@ -370,4 +422,14 @@ var clearPreviewMark = function(content,format){
     if(format==='html'){
         return content.replace(/\<div\>------\<\/div\>|\<p\>------\<\/p\>/ig,'');
     }
+}
+//获取分页位置
+var getPagingMark = function(content){
+    var mark = '======',//分页标示符
+        contentArray = [];//内容队列缓存
+    contentArray = content.split(mark);
+    for(var i= 0,len=contentArray.length;i<len;i++){
+        contentArray[i] = contentArray[i].replace(/\<[\w \=\"\:\;\-]*\>$/,'').replace(/^\<\/\w+\>/,'');
+    }
+    return contentArray;
 }

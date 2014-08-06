@@ -151,8 +151,11 @@ $(function(){
                     if(!data.err){
                         $('#blog-editblog-title').val(data.data.info.title);
                         var content = '';
-                        for(var i=0;i<data.data.content.length;i++){
+                        for(var i= 0,len=data.data.content.length;i<len;i++){
                             content+=data.data.content[i].content;
+                            if(i!==len-1){
+                                content+='<div>======</div>';
+                            }
                         }
                         $('#blog-editblog-content>div.summernote').html(content);
                         $('#blog-editblog-tags').val(data.data.info.tag.join(','));

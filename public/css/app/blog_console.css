@@ -3,11 +3,11 @@
 }
 .blog-tableedit a span{color: #34495e;}
 .blog-tableedit a span:hover{color: #1abc9c;}
-#blog-addblog-content{
+#blog-addblog-content,#blog-editblog-content{
     min-height: 300px;
     margin-bottom: 15px;
 }
-#blog-addblog-content>div{
+#blog-addblog-content>div,#blog-editblog-content>div{
     min-height: 300px;
 }
 #blog-addblog-title,#blog-editblog-title{
