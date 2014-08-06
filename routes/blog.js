@@ -459,9 +459,10 @@ router.post('/api/add',function(req,res){
     },function(err,userData){
         if(err===null){
             var blogData = {
-                title:req.body.title,
-                content:req.body.content,
-                tag:req.body.tag,
+                title:global.xss.text.process(req.body.title),
+                content:global.xss.html.process(req.body.content),
+                tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
+                format:global.xss.text.process(req.body.format),
                 author:{
                     id:userData._id,
                     name:userData.name
@@ -502,9 +503,10 @@ router.post('/api/update/:id',function(req,res){
                 if(err1===null && originalBlogData!==null){
                     if(originalBlogData.info.author.id === userData._id.toString()){//本人文章
                         var blogData = {
-                            title:req.body.title,
-                            content:req.body.content,
-                            tag:req.body.tag
+                            title:global.xss.text.process(req.body.title),
+                            content:global.xss.html.process(req.body.content),
+                            tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
+                            format:global.xss.text.process(req.body.format)
                         };
                         blogSchema.update(req.params.id,blogData,userData,function(err2){
                             if(err===null){
@@ -523,7 +525,8 @@ router.post('/api/update/:id',function(req,res){
                         var blogData = {
                             title:req.body.title,
                             content:req.body.content,
-                            tag:req.body.tag
+                            tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
+                            format:global.xss.text.process(req.body.format)
                         };
                         blogSchema.update(req.params.id,blogData,userData,function(err,version){
                             if(err===null){
@@ -629,7 +632,7 @@ router.get('/console/authors',function(req,res){
 
 router.get('/console/bloglist/:page?',function(req,res){
     var page = Number(req.params.page),
-        limitPerPage = 3;
+        limitPerPage = 10;
     if(isNaN(page) || page<1){
         page=1;
     }
@@ -696,6 +699,11 @@ router.post('/api/deleteBlogs',function(req,res){
 //获取日志内容api
 
 router.get('/api/getBlogDetail/:id',function(req,res){
+    var forEdit = false;
+    console.log(req.query.forEdit)
+    if(req.query.forEdit=='true'){
+        forEdit = true;
+    }
     blogSchema.blogDetail(req.params.id,function(err,blogData){
         if(err===null && blogData!==null){
             res.json({
@@ -708,7 +716,7 @@ router.get('/api/getBlogDetail/:id',function(req,res){
                 des:'数据错误。'
             });
         }
-    });
+    },forEdit);
 });
 
 module.exports = router;

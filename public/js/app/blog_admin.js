@@ -10,7 +10,8 @@ var blog = {
         var blogData = {
             title:$('#blog-'+type+'blog-title').val(),
             content:$('#blog-'+type+'blog-content>div').code(),
-            tag:tagArray
+            tag:tagArray,
+            format:'html'
         };
         var success = function(data){
             if(!data.error){
@@ -64,7 +65,7 @@ var blog = {
     previewBlog:function(el,e){
         var blogId = el.data('blogid');
         $.ajax({
-            url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId,
+            url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId+'?forEdit=false',
             type:'GET',
             beforeSend:function(XHR){
                 basic.stateModal('wait');
@@ -140,7 +141,7 @@ $(function(){
             $('#blog-editblog-title,#blog-editblog-content').val('数据加载中...');
             var blogId = element.data('blogid');
             $.ajax({
-                url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId,
+                url:siteUrl+blog.appPath+'/api/getBlogDetail/'+blogId+'?forEdit=true',
                 type:'GET',
                 beforeSend:function(XHR){
                     basic.stateModal('wait');

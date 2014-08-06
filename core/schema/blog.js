@@ -42,7 +42,7 @@ var blogContentModel = db.model('blogContent',blogContentSchema);
 module.exports = {
     add:function(data,callback){
         var originalContent = data.content;
-        data.content = originalContent.cutStrButUrl(300,'......');
+        data.content = getArticelPreview(originalContent,data.format);
         data.random = Math.random();
         var blogData = new blogModel(data);
         blogData.save(function(err,blogDataSaved){
@@ -93,7 +93,7 @@ module.exports = {
                         version:versionNow
                     });
                     var originalContent = blogData.content;
-                    originalData.content = originalContent.cutStrButUrl(300,'......');
+                    originalData.content = getArticelPreview(blogData.content,blogData.format);
                     originalData.save(function(err1,savedData){
                         if(err1===null){
                             /**
@@ -143,13 +143,22 @@ module.exports = {
                 callback(err,data);
             });
     },
-    blogDetail:function(id,callback){
+    blogDetail:function(id,callback,forEdit){
+        /*
+        * if forEdit === true
+        * no clear Preview Marks
+        * */
         blogModel.findById(id)
             .exec(function(err,doc){
                 if(err===null){
                     blogContentModel.find({blogId:id,version:doc.version})
                         .sort({'_id':1})
                         .exec(function(err,data){
+                            if(!forEdit){
+                                for(var i= 0,len=data.length;i<len;i++){
+                                    data[i].content = clearPreviewMark(data[i].content,doc.format);
+                                }
+                            }
                             callback(err,{
                                 info:doc,
                                 content:data
@@ -338,3 +347,27 @@ String.prototype.cutStrButUrl = function(n, sCut){
     }
     return s.toString();
 };
+//获取文章预览内容
+var getArticelPreview = function(content,format){
+    if(format==='html'){
+        var previewEnd = content.indexOf('<div>------</div>');
+        if(previewEnd<0){
+            previewEnd = content.indexOf('<p>------</p>');
+            if(previewEnd<0){
+                return content;
+            }else{
+                return content.slice(0,previewEnd);
+            }
+        }else{
+            return content.slice(0,previewEnd);
+        }
+    }else{//markdown
+        return content.cutStrButUrl(300,'......');
+    }
+}
+//清除预览标记
+var clearPreviewMark = function(content,format){
+    if(format==='html'){
+        return content.replace(/\<div\>------\<\/div\>|\<p\>------\<\/p\>/ig,'');
+    }
+}

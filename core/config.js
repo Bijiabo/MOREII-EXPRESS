@@ -270,6 +270,84 @@ var resError = function(req,res,des,redirectUrl,renderFile,renderData){
     }
 }
 
+//set xss
+var xss = require('xss'),
+    htmlOptions = {
+        whiteList:{
+            a:      ['target', 'href', 'title','style'],
+            abbr:   ['title'],
+            address: [],
+            area:   ['shape', 'coords', 'href', 'alt'],
+            article: [],
+            aside:  [],
+            audio:  ['autoplay', 'controls', 'loop', 'preload', 'src'],
+            b:      [],
+            bdi:    ['dir'],
+            bdo:    ['dir'],
+            big:    [],
+            blockquote: ['cite'],
+            br:     [],
+            caption: [],
+            center: [],
+            cite:   [],
+            code:   [],
+            col:    ['align', 'valign', 'span', 'width'],
+            colgroup: ['align', 'valign', 'span', 'width'],
+            dd:     [],
+            del:    ['datetime'],
+            details: ['open'],
+            div:    [],
+            dl:     [],
+            dt:     [],
+            em:     [],
+            font:   ['color', 'size', 'face'],
+            footer: [],
+            h1:     [],
+            h2:     [],
+            h3:     [],
+            h4:     [],
+            h5:     [],
+            h6:     [],
+            header: [],
+            hr:     [],
+            i:      [],
+            img:    ['src', 'alt', 'title', 'width', 'height','style'],
+            ins:    ['datetime'],
+            li:     ['style'],
+            mark:   [],
+            nav:    [],
+            ol:     [],
+            p:      [],
+            pre:    [],
+            s:      [],
+            section:[],
+            small:  [],
+            span:   ['style'],
+            strong: [],
+            table:  ['width', 'border', 'align', 'valign','class'],
+            tbody:  ['align', 'valign'],
+            td:     ['width', 'colspan', 'align', 'valign'],
+            tfoot:  ['align', 'valign'],
+            th:     ['width', 'colspan', 'align', 'valign'],
+            thead:  ['align', 'valign'],
+            tr:     ['rowspan', 'align', 'valign'],
+            tt:     [],
+            u:      [],
+            ul:     [],
+            video:  ['autoplay', 'controls', 'loop', 'preload', 'src', 'height', 'width'],
+            iframe:['webkitallowfullscreen','mozallowfullscreen','allowfullscreen','height','width','src','frameborder']
+        }
+    },
+    textOptions = {
+        whiteList:          [],        // 白名单为空，表示过滤所有标签
+        stripIgnoreTag:     true,      // 过滤所有非白名单标签的HTML
+        stripIgnoreTagBody: ['script'] // script标签较特殊，需要过滤标签中间的内容
+    };  // 自定义规则
+global.xss = {
+    html:new xss.FilterXSS(htmlOptions),
+    text:new xss.FilterXSS(textOptions)
+};
+
 module.exports = {
     cookieSecret: cookieSecret,
     domain: domain,

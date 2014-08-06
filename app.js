@@ -5,11 +5,13 @@ var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
+//set config
 global.config = require('./core/config');
+//get mongoose schema
 var site = require('./core/schema/site'),
     userSchema = require('./core/schema/user'),
     markdown = require('markdown-js');
-
+//get app
 global.app = express();
 //var app = express(),
   var router = express.Router();
