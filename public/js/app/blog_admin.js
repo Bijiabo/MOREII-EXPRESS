@@ -48,17 +48,22 @@ var blog = {
             data:{
                 idArray:idArray
             },
+            beforSend:function(XHR){
+                basic.stateModal('wait');
+            },
             success:function(data){
                 if(!data.err){
-                    $.each($('#blog-bloglisttable:checkbox:checked'),function(index,item){
+                    basic.stateModal('success');
+                    $.each($('#blog-bloglisttable :checkbox:checked'),function(index,item){
                         $(item).parents('tr').remove();
                     });
                 }else{
-                    alert(data.des);
+                    basic.stateModal('danger',data.des);
                 }
             },
             error:function(XHR){
-                alert('网络连接错误。');
+                basic.stateModal('danger','网络连接错误。');
+//                alert('网络连接错误。');
             }
         });
     },

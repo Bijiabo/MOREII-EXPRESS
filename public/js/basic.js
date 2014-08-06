@@ -38,6 +38,10 @@ var basic = {
         $(document).on('click','#statemodal',function(){
             $('#statemodal').remove();
         });
+        //表格选择
+        $(':checkbox.thead-checkbox').on('change', function(e) {
+            basic.tableAllCheck($(this),e);
+        });
     },
     resize:function(){
         basic.initConsoleSidebar();
@@ -463,7 +467,7 @@ var basic = {
                                         '</td>',
                                     '</tr>'].join('\n'));
                             }
-                            $(':checkbox').checkbox();
+//                            $(':checkbox').checkbox();
                         }else{
                             $('#modal-loading').hide();
                             $('#header-messagebox-light').fadeIn();
@@ -479,10 +483,11 @@ var basic = {
         }
     },
     tableAllCheck:function(el,e){
+        console.log($(el.get(0)).parents('table').find('tbody input:checkbox'));
         if(el[0].checked){
-            $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('check');
+            $(el.get(0)).parents('table').find('tbody input:checkbox').prop('checked', true);
         }else{
-            $(el.get(0)).parents('table').find('tbody input:checkbox').checkbox('uncheck');
+            $(el.get(0)).parents('table').find('tbody input:checkbox').prop('checked', false);
         }
     },
     initConsoleSidebar:function(){

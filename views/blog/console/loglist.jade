@@ -5,8 +5,8 @@ block content
         thead
             tr
                 th
-                    label.checkbox
-                        input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                    //label.checkbox
+                    input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
                 th 标题
                 th.hidden-xs.hidden-sm 创建时间
                 th.hidden-xs.hidden-sm 最后修改
@@ -24,8 +24,7 @@ block content
                     -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
                 tr
                     td
-                        label.checkbox
-                            input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
+                        input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
                     td #{blogItem.title}
                     td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
                     td.hidden-xs.hidden-sm #{lastModifyTime}

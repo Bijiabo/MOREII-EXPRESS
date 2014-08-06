@@ -255,7 +255,7 @@ module.exports = {
         });
     },
     //统计作者
-    statisticAuthor:function(limit,callback){
+    statisticAuthor:function(skip,limit,callback){
         blogModel.aggregate(
             {
                 "$project":{
@@ -277,7 +277,7 @@ module.exports = {
                     "activeMonth":{"$push":"$createdIn"},
                     "articelView":{"$sum":"$count.view"}
                 }
-            },{"$limit":10}
+            },{"$limit":limit},{"$skip":skip}
         ).exec(function(err,data){
                 callback(err,data);
             });

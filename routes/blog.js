@@ -614,14 +614,19 @@ router.get('/console',function(req,res){
 });
 //统计作者数据
 
-router.get('/console/authors',function(req,res){
+router.get('/console/authors/:page?',function(req,res){
+    var page = Number(req.params.page),
+        limitPerPage = 1;
+    if(isNaN(page) || page<1){
+        page=1;
+    }
     var data = new renderData({
         title:'博客作者统计',
         jsfile:'blog_admin.js',
         cssfile:'blog_console.css',
         consoleNavActive:'authors'
     });
-    blogSchema.statisticAuthor(10,function(err,authorData){
+    blogSchema.statisticAuthor(limitPerPage*(page-1),limitPerPage*page,function(err,authorData){
         if(err===null && authorData!==null){
             data.authorData = authorData;
         }
@@ -636,10 +641,9 @@ router.get('/console/bloglist/:page?',function(req,res){
     if(isNaN(page) || page<1){
         page=1;
     }
-//    page=page-1;
-    if(req.params.page && !isNaN(Number(req.params.page))){
+    /*if(req.params.page && !isNaN(Number(req.params.page))){
         page = Number(req.params.page);
-    }
+    }*/
     blogSchema.listBlog({state:1},(page-1)*limitPerPage,limitPerPage,function(err,blogData){
         if(err===null && blogData.length>0){
             var data = new renderData({
