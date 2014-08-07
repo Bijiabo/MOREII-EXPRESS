@@ -21,42 +21,49 @@ var userSchema = new mongoose.Schema({
         address:Array,
         permission:{
             user:{
-                login:Boolean,
-                editAddress:Boolean,
-                changeName:Boolean,
-                changeMail:Boolean,
-                changePassword:Boolean,
-                editUser:Boolean
+                login:{type:Boolean,default:true},
+                editAddress:{type:Boolean,default:true},
+                changeName:{type:Boolean,default:true},
+                changeMail:{type:Boolean,default:true},
+                changePassword:{type:Boolean,default:true},
+                editUser:{type:Boolean,default:true},
+                upload:{type:Boolean,default:true}
             },
             message:{
-                read:Boolean,
-                send:Boolean,
-                remove:Boolean
+                read:{type:Boolean,default:true},
+                send:{type:Boolean,default:true},
+                remove:{type:Boolean,default:true},
+                upload:{type:Boolean,default:true}
             },
             shop:{
-                buy:Boolean,
-                comment:Boolean,
-                editGood:Boolean
+                buy:{type:Boolean,default:true},
+                comment:{type:Boolean,default:true},
+                editGood:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
             },
             class:{
                 read:Boolean,
                 add:Boolean,
                 editClass:{type:Boolean,default:false},
                 editStudent:{type:Boolean,default:false},
-                editTeacher:{type:Boolean,default:false}
+                editTeacher:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
             },
             blog:{
                 write:{type:Boolean,default:false},
                 comment:{type:Boolean,default:true},
                 edit:{type:Boolean,default:false},
-                revise:{type:Boolean,default:false}
+                revise:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
             },
             statistics:{
                 view:{type:Boolean,default:false},
-                memberInfo:{type:Boolean,default:false}
+                memberInfo:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
             },
             console:{
-                edit:{type:Boolean,default:false}
+                edit:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
             }
         }
     });
@@ -90,7 +97,8 @@ var appGrade = {
             changeName:true,
             changeMail:false,
             changePassword:true,
-            editUser:false
+            editUser:false,
+            upload:false
         },
         admin:{
             login:true,
@@ -98,43 +106,50 @@ var appGrade = {
             changeName:true,
             changeMail:true,
             changePassword:true,
-            editUser:true
+            editUser:true,
+            upload:true
         }
     },
     message:{
         user:{
             read:true,
             send:true,
-            remove:false
+            remove:false,
+            upload:false
         },
         admin:{
             read:true,
             send:true,
-            remove:true
+            remove:true,
+            upload:true
         }
     },
     shop:{
         user:{
             buy:true,
             comment:false,
-            editGood:false
+            editGood:false,
+            upload:false
         },
         admin:{
             buy:true,
             comment:true,
-            editGood:true
+            editGood:true,
+            upload:true
         }
     },
     class:{
         user:{
             read:true,
             add:false,
-            edit:false
+            edit:false,
+            upload:false
         },
         admin:{
             read:true,
             add:true,
-            edit:true
+            edit:true,
+            upload:true
         }
     },
     blog:{
@@ -142,35 +157,42 @@ var appGrade = {
             write:false,
             comment:true,
             edit:false,
-            revise:false
+            revise:false,
+            upload:false
         },
         admin:{
             write:true,
             comment:true,
             edit:true,
-            revise:true
+            revise:true,
+            upload:true
         }
     },
     statistics:{
         user:{
             view:false,
-            memberInfo:false
+            memberInfo:false,
+            upload:false
         },
         editor:{
             view:true,
-            memberInfo:false
+            memberInfo:false,
+            upload:false
         },
         admin:{
             view:true,
-            memberInfo:true
+            memberInfo:true,
+            upload:true
         }
     },
     console:{
         user:{
-            edit:false
+            edit:false,
+            upload:false
         },
         admin:{
-            edit:true
+            edit:true,
+            upload:true
         }
     }
 }

@@ -127,113 +127,6 @@ var crypto = require('crypto'),
             state:1
         }
     };
-    /*app = [
-        {
-            name:'index',
-            cnName:'首页',
-            path:'',
-            ico:'fa-home',
-            state:1
-        },
-        {
-            name:'user',
-            cnName:'用户',
-            path:'user',
-            ico:'fa-user',
-            state:1
-        },
-        {
-            name:'api',
-            cnName:'核心接口',
-            path:'api',
-            ico:'fa-cloud',
-            state:1
-        },
-        {
-            name:'notice',
-            cnName:'通知',
-            path:'notice',
-            ico:'fa-bell',
-            state:1
-        },
-        {
-            name:'custom',
-            cnName:'壁纸定制',
-            path:'custom',
-            ico:'fa-lemon-o',
-            state:0
-        },
-        {
-            name:'shop',
-            cnName:'商城',
-            path:'shop',
-            ico:'fa-shopping-cart',
-            state:0
-        },
-        {
-            name:'console',
-            cnName:'站点信息',
-            path:'console',
-            ico:'fa-terminal',
-            state:1
-        },
-        {
-            name:'blog',
-            cnName:'博客',
-            path:'blog',
-            ico:'fa-leaf',
-            state:1
-        },
-        {
-            name:'mobile',
-            cnName:'移动版',
-            path:'mobile',
-            ico:'fa-building-o',
-            state:0
-        },
-        {
-            name:'tool',
-            cnName:'工具箱',
-            path:'tool',
-            ico:'fa-plus-square',
-            state:0
-        },
-        {
-            name:'comment',
-            cnName:'评论',
-            path:'comment',
-            ico:'fa-comment',
-            state:1
-        },
-        {
-            name:'class',
-            cnName:'课程',
-            path:'class',
-            ico:'fa-bomb',
-            state:1
-        },
-        {
-            name:'wechat',
-            cnName:'微信',
-            path:'wechat',
-            ico:'fa-wechat',
-            state:1
-        },
-        {
-            name:'statistics',
-            cnName:'统计',
-            path:'statistics',
-            ico:'fa-eye',
-            state:1
-        },
-        {
-            name:'hitcat',
-            cnName:'打猫猫',
-            path:'hitcat',
-            ico:'fa-github-alt',
-            state:1
-        }
-    ];*/
 var resError = function(req,res,des,redirectUrl,renderFile,renderData){
     if(redirectUrl===undefined || redirectUrl===false){
         var redirectUrl = '/500';
@@ -392,18 +285,33 @@ module.exports = {
         return x;
     },
     saveFile:function(app,savePath,req,res){
-        var filename = path.basename(req.files.file.path),
-            is = fs.createReadStream(req.files.file.path),
-            savedPath = path.join(__dirname,'../public/upload/',app,savePath);
-        fs.exists(savedPath,function(exists){
-            if(!exists){
-                //no such path,create it
-                var pathArray = savePath.split(path.sep);
-                mkdirp(savedPath, function (err) {
-                    if(err){
-                        console.error(err);
+        global.config.checkPermission(req,res,app,'upload',false,function(hasPermission){
+            if(hasPermission){
+                var filename = path.basename(req.files.file.path),
+                    is = fs.createReadStream(req.files.file.path),
+                    savedPath = path.join(__dirname,'../public/upload/',app,savePath);
+                fs.exists(savedPath,function(exists){
+                    if(!exists){
+                        //no such path,create it
+                        var pathArray = savePath.split(path.sep);
+                        mkdirp(savedPath, function (err) {
+                            if(err){
+                                console.error(err);
+                            }else{
+                                console.log('pow!');
+                                var os = fs.createWriteStream(path.join(savedPath,filename));
+                                util.pump(is, os, function() {
+                                    fs.unlinkSync(req.files.file.path);
+                                    res.json({
+                                        error:false,
+                                        filename:filename,
+                                        path:'upload/'+app+'/'+savePath+'/'+filename,
+                                        url:'http://'+domain+':'+port+'/'+'upload/'+app+'/'+savePath+'/'+filename
+                                    });
+                                });
+                            }
+                        });
                     }else{
-                        console.log('pow!');
                         var os = fs.createWriteStream(path.join(savedPath,filename));
                         util.pump(is, os, function() {
                             fs.unlinkSync(req.files.file.path);
@@ -417,19 +325,12 @@ module.exports = {
                     }
                 });
             }else{
-                var os = fs.createWriteStream(path.join(savedPath,filename));
-                util.pump(is, os, function() {
-                    fs.unlinkSync(req.files.file.path);
-                    res.json({
-                        error:false,
-                        filename:filename,
-                        path:'upload/'+app+'/'+savePath+'/'+filename,
-                        url:'http://'+domain+':'+port+'/'+'upload/'+app+'/'+savePath+'/'+filename
-                    });
+                res.json({
+                    err:true,
+                    des:'无上传权限。'
                 });
             }
         });
-
     },
     changeRoute:function(originPath,newPath){
         var routeRegexpCache = '',

@@ -273,9 +273,9 @@ router.get('/addTestNotice',function(req,res){
  * console
  * */
 //router.post('/uploadGoodImage',checkAdministratorPermission);
-router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
+//router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
 //    console.log(req.files);
-    global.config.saveFile('blog','log',req,res);
+//    global.config.saveFile('blog','log',req,res);
     /*var filename = req.files.file.path.match(/[\w\-]+\.\w+$/)[0];
     var is = fs.createReadStream(req.files.file.path);
     var os = fs.createWriteStream(path.join(__dirname,"../public/upload/good/"+filename));
@@ -289,7 +289,7 @@ router.post('/uploadGoodImage',multipartMiddleware,function(req,res){
             url:global.config.siteUrl+'image/good/'+filename
         }));
     });*/
-});
+//});
 router.post('/addGood',checkAdministratorPermission);
 router.post('/addGood',function(req,res){
     var color = [req.body.color1,req.body.color2,req.body.color3,req.body.color4];
@@ -363,6 +363,14 @@ router.post('/custom/build4print',function(req,res){
     });
 });
 
- //router.get()
+/*
+* 上传文件接口
+* */
+
+router.post('/upload/:app',multipartMiddleware,function(req,res){
+    var app = global.xss.text.process(req.params.app),
+        savePath = global.xss.text.process(req.query.savePath.replace(/\.*/,''));
+    global.config.saveFile(app,savePath,req,res);
+});
 
 module.exports = router;

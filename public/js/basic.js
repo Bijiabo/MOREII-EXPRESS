@@ -18,6 +18,9 @@ var basic = {
         });
         basic.initConsoleModal();
         basic.initDropbox();
+        /*
+        * 初始化所见即所得编辑器
+        * */
         $('.summernote').summernote({
             height: 300,                 // set editor height
             lang:'zh-CN',
@@ -32,7 +35,26 @@ var basic = {
                 ['para', ['ul', 'paragraph']],
                 ['table', ['table']],
                 ['insert', ['link', 'picture','video','hr']]
-            ]
+            ],
+            onImageUpload: function(files, editor, welEditable) {
+                var data = new FormData();
+                data.append("file", files[0]);
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: siteUrl+"api/upload/"+app+'/?savePath=summernote',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(r) {
+                        if(!r.err){
+                            editor.insertImage(welEditable, r.url);
+                        }else{
+                            basic.stateModal('danger', r.des);
+                        }
+                    }
+                });
+            }
         });
         $('.tip').tooltip();
         $(document).on('click','#statemodal',function(){
