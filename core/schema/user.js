@@ -301,7 +301,8 @@ module.exports = {
     checkLogin:function(req,res,callback){
         if(req.cookies.name){
             userModel.findOne({
-                name:req.cookies.name
+                name:req.cookies.name,
+                mail:req.cookies.mail
             },function(err,user){
                 if(user!==null){
                     var mii_login = global.config.encryptCookie({
@@ -310,7 +311,7 @@ module.exports = {
                         password:user.password
                     });
                     if(mii_login===req.cookies.mii_login){//logined
-                        callback(true);
+                        callback(true,user);
                     }else{//unlogined
                         callback(false);
                     }

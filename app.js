@@ -42,23 +42,14 @@ app.use(function(req,res,next){
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'
     });
-    userSchema.checkLogin(req,res,function(login){
+    userSchema.checkLogin(req,res,function(login,userData){
         if(login){
             req.login = true;
-            userSchema.getUserInfo({
-                name:req.cookies.name,
-                mail:req.cookies.mail
-            },function(err,userData){
-                if(err===null && userData!==null){
-                    req.permission = userData.permission;
-                }else{
-                    req.permission = false;
-                }
-                next();
-            });
+            req.userData = userData;
+            next();
         }else{
             req.login = false;
-            req.permission = false;
+            req.userData = false;
             next();
         }
     });

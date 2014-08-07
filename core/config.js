@@ -349,8 +349,8 @@ module.exports = {
         }
     },
     checkPermission:function(req,res,app,permission,redirect,callback){
-        if(req.login){
-            if(req.permission[app][permission]){
+        if(req.login && req.userData){
+            if(req.userData.permission[app][permission]){
                 callback(true);
             }else{
                 callback(false);
