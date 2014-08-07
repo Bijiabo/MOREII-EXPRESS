@@ -277,7 +277,7 @@ module.exports = {
                     "activeMonth":{"$push":"$createdIn"},
                     "articelView":{"$sum":"$count.view"}
                 }
-            },{"$limit":limit},{"$skip":skip}
+            },{"$limit":limit},{"$skip":skip},{"$sort":{"articelView":-1}}
         ).exec(function(err,data){
                 callback(err,data);
             });

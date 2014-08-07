@@ -38,10 +38,9 @@ var renderData = function(data){
     };
 /* GET home page. */
 router.get('/', function(req, res) {
-//    console.log('here');
     var page = 0,
         limitPerPage = 5;
-    if(req.query.page!==undefined){
+    if(!isNaN(Number(req.query.page))){
         page = Number(req.query.page) - 1;
     }
     var data = new renderData({
@@ -82,6 +81,9 @@ router.get('/', function(req, res) {
         }
     });
 });
+/*
+* 搜索标签
+* */
 router.get('/search/tag/:tags/:page?',function(req,res){
     var page = 0,
         limitPerPage = 10;
@@ -119,6 +121,57 @@ router.get('/search/tag/:tags/:page?',function(req,res){
         }
     });
 });
+/*
+* 搜索作者
+* */
+router.get('/search/author/:author/:page?',function(req,res){
+    var author = global.xss.text.process(req.params.author);
+    var page = 0,
+        limitPerPage = 5;
+    if(!isNaN(Number(req.query.page))){
+        page = Number(req.query.page) - 1;
+    }
+    var data = new renderData({
+        title : 'Moreii团队博客'
+    });
+    blogSchema.listBlog({"author.name":author},limitPerPage*page,limitPerPage,function(err,blogData){
+        if(err===null && blogData.length!==0) {
+            for (var i = 0; i < blogData.length; i++) {
+                console.log(blogData[i].format);
+                if(blogData[i].format !== 'html'){
+                    blogData[i].content = markdown.toHTML(String(blogData[i].content));
+                }
+            }
+            data.blogData = blogData;
+            blogSchema.getListItemCount({"author.name":author}, function (err1, countData) {
+                if (err1 === null) {
+                    data.pageUrl = global.config.siteUrl + data.app + '/search/author/'+author+'/';
+                    data.pageCount = Math.ceil(countData / limitPerPage);
+                    data.pageNow = page + 1;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    res.render('blog/index', data);
+                } else {
+                    res.redirect(global.config.siteUrl + '500');
+                }
+            });
+        }else if(err===null && blogData.length===0){
+            console.log(blogData);
+            data.blogData = blogData;
+            data.pageUrl = global.config.siteUrl + data.app + '/?page=';
+            data.pageCount = 0;
+            data.pageNow = page + 1;
+            data.limitPerPage = limitPerPage;
+            data.pagerLen = 5;//翻页控件显示页数
+            res.render('blog/index', data);
+        }else{
+            res.redirect(global.config.siteUrl+'404');
+        }
+    });
+});
+/*
+* 博客日志详情页面
+* */
 router.get('/detail/:id/:page?', function(req, res) {
     var page = Number(req.params.page);
     if(req.params.page===undefined || isNaN(page) || page<1){

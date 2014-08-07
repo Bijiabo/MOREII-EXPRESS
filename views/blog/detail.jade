@@ -20,7 +20,9 @@ block content
                         hr
                         div.text-muted.blog-userinfo
                             span 标签：#{blogData.info.tag} &nbsp;&nbsp;
-                            span.pull-right 作者：#{blogData.info.author.name}
+                            span.pull-right
+                                a(href="#{siteUrl}#{app}/search/author/#{blogData.info.author.name}") #{blogData.info.author.name}
+                            span.pull-right 作者：
                         hr
                         div.row
                             //div.col-md-2

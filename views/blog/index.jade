@@ -11,12 +11,15 @@ block content
                                 h3= blogData[i].title
                             hr
                             article!= blogData[i].content
-                            div.blog-userinfo.text-right.text-muted 作者：#{blogData[i].author.name}
+                            div.blog-userinfo.text-right.text-muted
+                                span作者：
+                                span
+                                    a(href="#{siteUrl}#{app}/search/author/#{blogData[i].author.name}") #{blogData[i].author.name}
                             br
                 -else
                     div.jumbotron
                         h2 没有文章
-                        p 可能管理员还没有开放可供阅读的内容，或者还没有添加。
+                        p 可能作者还没有开放可供阅读的内容，或者还没有添加。
                 div.col-md-12.row
                     hr
                     div.col-md-8.col-md-offset-2.text-center
