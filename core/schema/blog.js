@@ -332,9 +332,7 @@ module.exports = {
             .sort(sort)
             .skip(skip)
             .limit(limit)
-            .exec(function(err,data){
-                callback(err,data);
-            });
+            .exec(callback);
     },
     //统计列表分页数量
     getListItemCount:function(find,callback){
