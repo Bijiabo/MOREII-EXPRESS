@@ -616,7 +616,7 @@ router.get('/console',function(req,res){
 
 router.get('/console/authors/:page?',function(req,res){
     var page = Number(req.params.page),
-        limitPerPage = 1;
+        limitPerPage = 10;
     if(isNaN(page) || page<1){
         page=1;
     }
@@ -627,10 +627,23 @@ router.get('/console/authors/:page?',function(req,res){
         consoleNavActive:'authors'
     });
     blogSchema.statisticAuthor(limitPerPage*(page-1),limitPerPage*page,function(err,authorData){
-        if(err===null && authorData!==null){
+        if(err===null){
             data.authorData = authorData;
+            blogSchema.statisticAuthorNum(function(err1,authorNum){
+                if(err1===null){
+                    data.pageUrl = global.config.siteUrl+data.app+'/console/authors/';
+                    data.pageCount = Math.ceil(authorNum/limitPerPage);
+                    data.pageNow = page;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    res.render('blog/console/authors',data);
+                }else{
+                    config.resError(req,res,'数据错误','/500');
+                }
+            })
+        }else{
+            config.resError(req,res,'数据错误','/500');
         }
-        res.render('blog/console/authors',data);
     });
 });
 //内容管理列表

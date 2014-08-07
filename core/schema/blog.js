@@ -282,6 +282,23 @@ module.exports = {
                 callback(err,data);
             });
     },
+    statisticAuthorNum:function(callback){
+        blogModel.aggregate(
+            {
+                "$project":{
+                    "author":1
+                }
+            },
+            {
+                "$group":{
+                    "_id":"$author.id",
+                    "name":{"$addToSet":"$author.name"}
+                }
+            }
+        ).exec(function(err,data){
+                callback(err,data.length);
+            })
+    },
     //统计月份内博客发布情况
     statisticBlogByMonth:function(year,month,callback){
         blogModel.aggregate(
