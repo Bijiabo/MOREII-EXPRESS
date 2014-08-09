@@ -1,0 +1,65 @@
+extends ../../layout_console
+
+block content
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th
+                    //label.checkbox
+                    input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                th 标题
+                th.hidden-xs.hidden-sm 创建时间
+                th.hidden-xs.hidden-sm 最后修改
+                th 作者
+                th.hidden-xs.hidden-sm 最后修订
+                th 版本
+                th 操作
+        tbody#blog-bloglisttable
+            tr
+                td
+                    input(type="checkbox",value=" ",data-toggle="checkbox")
+                td
+    div.row
+        div.col-md-4
+            button.btn.btn-default#blog-deleteblogs(type="button")
+                span.fa.fa-trash-o &nbsp;&nbsp;删除
+            button#blog-write-new.btn.btn-primary
+                span.fa.fa-plus &nbsp;&nbsp;新建
+        div.col-md-8.text-right
+            //include ../../pager
+    //- 文章预览层
+    div#blog-previewblog.console-modal
+        div.fa.fa-times.console-modal-close
+        h3
+        hr
+        div#blog-previewblog-content
+    //- 文章编辑层
+    div#blog-editblog.console-modal
+        div.fa.fa-times.console-modal-close
+        //h6 编辑日志
+        input#blog-editblog-title.form-control(placeholder="文章标题")
+        hr
+        div#blog-editblog-content
+            div.summernote
+        //-textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-editblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
+        //-input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
+        hr
+        div.col-md-2.col-md-offset-5
+            button#blog-editblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="edit",data-id="") 提交修改
+    //- 文章书写层
+    div#blog-addblog.console-modal
+        div.fa.fa-times.console-modal-close
+        //h6 新建日志
+        input#blog-addblog-title.form-control(placeholder="文章标题")
+        hr
+        div#blog-addblog-content
+            div.summernote 文章内容...
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-addblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
+        hr
+        div.col-md-2.col-md-offset-5.row
+            button#blog-addblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="add",data-id="") 添加日志

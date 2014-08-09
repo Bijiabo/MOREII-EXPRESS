@@ -124,6 +124,13 @@ var crypto = require('crypto'),
                 cnName:'打猫猫',
             path:'hitcat',
             ico:'fa-github-alt',
+            state:0
+        },
+        cloth:{
+            name:'cloth',
+            cnName:'面料',
+            path:'cloth',
+            ico:'fa-male',
             state:1
         }
     };
@@ -285,7 +292,10 @@ module.exports = {
         return x;
     },
     saveFile:function(app,savePath,req,res){
+        console.log('11111111111111');
+        console.log(app);
         global.config.checkPermission(req,res,app,'upload',false,function(hasPermission){
+            console.log('2222222');
             if(hasPermission){
                 var filename = path.basename(req.files.file.path),
                     is = fs.createReadStream(req.files.file.path),
@@ -325,6 +335,7 @@ module.exports = {
                     }
                 });
             }else{
+                console.log('33333333');
                 res.json({
                     err:true,
                     des:'无上传权限。'
@@ -349,16 +360,24 @@ module.exports = {
         }
     },
     checkPermission:function(req,res,app,permission,redirect,callback){
+        console.log('4444444');
         if(req.login && req.userData){
-            if(req.userData.permission[app][permission]){
-                callback(true);
+            if(req.userData.permission[app]){
+                if(req.userData.permission[app][permission]){
+                    callback(true);
+                }else{
+                    callback(false);
+                    if(redirect){
+                        resError(req,res,'权限不足。',false,'error',{
+                            title:'权限不足',
+                            des:'您的档案库中无此项进入权限。'
+                        });
+                    }
+                }
             }else{
                 callback(false);
                 if(redirect){
-                    resError(req,res,'权限不足。',false,'error',{
-                        title:'权限不足',
-                        des:'您的档案库中无此项进入权限。'
-                    });
+                    resError(req,res,'请登录。','/user/login');
                 }
             }
         }else{

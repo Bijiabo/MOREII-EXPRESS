@@ -1,0 +1,59 @@
+extends ../../layout_console
+block content
+    form.form-horizontal#console-siteinfo-form(role="form")
+        br
+        h4 基础配置
+        hr
+        div.form-group
+            label.col-sm-2.control-label(for="sitename") 站点名称
+            div.col-sm-10
+                input.form-control(name="sitename",type="text",placeholder="siteName",value="#{siteData.siteName}")
+        div.form-group
+            label.col-sm-2.control-label(for="domain") 域名
+            div.col-sm-10
+                input.form-control(name="domain",type="text",placeholder="domain",value="#{siteData.domain}")
+        div.form-group
+            label.col-sm-2.control-label(for="port")
+                span 端口&nbsp;
+                span.text-muted.hidden-sm.hidden-xs (谨慎修改)
+            div.col-sm-10
+                input.form-control(name="port",type="text",placeholder="port,like 3001",value="#{siteData.port}")
+        div.form-group
+            label.col-sm-2.control-label(for="logo")
+                span LOGO
+            div.col-sm-10
+                input.form-control(name="logo",type="text",placeholder="logo",value="#{siteData.logo}")
+
+
+        br
+        h4 应用配置
+        hr
+        -for appData,key in siteData.app
+            div.form-group.console-appdata(data-app="#{appData.name}",data-ico="#{appData.ico}")
+                label.col-sm-2.control-label(for="port") #{appData.name}
+                div.col-sm-10
+                    div.input-group
+                        span.input-group-addon 中文名称
+                        input.form-control.console-appdata-cnname(name="#{appData.name}-cnname",type="text",placeholder="#{appData.cnName}",value="#{appData.cnName}")
+                    br
+                    div.input-group
+                        span.input-group-addon 应用路径
+                        input.form-control.console-appdata-path(name="#{appData.name}-path",type="text",placeholder="#{appData.path}",value="#{appData.path}",readonly)
+                    br
+                    -if(appData.state ===1)
+                        div.input-group.has-success
+                            span.input-group-addon 应用状态
+                            select.form-control.console-appdata-state(name="#{appData.name}-state")
+                                option(value="1" selected) 开启
+                                option(value="0") 关闭
+                    -else
+                        div.input-group.has-error
+                            span.input-group-addon 应用状态
+                            select.form-control.console-appdata-state(name="#{appData.name}-state")
+                                option(value="1") 开启
+                                option(value="0" selected) 关闭
+                    br
+                    br
+        hr
+        div.col-md-4.col-md-offset-4.row
+            button.btn.btn-primary.btn-block#console-save-siteinfo(type="button") 保存

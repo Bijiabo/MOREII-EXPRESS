@@ -1,0 +1,93 @@
+extends ../../layout_console
+block content
+    div.row#console-nav-browser
+        div.col-md-12
+            div.col-md-12#console-nav-browser-header
+                span.console-nav-browser-headeritem.fa.fa-times-circle
+                span.console-nav-browser-headeritem.fa.fa-minus-circle
+                span &nbsp;预览窗口
+            div.col-md-12#console-nav-browser-toolbar
+                div.console-nav-browser-toolbaritem
+                    span.fa.fa-file-o.text-muted &nbsp;
+                    span ooxx.com/
+                    span.text-muted index/?page=3
+        div.col-md-12
+            div.navbar.navbar-inverse.navbar-toolbar#console-nav-navbar
+                div.navbar-header
+                    button.navbar-toggle(type="button",data-toggle="collapse",data-target="#console-setnav-collapse",style="color:#cccccc;") menu
+                    a#console-sidebar-menubtn(href="javascript:;") menu
+                    a.navbar-brand(href="#",style="font-size:14px;") #{data.logo}
+                div.collapse.navbar-collapse#console-setnav-collapse
+                    ul.nav.navbar-nav#console-setnav-collapse-ul
+                        -if(nav!==undefind)
+                            -for(var i=0,len=nav.length;i<len;i++)
+                                li.applink(class="applink-#{nav[i].app}",data-href="#{nav[i].href}",data-app="#{nav[i].app}",data-text="#{nav[i].text}")
+                                    a(href="#")
+                                        span #{nav[i].text}
+                                        span.fa.fa-pencil
+                                        span.fa.fa-times
+        div.col-md-12
+            div.col-md-12#console-nav-browser-body
+                h3 添加导航
+                hr
+                form.form-horizontal(role="form")
+                    div.form-group
+                        label.col-sm-2.control-label(for="text") 导航文字
+                        div.col-sm-10
+                            input.form-control(name="text",type="text",placeholder="",value="")
+                    div.form-group
+                        label.col-sm-2.control-label(for="app") 所属应用
+                        div.col-sm-10.tip(data-toggle="tooltip",data-placement="bottom",title="站外应用请选择\"其它\"")
+                            select.form-control(name="app")
+                                -for appItem in apps
+                                    -if(appItem.state===1)
+                                        option(value="#{appItem.name}") #{appItem.cnName}
+                                option(value="") 其他
+                    div.form-group
+                        label.col-sm-2.control-label(for="href") 路径 / 链接
+                        div.col-sm-10.tip(data-toggle="tooltip",data-placement="bottom",title="\"blog\" 或 \"http://www.moreii.com/\"")
+                            input.form-control(name="href",type="text",placeholder="",value="")
+                    div.form-group
+                        label.col-sm-2.control-label(for="")
+                        div.col-sm-10
+                            button.btn.btn-default#console-addnav-btn(type="button") 添加
+                hr
+                div.col-md-4.col-md-offset-4
+                    button.btn.btn-primary.btn-block#console-savenav-btn 保存修改
+    //- 修改已有
+    div.modal.fade#console-nav-modifynav(role="dialog",aria-labelledby="#console-nav-modifynav-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#console-nav-modifynav-title 修改导航单元
+                div.modal-body
+                    form.form-horizontal#console-nav-modifyform(role="form")
+                        div.form-group
+                            label.col-sm-2.control-label(for="text") 导航文字
+                            div.col-sm-10
+                                input.form-control(name="text",type="text",placeholder="",value="")
+                        div.form-group
+                            label.col-sm-2.control-label(for="app") 所属应用
+                            div.col-sm-10.tip(data-toggle="tooltip",data-placement="bottom",title="站外应用请选择\"其它\"")
+                                select.form-control(name="app")
+                                    -for appItem in apps
+                                        -if(appItem.state===1)
+                                            option(value="#{appItem.name}") #{appItem.cnName}
+                                    option(value="") 其他
+                        div.form-group
+                            label.col-sm-2.control-label(for="href") 路径 / 链接
+                            div.col-sm-10.tip(data-toggle="tooltip",data-placement="bottom",title="\"blog\" 或 \"http://www.moreii.com/\"")
+                                input.form-control(name="href",type="text",placeholder="",value="")
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#console-nav-modifynav-true(type="button") 修改
+    script(src="#{siteUrl}js/jquery-ui.min.js")
+    script.
+        $(function() {
+            $( "#console-setnav-collapse-ul" ).sortable({
+                cursor: "move",
+                axis: "x"
+            });
+            $( "#console-setnav-collapse-ul" ).disableSelection();
+        });

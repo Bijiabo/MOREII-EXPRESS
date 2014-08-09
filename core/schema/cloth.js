@@ -12,7 +12,7 @@ var clothSchema = new mongoose.Schema({
     pattern:{type:String,default:'',index:true},//图案
     weight:{type:Number,default:250,index:true},//克重
     price:{type:Number,default:0,index:true},
-    yarnCount:{type:Number,default:100,index:true},
+    yarnCount:{type:Number,default:100,index:true},//纱支
     description:{type:String,default:'',index:true},//详细介绍
     state:{type:Number,default:1,index:true},//状态：1为正常，0为删除
     picture:{type:Array},//图片队列

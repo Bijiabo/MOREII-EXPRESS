@@ -42,7 +42,7 @@ var basic = {
                 $.ajax({
                     data: data,
                     type: "POST",
-                    url: siteUrl+"api/upload/"+app+'/?savePath=summernote',
+                    url: siteUrl+"api/upload/"+app+'/?savePath=summernote&ajax=true',
                     cache: false,
                     contentType: false,
                     processData: false,
@@ -336,7 +336,7 @@ var basic = {
     },
     initDropbox:function(){
         $.each($("div.uploadDropbox"),function(index,item){
-            var url = $(item).data('url');
+            var url = siteUrl+'api/upload/'+app+'/?savePath=dropbox&ajax=true';
             $(item).dropzone({
                 url: url,
                 paramName: "file",
@@ -366,6 +366,7 @@ var basic = {
                     <div class="dz-error-message"><span data-dz-errormessage></span></div>\
                 </div>',
                 success:function(file,data){
+                    console.log(file);
 //                    data = JSON.parse(data);
                     cache.uploadImageFiles.push({originalname:file.name,path:data.path});
                     /**
@@ -378,6 +379,7 @@ var basic = {
                     }
                 },
                 removedfile:function(file){
+                    console.log(file);
                     for(var i=1;i<cache.uploadImageFiles.length;i++){
                         if(cache.uploadImageFiles[i].originalname === file.name){
                             cache.uploadImageFiles.splice(i,1);
@@ -399,6 +401,9 @@ var basic = {
             var imagePath = filebox.data('path');
             console.log(imagePath);
         });
+    },
+    hideDropboxBackground:function(el){
+        el.removeClass('dz-clickable').addClass('dz-clickable dz-started');
     },
     getComment:function(skip,limit){
         var commentList = $('#comment-list');

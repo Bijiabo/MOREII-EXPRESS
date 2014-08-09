@@ -19,22 +19,26 @@ var siteModel = db.model('sites',siteSchema);
 * init/refresh site configure function
 * 初始化站点配置
 * */
-var refreshSiteConfigure = function(callback){
+var recoverFromConfig = function(callback){
+        var cb = callback || function(){};
+        var siteData = new siteModel({
+            siteName:global.config.siteName
+        });
+        siteData.save(function(err,savedData){
+            if(err===null){
+                console.log('>>>>>> init site configure data successed!');
+            }else{
+                console.log('>>>>>> init site configure data failed:');
+                console.log(err);
+            }
+            cb(err,savedData);
+        });
+    },
+    refreshSiteConfigure = function(callback){
     var cb = callback || function(){};
     siteModel.findOne().sort({"_id":-1}).exec(function(err,data){
         if(err===null && data===null){
-            var siteData = new siteModel({
-                siteName:global.config.siteName
-            });
-            siteData.save(function(err1,savedData){
-                if(err1===null){
-                    console.log('>>>>>> init site configure data successed!');
-                }else{
-                    console.log('>>>>>> init site configure data failed:');
-                    console.log(err1);
-                }
-                cb(err1,data);
-            });
+            recoverFromConfig(callback);
         }else{
             global.config.siteName = data.siteName;
             global.config.domain = data.domain;
@@ -51,6 +55,7 @@ var refreshSiteConfigure = function(callback){
 refreshSiteConfigure();
 
 module.exports = {
+    recoverFromConfig:recoverFromConfig,
     refreshSiteConfigure:refreshSiteConfigure,
     getLatestInfo:function(callback){
         siteModel.findOne().sort({"_id":-1}).exec(function(err,data){

@@ -53,6 +53,7 @@ app.use(function(req,res,next){
             next();
         }
     });
+//    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**
  * load Apps

@@ -166,4 +166,14 @@ router.post('/api/updateNav',function(req,res){
         });
     }
 });
+/*
+ * 回复初始设置
+ * */
+router.get('/api/recover0', function(req, res) {
+    siteSchema.recoverFromConfig(function(err,queryData){
+        res.json({
+            err:err
+        });
+    });
+});
 module.exports = router;

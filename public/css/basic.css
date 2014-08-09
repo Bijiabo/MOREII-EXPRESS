@@ -231,3 +231,11 @@
 #statemodal>div.premary{color: #3079ed;}
 #statemodal>div.success{color: #35aa47;}
 #statemodal>div.danger{color: #dd4b39;}
+/*editor*/
+.summernotebox{
+    min-height: 300px;
+    margin-bottom: 15px;
+}
+.summernotebox>.summernote{
+    min-height: 300px;
+}
