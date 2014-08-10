@@ -7,18 +7,35 @@ block content
                 th
                     //label.checkbox
                     input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
-                th 标题
-                th.hidden-xs.hidden-sm 创建时间
-                th.hidden-xs.hidden-sm 最后修改
-                th 作者
-                th.hidden-xs.hidden-sm 最后修订
-                th 版本
-                th 操作
+                th 编号
+                th.hidden-xs.hidden-sm 品牌
+                th.hidden-xs.hidden-sm 产地
+                th 颜色
+                th.hidden-xs.hidden-sm 图案
+                th 克重
+                th 纱支
+                th 价格
+                th 预览
         tbody#blog-bloglisttable
-            tr
-                td
-                    input(type="checkbox",value=" ",data-toggle="checkbox")
-                td
+            -for(var i=0,len=clothData.length;i<len;i++)
+                tr
+                    td
+                        input(type="checkbox",value=" ",data-toggle="checkbox")
+                    td #{clothData[i].codeNumber}
+                    td #{clothData[i].brand}
+                    td #{clothData[i].originPlace}
+                    td #{clothData[i].color}
+                    td #{clothData[i].pattern}
+                    td #{clothData[i].weight}
+                    td #{clothData[i].yarnCount}
+                    td #{clothData[i].price}
+                    td
+                        a(href="#{siteUrl}#{app}/detail/id")
+                            span.fa.fa-eye
+
+
+
+
     div.row
         div.col-md-4
             button.btn.btn-default#blog-deleteblogs(type="button")

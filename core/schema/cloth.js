@@ -32,6 +32,14 @@ module.exports = {
             .limit(limit)
             .exec(callback);
     },
+    getFindCount:function(find,callback){
+        clothModel.find(find)
+            .count()
+            .exec(callback);
+    },
+    getDetail:function(id,callback){
+        clothModel.findById(id).exec(callback);
+    },
     delete:function(find,callback){
         clothModel.update(find,{"$set":{state:0}},callback);
     },

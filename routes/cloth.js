@@ -39,11 +39,51 @@ var renderData = function(data){
 /*
  * 前台页面
  * */
+//列表页面
 router.get('/', function(req, res) {
+    var page = 0,
+        limitPerPage = 12;
+    if(!isNaN(Number(req.query.page))){
+        page = Number(req.query.page) - 1;
+    }
     var data = new renderData({
         title : 'Moreii cloth'
     });
-    res.render('cloth/index', data);
+    clothSchema.find({state:1},{"_id":-1},limitPerPage*page,limitPerPage,function(err,clothData){
+        if(err===null){
+            data.clothData=clothData;
+            clothSchema.getFindCount({state:1},function(err1,countData){
+                if(err1===null){
+                    data.pageUrl = global.config.siteUrl + data.app + '/?page=';
+                    data.pageCount = Math.ceil(countData / limitPerPage);
+                    data.pageNow = page + 1;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    console.log(countData)
+                    res.render('cloth/index', data);
+                }else {
+                    res.redirect(global.config.siteUrl + '500');
+                }
+            });
+
+        }else{
+            global.config.resError(req,res,'500');
+        }
+    });
+});
+//详情页面
+router.get('/detail/:id', function(req, res) {
+    var data = new renderData({
+        title : 'Moreii cloth'
+    });
+    clothSchema.getDetail(global.xss.text.process(req.params.id),function(err,clothData){
+        if(err===null){
+            data.clothData=clothData;
+            res.render('cloth/detail', data);
+        }else{
+            global.config.resError(req,res,'500');
+        }
+    });
 });
 /*
 * 验证后台权限
@@ -63,7 +103,14 @@ router.get('/console/list', function(req, res) {
         title : 'Moreii cloth list',
         consoleNavActive:'list'
     });
-    res.render('cloth/console/list', data);
+    clothSchema.find({state:1},{"_id":-1},0,10,function(err,clothData){
+        if(err===null){
+            data.clothData=clothData;
+            res.render('cloth/console/list', data);
+        }else{
+            global.config.resError(req,res,'500');
+        }
+    });
 });
 //添加面料页面
 router.get('/console/add', function(req, res) {

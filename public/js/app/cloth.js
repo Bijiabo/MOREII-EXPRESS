@@ -23,7 +23,8 @@ var clothConsole = {
                 success:function(r){
                     console.log(r);
                     if(!r.err){
-                        basic.stateModal('success');
+                        basic.stateModal('success','添加成功，跳转中...');
+                        cache.setTimeoutIdForAdd = setTimeout(function(){window.location.href=siteUrl+app+'/console/list'},1000);
                     }else{
                         basic.stateModal('danger',r.des);
                     }

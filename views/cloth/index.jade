@@ -3,12 +3,29 @@ extends ../layout
 block content
     div.container
         div.row
-            div.col-md-9
-                div.jumbotron
-                    h4 施工中...
-                div.col-md-12.row
-                    hr
-                    div.col-md-8.col-md-offset-2.text-center
-                        //include ../pager
             div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
-                //include sidebar
+                div.panel.panel-default
+                    div.panel-heading 面料参数
+                    div.panel-body(style="padding-top:0;")
+                        p 编号：XDSFS
+                        p 产地：中国
+                        p 纱支：150
+            div.col-md-9
+                div.row
+                -for(var i=0,len=clothData.length;i<len;i++)
+                    div.col-md-4.col-sm-6.col-xs-6
+                        div.thumbnail
+                            a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
+                                img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0]}")
+                            div.caption
+                                h3 #{clothData[i].brand} #{clothData[i].codeNumber}
+                                p
+                                    span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;
+                                    span 纱支：#{clothData[i].yarnCount}
+                div.col-md-12.text-center
+                    hr
+                    include ../pager
+
+                hr
+                div.col-md-8.col-md-offset-2.text-center
+                    //include ../pager
