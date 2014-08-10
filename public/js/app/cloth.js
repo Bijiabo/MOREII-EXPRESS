@@ -5,11 +5,30 @@ var clothConsole = {
     cache:{},
     function:{
         getAddInfo:function(){
-            clothConsole.cache.addClothInfo = {};
+            clothConsole.cache.addClothInfo = {
+                picture:cache.uploadImageFiles,
+                description:$('#cloth-add-description>.summernote').code()
+            };
             $.each($('#cloth-add-form :input'),function(index,item){
                 clothConsole.cache.addClothInfo[$(item).attr('name')] = $(item).val();
             });
-            console.log(clothConsole.cache.addClothInfo);
+//            console.log(clothConsole.cache.addClothInfo);
+            $.ajax({
+                type:'POST',
+                url:siteUrl+app+'/api/add/?ajax=true',
+                data:{
+                    addClothInfo:clothConsole.cache.addClothInfo
+                },
+                dataType:'json',
+                success:function(r){
+                    console.log(r);
+                    if(!r.err){
+                        basic.stateModal('success');
+                    }else{
+                        basic.stateModal('danger',r.des);
+                    }
+                }
+            });
         }
     }
 }

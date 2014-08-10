@@ -366,9 +366,10 @@ var basic = {
                     <div class="dz-error-message"><span data-dz-errormessage></span></div>\
                 </div>',
                 success:function(file,data){
-                    console.log(file);
+                    file.path = data.path;
+//                    console.log(file);
 //                    data = JSON.parse(data);
-                    cache.uploadImageFiles.push({originalname:file.name,path:data.path});
+                    cache.uploadImageFiles.push(data.path);
                     /**
                      * default skin
                      * */
@@ -379,9 +380,9 @@ var basic = {
                     }
                 },
                 removedfile:function(file){
-                    console.log(file);
+//                    console.log(file);
                     for(var i=1;i<cache.uploadImageFiles.length;i++){
-                        if(cache.uploadImageFiles[i].originalname === file.name){
+                        if(cache.uploadImageFiles[i] === file.path){
                             cache.uploadImageFiles.splice(i,1);
                             break;
                         }
@@ -632,6 +633,33 @@ var basic = {
             default :
                 $('#statemodal').remove();
                 break;
+        }
+    },
+    ajax:function(option){
+        if(option!==undefined && typeof option === 'object'){
+            $.ajax({
+                async:option.async||true,
+                beforeSend:option.beforeSend||function(){basic.stateModal('danger','连接错误。');},
+                cache:option.cache||true,
+                complete:option.complete||function(){},
+                contentType:option.contentType|| "application/x-www-form-urlencoded",
+                context:option.context||document.body,
+                data:option.data||{},
+                dataFilter:option.dataFilter||function(){},
+                dataType:option.dataType||'json',
+                error:option.error||function(){basic.stateModal('danger','连接错误。');},
+                global:option.global||true,
+                ifModified:option.ifModified||false,
+                jsonp:option.jsonp||'moreiicallback',
+                jsonpCallback:option.jsonpCallback||'moreiicallback',
+                username:option.username||undefined,
+                password:option.password||undefined,
+                processData:option.processData||true,
+                success:function(data){option.success(data);}||function(){basic.stateModal('success');},
+                timeout:1000,
+                type:option.type||'POST',
+                url:option.url||siteUrl+'api'
+            });
         }
     }
 }
