@@ -1,4 +1,7 @@
 /*main style for flatUI || todc*/
+body{
+    color:#555555;
+}
 .table thead tr th{
     line-height: 2.5em;
 }
@@ -24,6 +27,9 @@
     font-size: 18px;
 }
 .navbar-toolbar.navbar-default .navbar-brand {color: #3078eb;}
+.pagination>li>a, .pagination>li>span {
+    background-color: #FFFFFF;
+}
 /*mii*/
 .jsshow{display: none;}
 #uploadImageDropbox{

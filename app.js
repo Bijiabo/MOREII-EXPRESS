@@ -87,10 +87,9 @@ if (app.get('env') === 'development') {
             title:'500错误',
             path:req.path,
             errorname:'500',
-        })
+        });
     });
 }
-
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {

@@ -1,40 +1,40 @@
 /**
  * Created by boooo on 14-8-9.
  */
-var clothConsole = {
+var cloth = {
     cache:{},
     function:{
-        getAddInfo:function(){
-            clothConsole.cache.addClothInfo = {
-                picture:cache.uploadImageFiles,
-                description:$('#cloth-add-description>.summernote').code()
-            };
-            $.each($('#cloth-add-form :input'),function(index,item){
-                clothConsole.cache.addClothInfo[$(item).attr('name')] = $(item).val();
-            });
-//            console.log(clothConsole.cache.addClothInfo);
+        getDetail:function(el){
             $.ajax({
                 type:'POST',
-                url:siteUrl+app+'/api/add/?ajax=true',
-                data:{
-                    addClothInfo:clothConsole.cache.addClothInfo
-                },
+                url:siteUrl+app+'/detail/'+el.data('id'),
                 dataType:'json',
-                success:function(r){
-                    console.log(r);
-                    if(!r.err){
-                        basic.stateModal('success','添加成功，跳转中...');
-                        cache.setTimeoutIdForAdd = setTimeout(function(){window.location.href=siteUrl+app+'/console/list'},1000);
-                    }else{
-                        basic.stateModal('danger',r.des);
+                cache:true,
+                success:function(data){
+                    if(!data.err){
+                        //console.log(data.data);
+                        $('#cloth-sidebar .panel-body').html([
+                            '<p>编号：'+data.data.codeNumber+'</p>',
+                            '<p>品牌：'+data.data.brand+'</p>',
+                            '<p>产地：'+data.data.originPlace+'</p>',
+                            '<p>纱支：'+data.data.yarnCount+'</p>',
+                            '<p>克重：'+data.data.weight+'</p>',
+                        ].join('\n'));
                     }
                 }
-            });
+            })
         }
     }
 }
-$(function(){
-    $(document).on('click','#cloth-add-save',function(e){
-        clothConsole.function.getAddInfo();
+jQuery(function($) {
+    $(document).ready( function() {
+        $(document).on('mouseover','.cloth-list-item',function(e){
+            cloth.function.getDetail($(this));
+        });
+        //init sidebar panel width
+        $('#cloth-sidebar>.panel:first').css('width',$('#cloth-sidebar>.panel:first').width()+'px');
+        $('#cloth-sidebar>.panel:first').stickUp({
+            topMargin: "auto"
+        });
     });
 });

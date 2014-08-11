@@ -1,0 +1,69 @@
+extends ../../layout_console
+block content
+        br
+        h4 面料信息
+        hr
+        form.form-horizontal#cloth-add-form(role="form")
+            div.form-group
+                label.col-sm-2.control-label(for="codeNumber") 编号
+                div.col-sm-10
+                    input.form-control(name="codeNumber",type="text",placeholder="",value="#{clothData.codeNumber}")
+            div.form-group
+                label.col-sm-2.control-label(for="brand") 品牌
+                div.col-sm-10
+                    input.form-control(name="brand",type="text",placeholder="",value="#{clothData.brand}")
+            div.form-group
+                label.col-sm-2.control-label(for="originPlace") 产地
+                div.col-sm-10
+                    input.form-control(name="originPlace",type="text",placeholder="",value="#{clothData.originPlace}")
+            div.form-group
+                label.col-sm-2.control-label(for="color") 颜色
+                div.col-sm-10
+                    input.form-control(name="color",type="text",placeholder="",value="#{clothData.color}")
+            div.form-group
+                label.col-sm-2.control-label(for="pattern") 图案
+                div.col-sm-10
+                    input.form-control(name="pattern",type="text",placeholder="",value="#{clothData.pattern}")
+            div.form-group
+                label.col-sm-2.control-label(for="weight") 克重
+                div.col-sm-10
+                    input.form-control(name="weight",type="number",placeholder="",value="#{clothData.weight}")
+            div.form-group
+                label.col-sm-2.control-label(for="price") 价格
+                div.col-sm-10
+                    input.form-control(name="price",type="number",placeholder="",value="#{clothData.price}")
+            div.form-group
+                label.col-sm-2.control-label(for="yarnCount") 纱支
+                div.col-sm-10
+                    input.form-control(name="yarnCount",type="number",placeholder="",value="#{clothData.yarnCount}")
+        br
+        h4 面料图片
+        hr
+        div.uploadDropbox.miidropzone.dz-started#cloth-add-picture(data-mode="edit")
+            div.dz-default.dz-message
+            -for(var i=0,len=clothData.picture.length;i<len;i++)
+                div.dz-preview.dz-processing.dz-image-preview.dz-success
+                    div.dz-details
+                        div.dz-filename.text-center.text-primary
+                            //span(data-dz-name-hide="")
+                            //span.fa.fa-plus.fa-5x(style="line-height: 90px;")
+                        div.dz-size(data-dz-size="")
+                            span 原有图片
+                        img(data-dz-thumbnail="",src="#{siteUrl}#{clothData.picture[i]}")
+                    div.dz-success-mark
+                        span ✔
+                    a.dz-remove.mii-dz-remove(data-dz-remove="",data-path="#{clothData.picture[i]}") 移除文件
+        script.
+            $(function(){
+                cache.uploadImageFiles = "#{clothData.picture.join(',')}".split(',');
+                cache.clothEditId = '#{clothData._id}'
+            });
+        br
+        br
+        h4 面料介绍
+        hr
+        div#cloth-add-description.summernotebox
+            div.summernote!= clothData.description
+        hr
+        div.col-md-4.col-md-offset-4.row
+            button.btn.btn-primary.btn-block#cloth-update-save(type="button") 修改

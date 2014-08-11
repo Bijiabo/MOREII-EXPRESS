@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose'),
     db = require('../db');
-var ObjectId = mongoose.Schema.Types.ObjectId;
+//var ObjectId = mongoose.Schema.Types.ObjectId;
 var blogSchema = new mongoose.Schema({
     title:String,
     content:String,

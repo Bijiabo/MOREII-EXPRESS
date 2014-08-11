@@ -38,6 +38,7 @@ block content
                     a.right.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="next")
                         span.glyphicon.glyphicon-chevron-right
                 hr
-                div#cloth-detail-description= clothData.description
+                div#cloth-detail-description!= clothData.description
+                hr
                 div.col-md-8.col-md-offset-2.text-center
                     //include ../pager

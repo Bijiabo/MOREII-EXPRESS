@@ -24,6 +24,13 @@ router.get('/console', function(req, res) {
     var data = new renderData();
     res.render('index', data);
 });
+app.get('/500',function(req,res){
+    res.status(500);
+    var data = new renderData({
+        title:'500'
+    });
+    res.render('500',data);
+});
 /*router.get('/stack', function(req, res) {
     console.log(router.stack);
     res.json({

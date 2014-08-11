@@ -8,75 +8,43 @@ block content
                     //label.checkbox
                     input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
                 th 编号
-                th.hidden-xs.hidden-sm 品牌
+                th 品牌
                 th.hidden-xs.hidden-sm 产地
                 th 颜色
-                th.hidden-xs.hidden-sm 图案
-                th 克重
-                th 纱支
-                th 价格
-                th 预览
-        tbody#blog-bloglisttable
+                th 图案
+                th.hidden-xs.hidden-sm 克重
+                th.hidden-xs.hidden-sm 纱支
+                th.hidden-xs.hidden-sm 价格
+                th 查看
+                th 编辑
+        tbody#cloth-consolelisttable
             -for(var i=0,len=clothData.length;i<len;i++)
-                tr
+                tr(data-id="#{clothData[i]._id}")
                     td
-                        input(type="checkbox",value=" ",data-toggle="checkbox")
+                        input(type="checkbox",value=" ",data-toggle="checkbox",data-id="#{clothData[i]._id}")
                     td #{clothData[i].codeNumber}
                     td #{clothData[i].brand}
-                    td #{clothData[i].originPlace}
+                    td.hidden-xs.hidden-sm #{clothData[i].originPlace}
                     td #{clothData[i].color}
                     td #{clothData[i].pattern}
-                    td #{clothData[i].weight}
-                    td #{clothData[i].yarnCount}
-                    td #{clothData[i].price}
-                    td
-                        a(href="#{siteUrl}#{app}/detail/id")
+                    td.hidden-xs.hidden-sm #{clothData[i].weight}
+                    td.hidden-xs.hidden-sm #{clothData[i].yarnCount}
+                    td.hidden-xs.hidden-sm #{clothData[i].price}
+                    td.cloth-console-preivew
+                        a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}",target="_blank")
                             span.fa.fa-eye
+                    td
+                        a(href="#{siteUrl}#{app}/console/edit/#{clothData[i]._id}")
+                            span.fa.fa-edit
 
 
 
 
     div.row
         div.col-md-4
-            button.btn.btn-default#blog-deleteblogs(type="button")
-                span.fa.fa-trash-o &nbsp;&nbsp;删除
-            button#blog-write-new.btn.btn-primary
-                span.fa.fa-plus &nbsp;&nbsp;新建
+            button.btn.btn-default#cloth-delete-btn(type="button")
+                span.fa.fa-trash-o &nbsp;&nbsp;删除选中
+            a.btn.btn-primary(href="#{siteUrl}#{app}/console/add",style="margin-left:4px;")
+                span.fa.fa-plus &nbsp;&nbsp;添加面料
         div.col-md-8.text-right
-            //include ../../pager
-    //- 文章预览层
-    div#blog-previewblog.console-modal
-        div.fa.fa-times.console-modal-close
-        h3
-        hr
-        div#blog-previewblog-content
-    //- 文章编辑层
-    div#blog-editblog.console-modal
-        div.fa.fa-times.console-modal-close
-        //h6 编辑日志
-        input#blog-editblog-title.form-control(placeholder="文章标题")
-        hr
-        div#blog-editblog-content
-            div.summernote
-        //-textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
-        div.input-group
-            span.input-group-addon 标签
-            input#blog-editblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
-        //-input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
-        hr
-        div.col-md-2.col-md-offset-5
-            button#blog-editblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="edit",data-id="") 提交修改
-    //- 文章书写层
-    div#blog-addblog.console-modal
-        div.fa.fa-times.console-modal-close
-        //h6 新建日志
-        input#blog-addblog-title.form-control(placeholder="文章标题")
-        hr
-        div#blog-addblog-content
-            div.summernote 文章内容...
-        div.input-group
-            span.input-group-addon 标签
-            input#blog-addblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
-        hr
-        div.col-md-2.col-md-offset-5.row
-            button#blog-addblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="add",data-id="") 添加日志
+            include ../../pager

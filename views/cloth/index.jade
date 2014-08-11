@@ -3,21 +3,26 @@ extends ../layout
 block content
     div.container
         div.row
-            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
+            div.col-md-3.hidden-sm.hidden-xs#cloth-sidebar
                 div.panel.panel-default
                     div.panel-heading 面料参数
                     div.panel-body(style="padding-top:0;")
-                        p 编号：XDSFS
-                        p 产地：中国
-                        p 纱支：150
+                        -if(clothData.length>0)
+                            p 编号：#{clothData[0].codeNumber}
+                            p 品牌：#{clothData[0].brand}
+                            p 产地：#{clothData[0].originPlace}
+                            p 纱支：#{clothData[0].yarnCount}
+                            p 克重：#{clothData[0].weight}
+                        -else
+                            p 暂无数据
             div.col-md-9
                 div.row
                 -for(var i=0,len=clothData.length;i<len;i++)
                     div.col-md-4.col-sm-6.col-xs-6
-                        div.thumbnail
+                        div.thumbnail.cloth-list-item(data-id="#{clothData[i]._id}")
                             a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
                                 img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0]}")
-                            div.caption
+                            div.caption.hidden-xs
                                 h3 #{clothData[i].brand} #{clothData[i].codeNumber}
                                 p
                                     span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;

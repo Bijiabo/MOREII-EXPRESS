@@ -380,6 +380,7 @@ var basic = {
                     }
                 },
                 removedfile:function(file){
+                    var box = $(file.previewElement).parents('.uploadDropbox');
 //                    console.log(file);
                     for(var i=1;i<cache.uploadImageFiles.length;i++){
                         if(cache.uploadImageFiles[i] === file.path){
@@ -392,6 +393,9 @@ var basic = {
                         if ((_ref = file.previewElement) != null) {
                             _ref.parentNode.removeChild(file.previewElement);
                         }
+                    }
+                    if(box.data('mode')==='edit'){
+                        setTimeout(function(){box.addClass('dz-started');},10);
                     }
                 }
             });
@@ -626,6 +630,18 @@ var basic = {
                 /*cache.stateModalId = window.setTimeout(function(){
                     $('#statemodal').remove();
                 },2000);*/
+                break;
+            case 'danger':
+                $('#statemodal').remove();
+                $('body').append(['<div id="statemodal">',
+                    '<div class="danger">',
+                    '<span class="fa fa-exclamation-circle"></span>',
+                        '<p>'+tip+'</p>',
+                    '</div>',
+                    '</div>'].join('\n'));
+                /*cache.stateModalId = window.setTimeout(function(){
+                 $('#statemodal').remove();
+                 },2000);*/
                 break;
             case 'hide':
                 $('#statemodal').remove();

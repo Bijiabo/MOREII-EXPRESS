@@ -4,7 +4,7 @@
 var mongoose = require('mongoose'),
     userModal = require('./user'),
     db = require('../db');
-var ObjectId = mongoose.Schema.Types.ObjectId;
+//var ObjectId = mongoose.Schema.Types.ObjectId;
 var classSchema = new mongoose.Schema({
     name:String,
     intro:String,

@@ -13,6 +13,7 @@
     "debug": "~0.7.4",
     "express": "~4.2.0",
     "express-session": "*",
+    "images": "^2.0.2",
     "jade": "~1.3.0",
     "markdown": "*",
     "markdown-js": "*",
