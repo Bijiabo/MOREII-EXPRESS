@@ -32,9 +32,11 @@ jQuery(function($) {
             cloth.function.getDetail($(this));
         });
         //init sidebar panel width
-        $('#cloth-sidebar>.panel:first').css('width',$('#cloth-sidebar>.panel:first').width()+'px');
-        $('#cloth-sidebar>.panel:first').stickUp({
-            topMargin: "auto"
-        });
+        if($('#cloth-sidebar>.panel:first').length>0){
+            $('#cloth-sidebar>.panel:first').css('width',$('#cloth-sidebar>.panel:first').width()+'px');
+            $('#cloth-sidebar>.panel:first').stickUp({
+                topMargin: "auto"
+            });
+        }
     });
 });

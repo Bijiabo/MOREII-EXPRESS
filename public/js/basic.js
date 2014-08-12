@@ -47,8 +47,8 @@ var basic = {
                     contentType: false,
                     processData: false,
                     success: function(r) {
-                        if(!r.err){
-                            editor.insertImage(welEditable, r.url);
+                        if(!r.error){
+                            editor.insertImage(welEditable, siteUrl+r.path);
                         }else{
                             basic.stateModal('danger', r.des);
                         }
@@ -366,17 +366,18 @@ var basic = {
                     <div class="dz-error-message"><span data-dz-errormessage></span></div>\
                 </div>',
                 success:function(file,data){
-                    file.path = data.path;
-//                    console.log(file);
-//                    data = JSON.parse(data);
-                    cache.uploadImageFiles.push(data.path);
-                    /**
-                     * default skin
-                     * */
-                    if (file.previewElement) {
-                        var fileBox= $(file.previewElement);
-                        fileBox.data('path',data.path);
-                        return file.previewElement.classList.add("dz-success");
+                    if(!data.error){
+                        file.path = data.path;
+                        delete data.error
+                        cache.uploadImageFiles.push(data);
+                        /**
+                         * default skin
+                         * */
+                        if (file.previewElement) {
+                            var fileBox= $(file.previewElement);
+                            fileBox.data('path',data.path);
+                            return file.previewElement.classList.add("dz-success");
+                        }
                     }
                 },
                 removedfile:function(file){

@@ -49,13 +49,25 @@ block content
                             //span.fa.fa-plus.fa-5x(style="line-height: 90px;")
                         div.dz-size(data-dz-size="")
                             span 原有图片
-                        img(data-dz-thumbnail="",src="#{siteUrl}#{clothData.picture[i]}")
+                        img(data-dz-thumbnail="",src="#{siteUrl}#{clothData.picture[i].path}")
                     div.dz-success-mark
                         span ✔
-                    a.dz-remove.mii-dz-remove(data-dz-remove="",data-path="#{clothData.picture[i]}") 移除文件
+                    a.dz-remove.mii-dz-remove(data-dz-remove="",data-path="#{clothData.picture[i].path}") 移除文件
+        //- 拼接图片数据
+        -var pictureArray = []
+        -for(var i=0,len=clothData.picture.length;i<len;i++)
+            -pictureArray.push(JSON.stringify(clothData.picture[i]))
         script.
             $(function(){
-                cache.uploadImageFiles = "#{clothData.picture.join(',')}".split(',');
+                cache.uploadImageFiles = '!{pictureArray}'.split(',{');
+                for(var i=0,len=cache.uploadImageFiles.length;i<len;i++){
+                    if(i!==0){
+                        cache.uploadImageFiles[i] = JSON.parse('{'+cache.uploadImageFiles[i]);
+                    }else{
+                        cache.uploadImageFiles[i] = JSON.parse(cache.uploadImageFiles[i]);
+                    }
+                }
+                console.log(cache.uploadImageFiles );
                 cache.clothEditId = '#{clothData._id}'
             });
         br

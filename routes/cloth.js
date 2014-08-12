@@ -228,7 +228,7 @@ router.post('/api/add',function(req,res){
     if(clothData.picture.constructor.toString().match('Array')!==null){
         if(clothData.picture.length>0){
             for(var i= 0,len=clothData.picture.length;i<len;i++){
-                clothData.picture[i] = global.xss.text.process(clothData.picture[i]);
+//                clothData.picture[i] = global.xss.text.process(clothData.picture[i]);
             }
         }
     }else{

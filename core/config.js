@@ -134,6 +134,7 @@ var crypto = require('crypto'),
             state:1
         }
     };
+var im = require('imagemagick');
 var resError = function(req,res,des,redirectUrl,renderFile,renderData){
     if(redirectUrl===undefined || redirectUrl===false){
         var redirectUrl = '/500';
@@ -291,19 +292,18 @@ module.exports = {
         }
         return x;
     },
-    saveFile:function(app,savePath,req,res){
-        console.log('11111111111111');
-        console.log(app);
+    saveFile:function(app,savePath,req,res,resize){
+        if(resize===undefined){resize = 100;}
         global.config.checkPermission(req,res,app,'upload',false,function(hasPermission){
-            console.log('2222222');
             if(hasPermission){
                 var filename = path.basename(req.files.file.path),
                     is = fs.createReadStream(req.files.file.path),
-                    savedPath = path.join(__dirname,'../public/upload/',app,savePath);
+                    savedPath = path.join(__dirname,'../public/upload/',app,savePath,'origin'),
+                    resizePath = path.join(__dirname,'../public/upload/',app,savePath,'resize');
                 fs.exists(savedPath,function(exists){
                     if(!exists){
                         //no such path,create it
-                        var pathArray = savePath.split(path.sep);
+                        //var pathArray = savePath.split(path.sep);
                         mkdirp(savedPath, function (err) {
                             if(err){
                                 console.error(err);
@@ -311,12 +311,23 @@ module.exports = {
                                 console.log('pow!');
                                 var os = fs.createWriteStream(path.join(savedPath,filename));
                                 util.pump(is, os, function() {
-                                    fs.unlinkSync(req.files.file.path);
-                                    res.json({
-                                        error:false,
-                                        filename:filename,
-                                        path:'upload/'+app+'/'+savePath+'/'+filename,
-                                        url:'http://'+domain+':'+port+'/'+'upload/'+app+'/'+savePath+'/'+filename
+                                    fs.unlink(req.files.file.path,function(err){
+                                        if (err) throw err;
+                                        global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                            if(!err){
+                                                res.json({
+                                                    error:false,
+                                                    filename:filename,
+                                                    path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                                    resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename
+                                                });
+                                            }else{
+                                                res.json({
+                                                    error:true,
+                                                    des:'图片保存失败，请重试。'
+                                                });
+                                            }
+                                        });
                                     });
                                 });
                             }
@@ -324,18 +335,28 @@ module.exports = {
                     }else{
                         var os = fs.createWriteStream(path.join(savedPath,filename));
                         util.pump(is, os, function() {
-                            fs.unlinkSync(req.files.file.path);
-                            res.json({
-                                error:false,
-                                filename:filename,
-                                path:'upload/'+app+'/'+savePath+'/'+filename,
-                                url:'http://'+domain+':'+port+'/'+'upload/'+app+'/'+savePath+'/'+filename
+                            fs.unlink(req.files.file.path,function(err){
+                                if (err) throw err;
+                                global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                    if(!err){
+                                        res.json({
+                                            error:false,
+                                            filename:filename,
+                                            path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                            resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename
+                                        });
+                                    }else{
+                                        res.json({
+                                            error:true,
+                                            des:'图片保存失败，请重试。'
+                                        });
+                                    }
+                                });
                             });
                         });
                     }
                 });
             }else{
-                console.log('33333333');
                 res.json({
                     err:true,
                     des:'无上传权限。'
@@ -386,5 +407,35 @@ module.exports = {
                 resError(req,res,'请登录。','/user/login');
             }
         }
+    },
+    imageResize:function(fileName,srcPath,dstPath,width,callback){
+        fs.exists(dstPath,function(exists){
+            if(!exists){
+                //no such path,create it
+                mkdirp(dstPath, function (err) {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        im.resize({
+                            srcPath: path.join(srcPath,fileName),
+                            dstPath: path.join(dstPath,fileName),
+                            width:   256
+                        }, function(err, stdout, stderr){
+                            callback(err,stdout);
+                        });
+                    }
+                });
+            }else{
+                im.resize({
+                    srcPath: path.join(srcPath,fileName),
+                    dstPath: path.join(dstPath,fileName),
+                    width:   256
+                }, function(err, stdout, stderr){
+                    if (err) throw err;
+                    callback(err,stdout);
+                });
+            }
+        });
+
     }
 };

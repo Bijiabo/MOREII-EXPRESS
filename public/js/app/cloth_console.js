@@ -122,7 +122,7 @@ $(function(){
     $(document).on('click','.mii-dz-remove',function(){
         var path = $(this).data('path');
         for(var i= 0,len=cache.uploadImageFiles.length;i<len;i++){
-            if(path===cache.uploadImageFiles[i]){
+            if(path===cache.uploadImageFiles[i].path){
                 cache.uploadImageFiles.splice(i,1);
                 break;
             }
@@ -141,7 +141,7 @@ $(function(){
             $('#cloth-console-listpreview').remove();
             var htmlArray = ['<div id="cloth-console-listpreview" style="position: fixed;z-index:999;top:'+(el.offset().top+el.height()-$(document).scrollTop())+'px;left: '+el.offset().left+'px;display:none;border:1px solid #dddddd;padding:10px;background:#ffffff;">'];
             for(var i= 0,len=data.picture.length;i<len;i++){
-                htmlArray.push('<img src="'+siteUrl+data.picture[i]+'" style="height:200px;width:auto;">');
+                htmlArray.push('<img src="'+siteUrl+data.picture[i].resizePath+'" style="height:200px;width:auto;">');
             }
             htmlArray.push('</div>');
             $('body').append(htmlArray.join('\n'));

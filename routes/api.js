@@ -370,7 +370,7 @@ router.post('/custom/build4print',function(req,res){
 router.post('/upload/:app',multipartMiddleware,function(req,res){
     var app = global.xss.text.process(req.params.app),
         savePath = global.xss.text.process(req.query.savePath.replace(/\.*/,''));
-    global.config.saveFile(app,savePath,req,res);
+    global.config.saveFile(app,savePath,req,res,250);
 });
 
 module.exports = router;

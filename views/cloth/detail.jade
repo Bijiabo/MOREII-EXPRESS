@@ -6,7 +6,7 @@ block content
             div.col-md-12
                 h3 #{clothData.brand} #{clothData.codeNumber}
                 hr
-            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
+            div.col-md-3.hidden-sm.hidden-xs
                 div.panel.panel-default
                     div.panel-heading 面料参数
                     div.panel-body(style="padding-top:0;")
@@ -27,11 +27,11 @@ block content
                         -for(var i=0,len=clothData.picture.length;i<len;i++)
                             -if(i===0)
                                 div.item.active
-                                    img(src="#{siteUrl}#{clothData.picture[i]}",style="margin:auto;")
+                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
                                     //div.carousel-caption
                             -else
                                 div.item
-                                    img(src="#{siteUrl}#{clothData.picture[i]}",style="margin:auto;")
+                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
                                     //div.carousel-caption
                     a.left.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="prev")
                         span.glyphicon.glyphicon-chevron-left

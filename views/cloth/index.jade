@@ -21,15 +21,16 @@ block content
                     div.col-md-4.col-sm-6.col-xs-6
                         div.thumbnail.cloth-list-item(data-id="#{clothData[i]._id}")
                             a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
-                                img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0]}")
+                                img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0].resizePath}")
                             div.caption.hidden-xs
                                 h3 #{clothData[i].brand} #{clothData[i].codeNumber}
                                 p
                                     span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;
                                     span 纱支：#{clothData[i].yarnCount}
-                div.col-md-12.text-center
-                    hr
-                    include ../pager
+                div.row
+                    div.col-md-12.text-center
+                        hr
+                        include ../pager
 
                 hr
                 div.col-md-8.col-md-offset-2.text-center
