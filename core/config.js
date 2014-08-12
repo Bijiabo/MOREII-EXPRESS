@@ -298,8 +298,17 @@ module.exports = {
             if(hasPermission){
                 var filename = path.basename(req.files.file.path),
                     is = fs.createReadStream(req.files.file.path),
+                    fileExtName = path.extname(filename).toLowerCase().replace(/^\./,''),//获取文件后缀名
+                    imageExtName = ['bmp','gif','ico','jpeg','jpg','pjpeg','png'],//图片文件后缀
+                    isImage = false,//是否为图片
                     savedPath = path.join(__dirname,'../public/upload/',app,savePath,'origin'),
                     resizePath = path.join(__dirname,'../public/upload/',app,savePath,'resize');
+                for(var i= 0,len=imageExtName.length;i<len;i++){
+                    if(imageExtName[i]===fileExtName){
+                        isImage=true;
+                        break;
+                    }
+                }
                 fs.exists(savedPath,function(exists){
                     if(!exists){
                         //no such path,create it
@@ -308,26 +317,37 @@ module.exports = {
                             if(err){
                                 console.error(err);
                             }else{
-                                console.log('pow!');
                                 var os = fs.createWriteStream(path.join(savedPath,filename));
                                 util.pump(is, os, function() {
                                     fs.unlink(req.files.file.path,function(err){
                                         if (err) throw err;
-                                        global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
-                                            if(!err){
-                                                res.json({
-                                                    error:false,
-                                                    filename:filename,
-                                                    path:'upload/'+app+'/'+savePath+'/origin/'+filename,
-                                                    resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename
-                                                });
-                                            }else{
-                                                res.json({
-                                                    error:true,
-                                                    des:'图片保存失败，请重试。'
-                                                });
-                                            }
-                                        });
+                                        if(isImage){
+                                            global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                                if(!err){
+                                                    res.json({
+                                                        error:false,
+                                                        filename:filename,
+                                                        path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                                        resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename,
+                                                        extName:fileExtName,
+                                                        isImage:isImage
+                                                    });
+                                                }else{
+                                                    res.json({
+                                                        error:true,
+                                                        des:'图片保存失败，请重试。'
+                                                    });
+                                                }
+                                            });
+                                        }else{
+                                            res.json({
+                                                error:false,
+                                                filename:filename,
+                                                path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                                extName:fileExtName,
+                                                isImage:isImage
+                                            });
+                                        }
                                     });
                                 });
                             }
@@ -337,21 +357,34 @@ module.exports = {
                         util.pump(is, os, function() {
                             fs.unlink(req.files.file.path,function(err){
                                 if (err) throw err;
-                                global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
-                                    if(!err){
-                                        res.json({
-                                            error:false,
-                                            filename:filename,
-                                            path:'upload/'+app+'/'+savePath+'/origin/'+filename,
-                                            resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename
-                                        });
-                                    }else{
-                                        res.json({
-                                            error:true,
-                                            des:'图片保存失败，请重试。'
-                                        });
-                                    }
-                                });
+                                //判断文件类型，若为图片，自动缩略
+                                if(isImage){
+                                    global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                        if(!err){
+                                            res.json({
+                                                error:false,
+                                                filename:filename,
+                                                path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                                resizePath:'upload/'+app+'/'+savePath+'/resize/'+filename,
+                                                extName:fileExtName,
+                                                isImage:isImage
+                                            });
+                                        }else{
+                                            res.json({
+                                                error:true,
+                                                des:'图片保存失败，请重试。'
+                                            });
+                                        }
+                                    });
+                                }else{
+                                    res.json({
+                                        error:false,
+                                        filename:filename,
+                                        path:'upload/'+app+'/'+savePath+'/origin/'+filename,
+                                        extName:fileExtName,
+                                        isImage:isImage
+                                    });
+                                }
                             });
                         });
                     }

@@ -56,8 +56,8 @@
       <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.64" vertical-offset="4629" max-vertical-offset="6690">
-              <caret line="318" column="64" selection-start-line="318" selection-start-column="64" selection-end-line="318" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5279" max-vertical-offset="7185">
+              <caret line="376" column="41" selection-start-line="376" selection-start-column="41" selection-end-line="376" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -66,8 +66,8 @@
       <file leaf-file-name="api.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5011" max-vertical-offset="5715">
-              <caret line="372" column="51" selection-start-line="372" selection-start-column="51" selection-end-line="372" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5715">
+              <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -106,16 +106,16 @@
       <file leaf-file-name="basic.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/basic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6078148" vertical-offset="270" max-vertical-offset="10515">
-              <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.41244572" vertical-offset="4860" max-vertical-offset="10515">
+              <caret line="343" column="40" selection-start-line="343" selection-start-column="40" selection-end-line="343" selection-end-column="40" />
               <folding>
-                <marker date="1407835062735" expanded="true" signature="9332:10150" placeholder="..." />
-                <marker date="1407835062735" expanded="true" signature="9378:9787" placeholder="..." />
-                <marker date="1407835062735" expanded="true" signature="9454:9642" placeholder="..." />
-                <marker date="1407835062735" expanded="false" signature="9584:9602" placeholder="..." />
-                <marker date="1407835062735" expanded="true" signature="12544:13666" placeholder="..." />
-                <marker date="1407835062735" expanded="true" signature="12600:13666" placeholder="..." />
-                <marker date="1407835062735" expanded="true" signature="13786:13842" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="9332:10150" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="9378:9787" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="9454:9642" placeholder="..." />
+                <marker date="1407846974809" expanded="false" signature="9584:9602" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="12544:13666" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="12600:13666" placeholder="..." />
+                <marker date="1407846974809" expanded="true" signature="13786:13842" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -189,13 +189,13 @@
         <option value="$PROJECT_DIR$/views/cloth/console/list.jade" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/api.js" />
-        <option value="$PROJECT_DIR$/core/config.js" />
         <option value="$PROJECT_DIR$/routes/cloth.js" />
         <option value="$PROJECT_DIR$/views/cloth/console/edit.jade" />
         <option value="$PROJECT_DIR$/views/cloth/index.jade" />
         <option value="$PROJECT_DIR$/public/js/app/cloth_console.js" />
         <option value="$PROJECT_DIR$/views/cloth/detail.jade" />
         <option value="$PROJECT_DIR$/public/js/app/cloth.js" />
+        <option value="$PROJECT_DIR$/core/config.js" />
         <option value="$PROJECT_DIR$/public/js/basic.js" />
       </list>
     </option>
@@ -632,6 +632,72 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Moreii-express">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="upload">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Moreii-express">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="upload">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="blog">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="summernote">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Moreii-express">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="upload">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="blog">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -1133,22 +1199,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/images/install.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10085227" vertical-offset="2764" max-vertical-offset="3525">
-          <caret line="189" column="18" selection-start-line="189" selection-start-column="18" selection-end-line="189" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/images/binding.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10653409" vertical-offset="0" max-vertical-offset="704">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/cloth/index.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
@@ -1186,14 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5011" max-vertical-offset="5715">
-          <caret line="372" column="51" selection-start-line="372" selection-start-column="51" selection-end-line="372" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/basic.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3825">
@@ -1218,26 +1260,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5715">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.64" vertical-offset="4629" max-vertical-offset="6690">
-          <caret line="318" column="64" selection-start-line="318" selection-start-column="64" selection-end-line="318" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5279" max-vertical-offset="7185">
+          <caret line="376" column="41" selection-start-line="376" selection-start-column="41" selection-end-line="376" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/basic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6078148" vertical-offset="270" max-vertical-offset="10515">
-          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.41244572" vertical-offset="4860" max-vertical-offset="10515">
+          <caret line="343" column="40" selection-start-line="343" selection-start-column="40" selection-end-line="343" selection-end-column="40" />
           <folding>
-            <marker date="1407835062735" expanded="true" signature="9332:10150" placeholder="..." />
-            <marker date="1407835062735" expanded="true" signature="9378:9787" placeholder="..." />
-            <marker date="1407835062735" expanded="true" signature="9454:9642" placeholder="..." />
-            <marker date="1407835062735" expanded="false" signature="9584:9602" placeholder="..." />
-            <marker date="1407835062735" expanded="true" signature="12544:13666" placeholder="..." />
-            <marker date="1407835062735" expanded="true" signature="12600:13666" placeholder="..." />
-            <marker date="1407835062735" expanded="true" signature="13786:13842" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="9332:10150" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="9378:9787" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="9454:9642" placeholder="..." />
+            <marker date="1407846974809" expanded="false" signature="9584:9602" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="12544:13666" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="12600:13666" placeholder="..." />
+            <marker date="1407846974809" expanded="true" signature="13786:13842" placeholder="..." />
           </folding>
         </state>
       </provider>
