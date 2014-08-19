@@ -82,9 +82,7 @@ router.use(function(req,res,next){
     }
 });
 router.get('/logout',function(req,res){
-    res.clearCookie('name', { path: '/' });
-    res.clearCookie('mail', { path: '/' });
-    res.clearCookie('mii_login', { path: '/' });
+    req.session.user=null;
     var data = new renderData({
         title : '退出成功'
     });

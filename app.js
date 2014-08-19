@@ -48,7 +48,6 @@ app.use(express.static(path.join(__dirname, 'public')));
  * 验证登陆 & 权限
  * */
 app.use(function(req,res,next){
-    console.log(req.sessionID);
     res.set({
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'

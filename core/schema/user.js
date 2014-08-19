@@ -358,7 +358,6 @@ var userApi = {
             callback(false);
         }*/
         //session验证
-//        console.log(req.session.user);
         if(req.session.user){
             userModel.findOne({
                 name:req.session.user.name,
@@ -392,7 +391,6 @@ var userApi = {
                 mail:req.cookies.mail
             },function(err,user){
                 if(user!==null){
-                    console.log(global.config.cookieSecret);
                     var mii_login = global.config.encryptCookie({
                         name:user.name,
                         mail:user.mail,

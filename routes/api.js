@@ -120,13 +120,11 @@ router.post('/login',function(req,res){
     })
 });
 router.get('/logout',function(req,res){
-    res.clearCookie('name', { path: '/' });
-    res.clearCookie('mail', { path: '/' });
-    res.clearCookie('mii_login', { path: '/' });
-    res.send(JSON.stringify({
+    req.session.user=null;
+    res.json({
         "success":1,
         "descriotion":'退出成功。'
-    }));
+    });
 });
 router.get('/iflogin',function(req,res){
     res.send(JSON.stringify({
