@@ -178,47 +178,49 @@ router.get('/detail/:id/:page?', function(req, res) {
         page = 1;
     }
     if(req.login){
-        userSchema.getUserInfo({
+        var userData = req.userData;
+        var sendErr = function(r,err){
+            r.json({
+                err:true
+            });
+        }
+        /*
+         * 搞起文章url跳转
+         * for 小胡老师
+         * */
+        var shortURLPromise = short.generate({
+            URL : global.config.siteUrl+'blog/detail/'+req.params.id+'?userId='+String(userData._id),
+            data:{
+                blogId:req.params.id,
+                userId:String(userData._id)
+            }
+        });
+        shortURLPromise.then(function(mongodbDoc) {
+            short.retrieve(mongodbDoc.hash).then(function(result) {
+                //process.exit(0);
+                res.redirect(global.config.siteUrl+'blog/article/'+result.hash);
+            }, function(error) {
+                if (error) {
+                    //throw new Error(error);
+                    sendErr(res);
+                }
+            });
+        }, function(error) {
+            if (error) {
+                //throw new Error(error);
+                sendErr(res);
+            }
+        });
+        /*userSchema.getUserInfo({
             name:req.cookies.name,
             mail:req.cookies.mail
         },function(err,userData){
             if(err===null){
-                var sendErr = function(r,err){
-                    r.json({
-                        err:true
-                    });
-                }
-                /*
-                 * 搞起文章url跳转
-                 * for 小胡老师
-                 * */
-                var shortURLPromise = short.generate({
-                    URL : global.config.siteUrl+'blog/detail/'+req.params.id+'?userId='+String(userData._id),
-                    data:{
-                        blogId:req.params.id,
-                        userId:String(userData._id)
-                    }
-                });
-                shortURLPromise.then(function(mongodbDoc) {
-                    short.retrieve(mongodbDoc.hash).then(function(result) {
-                        //process.exit(0);
-                        res.redirect(global.config.siteUrl+'blog/article/'+result.hash);
-                    }, function(error) {
-                        if (error) {
-                            //throw new Error(error);
-                            sendErr(res);
-                        }
-                    });
-                }, function(error) {
-                    if (error) {
-                        //throw new Error(error);
-                        sendErr(res);
-                    }
-                });
+
             }else{
                 res.redirect(global.config.siteUrl+'user/login');
             }
-        });
+        });*/
     }else{
         var data = new renderData();
         blogSchema.blogDetail(req.params.id,function(err,blogData){

@@ -86,12 +86,16 @@ router.post('/login',function(req,res){
     userSchema.login(dataToLowerCase(req.body),function(err,user){
         if(err!==null){
             req.session.user = {
+                uid:user._id.toString(),
                 name:user.name,
                 mail:user.mail,
                 pw:user.password
             };
-            var keepLoginTime = (60*1000*60) * 24;//24hour
-            /*res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
+            var hour = 3600000;
+            //req.session.cookie.expires = new Date(Date.now() + hour);
+
+            /*var keepLoginTime = (60*1000*60) * 24;//24hour
+            res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
             res.cookie('ma
             il', user.mail,{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
             res.cookie('mii_login',global.config.encryptCookie({
@@ -125,40 +129,13 @@ router.get('/logout',function(req,res){
     }));
 });
 router.get('/iflogin',function(req,res){
-    userSchema.getUserInfo({name:req.cookies.name,mail:req.cookies.mail},function(err,user){
-        if(user!==null){
-            var mii_login = global.config.encryptCookie({
-                name:user.name,
-                mail:user.mail,
-                password:user.password
-            });
-            if(mii_login===req.cookies.mii_login){//logined
-                res.send(JSON.stringify({
-                    "login":true,
-                    "userInfo":{
-                        name:user.name,
-                        mail:user.mail
-                    }
-                }));
-            }else{//unlogined
-                res.send(JSON.stringify({
-                    "login":false,
-                    "userInfo":{
-                        name:null,
-                        mail:null
-                    }
-                }));
-            }
-        }else{
-            res.send(JSON.stringify({
-                "login":false,
-                "userInfo":{
-                    name:null,
-                    mail:null
-                }
-            }));
+    res.send(JSON.stringify({
+        "login":req.login,
+        "userInfo":{
+            name:req.userData.name,
+            mail:req.userData.mail
         }
-    });
+    }));
 });
 router.get('/getUserInfo/:query',function(req,res){
     userSchema.checkLogin(req,res,function(login){

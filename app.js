@@ -38,19 +38,16 @@ app.use(session({
     secret: 'speedyCat',
     cookie: {
         secure: false,
-        maxAge: 600000,
+        maxAge: 3600000
     },
-    store:require('./core/schema/session')()
+    store:userSchema.session()
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 /**
  * 验证登陆 & 权限
  * */
 app.use(function(req,res,next){
-    /*req.session.user = {
-        name:'bijiabo'
-    }*/
-    console.log(req.session.user);
+    console.log(req.sessionID);
     res.set({
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'

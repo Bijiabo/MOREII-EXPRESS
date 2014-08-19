@@ -35,7 +35,7 @@ var userSchema = new mongoose.Schema({
             default:1,
             index:true
         },
-        sessionId:{
+        sid:{
             type:String,
             default:'',
             index:true
@@ -338,7 +338,8 @@ var userApi = {
         }
     },
     checkLogin:function(req,res,callback){
-        if(req.cookies.name){
+        //cookies验证方式
+        /*if(req.cookies.name){
             userModel.findOne({
                 name:req.cookies.name,
                 mail:req.cookies.mail
@@ -352,6 +353,29 @@ var userApi = {
                     if(mii_login===req.cookies.mii_login){//logined
                         callback(true,user);
                     }else{//unlogined
+                        callback(false);
+                    }
+                }else{
+                    callback(false);
+                }
+            });
+        }else{
+            callback(false);
+        }*/
+        //session验证
+//        console.log(req.session.user);
+        if(req.session.user){
+            userModel.findOne({
+                name:req.session.user.name,
+                mail:req.session.user.mail,
+                password:req.session.user.pw
+            }).exec(function(err,userData){
+                if(err===null && userData!==null){
+                    console.log('userData.sid: '+userData.sid);
+                    console.log('session.sid : '+req.sessionID);
+                    if(userData.state!==0 && userData.sid===req.sessionID){
+                        callback(true,userData);
+                    }else{
                         callback(false);
                     }
                 }else{
@@ -464,6 +488,106 @@ var userApi = {
                 callback(err);
             }
         })
+    },
+    saveSID:function(id,sid,callback){
+        userModel.findByIdAndUpdate(id,{"$set":{sid:sid}},callback);
     }
 }
 module.exports = userApi;
+/*
+* session
+* */
+var sessionSchema = new mongoose.Schema({
+        sid: {
+            type:String,
+            index:true
+        },
+        session: mongoose.Schema.Types.Mixed
+    }),
+    SessionModel = db.model('sessions', sessionSchema);
+var MongooseSession = function () {
+    this.__proto__ = (require('express-session').Store).prototype;
+    this.mongoose = mongoose;
+    this.get = function(sid, callback) {
+        var self = this;
+        SessionModel.findOne({ sid: sid })
+            .exec(function(err, results) {
+                if (err) {
+                    console.error(err);
+                    callback(err);
+                } else {
+                    if (results) {
+                        callback(null, results.session);
+                    } else {
+                        callback(null);
+                    }
+                }
+            });
+    };
+    this.set = function(sid, session, callback) {
+        var self = this;
+        SessionModel.update(
+            { sid: sid },
+            { sid: sid, session: session },
+            { upsert: true },
+            function(err) {
+                if (err) {
+                    console.error(err);
+                    callback(err);
+                } else {
+                    if(session.user){
+                        userApi.saveSID(session.user.uid,sid,function(err1){
+                            if(err1){
+                                console.error(err1);
+                                callback(err1);
+                            }else{
+                                callback(null);
+                            }
+                        });
+                    }else{
+                        callback(null);
+                    }
+                }
+            });
+    };
+    this.destroy = function(sid, callback) {
+        var self = this;
+        SessionModel.remove({ sid: sid })
+            .exec(function(err, results) {
+                if (err) {
+                    console.error(err);
+                    callback(err);
+                } else {
+                    callback(null);
+                }
+            });
+    };
+    this.length = function(callback) {
+        var self = this;
+        SessionModel.find()
+            .exec(function(err, results) {
+                if (err) {
+                    console.error(err);
+                    callback(err);
+                } else {
+                    callback(null, results.length);
+                }
+            });
+    };
+    this.clear = function(callback) {
+        var self = this;
+        SessionModel.remove()
+            .exec(function(err, results) {
+                if (err) {
+                    console.error(err);
+                    callback(err);
+                } else {
+                    callback(null);
+                }
+            });
+    };
+};
+
+module.exports.session = function() {
+    return new MongooseSession();
+};
