@@ -32,13 +32,11 @@ router.get('/', function(req, res) {
  * 已登陆用户功能--------------------------------------------------------------------------------
  * */
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
-        }else{
-            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
-        }
-    });
+    if(req.login){
+        next();
+    }else{
+        global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
+    }
 });
 
 /**
@@ -46,20 +44,11 @@ router.use(function(req,res,next){
  * api
  * */
 router.use(function(req,res,next){
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null && userData!==null){
-            if(userData.permission.class.editClass && userData.permission.class.editStudent && userData.permission.class.editTeacher){//拥有修改用户的权限
-                next();
-            }else{//无修改用户的权限
-                global.config.resError(req,res,'权限不足。');
-            }
-        }else{
-            global.config.resError(req,res,'数据错误。');
-        }
-    });
+    if(req.userData.permission.class.editClass && req.userData.permission.class.editStudent && req.userData.permission.class.editTeacher){//拥有修改用户的权限
+        next();
+    }else{//无修改用户的权限
+        global.config.resError(req,res,'权限不足。');
+    }
 });
 //控制台首页
 router.get('/console',function(req,res){

@@ -75,18 +75,11 @@ router.get('/auth/github/callback',
  * 已登陆用户功能-----------------------------------------------------------------------------------
  * */
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
-        }else{
-            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
-            /*if(req.query.ajax !== 'true'){
-                res.redirect('/user/login');
-            }else{
-                global.config.resError(req,res,'请登录。');
-            }*/
-        }
-    });
+    if(req.login){
+        next();
+    }else{
+        global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
+    }
 });
 router.get('/logout',function(req,res){
     res.clearCookie('name', { path: '/' });
@@ -102,20 +95,9 @@ router.get('/account',function(req,res){
         title : '我的资料',
         jsfile:'ProvinceAndCityJson.js,user.js'
     });
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null){
-            data.userData = userData;
-            data.userData.password = undefined;
-            res.render('user/account', data);
-        }else{
-            data.title = '500 Error';
-            data.errorname = '500';
-            res.render('500', data);
-        }
-    });
+    data.userData = req.userData;
+    data.userData.password = undefined;
+    res.render('user/account', data);
 });
 router.post('/api/addAddress',function(req,res){
     var addressData = new userSchema.addressSchema({

@@ -41,52 +41,37 @@ router.post('/api/submit',function(req,res){
     data.os = ua.os;
     data.device = ua.device;
     data.cpu = ua.cpu;
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            userSchema.getUserInfo({
-                name:req.cookies.name,
-                mail:req.cookies.mail
-            },function(err,userData){
-                if(err===null && userData!==null){
-                    data.uid = userData._id.toString();
-                    data.uname = userData.name;
-                    statisticsSchema.add(data,function(err,savedData){
-                        if(err===null){
-                            res.json({
-                                err:false,
-                                id:savedData._id.toString()
-                            });
-                        }else{
-                            res.json({
-                                err:true,
-                                des:'数据保存错误.'
-                            });
-                        }
-                    });
-                }else{
-                    res.json({
-                        err:true,
-                        des:'用户身份信息错误.'
-                    });
-                }
-            });
-        }else{
-            //未登陆用户
-            statisticsSchema.add(data,function(err,savedData){
-                if(err===null){
-                    res.json({
-                        err:false,
-                        id:savedData._id.toString()
-                    });
-                }else{
-                    res.json({
-                        err:true,
-                        des:'数据保存错误.'
-                    });
-                }
-            });
-        }
-    });
+    if(req.login){
+        data.uid = req.userData._id.toString();
+        data.uname = req.userData.name;
+        statisticsSchema.add(data,function(err,savedData){
+            if(err===null){
+                res.json({
+                    err:false,
+                    id:savedData._id.toString()
+                });
+            }else{
+                res.json({
+                    err:true,
+                    des:'数据保存错误.'
+                });
+            }
+        });
+    }else{
+        statisticsSchema.add(data,function(err,savedData){
+            if(err===null){
+                res.json({
+                    err:false,
+                    id:savedData._id.toString()
+                });
+            }else{
+                res.json({
+                    err:true,
+                    des:'数据保存错误.'
+                });
+            }
+        });
+    }
 });
 /**
  * 更新页面打开后的浏览时间
@@ -120,33 +105,22 @@ router.post('/api/updateOpenTime',function(req,res){
  * 检测用户登录
  * */
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
-        }else{
-            global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
-        }
-    });
+    if(req.login){
+        next();
+    }else{
+        global.config.resError(req,res,'请登录。',global.config.siteUrl+'user/login');
+    }
 });
 
 /**
  * 检测统计后台基础查看权限 -view
  * */
 router.use(function(req,res,next){
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null && userData!==null){
-            if(userData.permission.statistics.view){//拥有权限
-                next();
-            }else{//无权限
-                global.config.resError(req,res,'权限不足。');
-            }
-        }else{
-            global.config.resError(req,res,'数据错误。');
-        }
-    });
+    if(req.userData.permission.statistics.view){//拥有权限
+        next();
+    }else{//无权限
+        global.config.resError(req,res,'权限不足。');
+    }
 });
 
 /**

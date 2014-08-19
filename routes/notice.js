@@ -38,28 +38,16 @@ router.use(function(req,res,next){
 });
 
 router.get('/api/getUnread', function(req, res) {
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null && userData!==null){
-            noticeSchema.unreadNotice({uid:userData._id.toString()},function(err,data){
-                if(err===null){
-                    res.json({
-                        err:false,
-                        data:data
-                    });
-                }else{
-                    res.json({
-                        err:true,
-                        des:'数据获取错误。'
-                    });
-                }
+    noticeSchema.unreadNotice({uid:req.userData._id.toString()},function(err,data){
+        if(err===null){
+            res.json({
+                err:false,
+                data:data
             });
         }else{
             res.json({
                 err:true,
-                des:'用户数据错误。'
+                des:'数据获取错误。'
             });
         }
     });

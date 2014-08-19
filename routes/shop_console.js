@@ -33,35 +33,18 @@ var renderData = function(data){
 }
 
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-       if(login){
-           userSchema.getUserInfo({
-               name:req.cookies.name,
-               mail:req.cookies.mail
-           },function(err,userData){
-                if(err===null && userData!==null){
-                    if(userData.permission.shop.editGood){
-                        next();
-                    }else{
-                        res.render('no_permission',{
-                            title:'权限不足',
-                            des:'您没有此页面浏览权限。'
-                        });
-                    }
-                }else{
-                    res.render('500',{
-                        title:'数据错误',
-                        des:'请检查您的登录状态，刷新页面后重试。'
-                    });
-                }
-           });
-       }else{
-           res.render('no_permission',{
-               title:'权限不足',
-               des:'此页面仅登录用户可见。',
-           });
-       }
-    });
+    if(req.login){
+        if(req.userData.permission.shop.editGood){
+            next();
+        }else{
+            res.render('no_permission',{
+                title:'权限不足',
+                des:'您没有此页面浏览权限。'
+            });
+        }
+    }else{
+        res.redirect(global.config.siteUrl+'/user/login');
+    }
 });
 
 router.get('/', function(req, res) {

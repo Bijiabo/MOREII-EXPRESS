@@ -35,11 +35,6 @@ var userSchema = new mongoose.Schema({
             default:1,
             index:true
         },
-        sid:{
-            type:String,
-            default:'',
-            index:true
-        },
         permission:{
             user:{
                 login:{type:Boolean,default:true},
@@ -371,9 +366,7 @@ var userApi = {
                 password:req.session.user.pw
             }).exec(function(err,userData){
                 if(err===null && userData!==null){
-                    console.log('userData.sid: '+userData.sid);
-                    console.log('session.sid : '+req.sessionID);
-                    if(userData.state!==0 && userData.sid===req.sessionID){
+                    if(userData.state!==0){
                         callback(true,userData);
                     }else{
                         callback(false);
@@ -535,18 +528,7 @@ var MongooseSession = function () {
                     console.error(err);
                     callback(err);
                 } else {
-                    if(session.user){
-                        userApi.saveSID(session.user.uid,sid,function(err1){
-                            if(err1){
-                                console.error(err1);
-                                callback(err1);
-                            }else{
-                                callback(null);
-                            }
-                        });
-                    }else{
-                        callback(null);
-                    }
+                    callback(null);
                 }
             });
     };

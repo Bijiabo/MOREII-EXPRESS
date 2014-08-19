@@ -138,43 +138,48 @@ router.get('/iflogin',function(req,res){
     }));
 });
 router.get('/getUserInfo/:query',function(req,res){
+    if(req.login){
+        var account = req.params.query;
+        if(/^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,4}$/.test(account)){//mail
+            userSchema.getUserInfo({
+                mail:account
+            },function(err,user){
+                if(user!==null){
+                    user.password = undefined;
+                    res.send(JSON.stringify(user));
+                }else{
+                    res.send(JSON.stringify({
+                        error:true,
+                        description:'木有这个账户啊亲！！！'
+                    }));
+                }
+            });
+        }else{//name
+            userSchema.getUserInfo({
+                name:account
+            },function(err,user){
+                if(user!==null){
+                    user.password = undefined;
+                    res.send(JSON.stringify(user));
+                }else{
+                    res.send(JSON.stringify({
+                        error:true,
+                        description:'木有这个账户啊亲！！！'
+                    }));
+                }
+            });
+        }
+    }else{
+        res.json({
+            error:true,
+            description:'木有登陆啊亲！！！'
+        });
+    }
     userSchema.checkLogin(req,res,function(login){
         if(login){
-            var account = req.params.query;
-            if(/^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,4}$/.test(account)){//mail
-                userSchema.getUserInfo({
-                    mail:account
-                },function(err,user){
-                    if(user!==null){
-                        user.password = undefined;
-                        res.send(JSON.stringify(user));
-                    }else{
-                        res.send(JSON.stringify({
-                            error:true,
-                            description:'木有这个账户啊亲！！！'
-                        }));
-                    }
-                });
-            }else{//name
-                userSchema.getUserInfo({
-                    name:account
-                },function(err,user){
-                    if(user!==null){
-                        user.password = undefined;
-                        res.send(JSON.stringify(user));
-                    }else{
-                        res.send(JSON.stringify({
-                            error:true,
-                            description:'木有这个账户啊亲！！！'
-                        }));
-                    }
-                });
-            }
+
         }else{
-            res.send(JSON.stringify({
-                error:true,
-                description:'木有登陆啊亲！！！'
-            }));
+
         }
     });
 });
@@ -182,73 +187,43 @@ router.get('/getUserInfo/:query',function(req,res){
  * notice api
  * */
 router.get('/getUnreadNotice',function(req,res){
-    userSchema.checkLogin(req,res,function(login){
-       if(login){
-            userSchema.getUserInfo({
-                name:req.cookies.name,
-                mail:req.cookies.mail
-            },function(err,user){
-                if(user!==null){
-                    //TODO:query form noticeSchema
-                    noticeSchema.unreadNotice({
-                        uid:user._id
-                    },function(err,data){
-                        if(err==null){
-                            res.send(JSON.stringify(data));
-                        }
-                    });
-                }else{
-                    res.send(JSON.stringify({
-                        error:true,
-                        description:'木有这个账户啊亲！！！'
-                    }));
-                }
-            });
-       }else{
-           res.send(JSON.stringify({
-               error:true,
-               description:'木有登陆啊亲！！！'
-           }));
-       }
-    });
+    if(req.login){
+        noticeSchema.unreadNotice({
+            uid:req.userData._id
+        },function(err,data){
+            if(err==null){
+                res.json(data);
+            }
+        });
+    }else{
+        res.json({
+            error:true,
+            description:'请登录。'
+        });
+    }
 });
 
 router.get('/addTestNotice',function(req,res){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            userSchema.getUserInfo({
-                name:req.cookies.name,
-                mail:req.cookies.mail
-            },function(err,user){
-                if(user!==null){
-                    //TODO:query form noticeSchema
-                    noticeSchema.addTestNotice(user._id,function(err){
-                       if(err==null){
-                           res.send(JSON.stringify({
-                               error:false,
-                               description:'添加测试通知成功:)'
-                           }));
-                       }else{
-                           res.send(JSON.stringify({
-                               err:true,
-                               description:'添加测试通知失败:('
-                           }));
-                       }
-                    });
-                }else{
-                    res.send(JSON.stringify({
-                        error:true,
-                        description:'木有这个账户啊亲！！！'
-                    }));
-                }
-            });
-        }else{
-            res.send(JSON.stringify({
-                error:true,
-                description:'木有登陆啊亲！！！'
-            }));
-        }
-    });
+    if(req.login){
+        noticeSchema.addTestNotice(req.userData._id,function(err){
+            if(err==null){
+                res.json({
+                    error:false,
+                    description:'添加测试通知成功:)'
+                });
+            }else{
+                res.json({
+                    err:true,
+                    description:'添加测试通知失败:('
+                });
+            }
+        });
+    }else{
+        res.json({
+            error:true,
+            description:'请登录。'
+        });
+    }
 });
 
 /**

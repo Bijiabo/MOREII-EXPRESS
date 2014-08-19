@@ -90,23 +90,11 @@ router.post('/api/addOrder',function(req,res){
         state:'waitingPaid'
     }
 
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,data){
+    orderData.uid = req.userData._id;
+    shopSchema.goodDetail(req.body.goodID,function(err,goodData){
         if(err===null){
-            orderData.uid = data._id;
-            shopSchema.goodDetail(req.body.goodID,function(err,goodData){
-                if(err===null){
-                    orderData.goodData = goodData;
-                    orderData.price = goodData.price * Number(req.body.count);
-                }else{
-                    res.send(JSON.stringify({
-                        err:err,
-                        data:data
-                    }));
-                }
-            });
+            orderData.goodData = goodData;
+            orderData.price = goodData.price * Number(req.body.count);
         }else{
             res.send(JSON.stringify({
                 err:err,

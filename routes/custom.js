@@ -97,34 +97,16 @@ router.use(function(req,res,next){
 });
 
 router.get('/api/listCustom', function(req, res) {
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null){
-            customSchema.list({uid:userData._id},0,20,function(error,data){
-                res.send(JSON.stringify({err:error,data:data}));
-            });
-        }else{
-            res.send(JSON.stringify({err:err}));
-        }
+    customSchema.list({uid:req.userData._id},0,20,function(error,data){
+        res.json({err:error,data:data});
     });
 });
 router.post('/api/addCustom', function(req, res) {
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,userData){
-        if(err===null){
-            customSchema.add({
-                uid:userData._id,
-                drawData:req.body.drawData
-            },function(error,data){
-                res.send(JSON.stringify({err:error}));
-            });
-        }else{
-            res.send(JSON.stringify({err:err}));
-        }
+    customSchema.add({
+        uid:req.userData._id,
+        drawData:req.body.drawData
+    },function(error,data){
+        res.json({err:error});
     });
 });
 

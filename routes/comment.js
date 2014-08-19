@@ -41,16 +41,14 @@ router.get('/api/list/:app/:appPageId/:skip/:limit', function(req, res) {
  * user api
  * */
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
-        }else{
-            res.send(JSON.stringify({
-                err:true,
-                description:'先登陆再评论啊亲！'
-            }));
-        }
-    });
+    if(req.login){
+        next();
+    }else{
+        res.json({
+            err:true,
+            description:'先登陆再评论啊亲！'
+        });
+    }
 });
 router.post('/api/add',function(req,res){
     var commenrData = {
@@ -59,31 +57,18 @@ router.post('/api/add',function(req,res){
         appPageId:req.body.appPageId,
         time:new Date()
     };
-    userSchema.getUserInfo({
-        name:req.cookies.name,
-        mail:req.cookies.mail
-    },function(err,data){
-        if(err===null){
-            commenrData.uid = data._id;
-            commenrData.userData = {
-                name:data.name,
-                mail:data.mail,
-                permission:data.permission
-            };
-            console.log(commenrData);
-            commentSchema.add(commenrData,function(err,data){
-                res.send(JSON.stringify({
-                    err:err,
-                    data:data
-                }));
-            })
-        }else{
-            res.send(JSON.stringify({
-                err:err,
-                data:data
-            }));
-        }
-    });
+    commenrData.uid = req.userData._id;
+    commenrData.userData = {
+        name:req.userData.name,
+        mail:req.userData.mail,
+        permission:req.userData.permission
+    };
+    commentSchema.add(commenrData,function(err,data){
+        res.send(JSON.stringify({
+            err:err,
+            data:data
+        }));
+    })
 });
 
 
