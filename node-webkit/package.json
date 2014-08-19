@@ -1,0 +1,18 @@
+{
+    "name": "Moreii-nw",
+    "version": "0.0.1",
+    "main": "index.html",
+    "window": {                                       /* APP的窗口属性 */
+        "icon": "link.png",                           /* APP图标（windows下，状态栏上可见） */
+        "toolbar": false,                              /* 是否显示工具栏 */
+        "min-width":800,
+        "min-height":700,
+        "width": 1500,                                 /* 窗口初始化大小 */
+        "height": 800,
+        "frame": false,                                 /* 是否显示外窗体，如最大化、最小化、关闭按钮 */
+        "title":"Moreii",
+        "position":"center",
+        "resizable":false
+    },
+    "nodejs":true
+}

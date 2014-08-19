@@ -7,11 +7,13 @@ var mongoose = require('mongoose'),
 var userSchema = new mongoose.Schema({
         name:{
             type:'String',
-            required:true
+            required:true,
+            index:true
         },
         mail:{
             type:'String',
-            required:true
+            required:true,
+            index:true
         },
         password:{
             type:'String',
@@ -19,6 +21,25 @@ var userSchema = new mongoose.Schema({
         },
         phone:String,
         address:Array,
+        type:{//账户类型，用于判断多账户登陆情况
+            type:String,
+            default:'moreii',
+            index:true
+        },
+        url:{//个人主页
+            type:String,
+            default:''
+        },
+        state:{//账户状态，1为允许登陆，0为禁止登陆
+            type:Number,
+            default:1,
+            index:true
+        },
+        sessionId:{
+            type:String,
+            default:'',
+            index:true
+        },
         permission:{
             user:{
                 login:{type:Boolean,default:true},
@@ -253,7 +274,7 @@ var userGrade = {
     }
 }
 
-module.exports = {
+var userApi = {
     addressSchema:addressSchema,
     register:function (userData,callback){
         userModel.findOne({name:userData.name},function(err,user){
@@ -445,3 +466,4 @@ module.exports = {
         })
     }
 }
+module.exports = userApi;

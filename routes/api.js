@@ -85,10 +85,15 @@ router.post('/register',function(req,res){
 router.post('/login',function(req,res){
     userSchema.login(dataToLowerCase(req.body),function(err,user){
         if(err!==null){
+            req.session.user = {
+                name:user.name,
+                mail:user.mail,
+                pw:user.password
+            };
             var keepLoginTime = (60*1000*60) * 24;//24hour
-            res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
-            res.cookie('mail', user.mail,{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
-
+            /*res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
+            res.cookie('ma
+            il', user.mail,{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });
             res.cookie('mii_login',global.config.encryptCookie({
                 name:user.name,
                 mail:user.mail,
@@ -97,7 +102,7 @@ router.post('/login',function(req,res){
                 path: '/',
                 expires: new Date(Date.now() + keepLoginTime),
                 httpOnly: true
-            });
+            });*/
             res.send(JSON.stringify({
                 "success":1,
                 "descriotion":'登陆成功。'

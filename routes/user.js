@@ -1,6 +1,26 @@
 var express = require('express'),
     router = express.Router(),
-    userSchema = require('../core/schema/user');
+    userSchema = require('../core/schema/user'),
+    passport = require('passport'),
+    GitHubStrategy = require('passport-github').Strategy;
+//router.use(passport.initialize());
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+router.use(passport.initialize());
+passport.use(new GitHubStrategy({
+        clientID: 'd7ae84d6f28449287145',
+        clientSecret: '0bc7b83eacca9446fb97a6cd2ae16bd27c59f880',
+        callbackURL: global.config.siteUrl+"user/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        done(null, profile);
+    }
+));
 var renderData = function(data){
     if(data===undefined){
         var data = {};
@@ -39,7 +59,18 @@ router.get('/login',function(req,res){
     });
     res.render('user/login', data);
 });
-
+//github
+router.get('/auth/github',passport.authenticate('github',{ session : false}));
+router.get('/auth/github/callback',
+    passport.authenticate('github', {
+        session:false,
+        failureRedirect: '/login' }),
+    function(req, res) {
+        console.log(req.user);
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    }
+);
 /**
  * 已登陆用户功能-----------------------------------------------------------------------------------
  * */
