@@ -70,10 +70,10 @@ app.use(function(req,res,next){
  * */
 var appRouter = {};
 for(var item in config.app){
-    if(config.app[item].state===1){
+//    if(config.app[item].state===1){
         appRouter[item] = require('./routes/'+config.app[item].name);
         app.use('/'+config.app[item].path,appRouter[item]);
-    }
+//    }
 }
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -120,9 +120,9 @@ var crypto = require('crypto'),
             state:1
         },
         hitcat:{
-            name:'hitcat',
-                cnName:'打猫猫',
-            path:'hitcat',
+            name:'wine',
+            cnName:'酒',
+            path:'wine',
             ico:'fa-github-alt',
             state:0
         },

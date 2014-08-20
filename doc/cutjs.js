@@ -236,7 +236,7 @@ bar.pin({
     // Distance from parent align to self handle in pixel.
     // 相对于父节点的像素位置
     offsetX : 0,
-    offsetY : 0,
+    offsetY : 0
 });
 
 // Scale to new width/height.
@@ -246,7 +246,7 @@ bar.pin({
 bar.pin({
     scaleMode : mode,
     scaleWidth : width,
-    scaleHeight : height,
+    scaleHeight : height
 });
 
 // Scale to new width/height and then resize to fill width/height.
@@ -255,7 +255,7 @@ bar.pin({
 bar.pin({
     resizeMode : mode,
     resizeWidth : width,
-    resizeHeight : height,
+    resizeHeight : height
 });
 
 //
