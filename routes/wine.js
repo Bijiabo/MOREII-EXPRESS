@@ -38,5 +38,14 @@ router.get('/', function(req, res) {
     });
     res.render('wine/index',data);
 });
+router.get('/test', function(req, res) {
+    console.log(global.config.app);
+    console.log(router.stack);
+    var data = new renderData({
+        title : 'Moreii Wine',
+        jsfile: 'wine_test.js'
+    });
+    res.render('wine/test',data);
+});
 
 module.exports = router;

@@ -7,47 +7,96 @@ var cache = {
     latestY:0,
     scaleY:1,
     effectivity:false,
-    score:0
+    score:0,
+    canvasElement:{},
+    beerElementList:[],
+    beerGroupType:1,
+    rowX:0
 };
+var beerFunc = {
+    randomBeerCount : function(){
+        return Math.floor(Math.random()*3+1);
+    },
+    addBeer:function(beer){
+        var maxListLength = 10;
+        cache.beerGroupType = beerFunc.randomBeerCount();
+        cache.beerElementList.push(beer['beer_'+cache.beerGroupType]);
+        if(cache.beerElementList.length>maxListLength){
+//            cache.beerElementList[0].remove();
+            cache.beerElementList.shift();
+        }
+        return {
+            element:cache.beerElementList[cache.beerElementList.length-1],
+            index:cache.beerElementList.length-1
+        };
+    }
+}
+
 Cut(function(root, container) {
     Cut.Mouse(root, container, true);
-    root.viewbox(360, 720);
+    root.viewbox(360, 720).pin('handle', 0);
     //绘制分数
-    var scoreString =  Cut.string("font:_").pin({
+    var scorerow = Cut.row().pin({
+        offset : 1,
         align : -0.5,
         handle : 0,
-        offset : 0.1
+        offsetX:250,
+        offsetY:380,
+        height:500
     }).appendTo(root);
+    var scoreString =  Cut.string('base:d_').appendTo(scorerow);
+    scoreString.pin({
+        offsetX:0,
+        offsetY:0,
+        height:50
+    });
     scoreString.setValue("Score:"+cache.score);
+    console.log(scorerow.pin('offsetX'));
+
+
     //绘制酒瓶
     var row = Cut.row(0).appendTo(root).pin({
-        "align": 0.5
+        "align": 0.5,
+        offsetX:0,
+        offsetY:0
     });
-    var beer = Cut.image("beerbottle:beer");
-    beer.appendTo(row);
+    var column = Cut.column(0).appendTo(root).pin({
+//        "align": 0.5,
+        offsetX:0,
+        offsetY:0
+    });
+    var beer={
+        beer_1 : Cut.image("beerbottle:beer1"),
+        beer_2 : Cut.image("beerbottle:beer2"),
+        beer_3 : Cut.image("beerbottle:beer3")
+    }
+    var addBeer = beerFunc.addBeer(beer),
+        beerNow = addBeer.element;
+    beerNow.appendTo(row);
+    beerNow.appendTo(column);
     root.on(Cut.Mouse.START,function(ev,point){
         cache.startX=point.x;
         cache.startY=point.y;
         cache.latestY=cache.startY;
-        if(Math.abs(document.body.clientWidth/2-point.x)<=80){
+        if(Math.abs(document.body.offsetWidth/2-point.x)<=80){
             cache.effectivity=true;
         }else{
             cache.effectivity=false;
         }
-        beer.tween(duration = 100, delay = 0).clear().pin({
+        beerNow.tween(duration = 100, delay = 0).clear().pin({
             scaleX : 1,
             scaleY : 1
         }).then(function(){
         });
     }).on(Cut.Mouse.MOVE,function(ev,point){
         if(cache.effectivity && point.y<cache.latestY){
-            beer.tween(duration = 100, delay = 0).clear().pin({
+            beerNow.tween(duration = 100, delay = 0).clear().pin({
                 scaleX : 1.2,
                 scaleY : 2
             }).then(function(){
             });
         }else{
-            beer.tween(duration = 100, delay = 0).clear().pin({
+            beerNow.tween(duration = 100, delay = 0).clear().pin({
                 scaleX : 1,
                 scaleY : 1
             }).then(function(){
@@ -57,24 +106,24 @@ Cut(function(root, container) {
     }).on(Cut.Mouse.END,function(ev,point){
         cache.effectivity=false;//终止动作标记
         //得分
-        cache.scaleY = beer.pin('scaleY');
-        console.log(cache.scaleY);
-        switch (true){
-            case cache.scaleY>1.1 && cache.scaleY<1.2:
-                cache.score+=10;
-                break;
-            case cache.scaleY>=1.2 && cache.scaleY<1.5:
-                cache.score+=30;
-                break;
-            case cache.scaleY>=1.5:
-                cache.score+=50;
-                break;
+        cache.scaleY = beerNow.pin('scaleY');
+        if(cache.scaleY>1){
+            cache.score++;
+            //清除啤酒瓶，并添加新瓶子
+            row.empty();
+            addBeer = beerFunc.addBeer(beer);
+            beerNow = addBeer.element;
+            beerNow.pin({
+                scaleX : 1,
+                scaleY : 1
+            }).appendTo(row);
         }
-        console.log('score:'+cache.score);
+        scoreString.setValue("Score:"+cache.score);
         //恢复原始状态，动画
-        beer.tween(duration = 100, delay = 0).clear().pin({
+        cache.beerElementList[addBeer.index-1].tween(duration = 100, delay = 0).clear().pin({
             scaleX : 1,
-            scaleY : 1
+            scaleY : 1,
+            pivotY:1
         }).then(function(){
         });
     });
@@ -84,14 +133,36 @@ Cut(function(root, container) {
 var PPU = 64;
 Cut.addTexture(texture = {
     name : 'beerbottle',
-    imagePath : '/img/wine/beer.jpg',
+    imagePath : '/img/wine/beers.png',
     imageRatio : 1,
     cutouts : [
         { // list of cutoutDefs or cutouts
-            name : 'beer',
+            name : 'beer1',
             x : 0,
             y : -200,
-            width : 250,
+            width : 450,
+            height : 750,
+            top : 0,
+            bottom : 0,
+            left : 0,
+            right : 0
+        },
+        {
+            name : 'beer2',
+            x : 450,
+            y : -200,
+            width : 450,
+            height : 750,
+            top : 0,
+            bottom : 0,
+            left : 0,
+            right : 0
+        },
+        {
+            name : 'beer3',
+            x : 900,
+            y : -200,
+            width : 450,
             height : 750,
             top : 0,
             bottom : 0,
@@ -99,19 +170,23 @@ Cut.addTexture(texture = {
             right : 0
         }
     ]
-},{
-    name : "font",
+});
+Cut.addTexture({
+    name : "base",
     factory : function(name) {
-        var prefix = "_";
-        if (name.substring(0, prefix.length) === prefix) {
-            var d = name.substr(prefix.length, 1);
-            return Cut.Out.drawing(prefix + d, 32 / PPU, 18 / PPU, 128, function(ctx,ratio) {
-                ctx.scale(ratio / PPU, ratio / PPU);
-                ctx.font = "bold 16px monospace";
-                ctx.fillStyle = "#000000";
-                ctx.measureText && this.cropX((ctx.measureText(d).width) / PPU);
+        if (name.substring(0, 2) === "d_") {
+            var d = name.substr(2, 1);
+            console.log(d);
+            return Cut.Out.drawing("d_" + d, 12, 24, 10, function(ctx, ratio) {
+//                ratio = 3;
+                console.log(ratio);
+                console.log('text----------------------');
+                ctx.scale(ratio, ratio);
+                ctx.font = "bold 24px Arial";
+                ctx.fillStyle = "#000";
+                ctx.measureText && this.cropX(ctx.measureText(d).width + 0.4);
                 ctx.textBaseline = "top";
-                ctx.fillText(d, 0, 1);
+                ctx.fillText(d, 0, 0);
             });
         }
     }
