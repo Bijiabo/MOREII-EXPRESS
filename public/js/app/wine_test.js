@@ -10,30 +10,40 @@ var cache = {
     randomIndex:1,
     start:false,
     startTime:new Date(),
-    playTime:30,//每局游戏时间，单位为秒
-    time2die:30//剩余时间，单位为秒
+    playTime:10,//每局游戏时间，单位为秒
+    time2die:10,//剩余时间，单位为秒
+    canvasSize:{
+        width:0,
+        height:0
+    }
 };
 var itemSize= 120;
-var startPlayTime = function(timeString){
+var startPlayTime = function(timeString,endGuide,endString){
     cache.start=true;
     cache.startTime=new Date();
     cache.time2die=30;
+    cache.score=0;
     cache.playTimeSetInterval=window.setInterval(function(){
-        refreshPlayTime(timeString);
+        refreshPlayTime(timeString,endGuide,endString);
     },1000);
 }
-var refreshPlayTime = function(timeString){
+var refreshPlayTime = function(timeString,endGuide,endString){
     cache.time2die=cache.playTime - Math.round((new Date() - cache.startTime)/1000);
-    timeString.setValue("剩余时间:"+cache.time2die+'s');
-    if(cache.time2die<=0){
+    timeString.setValue(cache.time2die+'s');
+    if(cache.time2die<=0){//时间到，游戏结束
         window.clearInterval(cache.playTimeSetInterval);
+        endString.setValue("一共干了"+cache.score+'瓶！');
+        endGuide.show();
     }
     console.log(cache.time2die);
 }
 Cut(function(root, container) {
     Cut.Mouse(root, container, true);
     root.viewbox(360, 720);
-
+    root.on("viewport", function(width, height) {
+        cache.canvasSize.width=width;
+        cache.canvasSize.height=height;
+    });
 
     //绘制酒瓶
     var last = null,
@@ -54,10 +64,12 @@ Cut(function(root, container) {
                 scaleHeight:itemSize
             }).appendTo(line).on(
                 Cut.Mouse.CLICK, function(ev, point) {
+                    //解除滚动锁定
+                    cache.onclick = false;
                     //启动计时
-                    if(!cache.start){
-                        startPlayTime(timeString);
-                    }else if(cache.time2die>0){//检测时间
+                    if(!cache.start && !guideBox.visible()){
+                        startPlayTime(timeString,endGuide,endString);
+                    }else if(cache.time2die>0 && !guideBox.visible()){//检测时间
                         //添加滚动锁定
                         cache.onclick = true;
                         clickCount++;
@@ -96,32 +108,32 @@ Cut(function(root, container) {
                                 default :
                                     break;
                             }
-                            /*this.setImage('beerok:test').pin({
-                             scaleMode:'in',
-                             scaleWidth:itemSize,
-                             scaleHeight:itemSize
-                             });*/
 //                        this.score=true;
                             //更新得分
                             cache.score+=this.score;
-                            scoreString.setValue("干掉"+cache.score+'瓶');
+                            scoreString.setValue(cache.score+'瓶');
 
                         }
                         //移动酒瓶列表
-                        row.tween(duration = 100, delay = 0).pin({
+                        row.tween(duration = 100, delay = 0).clear().pin({
                             offsetY:itemSize*clickCount
                         }).then(function(){
-                            //解除滚动锁定
-                            cache.onclick = false;
                             //回收资源
                             row.last().remove();
                             row.pin({
                                 offsetY:row.pin('offsetY')-itemSize
                             });
                             clickCount--;
-                            console.log(row.pin('offsetY'));
+//                            console.log(row.pin('offsetY'));
                             //添加元素
                             addLabItem();
+                            if(row.pin('offsetY')>20){
+                                for (var i = 0; i < 7; i++) {
+                                    addLabItem();
+                                }
+                            }
+                            //解除滚动锁定
+                            //cache.onclick = false;
                         });
                     }
                     return true;
@@ -146,7 +158,7 @@ Cut(function(root, container) {
             }
         }
     }
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 20; i++) {
         addLabItem();
     }
     //绘制分数
@@ -167,7 +179,7 @@ Cut(function(root, container) {
         offsetY:0,
         height:50
     });
-    scoreString.setValue("干掉"+cache.score+'瓶');
+    scoreString.setValue(cache.score+'瓶');
     scorerow.on(Cut.Mouse.CLICK,function(ev,point){
         row.last().remove();
         row.pin({
@@ -181,14 +193,73 @@ Cut(function(root, container) {
         alignX:1
     });
     var timeString =  Cut.string('base:d_').appendTo(timeBox);
-    /*timeString.pin({
-        offsetX:0,
-        offsetY:0,
-        height:50
-    });*/
-    timeString.setValue("挑战时间:"+cache.time2die+'s');
+    timeString.setValue(cache.time2die+'s');
     //绘制引导
-
+    var guideBox = Cut.row().appendTo(root).pin({
+        alignX:0.5,
+        alignY:0.5
+    });
+    var guideShadow = Cut.image('guide:white').appendTo(guideBox).pin({
+        alignX:0.5,
+        alignY:0,
+        alpha:0.5,
+        resizeMode:'out',
+        resizeWidth:600,
+        resizeHeight:720
+    });
+    var guidebg = Cut.image('guide:background')
+        .pin({
+            alignX:-0.5,
+            alignY:0.5
+        })
+        .appendTo(guideBox).on(Cut.Mouse.CLICK,function(ev,point){
+        guideBox.hide();
+        cache.start=false;
+    });
+    //绘制结束提示
+    var endGuide = Cut.create().appendTo(root).pin({
+        alignX:0.5,
+        alignY:0
+    });
+    var endbg = Cut.image('guide:white').appendTo(endGuide).pin({
+        alignX:0.5,
+        alignY:0,
+        resizeMode:'out',
+        resizeWidth:600,
+        resizeHeight:720
+    });
+    var endShare = Cut.image('guide:share').appendTo(endGuide).pin({
+        offsetX:60,
+        offsetY:10
+    });
+    var endString =  Cut.string('base:b_').appendTo(endGuide).pin({
+        alignX:0.5,
+        alignY:-4
+    });
+    endString.setValue("一共干了"+cache.score+'瓶！');
+    //绘制再来一局按钮
+    var endAgainButton = Cut.image('guide:button').appendTo(endGuide).pin({
+        alignX:0.5,
+        offsetY:400,
+        resizeMode:'out',
+        resizeWidth:300,
+        resizeHeight:90
+    });
+    var endAgainString =  Cut.string('base:w_').appendTo(endGuide).pin({
+        alignX:0.5,
+        offsetY:416
+    });
+    /*endString.on(Cut.Mouse.CLICK,function(ev,point){
+        console.log('---------------again');
+        row.empty();
+        for (var i = 0; i < 20; i++) {
+            addLabItem();
+        }
+        endGuide.hide();
+        cache.start=false;
+    });*/
+    endAgainString.setValue("再战一轮");
+    endGuide.hide();
 });
 
 /*texture*/
@@ -344,21 +415,55 @@ Cut.addTexture(texture = {
     ]
 });
 Cut.addTexture(texture = {
-    name : 'beerok',
-    imagePath : '/img/wine/labok.png',
+    name : 'guide',
+    imagePath : '/img/wine/guidebg.png',
     imageRatio : 1,
     cutouts : [
-        { // list of cutoutDefs or cutouts
-            name : 'test',
+        {
+            name : 'background',
             x : 0,
             y : 0,
-            width : 144,
-            height : 144,
+            width : 600,
+            height : 180,
+            top : 0,
+            bottom : 0,
+            left : 0,
+            right : 0
+        },
+        {
+            name : 'white',
+            x : 0,
+            y : 190,
+            width : 445,
+            height : 110,
+            top : 0,
+            bottom : 0,
+            left : 0,
+            right : 0
+        },
+        {
+            name : 'share',
+            x : 445,
+            y : 190,
+            width : 600,
+            height : 40,
+            top : 0,
+            bottom : 0,
+            left : 0,
+            right : 0
+        },
+        {
+            name : 'button',
+            x : 458,
+            y : 238,
+            width : 104,
+            height : 34,
             top : 0,
             bottom : 0,
             left : 0,
             right : 0
         }
+
     ]
 });
 Cut.addTexture({
@@ -370,6 +475,26 @@ Cut.addTexture({
                 ctx.scale(ratio, ratio);
                 ctx.font = "bold 24px Arial";
                 ctx.fillStyle = "#000";
+                ctx.measureText && this.cropX(ctx.measureText(d).width + 0.4);
+                ctx.textBaseline = "top";
+                ctx.fillText(d, 0, 0);
+            });
+        }else if(name.substring(0, 2) === "b_"){
+            var d = name.substr(2, 1);
+            return Cut.Out.drawing("d_" + d, 50, 60, 10, function(ctx, ratio) {
+                ctx.scale(ratio, ratio);
+                ctx.font = "bold 50px Arial";
+                ctx.fillStyle = "#000";
+                ctx.measureText && this.cropX(ctx.measureText(d).width + 0.4);
+                ctx.textBaseline = "top";
+                ctx.fillText(d, 0, 0);
+            });
+        }else if(name.substring(0, 2) === "w_"){
+            var d = name.substr(2, 1);
+            return Cut.Out.drawing("d_" + d, 50, 60, 10, function(ctx, ratio) {
+                ctx.scale(ratio, ratio);
+                ctx.font = "bold 50px Arial";
+                ctx.fillStyle = "#fff";
                 ctx.measureText && this.cropX(ctx.measureText(d).width + 0.4);
                 ctx.textBaseline = "top";
                 ctx.fillText(d, 0, 0);
