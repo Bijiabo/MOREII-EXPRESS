@@ -1,38 +1,6 @@
 /**
  * Created by boooo on 14-8-21.
  */
-var audios = {
-    open:{
-        origin:new Audio(),
-        list:[],
-        indexNow:0
-    },
-    drink:new Audio()
-}
-audios.open.origin.src='/img/wine/cached_pop.wav';
-audios.open.origin.preload="auto";
-//audios.open.origin.playbackRate= 2;
-for(var i=0;i<10;i++){
-    audios.open.list.push(audios.open.origin);
-}
-var playAudioOpen = function(){
-    if(audios.open.indexNow+1<audios.open.list.length-1){
-        audios.open.list[audios.open.indexNow+1].currentTime=0;
-        audios.open.list[audios.open.indexNow+1].play();
-        audios.open.indexNow++;
-    }else{
-        audios.open.list[0].currentTime=0;
-        audios.open.list[0].play();
-        audios.open.indexNow=0;
-    }
-}
-audios.drink.src='/img/wine/drink.wav';
-audios.drink.preload="auto";
-//audios.drink.volume=1;
-//audios.drink.loop=true;
-//audios.drink.currentTime = 0;
-//audios.drink.play();
-
 var cache = {
     siteUrl:'http://192.168.0.102:3001/wine/test',
     score:0,
@@ -56,6 +24,31 @@ if(isNaN(cache.goal)){
     cache.goal=0;
 }
 var itemSize= 120;
+var audios = {
+    open:{
+        origin:new Audio(),
+        list:[],
+        indexNow:0
+    },
+    drink:new Audio()
+}
+audios.open.origin.src='img/wine/cached_pop.wav';
+audios.open.origin.preload="auto";
+//audios.open.origin.playbackRate= 2;
+for(var i=0;i<10;i++){
+    audios.open.list.push(audios.open.origin);
+}
+var playAudioOpen = function(){
+    if(audios.open.indexNow+1<audios.open.list.length-1){
+        audios.open.list[audios.open.indexNow+1].currentTime=0;
+        audios.open.list[audios.open.indexNow+1].play();
+        audios.open.indexNow++;
+    }else{
+        audios.open.list[0].currentTime=0;
+        audios.open.list[0].play();
+        audios.open.indexNow=0;
+    }
+}
 var startPlayTime = function(timeString,endGuide,endString,challenge,challengeString){
     cache.start=true;
     cache.startTime=new Date();
@@ -84,11 +77,6 @@ var refreshPlayTime = function(timeString,endGuide,endString,challenge,challenge
         endGuide.pin({
             alpha:1
         }).show();
-        audios.drink.pause();
-        audios.drink.loop=true;
-        audios.drink.volume=1;
-        audios.drink.currentTime = 0;
-        audios.drink.play();
         window.setTimeout(function(){
             cache.startAgain = true;
         },1000);
@@ -380,7 +368,7 @@ Cut(function(root, container) {
 var PPU = 64;
 Cut.addTexture(texture = {
     name : 'beer',
-    imagePath : '/img/wine/beers8.png',
+    imagePath : 'img/wine/beers8.png',
     imageRatio : 1,
     cutouts : [
         { // list of cutoutDefs or cutouts
@@ -530,7 +518,7 @@ Cut.addTexture(texture = {
 });
 Cut.addTexture(texture = {
     name : 'guide',
-    imagePath : '/img/wine/guidebg.png',
+    imagePath : 'img/wine/guidebg.png',
     imageRatio : 1,
     cutouts : [
         {
