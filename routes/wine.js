@@ -1,7 +1,7 @@
 var express = require('express'),
     fs = require('fs'),
     path=require('path'),
-    userSchema = require('../core/schema/user');
+    wineSchema = require('../core/schema/wine');
 var router = express.Router();
 var renderData = function(data){
     if(data===undefined){
@@ -20,9 +20,7 @@ var renderData = function(data){
 * 判断应用状态
 * */
 router.use(function(req,res,next){
-    console.log(global.config.app.wine.state);
     if(global.config.app.wine.state===1){
-        console.log(global.config.app.wine);
         next();
     }else{
         res.redirect(global.config.siteUrl+'404');
@@ -30,8 +28,6 @@ router.use(function(req,res,next){
 })
 /* GET home page. */
 router.get('/', function(req, res) {
-    console.log(global.config.app);
-    console.log(router.stack);
     var data = new renderData({
         title : 'Moreii Wine',
         jsfile: 'wine.js'
@@ -39,13 +35,77 @@ router.get('/', function(req, res) {
     res.render('wine/index',data);
 });
 router.get('/test', function(req, res) {
-    console.log(global.config.app);
-    console.log(router.stack);
     var data = new renderData({
         title : 'Moreii Wine',
-        jsfile: 'wine_test.js'
+        jsfile: 'wine_product.js'
     });
     res.render('wine/test',data);
+});
+/*
+* 统计api
+* */
+router.get('/api/score',function(req,res){
+    res.json({
+        test:'test'
+    });
+})
+router.post('/api/score',function(req,res){
+    /*res.json({
+        test:'test'
+    });*/
+    var scoreData = req.body.scoreData;
+    if(typeof scoreData === 'object' && scoreData.score && scoreData.playTime){
+        scoreData.score = Number(scoreData.score);
+        scoreData.playTime = Number(scoreData.playTime);
+        if(isNaN(scoreData.score) || isNaN(scoreData.playTime)){
+            res.json({
+                err:true,
+                des:'数据错误'
+            });
+        }else{
+            wineSchema.add({
+                score:scoreData.score,
+                playTime:scoreData.playTime
+            },function(err){
+                if(err===null){
+                    wineSchema.getRank(scoreData.score,function(err1,data){
+                           if(err1===null){
+                               wineSchema.allCount(function(err2,data1){
+                                   if(err2===null){
+                                       console.log(data);
+                                       console.log(data1);
+                                       res.json({
+                                           err:false,
+                                           rank:Math.round(data/data1*10000)/100
+                                       });
+                                   }else{
+                                       res.json({
+                                           err:true,
+                                           des:'数据错误'
+                                       });
+                                   }
+                               });
+                           }else{
+                               res.json({
+                                   err:true,
+                                   des:'数据错误'
+                               });
+                           }
+                    });
+                }else{
+                    res.json({
+                        err:true,
+                        des:'数据错误'
+                    });
+                }
+            });
+        }
+    }else{
+        res.json({
+            err:true,
+            des:'数据错误'
+        });
+    }
 });
 
 module.exports = router;

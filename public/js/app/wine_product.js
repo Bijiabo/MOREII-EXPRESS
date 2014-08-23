@@ -37,7 +37,7 @@ var audios = {
     },
     drink: new Audio()
 }
-audios.open.origin.src = 'img/wine/cached_pop.wav';
+audios.open.origin.src = '/img/wine/cached_pop.wav';
 //audios.open.origin.preload = "auto";
 for (var i = 0; i < 10; i++) {
     audios.open.list.push(audios.open.origin)
@@ -54,6 +54,7 @@ var playAudioOpen = function() {
     }
 }
 var startPlayTime = function(timeString, endGuide, endString, challenge, challengeString) {
+    hideRank();
     cache.start = true;
     cache.startTime = new Date();
     cache.time2die = 30;
@@ -66,16 +67,17 @@ var refreshPlayTime = function(timeString, endGuide, endString, challenge, chall
     cache.time2die = cache.playTime - Math.round((new Date() - cache.startTime) / 1000);
     timeString.setValue(cache.time2die + 's');
     if (cache.time2die <= 0) {
+        getRank();
         window.clearInterval(cache.playTimeSetInterval);
         endString.setValue("一共干了" + cache.score + '瓶！');
         if (cache.goal > 0) {
             if (cache.goal < cache.score) {
-                challengeString.setValue('~挑战成功~')
+//                challengeString.setValue('~挑战成功~')
             } else {
-                challengeString.setValue('~挑战失败~')
+//                challengeString.setValue('~挑战失败~')
             }
         } else {
-            challengeString.setValue('')
+//            challengeString.setValue('')
         }
         challenge.show();
         endGuide.pin({
@@ -346,13 +348,13 @@ Cut(function(root, container) {
         alignX: -0.5,
         offsetY: 280
     });
-    challengeString.setValue('~挑战成功~');
+//    challengeString.setValue('~挑战成功~');
     challenge.hide()
 });
 var PPU = 64;
 Cut.addTexture(texture = {
     name: 'beer',
-    imagePath: 'img/wine/beers8.png',
+    imagePath: '/img/wine/beers8.png',
     imageRatio: 1,
     cutouts: [{
         name: '1',
@@ -488,7 +490,7 @@ Cut.addTexture(texture = {
 });
 Cut.addTexture(texture = {
     name: 'guide',
-    imagePath: 'img/wine/guidebg.png',
+    imagePath: '/img/wine/guidebg.png',
     imageRatio: 1,
     cutouts: [{
         name: 'background',
@@ -572,7 +574,7 @@ var refreshForShare = function() {
     document.title = '我干了' + cache.score + '瓶！快来和我10秒决胜负！'
 }
 window.shareData = {
-    "imgUrl": "http://game.canjs.cn/wine/img/wine/logo.png",
+    "imgUrl": "/img/wine/logo.png",
     "timeLineLink": cache.siteUrl,
     "tTitle": "来干几瓶，输了请客！",
     "tContent": "来干几瓶，输了请客！"
@@ -601,6 +603,30 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             "link": window.shareData.timeLineLink,
             "desc": window.shareData.tContent,
             "title": window.shareData.tTitle
-        }, onShareComplete)
+        }, onShareComplete);
     })
 }, false);
+
+var getRank = function(){
+    $.ajax({
+        url:siteUrl+'wine/api/score',
+        type:'POST',
+        dataType:'json',
+        data:{
+            scoreData:{
+                score:cache.score,
+                playTime:cache.playTime
+            }
+        },
+        timeout:2000,
+        success:function(data){
+            if(!data.err){
+                $('#rank>h1').text('打败了全国'+data.rank+'%的玩家！');
+                $('#rank').show();
+            }
+        }
+    })
+}
+var hideRank = function(){
+    $('#rank').hide();
+}
