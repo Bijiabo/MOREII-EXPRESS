@@ -7,7 +7,7 @@ DEBUG=(typeof DEBUG==='undefined'||DEBUG)&&console;function Cut(){if(!(this inst
 DEBUG=true||(typeof DEBUG==='undefined'||DEBUG)&&console;Cut.prototype.spy=function(spy){if(!arguments.length){return this._spy}this._spy=spy?true:false;return this};Cut.Mouse=function(){Cut.Mouse.subscribe.apply(Cut.Mouse,arguments)};Cut.Mouse.CLICK="click";Cut.Mouse.START="touchstart mousedown";Cut.Mouse.MOVE="touchmove mousemove";Cut.Mouse.END="touchend mouseup";Cut.Mouse.subscribe=function(listener,elem,move){elem=elem||document;var isTouchSupported="ontouchstart"in window;var CLICK="click";var START=isTouchSupported?"touchstart":"mousedown";var MOVE=isTouchSupported?"touchmove":"mousemove";var END=isTouchSupported?"touchend":"mouseup";elem.addEventListener(CLICK,mouseClick);elem.addEventListener(START,mouseStart);elem.addEventListener(END,mouseEnd);move&&elem.addEventListener(MOVE,mouseMove);var visitor=null;var abs={x:0,y:0,toString:function(){return(this.x|0)+"x"+(this.y|0)}};var rel={x:0,y:0,toString:function(){return abs+" / "+(this.x|0)+"x"+(this.y|0)}};var clicked={x:0,y:0,state:0};function mouseStart(event){update(event,elem);DEBUG&&console.log("Mouse Start: "+event.type+" "+abs);!move&&elem.addEventListener(MOVE,mouseMove);event.preventDefault();publish(event.type,event);clicked.x=abs.x;clicked.y=abs.y;clicked.state=1}function mouseEnd(event){try{DEBUG&&console.log("Mouse End: "+event.type+" "+abs);!move&&elem.removeEventListener(MOVE,mouseMove);event.preventDefault();publish(event.type,event);if(clicked.state==1&&clicked.x==abs.x&&clicked.y==abs.y){DEBUG&&console.log("Mouse Click [+]");publish("click",event);clicked.state=2}else{clicked.state=0}}catch(e){console&&console.log(e)}}function mouseMove(event){try{update(event,elem);event.preventDefault();publish(event.type,event)}catch(e){console&&console.log(e)}}function mouseClick(event){try{update(event,elem);DEBUG&&console.log("Mouse Click: "+event.type+" "+abs);event.preventDefault();if(clicked.state!=2){publish(event.type,event)}else{DEBUG&&console.log("Mouse Click [-]")}}catch(e){console&&console.log(e)}}function publish(type,event){abs.type=type;abs.event=event;rel.x=abs.x;rel.y=abs.y;listener.visit(visitor)}visitor={reverse:true,visible:true,start:function(cut){if(!(cut.spy()||listener===cut)){cut.matrix().reverse().map(abs,rel);if(rel.x<0||rel.x>cut._pin._width||rel.y<0||rel.y>cut._pin._height){return true}}},end:function(cut){var listeners=cut.listeners(abs.type);if(listeners){cut.matrix().reverse().map(abs,rel);for(var l=0;l<listeners.length;l++)if(listeners[l].call(cut,abs.event,rel)){return true}}}};function update(event,elem){var isTouch=false;if(event.touches){if(event.touches.length){isTouch=true;abs.x=event.touches[0].pageX;abs.y=event.touches[0].pageY}else{return}}else{abs.x=event.clientX;abs.y=event.clientY;if(document.body.scrollLeft||document.body.scrollTop){}else if(document.documentElement){abs.x+=document.documentElement.scrollLeft;abs.y+=document.documentElement.scrollTop}}abs.x-=elem.clientLeft||0;abs.y-=elem.clientTop||0;var par=elem;while(par){abs.x-=par.offsetLeft||0;abs.y-=par.offsetTop||0;if(!isTouch){abs.x+=par.scrollLeft||0;abs.y+=par.scrollTop||0}par=par.offsetParent}abs.x*=listener._ratio||1;abs.y*=listener._ratio||1}};
 DEBUG=(typeof DEBUG==='undefined'||DEBUG)&&console;window.addEventListener("load",function(){DEBUG&&console.log("On load.");Cut.Loader.start()},false);Cut.Loader.init=function(app,canvas){var context=null,full=false;var width=0,height=0,ratio=1;DEBUG&&console.log("Creating root...");var root=Cut.root(requestAnimationFrame,function(){context.setTransform(1,0,0,1,0,0);context.clearRect(0,0,width,height);this.render(context)});if(typeof canvas==="string"){canvas=document.getElementById(canvas)}if(!canvas){canvas=document.getElementById("cutjs")}if(!canvas){full=true;DEBUG&&console.log("Creating element...");canvas=document.createElement("canvas");canvas.style.position="absolute";var body=document.body;body.insertBefore(canvas,body.firstChild)}DEBUG&&console.log("Loading images...");Cut.loadImages(function(src,handleComplete,handleError){var image=new Image();DEBUG&&console.log("Loading image: "+src);image.onload=handleComplete;image.onerror=handleError;image.src=src;return image},init);function init(){DEBUG&&console.log("Images loaded.");context=canvas.getContext("2d");var devicePixelRatio=window.devicePixelRatio||1;var backingStoreRatio=context.webkitBackingStorePixelRatio||context.mozBackingStorePixelRatio||context.msBackingStorePixelRatio||context.oBackingStorePixelRatio||context.backingStorePixelRatio||1;ratio=devicePixelRatio/backingStoreRatio;canvas.resize=resize;DEBUG&&console.log("Loading...");app(root,canvas);resize();window.addEventListener("resize",resize,false);DEBUG&&console.log("Start playing...");root.start()}function resize(){if(full){width=(window.innerWidth>0?window.innerWidth:screen.width);height=(window.innerHeight>0?window.innerHeight:screen.height);canvas.style.width=width+"px";canvas.style.height=height+"px"}else{width=canvas.clientWidth;height=canvas.clientHeight}width*=ratio;height*=ratio;canvas.width=width;canvas.height=height;root._ratio=ratio;DEBUG&&console.log("Resize: "+width+" x "+height+" / "+ratio);root.visit({start:function(cut){var stop=true;var listeners=cut.listeners("viewport");if(listeners){for(var l=0;l<listeners.length;l++)stop&=!listeners[l].call(cut,width,height)}return stop}})}return root};!function(){var vendors=['ms','moz','webkit','o'];for(var v=0;v<vendors.length&&!window.requestAnimationFrame;v++){var vendor=vendors[v];window.requestAnimationFrame=window[vendor+'RequestAnimationFrame'];window.cancelAnimationFrame=window[vendor+'CancelAnimationFrame']||window[vendor+'CancelRequestAnimationFrame']}if(!window.requestAnimationFrame){var next=0;window.requestAnimationFrame=function(callback){var now=new Date().getTime();next=Math.max(next+16,now);return window.setTimeout(function(){callback(next)},next-now)}}if(!window.cancelAnimationFrame){window.cancelAnimationFrame=function(id){clearTimeout(id)}}}();
 var cache = {
-    siteUrl: 'http://game.canjs.cn/wine',
+    siteUrl: 'http://game.snnu.cc/wine',
     score: 0,
     imageElement: {},
     childCount: 0,
@@ -23,7 +23,8 @@ var cache = {
         height: 0
     },
     startAgain: false,
-    goal: Number(window.location.hash.replace('#', ''))
+    goal: Number(window.location.hash.replace('#', '')),
+    clickCount : 0
 };
 if (isNaN(cache.goal)) {
     cache.goal = 0
@@ -54,7 +55,6 @@ var playAudioOpen = function() {
     }
 }
 var startPlayTime = function(timeString, endGuide, endString, challenge, challengeString) {
-    hideRank();
     cache.start = true;
     cache.startTime = new Date();
     cache.time2die = 30;
@@ -67,7 +67,7 @@ var refreshPlayTime = function(timeString, endGuide, endString, challenge, chall
     cache.time2die = cache.playTime - Math.round((new Date() - cache.startTime) / 1000);
     timeString.setValue(cache.time2die + 's');
     if (cache.time2die <= 0) {
-        getRank();
+        gameover();
         window.clearInterval(cache.playTimeSetInterval);
         endString.setValue("一共干了" + cache.score + '瓶！');
         if (cache.goal > 0) {
@@ -86,7 +86,6 @@ var refreshPlayTime = function(timeString, endGuide, endString, challenge, chall
         window.setTimeout(function() {
             cache.startAgain = true
         }, 1000);
-        dp_share()
     }
 }
 Cut(function(root, container) {
@@ -97,7 +96,6 @@ Cut(function(root, container) {
         cache.canvasSize.height = height
     });
     var last = null,
-        clickCount = 0,
         scoreCounts = 0;
     root.on("viewport", function(width, height) {
         itemWidth = width / 3
@@ -120,15 +118,15 @@ Cut(function(root, container) {
                 scoreString.setValue(window.cache.score + '瓶');
 //                scoreString.setValue(scoreCounts + '瓶s');
                 if (cache.time2die > 0 && !guideBox.visible()){
-                    clickCount++;
+                    cache.clickCount++;
                     row.tween(duration = 100, delay = 0).clear().pin({
-                        offsetY: itemSize * clickCount
+                        offsetY: itemSize * cache.clickCount
                     }).then(function() {
                         row.last().remove();
                         row.pin({
                             offsetY: row.pin('offsetY') - itemSize
                         });
-                        clickCount--;
+                        cache.clickCount--;
                         addLabItem();
                         if (row.pin('offsetY') > 20) {
                             for (var i = 0; i < 7; i++) {
@@ -189,13 +187,13 @@ Cut(function(root, container) {
                         console.log(this._cutout);
                     }
                     /*row.tween(duration = 100, delay = 0).clear().pin({
-                     offsetY: itemSize * clickCount
+                     offsetY: itemSize * cache.clickCount
                      }).then(function() {
                      row.last().remove();
                      row.pin({
                      offsetY: row.pin('offsetY') - itemSize
                      });
-                     clickCount--;
+                     cache.clickCount--;
                      addLabItem();
                      if (row.pin('offsetY') > 20) {
                      for (var i = 0; i < 7; i++) {
@@ -324,14 +322,14 @@ Cut(function(root, container) {
                 row.pin({
                     offsetY: 0
                 });
-                clickCount = 0;
+                cache.clickCount = 0;
                 for (var i = 0; i < 20; i++) {
                     addLabItem()
                 }
                 challenge.hide();
                 endGuide.hide();
                 startPlayTime(timeString, endGuide, endString, challenge, challengeString)
-            })
+            });
         }
     });
     var endAgainString = Cut.string('base:w_').appendTo(endGuide).pin({
@@ -350,6 +348,15 @@ Cut(function(root, container) {
     });
 //    challengeString.setValue('~挑战成功~');
     challenge.hide()
+    //add stringobject to cache
+    cache.row = row;
+    cache.timeString = timeString;
+    cache.endGuide = endGuide;
+    cache.challenge = challenge;
+    cache.challengeString = challengeString;
+    cache.scoreString = scoreString;
+    cache.addLabItem = addLabItem;
+    cache.endString = endString;
 });
 var PPU = 64;
 Cut.addTexture(texture = {
@@ -570,22 +577,22 @@ Cut.addTexture({
         }
     }
 });
-var refreshForShare = function() {
-    document.title = '我干了' + cache.score + '瓶！快来和我10秒决胜负！'
-}
 window.shareData = {
-    "imgUrl": "/img/wine/logo.png",
-    "timeLineLink": cache.siteUrl,
+    "imgUrl": siteUrl+"img/wine/logo.png",
+    "timeLineLink": siteUrl+'wine',
     "tTitle": "来干几瓶，输了请客！",
     "tContent": "来干几瓶，输了请客！"
 };
 
 function dp_share() {
-    document.title = '我干了' + cache.score + '瓶！快来和我10秒决胜负！';
+//    document.title = '我干了' + cache.score + '瓶！快来和我10秒决胜负！';
     window.shareData.tTitle = document.title;
-    window.shareData.timeLineLink = cache.siteUrl + '#' + cache.score
+    window.shareData.timeLineLink = siteUrl + 'wine#' + cache.score
 }
-var onShareComplete = function() {}
+var onShareComplete = function() {
+    $('#rankresult').html('<h2>碉堡了！</h2><h2>击败了全国'+cache.rank+'%的玩家！</h2>').show();
+    $('#sharebox').hide();
+}
 document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
     WeixinJSBridge.on('menu:share:appmessage', function(argv) {
         WeixinJSBridge.invoke('sendAppMessage', {
@@ -606,7 +613,12 @@ document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
         }, onShareComplete);
     })
 }, false);
-
+var gameover = function(){
+    $('#rankresult').hide();
+    $('#rank>h1').text('一共干了'+cache.score+'瓶！');
+    $('#rank').show();
+    getRank();
+}
 var getRank = function(){
     $.ajax({
         url:siteUrl+'wine/api/score',
@@ -621,8 +633,10 @@ var getRank = function(){
         timeout:2000,
         success:function(data){
             if(!data.err){
-                $('#rank>h1').text('打败了全国'+data.rank+'%的玩家！');
-                $('#rank').show();
+                cache.rank=data.rank;
+                window.title = '我干了'+cache.score+'瓶，击败了全国'+cache.rank+'%的玩家！';
+                window.shareData.tTitle = '我干了'+cache.score+'瓶，击败了全国'+cache.rank+'%的玩家！';
+                window.shareData.tContent = '我干了'+cache.score+'瓶，击败了全国'+cache.rank+'%的玩家！够胆来挑战！';
             }
         }
     })
@@ -630,3 +644,65 @@ var getRank = function(){
 var hideRank = function(){
     $('#rank').hide();
 }
+var shareButton = function() {
+    if (cache.startAgain) {
+        $('#sharebox').show();
+    }
+}
+var playAgainButton = function(){
+    if (cache.startAgain) {
+        cache.startAgain = false;
+        cache.score = 0;
+        cache.time2die = 10;
+        cache.row.empty();
+        cache.scoreString.setValue(cache.score + '瓶');
+        cache.timeString.setValue(cache.time2die + 's');
+        cache.endGuide.tween(duration = 100, delay = 0).clear().pin({
+            alpha: 0
+        }).then(function () {
+            cache.row.pin({
+                offsetY: 0
+            });
+            cache.clickCount = 0;
+            for (var i = 0; i < 20; i++) {
+                cache.addLabItem();
+            }
+            cache.challenge.hide();
+            cache.endGuide.hide();
+            startPlayTime(cache.timeString, cache.endGuide, cache.endString, cache.challenge, cache.challengeString)
+        });
+        hideRank();
+    }
+}
+/*
+$(document).on('click','#share',function(){
+    alert('test click');
+    if (cache.startAgain) {
+        $('#sharebox').show();
+    }
+});
+$(document).on('click','#playagain',function(){
+    if (cache.startAgain) {
+        cache.startAgain = false;
+        cache.score = 0;
+        cache.time2die = 10;
+        cache.row.empty();
+        cache.scoreString.setValue(cache.score + '瓶');
+        cache.timeString.setValue(cache.time2die + 's');
+        cache.endGuide.tween(duration = 100, delay = 0).clear().pin({
+            alpha: 0
+        }).then(function () {
+            cache.row.pin({
+                offsetY: 0
+            });
+            cache.clickCount = 0;
+            for (var i = 0; i < 20; i++) {
+                cache.addLabItem();
+            }
+            cache.challenge.hide();
+            cache.endGuide.hide();
+            startPlayTime(cache.timeString, cache.endGuide, cache.endString, cache.challenge, cache.challengeString)
+        });
+        hideRank();
+    }
+});*/

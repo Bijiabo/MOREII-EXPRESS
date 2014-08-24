@@ -11,11 +11,11 @@ html
         //- script(src='/js/cut-mouse.js')
         //- script(src='/js/cut-loader.web.js')
         script(src='/js/zepto.min.js')
-    -var j = String(jsfile).split(',')
-        if(jsfile!=="" && jsfile!==undefind)
-            each item in j
-                script(src='/js/app/'+item)
         script.
             var siteUrl = '#{siteUrl}';
+        -var j = String(jsfile).split(',')
+        -if(jsfile!=="" && jsfile!==undefind)
+            -each item in j
+                script(src='/js/app/'+item)
     body
         block content

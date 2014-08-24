@@ -29,10 +29,10 @@ router.use(function(req,res,next){
 /* GET home page. */
 router.get('/', function(req, res) {
     var data = new renderData({
-        title : 'Moreii Wine',
-        jsfile: 'wine.js'
+        title : '干几瓶',
+        jsfile: 'wine_product.js'
     });
-    res.render('wine/index',data);
+    res.render('wine/test',data);
 });
 router.get('/test', function(req, res) {
     var data = new renderData({

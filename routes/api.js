@@ -92,7 +92,7 @@ router.post('/login',function(req,res){
                 pw:user.password
             };
             var hour = 3600000;
-            //req.session.cookie.expires = new Date(Date.now() + hour);
+            req.session.cookie.expires = new Date(Date.now() + hour*24);
 
             /*var keepLoginTime = (60*1000*60) * 24;//24hour
             res.cookie('name', String(user.name),{ path: '/',expires: new Date(Date.now() + keepLoginTime), httpOnly: true });

@@ -5,21 +5,58 @@ body{
     /*background: #dddddd;*/
 }
 #rank{
-    background: white;
+    box-sizing: border-box;
     position: fixed;
-    top: 260px;
+    top: 0;
     left: 0;
     text-align: center;
     width: 100%;
-    height: 70px;
-    z-index:999;
+    height: 100%;
+    background-color: #ffffff;
+    z-index:998;
+    padding-top: 50px;
     display: none;
+}
+#rankresult{
+    display: none;
+ }
+#share,#playagain{
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: red;
+    color: #ffffff;
+    font-size: 30px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
 }
 #adbox{
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 100px;
-    background: #eeeeee;
+    min-height: 100px;
+    /*background: #eeeeee;*/
+}
+#sharebox{
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    background-image: url("/img/wine/share.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    z-index: 999;
+    display: none;
+}
+#sharebox>div{
+    color: white;
+    margin-top: 70px;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
 }

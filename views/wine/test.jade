@@ -1,7 +1,18 @@
 extends layout
 block content
     div#rank
-        h1 打败了全国91%的玩家！
+        h1 一共干了93瓶！
+        div#rankresult
+            h2 碉堡了！
+            h2 击败了全国93%的玩家！
+        div#share(onclick="shareButton();") 分享看排名
+        div#playagain(onclick="playAgainButton();") 再来一局
         div#adbox
+            script.
+                var cpro_id = "u1674898";
             script(src="http://cpro.baidustatic.com/cpro/ui/cm.js",type="text/javascript")
+    div#sharebox
+        div
+            p 点击右上角按钮分享
+            p 分享后可查看排名哦
     script(type="text/javascript",src="http://tajs.qq.com/stats?sId=36641287",charset="UTF-8")

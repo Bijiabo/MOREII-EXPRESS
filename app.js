@@ -38,7 +38,7 @@ app.use(session({
     secret: 'speedyCat',
     cookie: {
         secure: false,
-        maxAge: 3600000,
+        maxAge: 3600000*24,
         httpOnly:true
     },
     store:userSchema.session()
