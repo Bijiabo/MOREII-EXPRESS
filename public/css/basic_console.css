@@ -354,3 +354,10 @@
     }
     #console-nav-menubtn{display: inline;}
 }
+@media (min-width: 768px){
+    .container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+}

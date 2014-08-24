@@ -187,7 +187,12 @@ router.get('/api/getOwnInfo',function(req,res){
  * api
  * */
 router.use(function(req,res,next){
-    userSchema.getUserInfo({
+    if(req.userData.permission.user.editUser){
+        next();
+    }else{
+        global.config.resError(req,res,'权限不足。');
+    }
+    /*userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
@@ -200,7 +205,7 @@ router.use(function(req,res,next){
         }else{
             global.config.resError(req,res,'数据错误。');
         }
-    });
+    });*/
 });
 // console
 router.get('/console',function(req,res){

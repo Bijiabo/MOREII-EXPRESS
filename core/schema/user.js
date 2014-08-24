@@ -36,6 +36,10 @@ var userSchema = new mongoose.Schema({
             index:true
         },
         permission:{
+            index:{
+                edit:{type:Boolean,default:false},
+                upload:{type:Boolean,default:false}
+            },
             user:{
                 login:{type:Boolean,default:true},
                 editAddress:{type:Boolean,default:true},
@@ -110,6 +114,16 @@ var addressSchema = function(data){
 var userModel = db.model('user',userSchema);
 //定义用户权限
 var appGrade = {
+    index:{
+        user:{
+            edit:false,
+            upload:false
+        },
+        admin:{
+            edit:true,
+            upload:true
+        }
+    },
     user:{
         user:{
             login:true,
@@ -228,6 +242,7 @@ var appGrade = {
 }
 var userGrade = {
     admin:{
+        index:appGrade.index.admin,
         user:appGrade.user.admin,
         message:appGrade.message.admin,
         shop:appGrade.shop.admin,
@@ -238,6 +253,7 @@ var userGrade = {
         cloth:appGrade.cloth.admin
     },
     user:{
+        index:appGrade.index.user,
         user:appGrade.user.user,
         message:appGrade.message.user,
         shop:appGrade.shop.user,
@@ -248,6 +264,7 @@ var userGrade = {
         cloth:appGrade.cloth.user
     },
     blogEditor:{
+        index:appGrade.index.user,
         user:appGrade.user.user,
         message:appGrade.message.user,
         shop:appGrade.shop.user,
@@ -258,6 +275,7 @@ var userGrade = {
         cloth:appGrade.cloth.user
     },
     shopAssistant:{
+        index:appGrade.index.user,
         user:appGrade.user.user,
         message:appGrade.message.user,
         shop:appGrade.shop.admin,

@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+    div.container
+        div.row
+            div.col-md-12
+                h3 #{clothData.brand} #{clothData.codeNumber}
+                hr
+            div.col-md-3.hidden-sm.hidden-xs
+                div.panel.panel-default
+                    div.panel-heading 面料参数
+                    div.panel-body(style="padding-top:0;")
+                        p 编号：#{clothData.codeNumber}
+                        p 产地：#{clothData.originPlace}
+                        p 纱支：#{clothData.yarnCount}
+                        p 克重：#{clothData.weight}
+                        p 图案：#{clothData.pattern}
+            div.col-md-9
+                div.carousel.slide(data-ride="carousel")
+                    ol.carousel-indicators
+                        -for(var i=0,len=clothData.picture.length;i<len;i++)
+                            -if(i===0)
+                                li.active(data-target="#shop-detail-bigpic-carousel",data-slide-to="#{i}")
+                            -else
+                                li.active(data-target="#shop-detail-bigpic-carousel",data-slide-to="#{i}")
+                    div.carousel-inner(role="listbox")
+                        -for(var i=0,len=clothData.picture.length;i<len;i++)
+                            -if(i===0)
+                                div.item.active
+                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
+                                    //div.carousel-caption
+                            -else
+                                div.item
+                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
+                                    //div.carousel-caption
+                    a.left.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="prev")
+                        span.glyphicon.glyphicon-chevron-left
+                    a.right.carousel-control(href="#shop-detail-bigpic-carousel",data-slide="next")
+                        span.glyphicon.glyphicon-chevron-right
+                hr
+                div#cloth-detail-description!= clothData.description
+                hr
+                div.col-md-8.col-md-offset-2.text-center
+                    //include ../pager

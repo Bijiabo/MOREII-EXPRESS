@@ -376,6 +376,8 @@ var basic = {
                         if (file.previewElement) {
                             var fileBox= $(file.previewElement);
                             fileBox.data('path',data.path);
+                            fileBox.find('.dz-filename .fa').data('file-path',data.path);
+                            fileBox.find('.dz-filename .fa').data('file-resize-path',data.resizePath);
                             return file.previewElement.classList.add("dz-success");
                         }
                     }

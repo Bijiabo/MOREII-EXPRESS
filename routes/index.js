@@ -6,10 +6,18 @@ var renderData = function(data){
     }
     this.title = data.title || global.config.siteName;
     this.jsfile = data.jsfile || '';
+    this.cssfile = data.cssfile || 'index.css';
     this.siteUrl = global.config.siteUrl;
     this.app = 'index';
     this.nav = global.config.nav;
     this.apps = global.config.app;
+    this.consoleNav = [
+        {
+            name:'内容设置',
+            path:''
+        }
+    ];
+    this.consoleNavActive = data.consoleNavActive || '';
     this.pretty = true;
 }
 /* GET home page. */
@@ -18,11 +26,13 @@ router.get('/', function(req, res) {
     /*res.json({
         appStack:app._router.stack
     });*/
-    res.render('index', data);
+    res.render('index/index', data);
 });
 router.get('/console', function(req, res) {
-    var data = new renderData();
-    res.render('index', data);
+    var data = new renderData({
+        jsfile:'index_console.js'
+    });
+    res.render('index/console', data);
 });
 app.get('/500',function(req,res){
     res.status(500);
