@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-8-24.
  */
-function ajaxFileUpload()
-{
+function ajaxFileUpload(){
     //starting setting some animation when the ajax starts and completes
     $("#file")
         .ajaxStart(function(){
@@ -49,9 +48,7 @@ function ajaxFileUpload()
             }
         }
     )
-
     return false;
-
 }
 var index_consoleObject = {
     cache:{
