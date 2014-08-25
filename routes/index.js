@@ -28,12 +28,6 @@ router.get('/', function(req, res) {
     });*/
     res.render('index/index', data);
 });
-router.get('/console', function(req, res) {
-    var data = new renderData({
-        jsfile:'index_console.js'
-    });
-    res.render('index/console', data);
-});
 app.get('/500',function(req,res){
     res.status(500);
     var data = new renderData({
@@ -41,6 +35,29 @@ app.get('/500',function(req,res){
     });
     res.render('500',data);
 });
+/*
+* 后台
+* */
+router.use(function(req,res,next){
+    global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
+        if(hasPermission){
+            next();
+        }
+    });
+});
+router.get('/console', function(req, res) {
+    var data = new renderData({
+        jsfile:'index_console.js',
+        cssfile:'index_console.css'
+    });
+    res.render('index/console/index', data);
+});
+
+
+
+/*
+* 路由测试功能
+* */
 /*router.get('/stack', function(req, res) {
     console.log(router.stack);
     res.json({

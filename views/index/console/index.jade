@@ -2,13 +2,22 @@ extends ../../layout_console
 block content
     br
     h4 首页图片
-    div.uploadDropbox.miidropzone#index-add-picture
-        div.dz-default.dz-message
+    //div.uploadDropbox.miidropzone#index-add-picture
+    //    div.dz-default.dz-message
     hr
     div.row
         div.col-md-12#index-content-box
-            div.col-md-12
-    br
+            -for(var i=0;i<3;i++)
+                div.col-md-12.index-content-item.empty
+                    div.index-content-imgbox
+                    div.index-content-item-btnbox
+                        span.fa.fa-chevron-up
+                        span.fa.fa-chevron-down
+                        span.fa.fa-times
+                    div.index-content-item-changepicture
+                        span.fa.fa-picture-o
+    div.hidden
+        input#file(type='file',name='file')
     hr
     div.col-md-4.col-md-offset-4.row
         button.btn.btn-primary.btn-block#console-save-siteinfo(type="button") 保存

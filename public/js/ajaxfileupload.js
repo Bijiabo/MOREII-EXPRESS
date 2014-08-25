@@ -1,6 +1,16 @@
 
 jQuery.extend({
-	
+    handleError: function( s, xhr, status, e )      {
+        // If a local callback was specified, fire it
+        if ( s.error ) {
+            s.error.call( s.context || s, xhr, status, e );
+        }
+
+        // Fire the global callback
+        if ( s.global ) {
+            (s.context ? jQuery(s.context) : jQuery.event).trigger( "ajaxError", [xhr, s, e] );
+        }
+    },
 
     createUploadIframe: function(id, uri)
 	{
@@ -190,7 +200,9 @@ jQuery.extend({
             jQuery.globalEval( data );
         // Get the JavaScript object, if JSON is used.
         if ( type == "json" )
-            eval( "data = " + data );
+//            eval( "data = " + data );
+//            eval("data = \""+data+"\"");
+        data = JSON.parse(data.replace(/^\<[\w\-\:\;\"\'\= \(\)]+\>|\<\/\w+\>$/ig,''));
         // evaluate scripts within html
         if ( type == "html" )
             jQuery("<div>").html(data).evalScripts();
