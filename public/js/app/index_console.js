@@ -25,7 +25,7 @@ function ajaxFileUpload(){
     $.ajaxFileUpload
     (
         {
-            url:siteUrl+'api/upload/index/?savePath=indexpicture&ajax=true',
+            url:siteUrl+'api/upload/index/?savePath=indexpicture&resize=720&ajax=true',
             secureuri:false,
             fileElementId:'file',
             dataType: 'json',
@@ -35,7 +35,7 @@ function ajaxFileUpload(){
                 if(!data.error){
                     basic.stateModal('success');
                     console.log(siteUrl+data.path);
-                    $('.index-content-item:eq('+cache.indexContentItemIndex+')>.index-content-imgbox').html('<img src="'+siteUrl+data.path+'" class="img-responsive">');
+                    $('.index-content-item:eq('+cache.indexContentItemIndex+')>.index-content-imgbox').html('<img src="'+siteUrl+data.path+'" class="img-responsive" data-resize="'+data.resizePath+'" data-path="'+data.path+'">');
                     $('.index-content-item:eq('+cache.indexContentItemIndex+')').removeClass('empty');
                 }else{
                     basic.stateModal('error',data.des);
@@ -65,6 +65,42 @@ var index_consoleObject = {
                     <div data-index="0" class="index-content-item-changepicture"><span class="fa fa-picture-o"></span></div>\
                 </div>');
             }
+        },
+        getIndexContent:function(){
+            index_consoleObject.cache.indexData = {
+                type:'system',
+                style:'default',
+                content:[]
+            };
+            $.each($('.index-content-item'),function(index,item){
+                if($(item).find('.index-content-imgbox img').length>0){
+                    index_consoleObject.cache.indexData.content.push({
+                        path:$(item).find('.index-content-imgbox img').data('path'),
+                        resizePath:$(item).find('.index-content-imgbox img').data('resize')
+                    });
+                }
+            });
+            return index_consoleObject.cache.indexData;
+        },
+        saveIndexContent:function(){
+            $.ajax({
+                url:siteUrl+'console/api/updateIndex',
+                type:'POST',
+                dataType:'json',
+                data:{
+                    indexData:index_consoleObject.function.getIndexContent()
+                },
+                success:function(data){
+                    if(!data.err){
+                        basic.stateModal('success');
+                    }else{
+                        basic.stateModal('error',data.des);
+                    }
+                },
+                error:function(err){
+                    basic.stateModal('error','连接失败，请检查连接。');
+                }
+            });
         }
     }
 }
@@ -97,5 +133,13 @@ $(function(){
         if($('.index-content-item').length<3){
             index_consoleObject.function.addIndexContentItem(3-$('.index-content-item').length);
         }
+    });
+    //添加
+    $(document).on('click','#index-content-addone',function(){
+        index_consoleObject.function.addIndexContentItem(1);
+    });
+    //保存
+    $(document).on('click','#index-content-save',function(){
+        index_consoleObject.function.saveIndexContent();
     });
 });

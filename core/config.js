@@ -292,8 +292,11 @@ module.exports = {
         }
         return x;
     },
-    saveFile:function(app,savePath,req,res,resize){
-        if(resize===undefined){resize = 100;}
+    saveFile:function(app,savePath,req,res){
+        var resize = Number(req.query.resize);
+        if(isNaN(resize) || resize <50){
+            resize = 50;
+        }
         global.config.checkPermission(req,res,app,'upload',false,function(hasPermission){
             if(hasPermission){
                 var filename = path.basename(req.files.file.path),
@@ -322,7 +325,7 @@ module.exports = {
                                     fs.unlink(req.files.file.path,function(err){
                                         if (err) throw err;
                                         if(isImage){
-                                            global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                            global.config.imageResize(filename,savedPath,resizePath,resize,function(err,out){
                                                 if(!err){
                                                     res.json({
                                                         error:false,
@@ -359,7 +362,7 @@ module.exports = {
                                 if (err) throw err;
                                 //判断文件类型，若为图片，自动缩略
                                 if(isImage){
-                                    global.config.imageResize(filename,savedPath,resizePath,50,function(err,out){
+                                    global.config.imageResize(filename,savedPath,resizePath,resize,function(err,out){
                                         if(!err){
                                             res.json({
                                                 error:false,

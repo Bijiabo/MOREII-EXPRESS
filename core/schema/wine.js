@@ -16,28 +16,28 @@ var wineSchema = new mongoose.Schema({
     },
     createTime:{ type : Date, default: Date.now }
 });
-var wineSchema = db.model('wines',wineSchema);
+var wineModel = db.model('wines',wineSchema);
 
 module.exports = {
     add:function(data,callback){
-        var wineData = new wineSchema(data);
+        var wineData = new wineModel(data);
         wineData.save(callback);
     },
     getRank:function(score,callback){
-        wineSchema.find().where('score').lt(score).count().exec(callback);
+        wineModel.find().where('score').lt(score).count().exec(callback);
     },
     allCount:function(callback){
-        wineSchema.find().count().exec(callback);
+        wineModel.find().count().exec(callback);
     },
     find:function(find,sort,skip,limit,callback){
-        wineSchema.find(find)
+        wineModel.find(find)
             .sort(sort)
             .skip(skip)
             .limit(limit)
             .exec(callback);
     },
     getFindCount:function(find,callback){
-        wineSchema.find(find)
+        wineModel.find(find)
             .count()
             .exec(callback);
     }

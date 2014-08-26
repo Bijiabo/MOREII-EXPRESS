@@ -1,0 +1,20 @@
+#index-image-carousel-box{
+    padding: 0;
+}
+#index-image-carousel{
+    padding: 0;
+}
+#index-image-carousel .carousel-inner>.item>img,#index-image-carousel .carousel-inner>.item>a>img {
+    line-height: 1;
+    width: 100%;
+}
+@media (max-width: 992px){
+    #index-image-carousel-box{
+        margin-top: -15px;
+    }
+}
+@media (min-width: 992px){
+    #index-image-carousel-box{
+        margin-top: -30px;
+    }
+}

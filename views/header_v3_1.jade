@@ -1,0 +1,70 @@
+div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom")
+    div.container
+        div.navbar-header
+            button.navbar-toggle(type="button",data-toggle="collapse",data-target="#mii-header-links")
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(href="/") Moreii
+                //img(src="/img/logo_120x80.png")
+        div.collapse.navbar-collapse#mii-header-links
+            ul.nav.navbar-nav
+                -if(nav!==undefind)
+                    -for(var i=0,len=nav.length;i<len;i++)
+                        li.applink(class="applink-#{nav[i].app}")
+                            -if(nav[i].app!=='')
+                                a(href="#{siteUrl}#{nav[i].href}") #{nav[i].text}
+                            -else
+                                a(href="#{nav[i].href}") #{nav[i].text}
+            ul.nav.navbar-nav.navbar-right
+                li#header-messagebox(style="display:none;")
+                    a(href="javascript:;")
+                        //span.fa.fa-circle#header-messagebox-light
+                        span(style="margin-right:4px;") 消息盒子
+                        span.badge.label-success.pull-right 0
+                li#header-login
+                    a(href="/user") 登陆 / 注册
+                li#header-user.dropdown(style="display:none;")
+                    a.dropdown-toggle(href="#",data-toggle="dropdown")
+                        span#header-user-name 用户名
+                        b.caret(style="margin-left:5px;")
+                    span.dropdown-arrow.dropdown-arrow-inverse
+                    ul.dropdown-menu.dropdown-inverse
+                        li
+                            a(href="#{siteUrl}user/account") 我的资料
+                        li
+                            a(href="#") 我的订单
+                        li
+                            a(href="#{siteUrl}user/logout") 退出
+div#header-placeholder
+//- 消息盒子
+div.modal.fade#messagebox(role="dialog",aria-labelledby="messagebox-title",aria-hidden="true")
+    div.modal-dialog
+        div.modal-content
+            div.modal-header
+                button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                h6.modal-title#messagebox-title 消息盒子
+            div.modal-body
+                div#modal-loading
+                    span.fa.fa-spin.fa-spinner
+                div#messageboxlist
+                    table.table.table-hover
+                        //thead
+                        //    tr
+                        //        th
+                        //            label.checkbox
+                        //                input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                        //        th # 内容
+                        //        th # 来源
+                        tbody
+                    div(style="padding-left:8px;padding-right:8px;")
+                        button.btn.btn-default.btn-sm(type="button") 标记为已读
+                        div.btn-group.pull-right
+                            button.btn.btn-default.btn-sm(type="button")
+                                span.fa.fa-chevron-left
+                            button.btn.btn-default.btn-sm(type="button")
+                                span.fa.fa-chevron-right
+            //div.modal-footer(style="margin-top: 0;")
+                button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                button.btn.btn-primary.btn-primary-o.mii-ani#class-modify-true(type="button") 修改

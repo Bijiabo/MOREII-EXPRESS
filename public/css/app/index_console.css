@@ -10,10 +10,8 @@
     background-size: 100%;
     padding: 0;
 }
-.index-content-item:first-child,.index-content-item:last-child{
-    /*border: 1px solid #ddd;*/
-    margin: 0;
-}
+.index-content-item:first-child{margin-top: 0;}
+.index-content-item:last-child{margin-bottom: 0;}
 .index-content-item-btnbox{
     position: absolute;
     box-sizing: border-box;
@@ -65,5 +63,5 @@
 }
 .index-content-imgbox>img{margin: auto;}
 .index-content-item:hover .index-content-imgbox{
-    opacity: 0.5;
+    /*opacity: 0.5;*/
 }

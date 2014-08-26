@@ -1,3 +1,6 @@
 #cloth-sidebar .panel.isStuck{
     margin-top: 70px;
 }
+#cloth-detail-carousel{
+    padding: 0;
+}

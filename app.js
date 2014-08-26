@@ -64,6 +64,10 @@ app.use(function(req,res,next){
             next();
         }
     });
+    res.locals.nav = global.config.nav;
+    res.locals.apps = global.config.app;
+    res.locals.pretty = true;
+    res.locals.siteUrl = global.config.siteUrl;
 //    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**
