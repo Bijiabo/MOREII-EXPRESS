@@ -38,7 +38,7 @@ app.get('/500',function(req,res){
 /*
 * 后台
 * */
-router.use(function(req,res,next){
+router.use('/console/*', function(req,res,next){
     global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
         if(hasPermission){
             next();

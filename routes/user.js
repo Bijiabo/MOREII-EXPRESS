@@ -45,7 +45,6 @@ router.get('/', function(req, res) {
             res.redirect('/user/login');
         }
     });
-
 });
 router.get('/register',function(req,res){
     var data = new renderData({

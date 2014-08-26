@@ -414,7 +414,7 @@ module.exports = {
         }
     },
     checkPermission:function(req,res,app,permission,redirect,callback){
-        console.log('4444444');
+//        console.log(permission);
         if(req.login && req.userData){
             if(req.userData.permission[app]){
                 if(req.userData.permission[app][permission]){

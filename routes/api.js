@@ -37,7 +37,7 @@ var checkAdministratorPermission = function(req,res,next){
                     res.render('404',{
                         title:'404错误',
                         path:'/api'+req.path,
-                        errorname:'404',
+                        errorname:'404'
                     });
                 }
             });
@@ -45,7 +45,7 @@ var checkAdministratorPermission = function(req,res,next){
             res.render('404',{
                 title:'404错误',
                 path:'/api'+req.path,
-                errorname:'404',
+                errorname:'404'
             });
         }
     });
@@ -61,7 +61,8 @@ router.get('/getUserList',function(req,res){
 });
 router.get('/ifUser/:query',function(req,res){
     var query = req.params.query;
-    if(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,4}/.test(query)){//is mail
+    if(/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,4}/.test(query)){
+        //is mail
         query = {mail:query};
     }else{
         query = {name:query};

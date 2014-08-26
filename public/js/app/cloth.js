@@ -18,7 +18,7 @@ var cloth = {
                             '<p>品牌：'+data.data.brand+'</p>',
                             '<p>产地：'+data.data.originPlace+'</p>',
                             '<p>纱支：'+data.data.yarnCount+'</p>',
-                            '<p>克重：'+data.data.weight+'</p>',
+                            '<p>克重：'+data.data.weight+'</p>'
                         ].join('\n'));
                     }
                 }

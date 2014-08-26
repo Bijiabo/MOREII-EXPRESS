@@ -213,7 +213,7 @@ bar.pin({
 // 一般情况下根据节点来自动设置什么的。
 bar.pin({
     height : height,
-    width : width,
+    width : width
 });
 
 // Positioning
