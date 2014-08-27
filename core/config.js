@@ -136,8 +136,8 @@ var crypto = require('crypto'),
     };
 var im = require('imagemagick');
 var resError = function(req,res,des,redirectUrl,renderFile,renderData){
-    if(redirectUrl===undefined || redirectUrl===false){
-        var redirectUrl = '/500';
+    if(!redirectUrl){
+        redirectUrl = '/500';
     }
     if(req.query.ajax === 'true' || req.get('X-Requested-With')!==undefined){
         res.send(JSON.stringify({
@@ -149,7 +149,7 @@ var resError = function(req,res,des,redirectUrl,renderFile,renderData){
         if(renderFile!==undefined){
             var renderDataModel = function(data){
                 if(data===undefined){
-                    var data = {};
+                    data = {};
                 }
                 this.title = data.title || 'Moreii Error';
                 this.cssfile=data.cssfile || '';
@@ -272,7 +272,7 @@ module.exports = {
     ],
     encryptCookie:encryptCookie,
     inArray:function (needle,array,bool){
-        if(typeof needle=="string"||typeof needle=="number"){
+        if(typeof needle==="string"||typeof needle==="number"){
             var len=array.length;
             for(var i=0;i<len;i++){
                 if(needle===array[i]){
@@ -401,10 +401,8 @@ module.exports = {
         });
     },
     changeRoute:function(originPath,newPath){
-        var routeRegexpCache = '',
-            matchCache = [];
+        var matchCache = [];
         for(var i= 0,len=global.app._router.stack.length;i<len;i++){
-            //routeRegexpCache = global.app._router.stack[i].regexp.toString().replace('/^\\/','').replace('\\/?(?=/|$)/i','').replace('/^/','').replace('/?(?=/|$)/i','').replace('?(?=/|$)/i','');
             matchCache = global.app._router.stack[i].regexp.toString().match(/\w{2,}/ig);
             if(matchCache!==null){
                 matchCache = matchCache[0];
@@ -412,7 +410,6 @@ module.exports = {
                     console.log(matchCache);
                     global.app._router.stack[i].regexp = new RegExp('^\/'+newPath+'\/?(?=/|$)','i');
                 }
-//                console.log(matchCache);
             }
         }
     },
@@ -457,7 +454,7 @@ module.exports = {
                             dstPath: path.join(dstPath,fileName),
                             width:   256
                         }, function(err, stdout, stderr){
-                            callback(err,stdout);
+                            callback(err,stdout,stderr);
                         });
                     }
                 });
