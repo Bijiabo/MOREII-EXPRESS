@@ -22,9 +22,7 @@ function ajaxFileUpload(){
      error: callback function when the ajax failed
 
      */
-    $.ajaxFileUpload
-    (
-        {
+    $.ajaxFileUpload({
             url:siteUrl+'api/upload/index/?savePath=indexpicture&resize=720&ajax=true',
             secureuri:false,
             fileElementId:'file',
@@ -46,8 +44,7 @@ function ajaxFileUpload(){
                 console.log(data);
                 basic.stateModal('error','上传失败，请检查网络。');
             }
-        }
-    )
+        });
     return false;
 }
 var index_consoleObject = {

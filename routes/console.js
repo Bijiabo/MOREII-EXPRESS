@@ -10,7 +10,7 @@ var express = require('express'),
     crypto = require('crypto');
 var renderData = function(data){
     if(data===undefined){
-        var data = {};
+        data = {};
     }
     this.title = data.title || 'Moreii Console';
     this.jsfile = data.jsfile ||'console_console.js';

@@ -633,7 +633,7 @@ Cut.Root = function(request, render) {
   this.on("viewport", function(width, height) {
     this._size = {
       width : width,
-      height : height,
+      height : height
     };
     this._updateViewbox();
     return true;

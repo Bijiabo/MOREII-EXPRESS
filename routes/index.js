@@ -3,7 +3,7 @@ var express = require('express'),
     router = express.Router();
 var renderData = function(data){
     if(data===undefined){
-        var data = {};
+        data = {};
     }
     this.title = data.title || global.config.siteName;
     this.jsfile = data.jsfile || '';
@@ -16,7 +16,7 @@ var renderData = function(data){
         }
     ];
     this.consoleNavActive = data.consoleNavActive || '';
-}
+};
 /* GET home page. */
 router.get('/', function(req, res) {
     var data = new renderData();
@@ -102,29 +102,4 @@ router.post('/console/api/updateIndex/:id?',function(req,res){
         }
     }
 });
-
-
-
-/*
-* 路由测试功能
-* */
-/*router.get('/stack', function(req, res) {
-    console.log(router.stack);
-    res.json({
-        stack : router.stack
-    });
-});
-router.get('/reset', function (req, res) {
-    var router_stack = router.stack.concat([]);
-    router.stack.length = 0;
-    router_stack.forEach(function (item) {
-        if (item.route.path !== '/') {
-            router.stack.push(item);
-        }
-    });
-    res.json({
-        stack : router.stack
-    });
-});*/
-
 module.exports = router;

@@ -101,7 +101,7 @@ if (app.get('env') === 'development') {
         res.render('500',{
             title:'500错误',
             path:req.path,
-            errorname:'500',
+            errorname:'500'
         });
     });
 }
@@ -116,7 +116,7 @@ app.use(function(err, req, res, next) {
     res.render('404',{
         title:'404错误',
         path:req.path,
-        errorname:'404',
+        errorname:'404'
     })
 });
 
