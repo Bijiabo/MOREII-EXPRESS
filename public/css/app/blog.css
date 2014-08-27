@@ -5,6 +5,7 @@
 }
 #blog-main h3{
     margin-top: 0;
+    margin-bottom: 20px;
 }
 .blog-tags{
     margin: 0 5px 5px 0;
@@ -26,11 +27,11 @@
 }*/
 .panel-heading-mii{
     padding: 15px 20px;
-    background-color: #f8f8f8;
+    /*background-color: #f8f8f8;
     border-bottom: 1px solid #e5e5e5;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    border-top: 0;
+    border-top: 0;*/
 }
 .blog-sidebar-item{
     /*background: #ffffff;*/

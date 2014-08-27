@@ -3,6 +3,7 @@
 }
 #index-image-carousel{
     padding: 0;
+    max-height: 400px;
 }
 #index-image-carousel .carousel-inner>.item>img,#index-image-carousel .carousel-inner>.item>a>img {
     line-height: 1;

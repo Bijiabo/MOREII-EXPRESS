@@ -26,17 +26,8 @@ var cloth = {
         }
     }
 }
-jQuery(function($) {
-    $(document).ready( function() {
-        $(document).on('mouseover','.cloth-list-item',function(e){
-            cloth.function.getDetail($(this));
-        });
-        //init sidebar panel width
-        if($('#cloth-sidebar>.panel:first').length>0){
-            $('#cloth-sidebar>.panel:first').css('width',$('#cloth-sidebar>.panel:first').width()+'px');
-            $('#cloth-sidebar>.panel:first').stickUp({
-                topMargin: "auto"
-            });
-        }
+$(document).ready( function() {
+    $(document).on('mouseover','.cloth-list-item',function(e){
+        cloth.function.getDetail($(this));
     });
 });

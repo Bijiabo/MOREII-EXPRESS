@@ -4,7 +4,7 @@ div.container
             div.row
                 div#header-navbar-logo.col-md-12 MOREII3
             div.row#header-navbar-nav
-                div.col-md-8
+                div.col-xs-8
                     ul.nav.nav-pills(role="tablist")
                         -if(nav!==undefind)
                             -for(var i=0,len=nav.length;i<len;i++)
@@ -13,15 +13,16 @@ div.container
                                         a(href="#{siteUrl}#{nav[i].href}") #{nav[i].text}
                                     -else
                                         a(href="#{nav[i].href}") #{nav[i].text}
-                div.col-md-4
+                div.col-xs-4
                     ul.nav.nav-pills(role="tablist").pull-right
                         li#header-messagebox(style="display:none;")
                             a(href="javascript:;")
                                 //span.fa.fa-circle#header-messagebox-light
-                                span(style="margin-right:4px;") 消息盒子
+                                span(style="margin-right:4px;") 消息
                                 span.badge.label-success.pull-right 0
                         li#header-login
-                            a(href="/user") 登陆 / 注册
+                            a.hidden-xs(href="/user") 登陆 / 注册
+                            a.hidden-sm.hidden-lg.hidden-md(href="/user")  用户中心
                         li#header-user.dropdown(style="display:none;")
                             a.dropdown-toggle(href="#",data-toggle="dropdown")
                                 span#header-user-name 用户名
@@ -80,7 +81,7 @@ div.modal.fade#messagebox(role="dialog",aria-labelledby="messagebox-title",aria-
         div.modal-content
             div.modal-header
                 button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
-                h6.modal-title#messagebox-title 消息盒子
+                h6.modal-title#messagebox-title 消息
             div.modal-body
                 div#modal-loading
                     span.fa.fa-spin.fa-spinner

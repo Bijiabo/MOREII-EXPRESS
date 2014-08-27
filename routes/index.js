@@ -39,15 +39,20 @@ app.get('/500',function(req,res){
 /*
 * 后台
 * */
-router.use('/console/*', function(req,res,next){
-    global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
-        if(hasPermission){
-            next();
-        }
-    });
+router.use('/console/?*', function(req,res,next){
+    console.log(req.login);
+    if(req.login){
+        global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
+            if(hasPermission){
+                next();
+            }
+        });
+    }else{
+        res.redirect(global.config.siteUrl+'user/login');
+    }
 });
 //后台首页
-router.get('/console', function(req, res) {
+router.get('/console/', function(req, res) {
     var data = new renderData({
         jsfile:'index_console.js',
         cssfile:'index_console.css'

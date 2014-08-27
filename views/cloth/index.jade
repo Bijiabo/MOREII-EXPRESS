@@ -3,8 +3,8 @@ extends ../layout
 block content
     div.container
         div.row
-            div.col-md-3.hidden-sm.hidden-xs#cloth-sidebar
-                div.panel.panel-default
+            div.col-md-3.hidden-sm.hidden-xs
+                div.panel.panel-default#cloth-sidebar
                     div.panel-heading 面料参数
                     div.panel-body(style="padding-top:0;")
                         -if(clothData.length>0)
@@ -31,7 +31,16 @@ block content
                     div.col-md-12.text-center
                         hr
                         include ../pager
-
-                hr
-                div.col-md-8.col-md-offset-2.text-center
-                    //include ../pager
+    script(src='/js/stickUp.min.js')
+    script.
+        jQuery(function($) {
+            $(document).ready( function() {
+                //init sidebar panel width
+                if($('#cloth-sidebar').length>0){
+                    $('#cloth-sidebar').css('width',$('#cloth-sidebar').width()+'px');
+                    $('#cloth-sidebar').stickUp({
+                        topMargin: "auto"
+                    });
+                }
+            });
+        });
