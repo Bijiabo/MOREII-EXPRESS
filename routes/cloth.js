@@ -179,13 +179,16 @@ router.route('/console/edit/:id')
         if(clothData.picture===undefined){clothData.picture=[];}
         if(clothData.picture.constructor.toString().match('Array')!==null){
             if(clothData.picture.length>0){
+                console.log('-----0');
                 for(var i= 0,len=clothData.picture.length;i<len;i++){
-                    clothData.picture[i] = global.xss.text.process(clothData.picture[i]);
+                    console.log('-----for');
+                    //clothData.picture[i] = global.xss.text.process(clothData.picture[i]);
                 }
             }
         }else{
             clothData.picture = [];
         }
+        console.log('-----');
         clothSchema.update(global.xss.text.process(req.params.id),clothData,function(err){
             console.log(err);
             if(err===null){

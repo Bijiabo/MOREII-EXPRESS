@@ -516,7 +516,7 @@ router.post('/api/update/:id',function(req,res){
                     format:global.xss.text.process(req.body.format)
                 };
                 blogSchema.update(req.params.id,blogData,req.userData,function(err2){
-                    if(err===null){
+                    if(err2===null){
                         res.json({
                             error:false,
                             blogId:req.params.id

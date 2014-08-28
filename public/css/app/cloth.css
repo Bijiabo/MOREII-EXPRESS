@@ -4,3 +4,11 @@
 #cloth-detail-carousel{
     padding: 0;
 }
+@media (max-width: 768px){
+    #cloth-listbox>.row>div:nth-child(2n+1){
+        padding-right: 7px;
+    }
+    #cloth-listbox>.row>div:nth-child(2n){
+        padding-left: 7px;
+    }
+}

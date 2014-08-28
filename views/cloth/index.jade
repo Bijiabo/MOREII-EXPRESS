@@ -15,18 +15,26 @@ block content
                             p 克重：#{clothData[0].weight}
                         -else
                             p 暂无数据
-            div.col-md-9
+            div.col-md-9#cloth-listbox
                 div.row
-                -for(var i=0,len=clothData.length;i<len;i++)
-                    div.col-md-4.col-sm-6.col-xs-6
-                        div.thumbnail.cloth-list-item(data-id="#{clothData[i]._id}")
-                            a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
-                                img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0].resizePath}")
-                            div.caption.hidden-xs
-                                h3 #{clothData[i].brand} #{clothData[i].codeNumber}
-                                p
-                                    span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;
-                                    span 纱支：#{clothData[i].yarnCount}
+                    -for(var i=0,len=clothData.length;i<len;i++)
+                        div.col-md-4.col-sm-3.col-xs-6
+                            div.thumbnail.cloth-list-item(data-id="#{clothData[i]._id}").hidden-xs.hidden-sm
+                                a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
+                                    img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0].resizePath}")
+                                div.caption.hidden-xs
+                                    h3 #{clothData[i].brand} #{clothData[i].codeNumber}
+                                    p
+                                        span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;
+                                        span 纱支：#{clothData[i].yarnCount}
+                            div.thumbnail.cloth-list-item(data-id="#{clothData[i]._id}").text-center.hidden-md.hidden-lg
+                                a(href="#{siteUrl}#{app}/detail/#{clothData[i]._id}")
+                                    img.img-responsive(src="#{siteUrl}#{clothData[i].picture[0].resizePath}")
+                                div.caption.hidden-xs
+                                    h3 #{clothData[i].brand} #{clothData[i].codeNumber}
+                                    p
+                                        span 产地：#{clothData[i].originPlace} &nbsp;&nbsp;&nbsp;
+                                        span 纱支：#{clothData[i].yarnCount}
                 div.row
                     div.col-md-12.text-center
                         hr
@@ -35,12 +43,16 @@ block content
     script.
         jQuery(function($) {
             $(document).ready( function() {
+                //resize sidebar
+                cloth.function.resizeSidebar();
                 //init sidebar panel width
                 if($('#cloth-sidebar').length>0){
-                    $('#cloth-sidebar').css('width',$('#cloth-sidebar').width()+'px');
                     $('#cloth-sidebar').stickUp({
                         topMargin: "auto"
                     });
                 }
+                $(document).on('resize',function(){
+                    cloth.function.resizeSidebar();
+                });
             });
         });

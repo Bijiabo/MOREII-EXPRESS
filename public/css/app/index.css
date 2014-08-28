@@ -4,6 +4,7 @@
 #index-image-carousel{
     padding: 0;
     max-height: 400px;
+    margin-bottom: 30px;
 }
 #index-image-carousel .carousel-inner>.item>img,#index-image-carousel .carousel-inner>.item>a>img {
     line-height: 1;
@@ -18,4 +19,8 @@
     #index-image-carousel-box{
         margin-top: -30px;
     }
+}
+.index-intro-item{
+    border:#eeeeee 1px solid;
+    padding: 15px;
 }

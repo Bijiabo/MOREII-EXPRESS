@@ -3,6 +3,8 @@ extends ../layout
 block content
     div.container
         div.row
+            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
+                include sidebar
             div.col-md-9
                 div.row
                     div.col-md-12#blog-main
@@ -47,8 +49,3 @@ block content
                                     div.form-group
                                         a.btn.btn-primary.pull-right#comment-submit 提交
                             div.col-md-12#comment-list(data-url="#{siteUrl}comment/api/list/#{app}/#{blogData.info._id}/")
-
-            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
-                include sidebar
-
-

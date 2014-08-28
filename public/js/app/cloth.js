@@ -23,6 +23,11 @@ var cloth = {
                     }
                 }
             })
+        },
+        resizeSidebar:function(){
+            if($('#cloth-sidebar').length>0){
+                $('#cloth-sidebar').css('width',$('#cloth-listbox>.row>div:first').width()+'px');
+            }
         }
     }
 }

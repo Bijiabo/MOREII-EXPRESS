@@ -40,7 +40,6 @@ app.get('/500',function(req,res){
 * 后台
 * */
 router.use('/console/?*', function(req,res,next){
-    console.log(req.login);
     if(req.login){
         global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
             if(hasPermission){
@@ -52,12 +51,19 @@ router.use('/console/?*', function(req,res,next){
     }
 });
 //后台首页
-router.get('/console/', function(req, res) {
+router.get('/console', function(req, res) {
     var data = new renderData({
         jsfile:'index_console.js',
         cssfile:'index_console.css'
     });
-    res.render('index/console/index', data);
+    indexSchema.getUseOne(function(err,indexData){
+        if(err===null){
+            data.data=indexData;
+            res.render('index/console/index', data);
+        }else{
+            res.redirect(global.config.siteUrl+'500');
+        }
+    });
 });
 /*
 * 后台api

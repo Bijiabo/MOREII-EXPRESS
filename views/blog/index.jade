@@ -3,19 +3,22 @@ extends ../layout
 block content
     div.container
         div.row
+            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
+                include sidebar
             div.col-md-9#blog-main
                 -if(blogData.length>0)
                     -for(var i=0;i<blogData.length;i++)
-                        div.col-md-12.row
-                            a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
-                                h3= blogData[i].title
-                            article!= blogData[i].content
-                            div.blog-userinfo.text-right.text-muted
-                                span 作者：
-                                span
-                                    a(href="#{siteUrl}#{app}/search/author/#{blogData[i].author.name}") #{blogData[i].author.name}
-                            hr
-                            br
+                        div.col-md-12
+                            div.row
+                                a(href="#{siteUrl}blog/detail/#{blogData[i]._id}")
+                                    h3= blogData[i].title
+                                article!= blogData[i].content
+                                div.blog-userinfo.text-right.text-muted
+                                    span 作者：
+                                    span
+                                        a(href="#{siteUrl}#{app}/search/author/#{blogData[i].author.name}") #{blogData[i].author.name}
+                                hr
+                                br
                 -else
                     div.jumbotron
                         h2 没有文章
@@ -23,5 +26,3 @@ block content
                 div.col-md-12.row
                     div.col-md-8.col-md-offset-2.text-center
                         include ../pager
-            div.col-md-3.hidden-sm.hidden-xs#blog-sidebar
-                include sidebar
