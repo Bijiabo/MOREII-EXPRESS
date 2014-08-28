@@ -253,7 +253,7 @@ router.get('/article/:shorturl/:page?',function(req,res){
             shortURLPromise.then(function(mongodbDoc) {
                 short.retrieve(mongodbDoc.hash).then(function(result) {
                     blogSchema.blogDetail(result.data.blogId,function(err,blogData){
-                        if(err===null && blogData!==null && blogData.info && blog.content){
+                        if(err===null && blogData!==null && blogData.info && blogData.content){
                             if(blogData.info.state===1 && page<=blogData.content.length){
                                 blogData.pageCount = blogData.content.length;//获取分页数量
                                 if(blogData.info.format !== 'html'){

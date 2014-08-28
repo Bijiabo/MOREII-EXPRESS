@@ -100,7 +100,6 @@ body{
     #header.navbar-toolbar.navbar-inverse .navbar-nav>.active>a:after,#header.navbar-toolbar.navbar-inverse .navbar-nav>.active>a:before {
         display: none;
     }
-
 }
 #header{
     z-index: 990;
@@ -287,4 +286,9 @@ a{color: #808080;}
 #header-navbar-nav ul.nav.nav-pills li.active a{
     background: none;
     color: #555555;
+}
+@media (max-width: 768px){
+    #header-navbar{
+        margin-bottom: 0;
+    }
 }
