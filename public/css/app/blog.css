@@ -2,6 +2,11 @@
 #blog-main{
     background: #ffffff;
     padding-bottom: 30px;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+#blog-main p{
+    margin: 0 0 2em 0;
 }
 #blog-main h3{
     margin-top: 0;

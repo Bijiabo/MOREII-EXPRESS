@@ -23,8 +23,8 @@ app.set('port',3001);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy',true);
-//app.set('env','production');//development
-app.set('env','development');//development
+app.set('env','production');//development
+//app.set('env','development');//development
 
 app.use(bodyParser({
     limit: 1000000*20  //1m

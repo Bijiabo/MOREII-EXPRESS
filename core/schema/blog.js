@@ -21,6 +21,7 @@ var blogSchema = new mongoose.Schema({
     version:{ type : Number, default: 1},
     state:{type : Number, default: 1,index:true},
     format:{type:String,default:'html',index:true},
+    type:{type:String,default:'blog',index:true},
     modify:[
         {
             uid:{type:String,index:true},
@@ -328,7 +329,7 @@ module.exports = {
     },
     //搜索标签
     findByTags:function(tagArray,sort,skip,limit,callback){
-        blogModel.find({tag:{"$all":tagArray}})
+        blogModel.find({tag:{"$all":tagArray},state:1})
             .sort(sort)
             .skip(skip)
             .limit(limit)
