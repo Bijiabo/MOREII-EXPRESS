@@ -256,7 +256,7 @@ router.get('/article/:shorturl/:page?',function(req,res){
                         if(err===null && blogData!==null && blogData.info && blogData.content){
                             if(blogData.info.state===1 && page<=blogData.content.length){
                                 blogData.pageCount = blogData.content.length;//获取分页数量
-                                if(blogData.info.format !== 'html'){
+                                if(blogData.info.format !== 'html' && blogData.content[page-1].content){
                                     blogData.content= markdown.toHTML(blogData.content[page-1].content);
                                 }else{
                                     blogData.content= blogData.content[page-1].content;

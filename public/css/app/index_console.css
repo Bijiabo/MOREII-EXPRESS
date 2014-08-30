@@ -51,7 +51,6 @@
     text-align: center;
     line-height: 100px;
     color: #cccccc;
-    text-shadow: 0 2px 3px rgba(255,255,255,0.5);
     display: none;
 }
 .index-content-item-changepicture:hover{
@@ -64,4 +63,24 @@
 .index-content-imgbox>img{margin: auto;}
 .index-content-item:hover .index-content-imgbox{
     /*opacity: 0.5;*/
+}
+@media (max-width: 768px){
+    .index-text-panel{
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eeeeee;
+        padding-bottom: 10px;
+    }
+}
+.index-text-panel .form-control{
+    border: 0;
+    resize: none;
+    box-shadow: none;
+    border-left: 2px solid #ffffff;
+}
+.index-text-panel .form-control:hover{
+    border-left: 2px solid rgba(48, 120, 235, 0.50);
+}
+.index-text-panel .form-control:focus{
+    border-left: 2px solid #3078eb;
+    background-color: #f4f4f4;
 }

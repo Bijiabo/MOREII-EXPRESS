@@ -11,8 +11,12 @@ var renderData = function(data){
     this.app = 'index';
     this.consoleNav = [
         {
-            name:'内容设置',
+            name:'图片设置',
             path:''
+        },
+        {
+            name:'文字设置',
+            path:'text'
         }
     ];
     this.consoleNavActive = data.consoleNavActive || '';
@@ -50,7 +54,7 @@ router.use('/console/?*', function(req,res,next){
         res.redirect(global.config.siteUrl+'user/login');
     }
 });
-//后台首页
+//后台首页 更改图片
 router.get('/console', function(req, res) {
     var data = new renderData({
         jsfile:'index_console.js',
@@ -65,9 +69,26 @@ router.get('/console', function(req, res) {
         }
     });
 });
+//后台 编辑首页文字
+router.get('/console/text', function(req, res) {
+    var data = new renderData({
+        jsfile:'index_console.js',
+        cssfile:'index_console.css',
+        consoleNavActive:'text'
+    });
+    indexSchema.getUseOne(function(err,indexData){
+        if(err===null){
+            data.data=indexData;
+            res.render('index/console/text', data);
+        }else{
+            res.redirect(global.config.siteUrl+'500');
+        }
+    });
+});
 /*
 * 后台api
 * */
+//更新首页内容
 router.post('/console/api/updateIndex/:id?',function(req,res){
     if(req.params.id===undefined){
         //新建首页模板

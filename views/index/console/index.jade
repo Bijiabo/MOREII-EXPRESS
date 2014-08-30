@@ -1,10 +1,6 @@
 extends ../../layout_console
 block content
     br
-    h4 首页图片
-    //div.uploadDropbox.miidropzone#index-add-picture
-    //    div.dz-default.dz-message
-    hr
     div.row
         div.col-md-12#index-content-box
             -if(data.content.length>0)
@@ -30,6 +26,8 @@ block content
     div.hidden
         input#file(type='file',name='file')
     hr
-    div.col-md-4.row
-        button.btn.btn-default#index-content-addone(type="button") 增加首页图片
-        button.btn.btn-primary#index-content-save(type="button") 保存
+    div.row
+        div.col-md-12
+            button.btn.btn-default#index-content-addone(type="button") 增加首页图片
+            button.btn.btn-primary#index-content-save(type="button") 保存
+            span.pull-right.text-muted.hidden-xs 推荐图片尺寸1140&times;400

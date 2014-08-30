@@ -1,8 +1,30 @@
 extends ../layout
 
 block content
+    div.col-md-12#index-image-carousel-box.visible-xs(style="margin-top: -20px;")
+        div.carousel.slide#index-image-carousel(data-ride="carousel")
+            ol.carousel-indicators
+                -for(var i=0,len=data.content.length;i<len;i++)
+                    -if(i===0)
+                        li.active(data-target="#index-image-carousel",data-slide-to="#{i}")
+                    -else
+                        li(data-target="#index-image-carousel",data-slide-to="#{i}")
+            div.carousel-inner(role="listbox")
+                -for(var i=0,len=data.content.length;i<len;i++)
+                    -if(i===0)
+                        div.item.active
+                            img(src="#{siteUrl}#{data.content[i].path}",style="margin:auto;")
+                            //div.carousel-caption
+                    -else
+                        div.item
+                            img(src="#{siteUrl}#{data.content[i].path}",style="margin:auto;")
+                            //div.carousel-caption
+            a.left.carousel-control(href="#index-image-carousel",data-slide="prev")
+                span.glyphicon.glyphicon-chevron-left
+            a.right.carousel-control(href="#index-image-carousel",data-slide="next")
+                span.glyphicon.glyphicon-chevron-right
     div.container
-        div.row
+        div.row.hidden-xs
             div.col-md-12
                 div.carousel.slide#index-image-carousel(data-ride="carousel")
                     ol.carousel-indicators
@@ -54,26 +76,3 @@ block content
                     div.caption
                         h3 Header item
                         p just content
-
-    //div.col-md-12#index-image-carousel-box
-    //    div.carousel.slide#index-image-carousel(data-ride="carousel")
-    //        ol.carousel-indicators
-    //            -for(var i=0,len=data.content.length;i<len;i++)
-    //                -if(i===0)
-    //                    li.active(data-target="#index-image-carousel",data-slide-to="#{i}")
-    //                -else
-    //                    li(data-target="#index-image-carousel",data-slide-to="#{i}")
-    //        div.carousel-inner(role="listbox")
-    //            -for(var i=0,len=data.content.length;i<len;i++)
-    //                -if(i===0)
-    //                    div.item.active
-    //                        img(src="#{siteUrl}#{data.content[i].path}",style="margin:auto;")
-    //                        //div.carousel-caption
-    //                -else
-    //                    div.item
-    //                        img(src="#{siteUrl}#{data.content[i].path}",style="margin:auto;")
-    //                        //div.carousel-caption
-    //        a.left.carousel-control(href="#index-image-carousel",data-slide="prev")
-    //            span.glyphicon.glyphicon-chevron-left
-    //        a.right.carousel-control(href="#index-image-carousel",data-slide="next")
-    //            span.glyphicon.glyphicon-chevron-right

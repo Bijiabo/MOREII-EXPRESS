@@ -280,12 +280,23 @@ a{color: #808080;}
     color: #808080;
     font-size: 16px;
 }
-#header-navbar-nav ul.nav.nav-pills li:first-child a{
+#header-navbar-nav .col-xs-8 ul.nav.nav-pills li:first-child a{
     padding-left: 0;
 }
 #header-navbar-nav ul.nav.nav-pills li.active a{
     background: none;
     color: #555555;
+}
+#header-nav-account-dropdown{
+    left: -69px;
+}
+#header-nav-account-caretup{
+    position: absolute;
+    top: -16px;
+    right: 11px;
+    color: white;
+    text-shadow: 0 -1px 0 #cccccc;
+    font-size: 24px;
 }
 @media (max-width: 768px){
     #header-navbar{

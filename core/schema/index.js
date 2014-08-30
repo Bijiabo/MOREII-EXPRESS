@@ -29,7 +29,7 @@ module.exports = {
             .exec(callback);
     },
     update:function(id,data,callback){
-        indexModel.findByIdAndUpdate(id,data,callback);
+        indexModel.findByIdAndUpdate(id,{"$set":data},callback);
     },
     getUseOne:function(callback){
         indexModel.findOne().sort({useTime:-1}).exec(callback);

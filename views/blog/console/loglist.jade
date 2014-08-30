@@ -25,7 +25,8 @@ block content
                 tr
                     td
                         input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
-                    td #{blogItem.title}
+                    td
+                        a(href="#{siteUrl}#{app}/detail/#{blogItem._id}",target="_blank") #{blogItem.title}
                     td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
                     td.hidden-xs.hidden-sm #{lastModifyTime}
                     td #{blogItem.author.name}

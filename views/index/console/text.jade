@@ -1,0 +1,18 @@
+extends ../../layout_console
+block content
+    br
+    div.row
+        -for(var i=0;i<3;i++)
+            div.col-md-4.index-text-panel
+                form(role="form")
+                    input.form-control.tip(type="text",placeholder="文字区域小标题",data-toggle="tooltip",data-placement="left",title="文字区域小标题")
+                    textarea.form-control.tip(placeholder="内容区域，如书写目标页面的内容简介或相关业务介绍等。为保证前台展示效果，该区域暂时仅支持纯文字显示。",rows=3,data-toggle="tooltip",data-placement="left",title="内容区域")
+                    input.form-control.tip(type="text",placeholder="链接显示文字",data-toggle="tooltip",data-placement="left",title="链接显示文字")
+                    input.form-control.tip(type="text",placeholder="链接地址",data-toggle="tooltip",data-placement="left",title="链接地址")
+
+    div.hidden
+        input#file(type='file',name='file')
+    hr.hidden-xs
+    div.row
+        div.col-md-12
+            button.btn.btn-primary#index-text-save(type="button") 保存

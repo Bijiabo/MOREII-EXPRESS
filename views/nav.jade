@@ -7,11 +7,16 @@ nav.navbar.navbar-default.navbar-toolbar#console-appnav(role="navigation")
         div.collapse.navbar-collapse#console-appnav-collapse
             ul.nav.navbar-nav
                 -if(consoleNav!==undefined)
-                    -if(consoleNav.length>0)
-                        -for navItem in consoleNav
-                            -if(navItem.path===consoleNavActive)
-                                li.active
-                                    a(href="#{siteUrl}#{app}/console/#{navItem.path}") #{navItem.name}
-                            -else
-                                li
-                                    a(href="#{siteUrl}#{app}/console/#{navItem.path}") #{navItem.name}
+                    -for navItem in consoleNav
+                        -if(navItem.path===consoleNavActive && app!=='index')
+                            li.active
+                                a(href="#{siteUrl}#{app}/console/#{navItem.path}") #{navItem.name}
+                        -else if(navItem.path!==consoleNavActive && app!=='index')
+                            li
+                                a(href="#{siteUrl}#{app}/console/#{navItem.path}") #{navItem.name}
+                        -else if(navItem.path===consoleNavActive && app==='index')
+                            li.active
+                                a(href="#{siteUrl}console/#{navItem.path}") #{navItem.name}
+                        -else
+                            li
+                                a(href="#{siteUrl}console/#{navItem.path}") #{navItem.name}

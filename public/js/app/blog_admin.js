@@ -163,7 +163,7 @@ $(function(){
                             }
                         }
                         $('#blog-editblog-content>div.summernote').html(content);
-                        $('#blog-editblog-tags').val(data.data.info.tag.join(','));
+                        $('#blog-editblog-tags').val(data.data.info.tag.join(' '));
                         $('#blog-editblog-submit').data('id',data.data.info._id.toString());
                     }else{
                         alert(data.des);

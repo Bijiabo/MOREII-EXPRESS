@@ -37,6 +37,15 @@ block content
                         span.glyphicon.glyphicon-chevron-left
                     a.right.carousel-control(href="#cloth-detail-carousel",data-slide="next")
                         span.glyphicon.glyphicon-chevron-right
+                hr.visible-xs
+                div.panel.panel-default.visible-xs
+                    div.panel-heading 面料参数
+                    div.panel-body(style="padding-top:0;")
+                        p 编号：#{clothData.codeNumber}
+                        p 产地：#{clothData.originPlace}
+                        p 纱支：#{clothData.yarnCount}
+                        p 克重：#{clothData.weight}
+                        p 图案：#{clothData.pattern}
                 hr
                 div#cloth-detail-description!= clothData.description
                 hr

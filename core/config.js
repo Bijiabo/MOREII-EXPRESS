@@ -452,7 +452,7 @@ module.exports = {
                         im.resize({
                             srcPath: path.join(srcPath,fileName),
                             dstPath: path.join(dstPath,fileName),
-                            width:   256
+                            width:   width
                         }, function(err, stdout, stderr){
                             callback(err,stdout,stderr);
                         });
@@ -462,7 +462,7 @@ module.exports = {
                 im.resize({
                     srcPath: path.join(srcPath,fileName),
                     dstPath: path.join(dstPath,fileName),
-                    width:   256
+                    width:   width
                 }, function(err, stdout, stderr){
                     if (err) throw err;
                     callback(err,stdout);

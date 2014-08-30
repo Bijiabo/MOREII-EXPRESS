@@ -1,8 +1,5 @@
 div#console_sidebar.col-md-2
     div.list-group
-        a.list-group-item.applink.active(href="#")
-            span.fa.fa-align-justify
-            span.list-group-name 概述
         -for appItem in apps
             -if(appItem.state===1)
                 a.list-group-item.applink(class="applink-#{appItem.name}",href="#{siteUrl}#{appItem.path}/console")

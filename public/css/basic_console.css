@@ -320,12 +320,12 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 28px;
-        width: 28px;
-        font-size: 14px;
-        background-color: #CED5D6;
-        color: #ffffff;
-        line-height: 28px;
+        height: 36px;
+        width: 36px;
+        font-size: 16px;
+        /* background-color: #CED5D6; */
+        color: #555555;
+        line-height: 36px;
         text-align: center;
         display: block;
     }
@@ -352,7 +352,15 @@
         -ms-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
-    #console-nav-menubtn{display: inline;}
+    #console-nav-menubtn{
+        display: inline;
+        border: 0;
+        font-size: 16px;
+        margin: 0;
+        height: 36px;
+        width: 36px;
+        background: none;
+    }
 }
 @media (min-width: 768px){
     .container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
