@@ -191,6 +191,9 @@ body{
 #user-account-box .tab-pane{
     padding-top: 30px;
 }
+#user-toggle-login{
+    margin-bottom: 50px;
+}
 /*comment*/
 #comment-box{
     padding-top: 30px;

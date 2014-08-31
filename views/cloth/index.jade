@@ -37,7 +37,8 @@ block content
                                         span 纱支：#{clothData[i].yarnCount}
                 div.row
                     div.col-md-12.text-center
-                        hr
+                        -if(pageCount>1)
+                            hr
                         include ../pager
     script(src='/js/stickUp.min.js')
     script.
