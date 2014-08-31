@@ -2,13 +2,13 @@ extends ../../layout_console
 block content
     br
     div.row
-        -for(var i=0;i<3;i++)
+        -for(var i=0;i<data.text.length;i++)
             div.col-md-4.index-text-panel
                 form(role="form")
-                    input.form-control.tip.index-text-title(type="text",placeholder="文字区域小标题",data-toggle="tooltip",data-placement="left",title="文字区域小标题")
-                    textarea.form-control.tip.index-text-des(placeholder="内容区域，如书写目标页面的内容简介或相关业务介绍等。为保证前台展示效果，该区域暂时仅支持纯文字显示。",rows=3,data-toggle="tooltip",data-placement="left",title="内容区域")
-                    input.form-control.tip.index-text-linktext(type="text",placeholder="链接显示文字",data-toggle="tooltip",data-placement="left",title="链接显示文字")
-                    input.form-control.tip.index-text-linkurl(type="text",placeholder="链接地址",data-toggle="tooltip",data-placement="left",title="链接地址")
+                    input.form-control.tip.index-text-title(type="text",placeholder="文字区域小标题",data-toggle="tooltip",data-placement="left",title="文字区域小标题",value="#{data.text[i].title}")
+                    textarea.form-control.tip.index-text-des(placeholder="内容区域，如书写目标页面的内容简介或相关业务介绍等。为保证前台展示效果，该区域暂时仅支持纯文字显示。",rows=3,data-toggle="tooltip",data-placement="left",title="内容区域") #{data.text[i].des}
+                    input.form-control.tip.index-text-linktext(type="text",placeholder="链接显示文字",data-toggle="tooltip",data-placement="left",title="链接显示文字",value="#{data.text[i].linktext}")
+                    input.form-control.tip.index-text-linkurl(type="text",placeholder="链接地址",data-toggle="tooltip",data-placement="left",title="链接地址",value="#{data.text[i].linkurl}")
 
     div.hidden
         input#file(type='file',name='file')

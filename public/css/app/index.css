@@ -35,3 +35,8 @@
     background-size: cover;
     background-position: center;
 }
+.index-text-des{
+    max-height: 4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

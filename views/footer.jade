@@ -1,6 +1,69 @@
 div.console_main
     div.container
-        div.row#footer
+        div#footer.hidden-xs.hidden-sm.text-muted.col-md-12
+            div.col-md-4
+                address
+                    strong 新手帮助
+                    br
+                    br
+                    span
+                        a(href="#{siteUrl}user") 注册和登陆
+                    br
+                    span
+                        a(href="#") 订做流程
+                    br
+                    span
+                        a(href="#") 西服知识
+            div.col-md-4
+                address
+                    strong 会员服务
+                    br
+                    br
+                    span
+                        a(href="#{siteUrl}user") 我的账户
+                    br
+                    span
+                        a(href="#") 订单状态
+                    br
+                    span
+                        a(href="#") 发票制度
+            div.col-md-4(style="padding-left:23px;")
+                address
+                    strong 服务支持
+                    br
+                    br
+                    span 地址：北京市海淀区西二旗大街领秀新硅谷
+                    br
+                    span 电话：010-3372115
+                    br
+                    span 邮箱：service@difei-sun.com
+        div.row.visible-xs.visible-sm.footer.text-muted
+            div.col-md-4
+                address
+                    strong 新手帮助
+                    br
+                    br
+                    a.btn.btn-default(href="#{siteUrl}user") 注册和登陆
+                    a.btn.btn-default(href="#") 订做流程
+                    a.btn.btn-default(href="#") 西服知识
             hr
-            div.col-md-12.text-center.text-muted powered by Moreii
+            div.col-md-4
+                address
+                    strong 会员服务
+                    br
+                    br
+                    a.btn.btn-default(href="#{siteUrl}user") 我的账户
+                    a.btn.btn-default(href="#") 订单状态
+                    a.btn.btn-default(href="#") 发票制度
+            hr
+            div.col-md-4
+                address
+                    strong 服务支持
+                    br
+                    br
+                    span 地址：北京市海淀区西二旗大街领秀新硅谷
+                    br
+                    span 电话：010-3372115
+                    br
+                    span 邮箱：service@difei-sun.com
 script(src="#{siteUrl}js/app/statistics.js")

@@ -51,13 +51,22 @@ block content
                             span.glyphicon.glyphicon-chevron-right
         div.row#index-text-box
             -for(var i=0,len=data.text.length;i<len;i++)
-                div.col-md-4.col-sm-6
-                    div.thumbnail
-                        //img(style="width:100%",src="https://d3dgk6r8ca2pzn.cloudfront.net/images/slots/banner/53e9a8445946d.jpg")
-                        div.caption
-                            h4 #{data.text[i].title}
-                            p #{data.text[i].des}
-                            p
-                                a(href="#{data.text[i].linkurl}") #{data.text[i].linktext} &gt;&gt;
                 -if(i<len-1)
+                    div.col-md-4.col-sm-6
+                        div.thumbnail
+                            div.caption
+                                a(href="#{data.text[i].linkurl}")
+                                    h4 #{data.text[i].title}
+                                p.index-text-des #{data.text[i].des}
+                                p
+                                    a(href="#{data.text[i].linkurl}") #{data.text[i].linktext} &gt;&gt;
                     hr.visible-xs
+                -else
+                    div.col-md-4.col-sm-12
+                        div.thumbnail
+                            div.caption
+                                a(href="#{data.text[i].linkurl}")
+                                    h4 #{data.text[i].title}
+                                p.index-text-des #{data.text[i].des}
+                                p
+                                    a(href="#{data.text[i].linkurl}") #{data.text[i].linktext} &gt;&gt;
