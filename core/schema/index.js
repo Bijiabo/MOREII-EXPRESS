@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var indexSchema = new mongoose.Schema({
     type:{type:String,default:'system',index:true},
     style:{type:String,default:'default',index:true},
-    content:mongoose.Schema.Types.Mixed,
+    image:mongoose.Schema.Types.Mixed,
+    text:mongoose.Schema.Types.Mixed,
     user:{
         "_id":{type:String,index:true},
         name:{type:String,index:true}

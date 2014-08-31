@@ -3,31 +3,42 @@ block content
     br
     div.row
         div.col-md-12#index-content-box
-            -if(data.content.length>0)
-                -for(var i=0;i<data.content.length;i++)
-                    div.col-md-12.index-content-item
+            -if(data.image)
+                -if(data.image.length>0)
+                    -for(var i=0;i<data.image.length;i++)
+                        div.col-md-12.index-content-item
+                            div.index-content-imgbox
+                                img.img-responsive(src="#{siteUrl}#{data.image[i].path}",data-path="#{data.image[i].path}",data-resize="#{data.image[i].resizePath}")
+                            div.index-content-item-btnbox
+                                span.fa.fa-chevron-up
+                                span.fa.fa-chevron-down
+                                span.fa.fa-times
+                            div.index-content-item-changepicture
+                                span.fa.fa-picture-o
+                -for(var i=0;i<3-data.image.length;i++)
+                    div.col-md-12.index-content-item.empty
                         div.index-content-imgbox
-                            img.img-responsive(src="#{siteUrl}#{data.content[i].path}",data-path="#{data.content[i].path}",data-resize="#{data.content[i].resizePath}")
                         div.index-content-item-btnbox
                             span.fa.fa-chevron-up
                             span.fa.fa-chevron-down
                             span.fa.fa-times
                         div.index-content-item-changepicture
                             span.fa.fa-picture-o
-            -for(var i=0;i<3-data.content.length;i++)
-                div.col-md-12.index-content-item.empty
-                    div.index-content-imgbox
-                    div.index-content-item-btnbox
-                        span.fa.fa-chevron-up
-                        span.fa.fa-chevron-down
-                        span.fa.fa-times
-                    div.index-content-item-changepicture
-                        span.fa.fa-picture-o
+            -else
+                -for(var i=0;i<3;i++)
+                    div.col-md-12.index-content-item.empty
+                        div.index-content-imgbox
+                        div.index-content-item-btnbox
+                            span.fa.fa-chevron-up
+                            span.fa.fa-chevron-down
+                            span.fa.fa-times
+                        div.index-content-item-changepicture
+                            span.fa.fa-picture-o
     div.hidden
         input#file(type='file',name='file')
     hr
     div.row
         div.col-md-12
             button.btn.btn-default#index-content-addone(type="button") 增加首页图片
-            button.btn.btn-primary#index-content-save(type="button") 保存
+            button.btn.btn-primary#index-content-save(type="button",data-id="#{data._id}") 保存
             span.pull-right.text-muted.hidden-xs 推荐图片尺寸1140&times;400

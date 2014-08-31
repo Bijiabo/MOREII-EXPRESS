@@ -1,7 +1,7 @@
 #index-image-carousel-box{
     padding: 0;
 }
-#index-image-carousel{
+#index-image-carousel,#index-image-carousel-small{
     padding: 0;
     max-height: 400px;
     margin-bottom: 30px;
@@ -23,4 +23,15 @@
 .index-intro-item{
     border:#eeeeee 1px solid;
     padding: 15px;
+}
+#index-text-box h4{
+    color: #555555;
+}
+#index-text-box p{
+    color: #888888;
+}
+#index-image-carousel-box .carousel-inner>.item{
+    height: 220px;
+    background-size: cover;
+    background-position: center;
 }

@@ -32,7 +32,6 @@ function ajaxFileUpload(){
                 console.log(data);
                 if(!data.error){
                     basic.stateModal('success');
-                    console.log(siteUrl+data.path);
                     $('.index-content-item:eq('+cache.indexContentItemIndex+')>.index-content-imgbox').html('<img src="'+siteUrl+data.path+'" class="img-responsive" data-resize="'+data.resizePath+'" data-path="'+data.path+'">');
                     $('.index-content-item:eq('+cache.indexContentItemIndex+')').removeClass('empty');
                 }else{
@@ -67,11 +66,11 @@ var index_consoleObject = {
             index_consoleObject.cache.indexData = {
                 type:'system',
                 style:'default',
-                content:[]
+                image:[]
             };
             $.each($('.index-content-item'),function(index,item){
                 if($(item).find('.index-content-imgbox img').length>0){
-                    index_consoleObject.cache.indexData.content.push({
+                    index_consoleObject.cache.indexData.image.push({
                         path:$(item).find('.index-content-imgbox img').data('path'),
                         resizePath:$(item).find('.index-content-imgbox img').data('resize')
                     });
@@ -79,7 +78,7 @@ var index_consoleObject = {
             });
             return index_consoleObject.cache.indexData;
         },
-        saveIndexContent:function(){
+        saveIndexImage:function(){
             $.ajax({
                 url:siteUrl+'console/api/updateIndex',
                 type:'POST',
@@ -98,7 +97,59 @@ var index_consoleObject = {
                     basic.stateModal('error','连接失败，请检查连接。');
                 }
             });
-        }
+        },
+        getTextContent:function(){
+            index_consoleObject.cache.textData = [];
+            var error = {
+                error:false,
+                des:''
+            };
+            $.each($('.index-text-panel'),function(index,item){
+                if(/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/.test($(item).find('.index-text-linkurl').val())){
+                    if(!/^\s*$/.test($(item).find('.index-text-title').val()) && !/^\s*$/.test($(item).find('.index-text-des').val()) && !/^\s*$/.test($(item).find('.index-text-linkurl').val()) && !/^\s*$/.test($(item).find('.index-text-linktext').val())){
+                        index_consoleObject.cache.textData.push({
+                            title:$(item).find('.index-text-title').val(),
+                            des:$(item).find('.index-text-des').val(),
+                            linktext:$(item).find('.index-text-linktext').val(),
+                            linkurl:$(item).find('.index-text-linkurl').val()
+                        });
+                    }else{
+                        error.error=true;
+                        error.des='内容不能为空'
+                    }
+
+                }else{
+                    error.error=true;
+                    error.des='网址格式错误'
+                }
+            });
+            return error;
+        },
+        saveIndexText:function(id){
+            if(!id){
+                id=''
+            }
+            $.ajax({
+                url:siteUrl+'console/api/updateIndex/'+id,
+                type:'POST',
+                dataType:'json',
+                data:{
+                    indexData:{
+                        text:index_consoleObject.cache.textData
+                    }
+                },
+                success:function(data){
+                    if(!data.err){
+                        basic.stateModal('success');
+                    }else{
+                        basic.stateModal('error',data.des);
+                    }
+                },
+                error:function(err){
+                    basic.stateModal('error','连接失败，请检查连接。');
+                }
+            });
+        },
     }
 }
 $(function(){
@@ -135,8 +186,17 @@ $(function(){
     $(document).on('click','#index-content-addone',function(){
         index_consoleObject.function.addIndexContentItem(1);
     });
-    //保存
+    //保存图片内容
     $(document).on('click','#index-content-save',function(){
-        index_consoleObject.function.saveIndexContent();
+        index_consoleObject.function.saveIndexImage();
+    });
+    //保存文字内容
+    $(document).on('click','#index-text-save',function(){
+        var getText = index_consoleObject.function.getTextContent();
+        if(!getText.error){
+            index_consoleObject.function.saveIndexText($(this).data('id'));
+        }else{
+            basic.stateModal('error',getText.des);
+        }
     });
 });
