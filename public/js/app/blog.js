@@ -8,14 +8,13 @@ var blog = {
             content:$('#comment-content').val(),
             app:el.parents('form').data('app'),
             appPageId:el.parents('form').data('apppageid')
-        }
+        };
         var success = function(data){
             if(data.err===null){
                 $(':input[name="content"]').val('');
                 basic.getComment();
             }
-        }
-        console.log(commentData);
+        };
         $.ajax({
             type:'POST',
             url:siteUrl+'comment/api/add',
@@ -37,7 +36,7 @@ var blog = {
                     alert('获取分享链接失败，请稍后重试:)');
                 }
             }
-        })
+        });
     },
     randomBlog:function(el,callback){
         $.ajax({

@@ -274,7 +274,6 @@ router.get('/article/:shorturl/:page?',function(req,res){
                                     if(err1===null){
                                         data.pageUrl = global.config.siteUrl+data.app+'/article/'+req.params.shorturl+'/';
                                         data.pageCount = blogData.pageCount;
-                                        console.log(blogData.pageCount);
                                         data.pageNow = page;
                                         data.limitPerPage = 1;
                                         data.pagerLen = 5;//翻页控件显示页数
@@ -418,8 +417,13 @@ router.get('/edit/:blogId',function(req,res){
             var rData = new renderData({
                 title : 'Moreii团队博客 - 编辑日志',
                 jsfile: 'blog_admin.js',
-                blogData : blogData
+                blogData:blogData
             });
+            var content = '';
+            for(var i= 0,len=blogData.content.length;i<len;i++){
+                content += blogData.content[i].content;
+            }
+            rData.blogData.content = content;
             res.render('blog/edit', rData);
         }else{
             res.send(JSON.stringify({
@@ -436,6 +440,7 @@ router.post('/api/add',function(req,res){
         content:global.xss.html.process(req.body.content),
         tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
         format:global.xss.text.process(req.body.format),
+        type:global.xss.text.process(req.body.type),
         author:{
             id:req.userData._id,
             name:req.userData.name
@@ -467,7 +472,8 @@ router.post('/api/update/:id',function(req,res){
                     title:global.xss.text.process(req.body.title),
                     content:global.xss.html.process(req.body.content),
                     tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
-                    format:global.xss.text.process(req.body.format)
+                    format:global.xss.text.process(req.body.format),
+                    type:global.xss.text.process(req.body.type)
                 };
                 blogSchema.update(req.params.id,blogData,req.userData,function(err2){
                     if(err2===null){
@@ -487,7 +493,8 @@ router.post('/api/update/:id',function(req,res){
                     title:req.body.title,
                     content:req.body.content,
                     tag:global.xss.text.process(req.body.tag.join(' ')).replace(/^\s+/,'').replace(/\s{2,}/,' ').replace(/\s+$/,'').replace(/\[removed\]/g,'').split(' '),
-                    format:global.xss.text.process(req.body.format)
+                    format:global.xss.text.process(req.body.format),
+                    type:global.xss.text.process(req.body.type)
                 };
                 blogSchema.update(req.params.id,blogData,req.userData,function(err,version){
                     if(err===null){

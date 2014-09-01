@@ -11,14 +11,17 @@ var blog = {
             title:$('#blog-'+type+'blog-title').val(),
             content:$('#blog-'+type+'blog-content>div').code(),
             tag:tagArray,
-            format:'html'
+            format:'html',
+            type:'blog'
         };
         var success = function(data){
             if(!data.error){
-                window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+                basic.stateModal('success');
+                window.setTimeout(function(){
+                    window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+                },1000);
             }else{
-                alert('提交错误，详情请查看控制台。');
-                console.log(data.des);
+                basic.stateModal('error',data.des);
             }
         };
         if(type==='add'){
@@ -100,6 +103,15 @@ var blog = {
                 alert('连接错误，请重试。');
             }
         });
+    },
+    getTags:function(){
+        var tagArray = [];
+        $.each($('.blog-tags'),function(index,item){
+            if(!/^\s*$/.test($(item).text())){
+                tagArray.push($(item).text());
+            }
+        });
+        return tagArray;
     }
 }
 $(function(){
@@ -122,7 +134,7 @@ $(function(){
                     }
                 }
                 if(!hasTag){
-                    $('#tagbox').append('<a class="btn btn-info blog-tags">'+tag+'</a>');
+                    $('#tagbox').append('<a class="btn btn-default blog-tags">'+tag+'</a>');
                 }
             }
         }
@@ -165,6 +177,7 @@ $(function(){
                         $('#blog-editblog-content>div.summernote').html(content);
                         $('#blog-editblog-tags').val(data.data.info.tag.join(' '));
                         $('#blog-editblog-submit').data('id',data.data.info._id.toString());
+                        $('#blog-editpage-submit').data('id',data.data.info._id.toString());
                     }else{
                         alert(data.des);
                     }
@@ -173,6 +186,47 @@ $(function(){
                     alert('连接错误，请重试。');
                 }
             });
+        });
+    });
+    //添加页面
+    $(document).on('click','.console-page-submit',function(){
+        var el = $(this),
+            blogId = el.data('id'),
+            type = el.data('type');
+        blog.update(blogId,type);
+    });
+    //前台保存修改
+    $(document).on('click','#blog-save',function(event){
+        if(blog.getTags()!==[]){
+            var tag = blog.getTags();
+        }else{
+            tag = [];
+        }
+        var id = $(':input[name="_id"]').val();
+        var blogData = {
+            title:$('#blog-editblog-title').val(),
+            content:$('#blog-edit-content').code(),
+            tag:tag,
+            format:'html',
+            type:$(':input[name="type"]').val()
+        };
+        var success = function(data){
+            if(!data.error){
+                basic.stateModal('success');
+                window.setTimeout(function(){
+                    //window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+                },1000);
+            }else{
+                basic.stateModal('error',data.des);
+            }
+        };
+        var url = siteUrl+blog.appPath+'/api/update/'+id;
+        $.ajax({
+            url:url,
+            type:'POST',
+            dataType:'json',
+            data:blogData,
+            success:success
         });
     });
 })

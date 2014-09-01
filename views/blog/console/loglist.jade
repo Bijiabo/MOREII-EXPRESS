@@ -8,6 +8,7 @@ block content
                     //label.checkbox
                     input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
                 th 标题
+                th 类型
                 th.hidden-xs.hidden-sm 创建时间
                 th.hidden-xs.hidden-sm 最后修改
                 th 作者
@@ -27,6 +28,11 @@ block content
                         input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
                     td
                         a(href="#{siteUrl}#{app}/detail/#{blogItem._id}",target="_blank") #{blogItem.title}
+                    td.hidden-xs.hidden-sm
+                        -if(blogItem.type==="blog")
+                            span 日志
+                        -else
+                            span 页面
                     td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
                     td.hidden-xs.hidden-sm #{lastModifyTime}
                     td #{blogItem.author.name}
@@ -65,8 +71,9 @@ block content
             input#blog-editblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
         //-input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
         hr
-        div.col-md-2.col-md-offset-5
-            button#blog-editblog-submit.btn.btn-primary.btn-block.console-blog-submit(type="button",data-type="edit",data-id="") 提交修改
+        div
+            button#blog-editblog-submit.btn.btn-primary.console-blog-submit(type="button",data-type="edit",data-id="") 作为日志重新发布
+            button#blog-editpage-submit.btn.btn-default.console-page-submit(type="button",data-type="edit",data-id="") 作为页面重新发布
     //- 文章书写层
     div#blog-addblog.console-modal
         div.fa.fa-times.console-modal-close
@@ -81,4 +88,4 @@ block content
         hr
         div
             button#blog-addblog-submit.btn.btn-primary.console-blog-submit(type="button",data-type="add",data-id="") 发布为日志
-            button.btn.btn-default(type="button") 发布为页面
+            button#blog-addpage-submit.btn.btn-default.console-page-submit(type="button",data-type="add",data-id="") 发布为页面

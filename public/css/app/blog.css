@@ -50,3 +50,35 @@
     color: #767676;
     border: 1px solid #eeeeee;
 }
+#blog-addblog-title, #blog-editblog-title {
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    font-size: 24px;
+    margin-top: 6px;
+}
+.blog-add-tag-input,.blog-add-tag-input:hover,.blog-add-tag-input:focus{
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+    background: none;
+    border-bottom: 1px solid #eeeeee;
+    margin-top: 27px;
+}
+#blog-save{
+    margin: 0 0 30px 0;
+}
+.blog-tags .fa{
+    /*display: none;*/
+    margin-left: 0;
+    width:0;
+    overflow: hidden;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+}
+.blog-tags:hover .fa{
+    /*display: inline;*/
+    margin-left: 6px;
+    width: 12px;
+}

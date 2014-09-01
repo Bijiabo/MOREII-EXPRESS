@@ -17,37 +17,27 @@ block content
                                     a.btn.btn-default.pull-right(href="#{siteUrl}#{app}/edit/#{blogData.info._id}") 修订
                         hr
                         article!= blogData.content
-                        p
                         //button#getshareurl.btn.btn-primary(type="button",data-id="#{blogData.info.id}") 分享
-                        hr
-                        div.text-muted.blog-userinfo
-                            span 标签：
-                            -for(var i=0,len=blogData.info.tag.length;i<len;i++)
-                                a(href="#{siteUrl}#{app}/search/tag/#{blogData.info.tag[i]}") #{blogData.info.tag[i]}
-                                -if(i!==len-1)
-                                    span ,
-                            span.pull-right.hidden-xs
-                                a(href="#{siteUrl}#{app}/search/author/#{blogData.info.author.name}") #{blogData.info.author.name}
-                            span.pull-right.hidden-xs 作者：
-                            p.visible-xs(style="margin-bottom: 0;")
-                                span 作者：
-                                span
+                        -if(blogData.info.type==='blog')
+                            hr
+                            div.text-muted.blog-userinfo
+                                span 标签：
+                                -for(var i=0,len=blogData.info.tag.length;i<len;i++)
+                                    a(href="#{siteUrl}#{app}/search/tag/#{blogData.info.tag[i]}") #{blogData.info.tag[i]}
+                                    -if(i!==len-1)
+                                        span ,
+                                span.pull-right.hidden-xs
                                     a(href="#{siteUrl}#{app}/search/author/#{blogData.info.author.name}") #{blogData.info.author.name}
-                        hr
-                        div.row
-                            //div.col-md-2
-                                -if(pageNow>1)
-                                    a.btn.btn-default.pull-left(href="#{pageUrl}#{pageNow-1}")
-                                        span.fa.fa-arrow-left
-                                        span &nbsp;&nbsp; 上一页
-                            div.col-md-8.text-center.col-md-offset-2
-                                include ../pager
-                            //div.col-md-2
-                                -if(pageNow<pageCount)
-                                    //#blog-readmore
-                                    a.btn.btn-primary.pull-right(href="#{pageUrl}#{pageNow+1}")
-                                        span 下一页&nbsp;&nbsp;
-                                        span.fa.fa-arrow-right
+                                span.pull-right.hidden-xs 作者：
+                                p.visible-xs(style="margin-bottom: 0;")
+                                    span 作者：
+                                    span
+                                        a(href="#{siteUrl}#{app}/search/author/#{blogData.info.author.name}") #{blogData.info.author.name}
+                        -if(pageCount>1)
+                            hr
+                            div.row
+                                div.col-md-8.text-center.col-md-offset-2
+                                    include ../pager
                         //-div.row
                             div.col-md-12#comment-box
                                 h6 评论
