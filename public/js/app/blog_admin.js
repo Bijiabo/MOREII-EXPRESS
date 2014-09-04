@@ -37,6 +37,40 @@ var blog = {
             success:success
         });
     },
+    updatePage:function(id,type){
+        var tags = $('#blog-'+type+'blog-tags').val(),
+            tagArray = tags.split(' ').unique();
+
+        var blogData = {
+            title:$('#blog-'+type+'blog-title').val(),
+            content:$('#blog-'+type+'blog-content>div').code(),
+            tag:tagArray,
+            format:'html',
+            type:'page'
+        };
+        var success = function(data){
+            if(!data.error){
+                basic.stateModal('success');
+                window.setTimeout(function(){
+                    window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+                },1000);
+            }else{
+                basic.stateModal('error',data.des);
+            }
+        };
+        if(type==='add'){
+            var url = siteUrl+blog.appPath+'/api/add';
+        }else{
+            var url = siteUrl+blog.appPath+'/api/update/'+id
+        }
+        $.ajax({
+            url:url,
+            type:'POST',
+            dataType:'json',
+            data:blogData,
+            success:success
+        });
+    },
     deleteBlogs:function(el,e){
         var idArray = [];
         $.each($('#blog-bloglisttable :checkbox:checked'),function(index,item){
@@ -193,7 +227,7 @@ $(function(){
         var el = $(this),
             blogId = el.data('id'),
             type = el.data('type');
-        blog.update(blogId,type);
+        blog.updatePage(blogId,type);
     });
     //前台保存修改
     $(document).on('click','#blog-save',function(event){
@@ -214,7 +248,7 @@ $(function(){
             if(!data.error){
                 basic.stateModal('success');
                 window.setTimeout(function(){
-                    //window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
+                    window.location.href = siteUrl+blog.appPath+'/detail/'+data.blogId;
                 },1000);
             }else{
                 basic.stateModal('error',data.des);

@@ -16,33 +16,34 @@ block content
                 th 版本
                 th 操作
         tbody#blog-bloglisttable
-            -for blogItem in blogData
-                -var createTime = new Date(blogItem.createTime)
-                -var lastModifyName = '',lastModifyTime=''
-                -if(blogItem.modify.length>0)
-                    -lastModifyName = blogItem.modify[blogItem.modify.length-1].name
-                    -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
-                    -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
-                tr
-                    td
-                        input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
-                    td
-                        a(href="#{siteUrl}#{app}/detail/#{blogItem._id}",target="_blank") #{blogItem.title}
-                    td.hidden-xs.hidden-sm
-                        -if(blogItem.type==="blog")
-                            span 日志
-                        -else
-                            span 页面
-                    td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
-                    td.hidden-xs.hidden-sm #{lastModifyTime}
-                    td #{blogItem.author.name}
-                    td.hidden-xs.hidden-sm #{lastModifyName}
-                    td #{blogItem.version}
-                    td.blog-tableedit
-                        a.blog-console-preview(href="javascript:;",data-blogid="#{blogItem._id}")
-                            span.fa.fa-eye
-                        a.blog-console-edit(href="javascript:;",data-blogid="#{blogItem._id}")
-                            span.fa.fa-edit
+            -if(blogData.length>0)
+                -for blogItem in blogData
+                    -var createTime = new Date(blogItem.createTime)
+                    -var lastModifyName = '',lastModifyTime=''
+                    -if(blogItem.modify.length>0)
+                        -lastModifyName = blogItem.modify[blogItem.modify.length-1].name
+                        -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
+                        -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
+                    tr
+                        td
+                            input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
+                        td
+                            a(href="#{siteUrl}#{app}/detail/#{blogItem._id}",target="_blank") #{blogItem.title}
+                        td.hidden-xs.hidden-sm
+                            -if(blogItem.type==="blog")
+                                span 日志
+                            -else
+                                span 页面
+                        td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
+                        td.hidden-xs.hidden-sm #{lastModifyTime}
+                        td #{blogItem.author.name}
+                        td.hidden-xs.hidden-sm #{lastModifyName}
+                        td #{blogItem.version}
+                        td.blog-tableedit
+                            a.blog-console-preview(href="javascript:;",data-blogid="#{blogItem._id}")
+                                span.fa.fa-eye
+                            a.blog-console-edit(href="javascript:;",data-blogid="#{blogItem._id}")
+                                span.fa.fa-edit
     div.row
         div.col-md-4
             button.btn.btn-default#blog-deleteblogs(type="button")

@@ -68,6 +68,7 @@ app.use(function(req,res,next){
     res.locals.apps = global.config.app;
     res.locals.pretty = true;
     res.locals.siteUrl = global.config.siteUrl;
+    res.locals.logo = global.config.logo;
 //    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**

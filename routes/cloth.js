@@ -113,6 +113,9 @@ router.use(function(req,res,next){
 /*
 * 后台面料列表
 * */
+router.get('/console', function(req, res) {
+    res.redirect(global.config.siteUrl+'cloth/console/list');
+});
 router.get('/console/list', function(req, res) {
     var page = 0,
         limitPerPage = 12;

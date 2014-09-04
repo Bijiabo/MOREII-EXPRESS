@@ -237,11 +237,12 @@ module.exports = {
     },
     randomBlog:function(limit,callback){
         var random = Math.random();
-        blogModel.find({"random" : {"$gt" : random}})
+        blogModel.find({"random" : {"$gt" : random},state:1})
             .limit(limit)
             .exec(function(err,data){
                 if(err===null && data===null){
-                    blogModel.findOne({"random" : {"$lt" : random}})
+                    blogModel.find({state:1})
+                        .limit(5)
                         .exec(function(err,data){
                             callback(err,data);
                         });
