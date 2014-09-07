@@ -78,9 +78,10 @@ var index_consoleObject = {
             });
             return index_consoleObject.cache.indexData;
         },
-        saveIndexImage:function(){
+        saveIndexImage:function(id){
+            if(id===undefined){id='';}
             $.ajax({
-                url:siteUrl+'console/api/updateIndex',
+                url:siteUrl+'console/api/updateIndex/'+id,
                 type:'POST',
                 dataType:'json',
                 data:{
@@ -188,7 +189,7 @@ $(function(){
     });
     //保存图片内容
     $(document).on('click','#index-content-save',function(){
-        index_consoleObject.function.saveIndexImage();
+        index_consoleObject.function.saveIndexImage($(this).data('id'));
     });
     //保存文字内容
     $(document).on('click','#index-text-save',function(){

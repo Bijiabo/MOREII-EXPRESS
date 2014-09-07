@@ -63,12 +63,29 @@ module.exports = {
         });
     },
     update:function(data,callback){
-        var siteData = new siteModel(data);
-        siteData.save(function(err,savedData){
-            if(err===null){
-                refreshSiteConfigure(callback);
+        siteModel.findOne().sort({"_id":-1}).exec(function(err,odata){
+            if(err===null && data!==null){
+                odata.siteName = data.siteName;
+                odata.domain = data.domain;
+                odata.port = data.port;
+                odata.logo = data.logo;
+                odata.app = data.app;
+                odata.save(function(err1,savedData){
+                    if(err1===null){
+                        refreshSiteConfigure(callback);
+                    }else{
+                        callback(err1,savedData);
+                    }
+                });
             }else{
-                callback(err,savedData);
+                var siteData = new siteModel(data);
+                siteData.save(function(err,savedData){
+                    if(err===null){
+                        refreshSiteConfigure(callback);
+                    }else{
+                        callback(err,savedData);
+                    }
+                });
             }
         });
     },

@@ -336,7 +336,11 @@ var basic = {
     },
     initDropbox:function(){
         $.each($("div.uploadDropbox"),function(index,item){
-            var url = siteUrl+'api/upload/'+app+'/?savePath=dropbox&ajax=true';
+            var resize = Number($(item).data('resize'))
+                ,url = siteUrl+'api/upload/'+app+'/?savePath=dropbox&ajax=true';
+            if(resize>=50 && !isNaN(resize)){
+                url+='&resize='+resize;
+            }
             $(item).dropzone({
                 url: url,
                 paramName: "file",

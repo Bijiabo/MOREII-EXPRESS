@@ -13,11 +13,11 @@ block content
                 div.carousel-inner(role="listbox")
                     -for(var i=0,len=data.image.length;i<len;i++)
                         -if(i===0)
-                            div.item.active(style="background-image:url(#{siteUrl}#{data.image[i].path});")
+                            div.item.active(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});")
                                 //-img(src="#{siteUrl}#{data.image[i].path}",style="margin:auto;")
                                 //-div.carousel-caption
                         -else
-                            div.item(style="background-image:url(#{siteUrl}#{data.image[i].path});")
+                            div.item(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});")
                                 //-img(src="#{siteUrl}#{data.image[i].path}",style="margin:auto;")
                                 //-div.carousel-caption
                 a.left.carousel-control(href="#index-image-carousel-small",data-slide="prev")

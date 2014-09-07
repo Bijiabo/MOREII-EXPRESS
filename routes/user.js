@@ -31,6 +31,7 @@ var renderData = function(data){
     this.app = 'user';
     this.nav = global.config.nav;
     this.apps = global.config.app;
+    this.logo = global.config.logo;
     this.pretty = true;
 }
 /* GET users listing. */
