@@ -27,11 +27,11 @@ block content
                         -for(var i=0,len=clothData.picture.length;i<len;i++)
                             -if(i===0)
                                 div.item.active
-                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
+                                    img.responsive-img(data-path="#{siteUrl}#{clothData.picture[i].path}",data-resizepath="#{siteUrl}#{clothData.picture[i].resizePath}",style="margin:auto;")
                                     //div.carousel-caption
                             -else
                                 div.item
-                                    img(src="#{siteUrl}#{clothData.picture[i].path}",style="margin:auto;")
+                                    img.responsive-img(data-path="#{siteUrl}#{clothData.picture[i].path}",data-resizepath="#{siteUrl}#{clothData.picture[i].resizePath}",style="margin:auto;")
                                     //div.carousel-caption
                     a.left.carousel-control(href="#cloth-detail-carousel",data-slide="prev")
                         span.glyphicon.glyphicon-chevron-left

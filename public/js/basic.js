@@ -64,9 +64,12 @@ var basic = {
         $(':checkbox.thead-checkbox').on('change', function(e) {
             basic.tableAllCheck($(this),e);
         });
+        //响应式载入图片
+        basic.responsiveLoadImage();
     },
     resize:function(){
         basic.initConsoleSidebar();
+        basic.responsiveLoadImage();
     },
     pwdencode:function(password){
         /*
@@ -658,30 +661,14 @@ var basic = {
                 break;
         }
     },
-    ajax:function(option){
-        if(option!==undefined && typeof option === 'object'){
-            $.ajax({
-                async:option.async||true,
-                beforeSend:option.beforeSend||function(){basic.stateModal('danger','连接错误。');},
-                cache:option.cache||true,
-                complete:option.complete||function(){},
-                contentType:option.contentType|| "application/x-www-form-urlencoded",
-                context:option.context||document.body,
-                data:option.data||{},
-                dataFilter:option.dataFilter||function(){},
-                dataType:option.dataType||'json',
-                error:option.error||function(){basic.stateModal('danger','连接错误。');},
-                global:option.global||true,
-                ifModified:option.ifModified||false,
-                jsonp:option.jsonp||'moreiicallback',
-                jsonpCallback:option.jsonpCallback||'moreiicallback',
-                username:option.username||undefined,
-                password:option.password||undefined,
-                processData:option.processData||true,
-                success:function(data){option.success(data);}||function(){basic.stateModal('success');},
-                timeout:1000,
-                type:option.type||'POST',
-                url:option.url||siteUrl+'api'
+    responsiveLoadImage:function(){
+        if($(document).width()<=768){
+            $.each($('.responsive-img'),function(index,item){
+                $(item).attr('src',$(item).data('resizepath'));
+            });
+        }else{
+            $.each($('.responsive-img'),function(index,item){
+                $(item).attr('src',$(item).data('path'));
             });
         }
     }
