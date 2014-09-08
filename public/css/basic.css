@@ -312,4 +312,7 @@ a{color: #808080;}
     #header-navbar-nav ul.nav.nav-pills li:nth-child(1),#header-navbar-nav ul.nav.nav-pills li:nth-child(2),#header-navbar-nav ul.nav.nav-pills li:nth-child(3){display: inline-block}
     #header-user a,#header-login a{padding-right: 0;}
     #header-user a b{display: none;}
+    #header-nav-account-dropdown {left: -81px;margin-top: -1px;}
+    #header-nav-account-caretup {right: 32px;}
+    #header-nav-account-dropdown li{display: inline-block !important;}
 }

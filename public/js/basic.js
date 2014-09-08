@@ -75,9 +75,11 @@ var basic = {
         //检测后台页面访问权限，-ok 个人下拉菜单显示链接
         basic.checkConsolePermission(function(permissionResult){
             if(permissionResult && permissionResult.permission){
+                var appPath = app+'/';
+                if(app==='index'){appPath=''}
                 $('#header-nav-account-dropdown').prepend([
                     '<li>',
-                    '<a href="'+siteUrl+app+'/console">控制台</a>',
+                    '<a href="'+siteUrl+appPath+'console">控制台</a>',
                     '</li>'
                 ].join('\n'));
             }
@@ -694,7 +696,7 @@ var basic = {
         if(app!=='index'){
             url = siteUrl+app+'/api/consolePermission';
         }else{
-            siteUrl+'api/consolePermission'
+            url = siteUrl+'api/consolePermission';
         }
         $.ajax({
             url:url,
