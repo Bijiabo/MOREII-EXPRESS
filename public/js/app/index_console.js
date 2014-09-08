@@ -23,7 +23,7 @@ function ajaxFileUpload(){
 
      */
     $.ajaxFileUpload({
-            url:siteUrl+'api/upload/index/?savePath=indexpicture&resize=720&ajax=true',
+            url:siteUrl+'api/upload/index/?savePath=indexpicture&resize=720&ajax=true&_csrf='+$(':input[name="_csrf"]').val(),
             secureuri:false,
             fileElementId:'file',
             dataType: 'json',
