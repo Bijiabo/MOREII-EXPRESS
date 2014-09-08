@@ -164,22 +164,23 @@ $(function(){
     /*
     * 调整顺序
     * */
+    var indexContentItemBoxName = '.index-content-itembox';
     $(document).on('click','.index-content-item-btnbox>.fa-chevron-up',function(){
-        var indexOrigin = $(this).parents('.index-content-item').index();
+        var indexOrigin = $(this).parents(indexContentItemBoxName).index();
         if(indexOrigin>0){
-            $(this).parents('.index-content-item').insertBefore($('.index-content-item:eq('+(indexOrigin-1)+')'));
+            $(this).parents(indexContentItemBoxName).insertBefore($(indexContentItemBoxName+':eq('+(indexOrigin-1)+')'));
         }
     });
     $(document).on('click','.index-content-item-btnbox>.fa-chevron-down',function(){
-        var indexOrigin = $(this).parents('.index-content-item').index();
-        if(indexOrigin<$('.index-content-item').length-1){
-            $(this).parents('.index-content-item').insertAfter($('.index-content-item:eq('+(indexOrigin+1)+')'));
+        var indexOrigin = $(this).parents(indexContentItemBoxName).index();
+        if(indexOrigin<$(indexContentItemBoxName).length-1){
+            $(this).parents(indexContentItemBoxName).insertAfter($(indexContentItemBoxName+':eq('+(indexOrigin+1)+')'));
         }
     });
     $(document).on('click','.index-content-item-btnbox>.fa-times',function(){
-        $(this).parents('.index-content-item').remove();
-        if($('.index-content-item').length<3){
-            index_consoleObject.function.addIndexContentItem(3-$('.index-content-item').length);
+        $(this).parents(indexContentItemBoxName).remove();
+        if($(indexContentItemBoxName).length<3){
+            index_consoleObject.function.addIndexContentItem(3-$(indexContentItemBoxName).length);
         }
     });
     //添加

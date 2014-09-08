@@ -3,7 +3,7 @@ nav.navbar.navbar-default.navbar-toolbar#console-appnav(role="navigation")
         div.navbar-header
             button#console-nav-menubtn.navbar-toggle.iconfont.icon-more(type="button",data-toggle="collapse",data-target="#console-appnav-collapse")
             a.span.iconfont.icon-cascades#console-sidebar-menubtn(href="javascript:;")
-            a.navbar-brand(href="#",style="font-size:14px;") #{apps[app].cnName}
+            a.navbar-brand.tip(href="#{siteUrl}#{apps[app].path}",style="font-size:14px;",data-toggle="tooltip",data-placement="bottom",title="点击查看前台页面",target="_blank") #{apps[app].cnName}
         div.collapse.navbar-collapse#console-appnav-collapse
             ul.nav.navbar-nav
                 -if(consoleNav!==undefined)

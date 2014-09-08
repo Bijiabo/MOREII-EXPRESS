@@ -316,3 +316,6 @@ a{color: #808080;}
     #header-nav-account-caretup {right: 32px;}
     #header-nav-account-dropdown li{display: inline-block !important;}
 }
+.tooltip-inner {
+    border: 0;
+}
