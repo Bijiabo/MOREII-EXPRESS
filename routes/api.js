@@ -108,15 +108,15 @@ router.post('/login',function(req,res){
                 expires: new Date(Date.now() + keepLoginTime),
                 httpOnly: true
             });*/
-            res.send(JSON.stringify({
+            res.json({
                 "success":1,
                 "descriotion":'登陆成功。'
-            }));
+            });
         }else{
-            res.send(JSON.stringify({
+            res.json({
                 "success":0,
                 "descriotion":'帐号或密码错误。'
-            }));
+            });
         }
     })
 });

@@ -66,6 +66,12 @@ var basic = {
         });
         //响应式载入图片
         basic.responsiveLoadImage();
+        //csrf4ajax
+        $.ajaxSetup({
+            beforeSend:function(xhr){
+                xhr.setRequestHeader("x-csrf-token", $(':input[name="_csrf"]').val());
+            }
+        });
     },
     resize:function(){
         basic.initConsoleSidebar();

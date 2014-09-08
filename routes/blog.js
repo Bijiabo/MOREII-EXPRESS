@@ -21,8 +21,6 @@ var limitPerPage = 5,
     this.siteUrl = global.config.siteUrl;
     this.blogData = data.blogData ||{title:'',content:'',tag:[],_id:''};
     this.app = 'blog';
-    this.apps = global.config.app;
-    this.nav = global.config.nav;
     this.consoleNav = [
         {
             name:'管理首页',
@@ -42,7 +40,6 @@ var limitPerPage = 5,
         }
     ];
     this.consoleNavActive = data.consoleNavActive || '';
-    this.pretty = true;
     };
 /* GET home page. */
 router.get('/', function(req, res) {

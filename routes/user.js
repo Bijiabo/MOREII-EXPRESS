@@ -23,7 +23,7 @@ passport.use(new GitHubStrategy({
 ));
 var renderData = function(data){
     if(data===undefined){
-        var data = {};
+        data = {};
     }
     this.title = data.title || '用户中心';
     this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
@@ -54,6 +54,7 @@ router.get('/register',function(req,res){
     res.render('user/register',data);
 });
 router.get('/login',function(req,res){
+    console.log(res.locals);
     var data = new renderData({
         title : '登陆'
     });
@@ -98,15 +99,20 @@ router.get('/account',function(req,res){
     res.render('user/account', data);
 });
 router.post('/api/addAddress',function(req,res){
-    var addressData = new userSchema.addressSchema({
+    var addressData = {
         province:req.body.province,
         areaType:req.body.areaType,
         area:req.body.area,
         address:req.body.address,
         name:req.body.name,
         tel:req.body.tel
+    };
+    userSchema.addAddress(req.userData._id,addressData,function(err,data){
+        res.send(JSON.stringify({
+            err:err
+        }));
     });
-    userSchema.getUserInfo({
+    /*userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
@@ -122,7 +128,7 @@ router.post('/api/addAddress',function(req,res){
             data.errorname = '500';
             res.render('500', data);
         }
-    });
+    });*/
 });
 router.post('/api/deleteAddress',function(req,res){
     userSchema.getUserInfo({

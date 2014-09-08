@@ -441,10 +441,12 @@ var userApi = {
     },
     addAddress:function(userId,addressData,callback){
         userModel.findById(userId,function(err,data){
-            data.address.push(addressData);
-            data.save(function(err,data){
-                callback(err,data);
-            });
+            if(data && data.address){
+                data.address.push(addressData);
+                data.save(function(err,data){
+                    callback(err,data);
+                });
+            }
         });
     },
     deleteAddress:function(userId,addressIndex,callback){

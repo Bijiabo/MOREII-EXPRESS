@@ -6,7 +6,8 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
-    GithubStrategy = require('passport-github').Strategy;
+    GithubStrategy = require('passport-github').Strategy,
+    csrf = require('csurf');
 //set config
 global.config = require('./core/config');
 //get mongoose schema
@@ -44,6 +45,7 @@ app.use(session({
     },
     store:userSchema.session()
 }));
+app.use(csrf());
 app.use(express.static(path.join(__dirname, 'public')));
 /**
  * 验证登陆 & 权限
@@ -69,6 +71,7 @@ app.use(function(req,res,next){
     res.locals.pretty = true;
     res.locals.siteUrl = global.config.siteUrl;
     res.locals.logo = global.config.logo;
+    app.locals.csrf = req.csrfToken();
 //    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**
