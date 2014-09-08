@@ -29,7 +29,6 @@ function ajaxFileUpload(){
             dataType: 'json',
             success: function (data, status)
             {
-                console.log(data);
                 if(!data.error){
                     basic.stateModal('success');
                     $('.index-content-item:eq('+cache.indexContentItemIndex+')>.index-content-imgbox').html('<img src="'+siteUrl+data.path+'" class="img-responsive" data-resize="'+data.resizePath+'" data-path="'+data.path+'">');

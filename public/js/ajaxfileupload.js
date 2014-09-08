@@ -44,7 +44,7 @@ jQuery.extend({
 			for(var i in data)
 			{
 				jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
-			}			
+			}
 		}		
 		var oldElement = jQuery('#' + fileElementId);
 		var newElement = jQuery(oldElement).clone();

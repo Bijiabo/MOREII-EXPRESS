@@ -390,6 +390,10 @@ var basic = {
                     <div class="dz-error-mark"><span>✘</span></div>\
                     <div class="dz-error-message"><span data-dz-errormessage></span></div>\
                 </div>',
+                sending:function(file,xhr){
+//                    console.log(xhr)
+                    xhr.setRequestHeader("x-csrf-token", $(':input[name="_csrf"]').val());
+                },
                 success:function(file,data){
                     if(!data.error){
                         file.path = data.path;

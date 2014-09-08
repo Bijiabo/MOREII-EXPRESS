@@ -6,15 +6,23 @@ block content
             -if(data.image)
                 -if(data.image.length>0)
                     -for(var i=0;i<data.image.length;i++)
-                        div.col-md-12.index-content-item
-                            div.index-content-imgbox
-                                img.img-responsive(src="#{siteUrl}#{data.image[i].path}",data-path="#{data.image[i].path}",data-resize="#{data.image[i].resizePath}")
-                            div.index-content-item-btnbox
-                                span.fa.fa-chevron-up
-                                span.fa.fa-chevron-down
-                                span.fa.fa-times
-                            div.index-content-item-changepicture
-                                span.fa.fa-picture-o
+                        div.col-md-12.index-content-itembox
+                            div.col-md-6.index-content-itemtext
+                                div.form-group
+                                    label(for="link-#{i}") 链接
+                                    input.form-control(name="link-#{i}",placeholder="http://...")
+                                div.form-group
+                                    label(for="des-#{i}") 图片链接描述
+                                    textarea.form-control(name="des-#{i}",rows=3)
+                            div.col-md-6.index-content-item
+                                div.index-content-imgbox
+                                    img.img-responsive(src="#{siteUrl}#{data.image[i].path}",data-path="#{data.image[i].path}",data-resize="#{data.image[i].resizePath}")
+                                div.index-content-item-btnbox
+                                    span.fa.fa-chevron-up
+                                    span.fa.fa-chevron-down
+                                    span.fa.fa-times
+                                div.index-content-item-changepicture
+                                    span.fa.fa-picture-o
                 -for(var i=0;i<3-data.image.length;i++)
                     div.col-md-12.index-content-item.empty
                         div.index-content-imgbox

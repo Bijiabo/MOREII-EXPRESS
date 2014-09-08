@@ -1,11 +1,22 @@
+.index-content-itembox{
+    padding: 0;
+    margin-bottom: 20px;
+    background-color: #f8f8f8;
+}
+.index-content-itembox:hover{
+    background-color: #f4f4f4;
+}
+.index-content-itembox:last-child{
+    margin-bottom: 0;
+}
+.index-content-itemtext{
+    padding-top: 15px;
+}
 .index-content-item{
     position: relative;
-    /*border-left: 1px solid #ddd;*/
-    /*border-right: 1px solid #ddd;*/
     border: 1px solid #ddd;
-    min-height: 200px;
+    min-height: 100px;
     background-color: #f8f8f8;
-    margin: 15px 0;
     background-position: center;
     background-size: 100%;
     padding: 0;

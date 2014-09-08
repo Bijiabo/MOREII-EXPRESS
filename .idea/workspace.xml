@@ -23,26 +23,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="blog.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/blog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="11160">
-              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cloth.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/cloth.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="4770">
-              <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="user.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/schema/user.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -56,25 +36,25 @@
       <file leaf-file-name="basic.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/basic.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.6666665" vertical-offset="765" max-vertical-offset="10980">
-              <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+            <state vertical-scroll-proportion="-1.2962962" vertical-offset="5365" max-vertical-offset="11040">
+              <caret line="360" column="80" selection-start-line="360" selection-start-column="80" selection-end-line="360" selection-end-column="80" />
               <folding>
-                <marker date="1410161900529" expanded="true" signature="10265:11083" placeholder="..." />
-                <marker date="1410161900529" expanded="true" signature="10311:10720" placeholder="..." />
-                <marker date="1410161900529" expanded="true" signature="10387:10575" placeholder="..." />
-                <marker date="1410161900529" expanded="false" signature="10517:10535" placeholder="..." />
-                <marker date="1410161900529" expanded="true" signature="13670:14792" placeholder="..." />
-                <marker date="1410161900529" expanded="true" signature="13726:14792" placeholder="..." />
-                <marker date="1410161900529" expanded="true" signature="14912:14968" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="10265:11083" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="10311:10720" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="10387:10575" placeholder="..." />
+                <marker date="1410165182025" expanded="false" signature="10517:10535" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="13863:14985" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="13919:14985" placeholder="..." />
+                <marker date="1410165182025" expanded="true" signature="15105:15161" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="basic.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="basic.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/basic.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8265896" vertical-offset="4138" max-vertical-offset="4845">
+            <state vertical-scroll-proportion="-21.185184" vertical-offset="4138" max-vertical-offset="4845">
               <caret line="314" column="64" selection-start-line="314" selection-start-column="64" selection-end-line="314" selection-end-column="64" />
               <folding />
             </state>
@@ -91,11 +71,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.jade" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/header.jade">
+      <file leaf-file-name="layout.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1695">
-              <caret line="31" column="93" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="93" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="840">
+              <caret line="49" column="40" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_console.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/app/index_console.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+              <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index_console.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/app/index_console.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3105">
+              <caret line="24" column="20" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="20" />
+              <folding>
+                <marker date="1410164537945" expanded="true" signature="2084:2474" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajaxfileupload.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/ajaxfileupload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3579235" vertical-offset="593" max-vertical-offset="3285">
+              <caret line="57" column="21" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/index/console/index.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+              <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -121,7 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/doc/cutjs.js" />
         <option value="$PROJECT_DIR$/core/schema/wine.js" />
         <option value="$PROJECT_DIR$/views/user/register.jade" />
         <option value="$PROJECT_DIR$/public/js/cut-core.js" />
@@ -131,9 +152,7 @@
         <option value="$PROJECT_DIR$/public/js/app/cloth.js" />
         <option value="$PROJECT_DIR$/views/blog/index.jade" />
         <option value="$PROJECT_DIR$/views/header_console.jade" />
-        <option value="$PROJECT_DIR$/public/css/app/index_console.css" />
         <option value="$PROJECT_DIR$/core/schema/index.js" />
-        <option value="$PROJECT_DIR$/views/index/console/index.jade" />
         <option value="$PROJECT_DIR$/views/footer_console.jade" />
         <option value="$PROJECT_DIR$/views/footer.jade" />
         <option value="$PROJECT_DIR$/views/index/console/text.jade" />
@@ -148,7 +167,6 @@
         <option value="$PROJECT_DIR$/public/js/app/blog_admin.js" />
         <option value="$PROJECT_DIR$/views/404.jade" />
         <option value="$PROJECT_DIR$/core/schema/blog.js" />
-        <option value="$PROJECT_DIR$/public/js/app/index_console.js" />
         <option value="$PROJECT_DIR$/views/cloth/console/add.jade" />
         <option value="$PROJECT_DIR$/core/schema/site.js" />
         <option value="$PROJECT_DIR$/views/nav.jade" />
@@ -170,13 +188,17 @@
         <option value="$PROJECT_DIR$/routes/user.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/header.jade" />
-        <option value="$PROJECT_DIR$/public/js/basic.js" />
         <option value="$PROJECT_DIR$/public/css/basic.css" />
+        <option value="$PROJECT_DIR$/views/index/console/index.jade" />
+        <option value="$PROJECT_DIR$/public/css/app/index_console.css" />
+        <option value="$PROJECT_DIR$/public/js/app/index_console.js" />
+        <option value="$PROJECT_DIR$/public/js/ajaxfileupload.js" />
+        <option value="$PROJECT_DIR$/public/js/basic.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1985" />
+    <option name="x" value="65" />
     <option name="y" value="-4" />
     <option name="width" value="1855" />
     <option name="height" value="1084" />
@@ -817,6 +839,28 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="css">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="app">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Moreii-express">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="node_modules">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -989,7 +1033,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1031,13 +1075,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/css/app/cloth.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17964073" vertical-offset="0" max-vertical-offset="668">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/blog/index.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
@@ -1049,13 +1086,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
           <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/app/index_console.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1365">
-          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1170,21 +1200,6 @@
         <state vertical-scroll-proportion="0.46438357" vertical-offset="3321" max-vertical-offset="6855">
           <caret line="244" column="25" selection-start-line="244" selection-start-column="25" selection-end-line="244" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app/index_console.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.074074" vertical-offset="970" max-vertical-offset="3120">
-          <caret line="90" column="34" selection-start-line="90" selection-start-column="34" selection-end-line="90" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index/console/index.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
-          <caret line="13" column="55" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1322,14 +1337,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8770492" vertical-offset="93" max-vertical-offset="840">
-          <caret line="49" column="57" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/cloth/detail.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49652296" vertical-offset="93" max-vertical-offset="855">
@@ -1386,10 +1393,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.185184" vertical-offset="4138" max-vertical-offset="4845">
+          <caret line="314" column="64" selection-start-line="314" selection-start-column="64" selection-end-line="314" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index/console/index.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/app/index_console.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/header.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1695">
-          <caret line="31" column="93" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="93" />
+        <state vertical-scroll-proportion="0.40983605" vertical-offset="0" max-vertical-offset="1695">
+          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
           <folding />
         </state>
       </provider>
@@ -1402,26 +1433,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="840">
+          <caret line="49" column="40" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/basic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.6666665" vertical-offset="765" max-vertical-offset="10980">
-          <caret line="63" column="36" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+        <state vertical-scroll-proportion="-1.2962962" vertical-offset="5365" max-vertical-offset="11040">
+          <caret line="360" column="80" selection-start-line="360" selection-start-column="80" selection-end-line="360" selection-end-column="80" />
           <folding>
-            <marker date="1410161900529" expanded="true" signature="10265:11083" placeholder="..." />
-            <marker date="1410161900529" expanded="true" signature="10311:10720" placeholder="..." />
-            <marker date="1410161900529" expanded="true" signature="10387:10575" placeholder="..." />
-            <marker date="1410161900529" expanded="false" signature="10517:10535" placeholder="..." />
-            <marker date="1410161900529" expanded="true" signature="13670:14792" placeholder="..." />
-            <marker date="1410161900529" expanded="true" signature="13726:14792" placeholder="..." />
-            <marker date="1410161900529" expanded="true" signature="14912:14968" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="10265:11083" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="10311:10720" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="10387:10575" placeholder="..." />
+            <marker date="1410165182025" expanded="false" signature="10517:10535" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="13863:14985" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="13919:14985" placeholder="..." />
+            <marker date="1410165182025" expanded="true" signature="15105:15161" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/basic.css">
+    <entry file="file://$PROJECT_DIR$/public/js/app/index_console.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8265896" vertical-offset="4138" max-vertical-offset="4845">
-          <caret line="314" column="64" selection-start-line="314" selection-start-column="64" selection-end-line="314" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3105">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="20" />
+          <folding>
+            <marker date="1410164537945" expanded="true" signature="2084:2474" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/ajaxfileupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3579235" vertical-offset="593" max-vertical-offset="3285">
+          <caret line="57" column="21" selection-start-line="57" selection-start-column="21" selection-end-line="57" selection-end-column="21" />
           <folding />
         </state>
       </provider>
