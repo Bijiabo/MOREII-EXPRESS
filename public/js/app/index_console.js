@@ -3,7 +3,7 @@
  */
 function ajaxFileUpload(){
     //starting setting some animation when the ajax starts and completes
-    $("#file")
+    $(document)
         .ajaxStart(function(){
 //            $(this).show();
             basic.stateModal('wait');
