@@ -34,6 +34,20 @@ var renderData = function(data){
     this.logo = global.config.logo;
     this.pretty = true;
 }
+//验证后台页面权限接口
+router.get('/api/consolePermission',function(req,res){
+    global.config.checkPermission(req,res,'user','editUser',true,function(hasPermission){
+        if(hasPermission){
+            res.json({
+                permission:true
+            });
+        }else{
+            res.json({
+                permission:false
+            });
+        }
+    });
+});
 /* GET users listing. */
 router.get('/', function(req, res) {
     var data = new renderData({

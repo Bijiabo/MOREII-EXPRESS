@@ -59,10 +59,14 @@ app.use(function(req,res,next){
         if(login){
             req.login = true;
             req.userData = userData;
+            res.locals.login = true;
+            res.locals.userData = userData;
             next();
         }else{
             req.login = false;
             req.userData = false;
+            res.locals.login = false;
+            res.locals.userData = false;
             next();
         }
     });

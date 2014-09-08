@@ -15,26 +15,26 @@ div.container
                                         a(href="#{nav[i].href}") #{nav[i].text}
                 div.col-xs-4
                     ul.nav.nav-pills(role="tablist").pull-right
-                        li#header-messagebox(style="display:none;").hidden-xs
-                            a(href="javascript:;")
-                                //span.fa.fa-circle#header-messagebox-light
-                                span(style="margin-right:4px;") 消息
-                                span.badge.label-success.pull-right 0
-                        li#header-login
-                            a.hidden-xs(href="/user") 登陆 / 注册
-                            a.hidden-sm.hidden-lg.hidden-md(href="/user")  登陆
-                        li#header-user.dropdown(style="display:none;")
-                            a.dropdown-toggle(href="#",data-toggle="dropdown")
-                                span#header-user-name 用户名
-                                b.caret(style="margin-left:5px;")
-                            ul.dropdown-menu.dropdown-inverse#header-nav-account-dropdown
-                                span.fa.fa-caret-up#header-nav-account-caretup
-                                li
-                                    a(href="#{siteUrl}user/account") 我的资料
-                                //-li
-                                //-    a(href="#") 我的订单
-                                li
-                                    a(href="#{siteUrl}user/logout") 退出
+                        -if(!login)
+                            li#header-login
+                                a.hidden-xs(href="/user") 登陆 / 注册
+                                a.hidden-sm.hidden-lg.hidden-md(href="/user")  登陆
+                        -else
+                            li#header-messagebox.hidden-xs
+                                a(href="javascript:;")
+                                    //span.fa.fa-circle#header-messagebox-light
+                                    span(style="margin-right:4px;") 消息
+                                    span.badge.label-success.pull-right 0
+                            li#header-user.dropdown
+                                a.dropdown-toggle(href="#",data-toggle="dropdown")
+                                    span#header-user-name #{userData.name}
+                                    b.caret(style="margin-left:5px;")
+                                ul.dropdown-menu.dropdown-inverse#header-nav-account-dropdown
+                                    span.fa.fa-caret-up#header-nav-account-caretup
+                                    li
+                                        a(href="#{siteUrl}user/account") 我的资料
+                                    li
+                                        a(href="#{siteUrl}user/logout") 退出
     hr.hidden-lg.hidden-md.hidden-sm(style="margin-top:0;")
 //div#header.navbar.navbar-toolbar.navbar-inverse(role="navigatiom",style="position:relative;")
 //    div.container

@@ -72,6 +72,16 @@ var basic = {
                 xhr.setRequestHeader("x-csrf-token", $(':input[name="_csrf"]').val());
             }
         });
+        //检测后台页面访问权限，-ok 个人下拉菜单显示链接
+        basic.checkConsolePermission(function(permissionResult){
+            if(permissionResult && permissionResult.permission){
+                $('#header-nav-account-dropdown').prepend([
+                    '<li>',
+                    '<a href="'+siteUrl+app+'/console">控制台</a>',
+                    '</li>'
+                ].join('\n'));
+            }
+        })
     },
     resize:function(){
         basic.initConsoleSidebar();
@@ -466,9 +476,9 @@ var basic = {
             dataType:'json',
             success:function(data){
                 if(data.login===true){
-                    $('#header-user-name').text(data.userInfo.name);
+                    /*$('#header-user-name').text(data.userInfo.name);
                     $('#header-login').hide();
-                    $('#header-user,#header-messagebox').fadeIn();
+                    $('#header-user,#header-messagebox').fadeIn();*/
                     cache.login = true;
                     basic.checkMessageBox();
                 }else{
@@ -677,6 +687,26 @@ var basic = {
                 $(item).attr('src',$(item).data('path'));
             });
         }
+    },
+    checkConsolePermission:function(callback){
+        //验证用户后台页面权限
+        var url;
+        if(app!=='index'){
+            url = siteUrl+app+'/api/consolePermission';
+        }else{
+            siteUrl+'api/consolePermission'
+        }
+        $.ajax({
+            url:url,
+            type:'GET',
+            dataType:'json',
+            success:function(data){
+                callback(data);
+            },
+            error:function(error){
+                callback(false);
+            }
+        });
     }
 }
 

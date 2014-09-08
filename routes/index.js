@@ -21,6 +21,20 @@ var renderData = function(data){
     ];
     this.consoleNavActive = data.consoleNavActive || '';
 };
+//验证后台页面权限接口
+router.get('/api/consolePermission',function(req,res){
+    global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
+        if(hasPermission){
+            res.json({
+                permission:true
+            });
+        }else{
+            res.json({
+                permission:false
+            });
+        }
+    });
+});
 /* GET home page. */
 router.get('/', function(req, res) {
     var data = new renderData();

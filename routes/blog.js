@@ -41,7 +41,21 @@ var limitPerPage = 5,
     ];
     this.consoleNavActive = data.consoleNavActive || '';
     };
-/* GET home page. */
+//验证后台页面权限接口
+router.get('/api/consolePermission',function(req,res){
+    global.config.checkPermission(req,res,'blog','edit',true,function(hasPermission){
+        if(hasPermission){
+            res.json({
+                permission:true
+            });
+        }else{
+            res.json({
+                permission:false
+            });
+        }
+    });
+});
+//博客列表
 router.get('/', function(req, res) {
     var page = 0;
     if(!isNaN(Number(req.query.page))){

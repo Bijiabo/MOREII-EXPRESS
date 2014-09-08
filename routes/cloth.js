@@ -36,6 +36,20 @@ var renderData = function(data){
     this.consoleNavActive = data.consoleNavActive || '';
     this.pretty = true;
 }
+//验证后台页面权限接口
+router.get('/api/consolePermission',function(req,res){
+    global.config.checkPermission(req,res,'cloth','edit',true,function(hasPermission){
+        if(hasPermission){
+            res.json({
+                permission:true
+            });
+        }else{
+            res.json({
+                permission:false
+            });
+        }
+    });
+});
 /*
  * 前台页面
  * */
