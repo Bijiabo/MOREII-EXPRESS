@@ -13,13 +13,9 @@ block content
                 div.carousel-inner(role="listbox")
                     -for(var i=0,len=data.image.length;i<len;i++)
                         -if(i===0)
-                            div.item.active(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});")
-                                //-img(src="#{siteUrl}#{data.image[i].path}",style="margin:auto;")
-                                //-div.carousel-caption
+                            div.item.active.mii-link(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});",data-link="#{data.image[i].link}")
                         -else
-                            div.item(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});")
-                                //-img(src="#{siteUrl}#{data.image[i].path}",style="margin:auto;")
-                                //-div.carousel-caption
+                            div.item.mii-link(style="background-image:url(#{siteUrl}#{data.image[i].resizePath});",data-link="#{data.image[i].link}")
                 a.left.carousel-control(href="#index-image-carousel-small",data-slide="prev")
                     span.glyphicon.glyphicon-chevron-left
                 a.right.carousel-control(href="#index-image-carousel-small",data-slide="next")
@@ -37,14 +33,26 @@ block content
                                     li(data-target="#index-image-carousel",data-slide-to="#{i}")
                         div.carousel-inner(role="listbox")
                             -for(var i=0,len=data.image.length;i<len;i++)
-                                -if(i===0)
-                                    div.item.active
-                                        img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;")
-                                        //div.carousel-caption
+                                -if(data.image[i].link==='')
+                                    -if(i===0)
+                                        div.item.active
+                                            img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;",alt="#{data.image[i].des}")
+                                            //div.carousel-caption
+                                    -else
+                                        div.item
+                                            img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;",alt="#{data.image[i].des}")
+                                            //div.carousel-caption
                                 -else
-                                    div.item
-                                        img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;")
-                                        //div.carousel-caption
+                                    -if(i===0)
+                                        div.item.active
+                                            a(href="#{data.image[i].link}")
+                                                img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;",alt="#{data.image[i].des}")
+                                                //div.carousel-caption
+                                    -else
+                                        div.item
+                                            a(href="#{data.image[i].link}")
+                                                img.responsive-img(data-path="#{siteUrl}#{data.image[i].path}",data-resizepath="#{siteUrl}#{data.image[i].resizePath}",style="margin:auto;",alt="#{data.image[i].des}")
+                                                //div.carousel-caption
                         a.left.carousel-control(href="#index-image-carousel",data-slide="prev")
                             span.glyphicon.glyphicon-chevron-left
                         a.right.carousel-control(href="#index-image-carousel",data-slide="next")

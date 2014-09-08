@@ -1,21 +1,24 @@
 extends ../../layout_console
 block content
-    h6 #{title}
-    table.table.table-striped
+    table.table.table-striped.table-hover
         thead
             tr
-                th.hidden-sm.hidden-xs # id
-                th # name
-                th # mail
-                th # edit
+                th 昵称
+                th 邮箱
+                th 地址
+                th 编辑
         tbody
             - for user in userData
                 tr(id="userlist-#{user._id}")
-                    td.hidden-sm.hidden-xs #{user._id}
                     td.userlist-name #{user.name}
                     td.userlist-mail #{user.mail}
                     td
-                        button.btn.btn-default.btn-xs.user-console-modifyuser(type="button",data-id="#{user._id}",data-name="#{user.name}",data-mail="#{user.mail}") edit
+                        if(user.address.length>0)
+                            span #{user.address[0].province.name} #{user.address[0].areaType.name} #{user.address[0].area.name}
+                        else
+                            span 未填写
+                    td.user-console-modifyuser(data-id="#{user._id}",data-name="#{user.name}",data-mail="#{user.mail}")
+                        span.iconfont.icon-edit
     //- 修改账号模态框
     div.modal.fade#modify-userdata(role="dialog",aria-labelledby="modify-userdata-title",aria-hidden="true")
         div.modal-dialog

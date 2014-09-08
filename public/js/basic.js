@@ -83,7 +83,14 @@ var basic = {
                     '</li>'
                 ].join('\n'));
             }
-        })
+        });
+        //移动端绑定点击
+        $(document).on('click','.mii-link',function(){
+            var link = $(this).data('link');
+            if(link && link!==''){
+                window.location.href = link;
+            }
+        });
     },
     resize:function(){
         basic.initConsoleSidebar();

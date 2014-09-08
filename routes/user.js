@@ -27,11 +27,19 @@ var renderData = function(data){
     }
     this.title = data.title || '用户中心';
     this.jsfile = data.jsfile ||'ProvinceAndCityJson.js,user.js';
+    this.cssfile = data.cssfile || '';
     this.siteUrl = global.config.siteUrl;
     this.app = 'user';
     this.nav = global.config.nav;
     this.apps = global.config.app;
     this.logo = global.config.logo;
+    this.consoleNav = [
+        {
+            name:'用户列表',
+            path:''
+        }
+    ];
+    this.consoleNavActive = data.consoleNavActive || '';
     this.pretty = true;
 }
 //验证后台页面权限接口
@@ -66,7 +74,6 @@ router.get('/register',function(req,res){
     res.render('user/register',data);
 });
 router.get('/login',function(req,res){
-    console.log(res.locals);
     var data = new renderData({
         title : '登陆'
     });
@@ -83,7 +90,6 @@ router.get('/auth/github/callback',
         session:false,
         failureRedirect: '/login' }),
     function(req, res) {
-        console.log(req.user);
         // Successful authentication, redirect home.
         res.redirect('/');
     }
@@ -235,7 +241,8 @@ router.get('/console',function(req,res){
         if(!err){
             var data = new renderData({
                 title:'用户管理',
-                jsfile:'user_console.js'
+                jsfile:'user_console.js',
+                cssfile:'user_console.css'
             });
             data.userData = userData;
             res.render('user/console/index',data);
@@ -263,6 +270,11 @@ router.get('/api/getUserPermission/:id',function(req,res){
     userSchema.getUserInfoById(String(req.params.id),function(err,userData){
         if(!err && userData!==null){
             var data = userData.permission;
+            for(key in global.config.app){
+                if(global.config.app[key].state===0){
+                    data[key] = undefined;
+                }
+            }
             res.send(JSON.stringify(data));
         }else{
             res.send(JSON.stringify({

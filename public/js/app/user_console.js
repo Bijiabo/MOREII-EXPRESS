@@ -118,16 +118,14 @@ var user = {
                 }
             }
         );
+        el.data('origintext',el.text());
+        el.html('&nbsp;&nbsp;<span class="fa fa-spin fa-spinner"></span>&nbsp;&nbsp;');
         $.ajax({
             url:siteUrl+'user/api/editUser/'+user.cache.userId,
             method:'POST',
             dataType:'json',
             data:{
                 userData:user.cache.editUserData
-            },
-            beforeSend:function(XHR){
-                el.data('origintext',el.text());
-                el.html('&nbsp;&nbsp;<span class="fa fa-spin fa-spinner"></span>&nbsp;&nbsp;');
             },
             complete:function(XHR,TS){
                 el.html(el.data('origintext'));

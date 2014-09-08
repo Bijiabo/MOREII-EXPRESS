@@ -54,10 +54,22 @@ var index_consoleObject = {
             number=Number(number);
             if(isNaN(number)||number<1){number=1;}
             for(var i=0;i<number;i++){
-                $('#index-content-box').append('<div class="col-md-12 index-content-item empty">\
+                $('#index-content-box').append('<div class="col-md-12 index-content-itembox">\
+                    <div class="col-md-6 index-content-itemtext">\
+                    <div class="form-group">\
+                        <label for="link-0">链接</label>\
+                        <input name="link-0" placeholder="http://..." class="index-content-link form-control">\
+                        </div>\
+                        <div class="form-group">\
+                            <label for="des-0">图片链接描述</label>\
+                            <textarea name="des-0" rows="3" class="index-content-des form-control"></textarea>\
+                        </div>\
+                    </div>\
+                    <div class="col-md-6 index-content-item empty">\
                     <div class="index-content-imgbox"></div>\
                     <div class="index-content-item-btnbox"><span class="fa fa-chevron-up"></span><span class="fa fa-chevron-down"></span><span class="fa fa-times"></span></div>\
-                    <div data-index="0" class="index-content-item-changepicture"><span class="fa fa-picture-o"></span></div>\
+                    <div class="index-content-item-changepicture"><span class="fa fa-picture-o"></span></div>\
+                </div>\
                 </div>');
             }
         },
@@ -67,11 +79,13 @@ var index_consoleObject = {
                 style:'default',
                 image:[]
             };
-            $.each($('.index-content-item'),function(index,item){
+            $.each($('.index-content-itembox'),function(index,item){
                 if($(item).find('.index-content-imgbox img').length>0){
                     index_consoleObject.cache.indexData.image.push({
                         path:$(item).find('.index-content-imgbox img').data('path'),
-                        resizePath:$(item).find('.index-content-imgbox img').data('resize')
+                        resizePath:$(item).find('.index-content-imgbox img').data('resize'),
+                        link:$(item).find('.index-content-link').val(),
+                        des:$(item).find('.index-content-des').val()
                     });
                 }
             });
@@ -79,6 +93,7 @@ var index_consoleObject = {
         },
         saveIndexImage:function(id){
             if(id===undefined){id='';}
+            basic.stateModal('wait');
             $.ajax({
                 url:siteUrl+'console/api/updateIndex/'+id,
                 type:'POST',
@@ -154,7 +169,7 @@ var index_consoleObject = {
 }
 $(function(){
     $(document).on('click','.index-content-item-changepicture',function(){
-        cache.indexContentItemIndex=Number($(this).parents('.index-content-item').index());
+        cache.indexContentItemIndex=Number($(this).parents('.index-content-itembox').index());
         $('#file').click();
     });
     $(document).on('change','#file',function(){

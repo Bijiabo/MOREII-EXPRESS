@@ -10,10 +10,10 @@ block content
                             div.col-md-6.index-content-itemtext
                                 div.form-group
                                     label(for="link-#{i}") 链接
-                                    input.form-control(name="link-#{i}",placeholder="http://...")
+                                    input.index-content-link.form-control(name="link-#{i}",placeholder="http://...",value="#{data.image[i].link||''}")
                                 div.form-group
                                     label(for="des-#{i}") 图片链接描述
-                                    textarea.form-control(name="des-#{i}",rows=3)
+                                    textarea.index-content-des.form-control(name="des-#{i}",rows=3) #{data.image[i].des||''}
                             div.col-md-6.index-content-item
                                 div.index-content-imgbox
                                     img.img-responsive.mii-ani(src="#{siteUrl}#{data.image[i].path}",data-path="#{data.image[i].path}",data-resize="#{data.image[i].resizePath}")
@@ -24,17 +24,50 @@ block content
                                 div.index-content-item-changepicture
                                     span.fa.fa-picture-o
                 -for(var i=0;i<3-data.image.length;i++)
-                    div.col-md-12.index-content-item.empty
-                        div.index-content-imgbox
-                        div.index-content-item-btnbox
-                            span.fa.fa-chevron-up
-                            span.fa.fa-chevron-down
-                            span.fa.fa-times
-                        div.index-content-item-changepicture
-                            span.fa.fa-picture-o
+                    div.col-md-12.index-content-itembox
+                        div.col-md-6.index-content-itemtext
+                            div.form-group
+                                label(for="link-#{i}") 链接
+                                input.index-content-link.form-control(name="link-#{i}",placeholder="http://...")
+                            div.form-group
+                                label(for="des-#{i}") 图片链接描述
+                                textarea.index-content-des.form-control(name="des-#{i}",rows=3)
+                        div.col-md-6.index-content-item.empty
+                            div.index-content-imgbox
+                            div.index-content-item-btnbox
+                                span.fa.fa-chevron-up
+                                span.fa.fa-chevron-down
+                                span.fa.fa-times
+                            div.index-content-item-changepicture
+                                span.fa.fa-picture-o
             -else
                 -for(var i=0;i<3;i++)
-                    div.col-md-12.index-content-item.empty
+                    div.col-md-12.index-content-itembox
+                        div.col-md-6.index-content-itemtext
+                            div.form-group
+                                label(for="link-#{i}") 链接
+                                input.index-content-link.form-control(name="link-#{i}",placeholder="http://...")
+                            div.form-group
+                                label(for="des-#{i}") 图片链接描述
+                                textarea.index-content-des.form-control(name="des-#{i}",rows=3)
+                        div.col-md-6.index-content-item.empty
+                            div.index-content-imgbox
+                            div.index-content-item-btnbox
+                                span.fa.fa-chevron-up
+                                span.fa.fa-chevron-down
+                                span.fa.fa-times
+                            div.index-content-item-changepicture
+                                span.fa.fa-picture-o
+            div.hidden#index-content-addcode
+                div.col-md-12.index-content-itembox
+                    div.col-md-6.index-content-itemtext
+                        div.form-group
+                            label(for="link-0") 链接
+                            input.index-content-link.form-control(name="link-0",placeholder="http://...")
+                        div.form-group
+                            label(for="des-0") 图片链接描述
+                            textarea.index-content-des.form-control(name="des-0",rows=3)
+                    div.col-md-6.index-content-item.empty
                         div.index-content-imgbox
                         div.index-content-item-btnbox
                             span.fa.fa-chevron-up
