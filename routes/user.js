@@ -39,13 +39,11 @@ router.get('/', function(req, res) {
     var data = new renderData({
         title : '用户中心'
     });
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            res.render('user/index',data);
-        }else{
-            res.redirect('/user/login');
-        }
-    });
+    if(req.login){
+        res.render('user/index',data);
+    }else{
+        res.redirect('/user/login');
+    }
 });
 router.get('/register',function(req,res){
     var data = new renderData({
@@ -58,7 +56,11 @@ router.get('/login',function(req,res){
     var data = new renderData({
         title : '登陆'
     });
-    res.render('user/login', data);
+    if(req.login){
+        res.redirect('/user');
+    }else{
+        res.render('user/login', data);
+    }
 });
 //github
 router.get('/auth/github',passport.authenticate('github',{ session : false}));

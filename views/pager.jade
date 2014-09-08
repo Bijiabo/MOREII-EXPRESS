@@ -2,8 +2,8 @@
     div(style="margin:0;")
         ul.pagination(style="margin:0;")
             -if(Number(pageNow)===1)
-                li.previous
-                    a.fa.fa-home(href="#")
+                //-li.previous
+                //-    a.fa.fa-home(href="#")
             -else
                 li.previous
                     a.fa.fa-chevron-left(href="#{pageUrl}#{pageNow-1}") &nbsp;&nbsp;上一页

@@ -3,7 +3,7 @@ block content
     div.container
         div.row
             div.col-md-12.hidden-xs(style="height:100px;")
-            div.col-md-12#user-account-box
+            div.col-md-8.col-md-offset-2#user-account-box
                 form.form-horizontal(role="form")
                     div.form-group
                         label.col-xs-2.control-label(for="name") 昵称
@@ -66,6 +66,7 @@ block content
                         label.col-xs-2.control-label(for="name")
                         div.col-xs-10
                             button.btn.btn-primary.btn-red-o.mii-ani(type="button") 保存
+            div.col-md-12.hidden-xs(style="height:30px;")
     //- 添加地址modal
     div.modal.fade#add-address(role="dialog",aria-labelledby="add-address-title",aria-hidden="true")
         div.modal-dialog
