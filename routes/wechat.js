@@ -7,22 +7,19 @@ var token = 'moreiiexpresswechattoken';//微信token
 
 var renderData = function(data){
     if(data===undefined){
-        var data = {};
+        data = {};
     }
     this.title = data.title || 'Moreii Wechat';
     this.cssfile = data.cssfile || '';
     this.jsfile = data.jsfile ||'';
-    this.siteUrl = global.config.siteUrl;
     this.app = 'wechat';
-    this.nav = global.config.nav;
-    this.apps = global.config.app;
-    this.pretty = true;
 }
 
 router.get('/', function(req, res) {
     var data = new renderData({
         title : 'Moreii Wechat'
     });
+    console.log(res.locals);
     res.render('index', data);
 });
 /**
@@ -89,5 +86,8 @@ router.use('/api', wechat(token)
             }
     }).middlewarify()
 );
+/*
+* 后台配置界面
+* */
 
 module.exports = router;

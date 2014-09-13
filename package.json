@@ -27,9 +27,11 @@
     "passport-weibo": "^0.1.0",
     "rd": "*",
     "short": "*",
+    "socket.io": "^1.1.0",
     "static-favicon": "~1.0.0",
     "ua-parser-js": "^0.7.0",
-    "wechat": "^0.8.8",
+    "wechat": "^0.8.11",
+    "xml2js": "^0.4.4",
     "xss": "^0.1.10"
   },
   "devDependencies": {

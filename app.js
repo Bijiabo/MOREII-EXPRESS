@@ -61,13 +61,12 @@ app.use(function(req,res,next){
             req.userData = userData;
             res.locals.login = true;
             res.locals.userData = userData;
-            next();
+
         }else{
             req.login = false;
             req.userData = false;
             res.locals.login = false;
             res.locals.userData = false;
-            next();
         }
     });
     res.locals.nav = global.config.nav;
@@ -76,6 +75,7 @@ app.use(function(req,res,next){
     res.locals.siteUrl = global.config.siteUrl;
     res.locals.logo = global.config.logo;
     app.locals.csrf = req.csrfToken();
+    next();
 //    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**
