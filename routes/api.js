@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     router = express.Router(),
-    userSchema = require('../core/schema/user'),
     noticeSchema = require('../core/schema/notice'),
     shopSchema = require('../core/schema/shop'),
     fs=require('fs'),
@@ -25,9 +24,9 @@ var dataToLowerCase = function(obj){
 }
 
 var checkAdministratorPermission = function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
+    global.userSchema.checkLogin(req,res,function(login){
         if(login){
-            userSchema.checkAdministratorPermission({
+            global.userSchema.checkAdministratorPermission({
                 name:req.cookies.name,
                 mail:req.cookies.mail
             },function(err,data){
@@ -55,7 +54,7 @@ router.get('/', function(req, res) {
     res.send('hello,api');
 });
 router.get('/getUserList',function(req,res){
-   userSchema.listUser(function(err,user){
+   global.userSchema.listUser(function(err,user){
        res.send(JSON.stringify(user));
    });
 });
@@ -67,12 +66,12 @@ router.get('/ifUser/:query',function(req,res){
     }else{
         query = {name:query};
     }
-    userSchema.ifUser(query,function(err,user){
+    global.userSchema.ifUser(query,function(err,user){
         res.send(JSON.stringify(user));
     });
 });
 router.post('/register',function(req,res){
-    userSchema.register(dataToLowerCase(req.body),function(err){
+    global.userSchema.register(dataToLowerCase(req.body),function(err){
         if(err!==null){
             res.send(JSON.stringify(err));
         }else{
@@ -84,7 +83,7 @@ router.post('/register',function(req,res){
     });
 });
 router.post('/login',function(req,res){
-    userSchema.login(dataToLowerCase(req.body),function(err,user){
+    global.userSchema.login(dataToLowerCase(req.body),function(err,user){
         if(err!==null){
             req.session.user = {
                 uid:user._id.toString(),
@@ -140,7 +139,7 @@ router.get('/getUserInfo/:query',function(req,res){
     if(req.login){
         var account = req.params.query;
         if(/^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,4}$/.test(account)){//mail
-            userSchema.getUserInfo({
+            global.userSchema.getUserInfo({
                 mail:account
             },function(err,user){
                 if(user!==null){
@@ -154,7 +153,7 @@ router.get('/getUserInfo/:query',function(req,res){
                 }
             });
         }else{//name
-            userSchema.getUserInfo({
+            global.userSchema.getUserInfo({
                 name:account
             },function(err,user){
                 if(user!==null){
@@ -174,7 +173,7 @@ router.get('/getUserInfo/:query',function(req,res){
             description:'木有登陆啊亲！！！'
         });
     }
-    userSchema.checkLogin(req,res,function(login){
+    global.userSchema.checkLogin(req,res,function(login){
         if(login){
 
         }else{

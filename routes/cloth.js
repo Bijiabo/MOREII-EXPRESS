@@ -1,7 +1,6 @@
 var express = require('express'),
     fs = require('fs'),
     path=require('path'),
-    userSchema = require('../core/schema/user'),
     clothSchema = require('../core/schema/cloth');
 var router = express.Router();
 var renderData = function(data){

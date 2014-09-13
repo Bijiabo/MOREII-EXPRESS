@@ -1,5 +1,4 @@
 var express = require('express'),
-    userSchema = require('../core/schema/user'),
     blogSchema = require('../core/schema/blog'),
     noticeSchema = require('../core/schema/notice'),
     statisticsSchema = require('../core/schema/statistics'),
@@ -734,5 +733,13 @@ router.get('/api/getBlogDetail/:id',function(req,res){
             });
         }
     },forEdit);
+});
+//编辑列表
+router.get('/console/editorList/:page?',function(req,res){
+    var page = Number(req.params.page),
+        limitPerPage = 10;
+    if(isNaN(page) || page<1){
+        page=1;
+    }
 });
 module.exports = router;

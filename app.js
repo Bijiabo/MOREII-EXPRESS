@@ -9,10 +9,10 @@ var express = require('express'),
     GithubStrategy = require('passport-github').Strategy,
     csrf = require('csurf');
 //set config
+global.userSchema = require('./core/schema/user');
 global.config = require('./core/config');
 //get mongoose schema
 var site = require('./core/schema/site'),
-    userSchema = require('./core/schema/user'),
     markdown = require('markdown-js');
 //get app
 global.app = express();
@@ -43,7 +43,7 @@ app.use(session({
         maxAge: 3600000*24,
         httpOnly:true
     },
-    store:userSchema.session()
+    store:global.userSchema.session()
 }));
 app.use(csrf());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -55,7 +55,7 @@ app.use(function(req,res,next){
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'
     });
-    userSchema.checkLogin(req,res,function(login,userData){
+    global.userSchema.checkLogin(req,res,function(login,userData){
         if(login){
             req.login = true;
             req.userData = userData;

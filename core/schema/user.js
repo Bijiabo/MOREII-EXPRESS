@@ -494,14 +494,37 @@ var userApi = {
                 userData.permission=data.permission;
                 userData.save(function(err){
                     callback(err);
-                })
+                });
             }else{
                 callback(err);
             }
-        })
+        });
     },
     saveSID:function(id,sid,callback){
         userModel.findByIdAndUpdate(id,{"$set":{sid:sid}},callback);
+    },
+    setPermission:function(userId,appName,permissionData,callback){
+        //设定指定用户在某一应用内的权限
+        userModel.findById(id,function(err,userData){
+            if(err===null && data!==null && typeof appName==='string' && typeof permissionData==='object' && permissionData.constructor === Object && permissionData!=={}){
+                if(userData.permission[appName]){
+                    for(var permissionItemName in permissionData){
+                        userData.permission[appName][permissionItemName] = permissionData[permissionItemName];
+                    }
+                }else{
+                    //对于该用户，这是一个全新的应用呢。
+                    userData.permission[appName]=permissionData;
+                }
+                userData.save(function(err1){
+                    callback(err1);
+                });
+            }else{
+                callback(err);
+            }
+        });
+    },
+    findUserByPermission:function(appName,permissionData){
+
     }
 }
 module.exports = userApi;

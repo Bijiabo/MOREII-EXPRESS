@@ -1,6 +1,5 @@
 var express = require('express'),
     router = express.Router(),
-    userSchema = require('../core/schema/user'),
     passport = require('passport'),
     GitHubStrategy = require('passport-github').Strategy;
 //router.use(passport.initialize());
@@ -129,18 +128,18 @@ router.post('/api/addAddress',function(req,res){
         name:req.body.name,
         tel:req.body.tel
     };
-    userSchema.addAddress(req.userData._id,addressData,function(err,data){
+    global.userSchema.addAddress(req.userData._id,addressData,function(err,data){
         res.send(JSON.stringify({
             err:err
         }));
     });
-    /*userSchema.getUserInfo({
+    /*global.userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
         if(err===null){
             var userId = userData._id;
-            userSchema.addAddress(userId,addressData,function(err,data){
+            global.userSchema.addAddress(userId,addressData,function(err,data){
                 res.send(JSON.stringify({
                     err:err
                 }));
@@ -153,13 +152,13 @@ router.post('/api/addAddress',function(req,res){
     });*/
 });
 router.post('/api/deleteAddress',function(req,res){
-    userSchema.getUserInfo({
+    global.userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
         if(err===null){
             var userId = userData._id;
-            userSchema.deleteAddress(userId,req.body.addressIndex,function(err,data){
+            global.userSchema.deleteAddress(userId,req.body.addressIndex,function(err,data){
                 res.send(JSON.stringify({
                     err:err
                 }));
@@ -172,13 +171,13 @@ router.post('/api/deleteAddress',function(req,res){
     });
 });
 router.post('/api/modifyAddress',function(req,res){
-    userSchema.getUserInfo({
+    global.userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
         if(err===null){
             var userId = userData._id;
-            userSchema.modifyAddress(userId,{addressIndex:req.body.addressIndex,addressData:req.body.addressData},function(err,data){
+            global.userSchema.modifyAddress(userId,{addressIndex:req.body.addressIndex,addressData:req.body.addressData},function(err,data){
                 res.send(JSON.stringify({
                     err:err
                 }));
@@ -191,7 +190,7 @@ router.post('/api/modifyAddress',function(req,res){
     });
 });
 router.get('/api/getOwnInfo',function(req,res){
-    userSchema.getUserInfo({
+    global.userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
@@ -220,7 +219,7 @@ router.use(function(req,res,next){
     }else{
         global.config.resError(req,res,'权限不足。');
     }
-    /*userSchema.getUserInfo({
+    /*global.userSchema.getUserInfo({
         name:req.cookies.name,
         mail:req.cookies.mail
     },function(err,userData){
@@ -237,7 +236,7 @@ router.use(function(req,res,next){
 });
 // console
 router.get('/console',function(req,res){
-    userSchema.getUserList({},0,10,function(err,userData){
+    global.userSchema.getUserList({},0,10,function(err,userData){
         if(!err){
             var data = new renderData({
                 title:'用户管理',
@@ -256,7 +255,7 @@ router.get('/console',function(req,res){
     });
 });
 router.get('/api/getUserInfo/:id',function(req,res){
-    userSchema.getUserInfoById(String(req.params.id),function(err,userData){
+    global.userSchema.getUserInfoById(String(req.params.id),function(err,userData){
         if(!err && userData!==null){
             var data = userData;
             data.password = undefined;
@@ -267,7 +266,7 @@ router.get('/api/getUserInfo/:id',function(req,res){
     });
 });
 router.get('/api/getUserPermission/:id',function(req,res){
-    userSchema.getUserInfoById(String(req.params.id),function(err,userData){
+    global.userSchema.getUserInfoById(String(req.params.id),function(err,userData){
         if(!err && userData!==null){
             var data = userData.permission;
             for(key in global.config.app){
@@ -284,7 +283,7 @@ router.get('/api/getUserPermission/:id',function(req,res){
     });
 });
 router.post('/api/editUser/:id',function(req,res){
-    userSchema.editUserById(req.params.id,req.body.userData,function(err){
+    global.userSchema.editUserById(req.params.id,req.body.userData,function(err){
         if(err!==null){
             res.send(JSON.stringify({
                 err:false
