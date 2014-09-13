@@ -68,14 +68,15 @@ app.use(function(req,res,next){
             res.locals.login = false;
             res.locals.userData = false;
         }
+        res.locals.nav = global.config.nav;
+        res.locals.apps = global.config.app;
+        res.locals.pretty = true;
+        res.locals.siteUrl = global.config.siteUrl;
+        res.locals.logo = global.config.logo;
+        app.locals.csrf = req.csrfToken();
+        next();
     });
-    res.locals.nav = global.config.nav;
-    res.locals.apps = global.config.app;
-    res.locals.pretty = true;
-    res.locals.siteUrl = global.config.siteUrl;
-    res.locals.logo = global.config.logo;
-    app.locals.csrf = req.csrfToken();
-    next();
+
 //    console.log(process.memoryUsage().heapUsed/1024/1024);
 });
 /**

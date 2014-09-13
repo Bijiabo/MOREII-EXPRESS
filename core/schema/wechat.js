@@ -4,7 +4,7 @@
  */
 var mongoose = require('mongoose'),
     db = require('../db');
-var clothSchema = new mongoose.Schema({
+var wechatSettingSchema = new mongoose.Schema({
     uid:{type:String,index:true},
     uname:{type:String,index:true},
     codeNumber:{type:String,default:'',index:true},
@@ -20,7 +20,7 @@ var clothSchema = new mongoose.Schema({
     picture:{type:Array},//图片队列
     previewPicture:{type:String}//预览图片
 });
-var clothModel = db.model('cloth',clothSchema);
+var wechatSettingModel = db.model('cloth',wechatSettingSchema);
 
 module.exports = {
     add:function(data,callback){

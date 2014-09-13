@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     ua_Parser_js = require('ua-parser-js'),
-    userSchema =  require('../core/schema/user'),
     statisticsSchema = require('../core/schema/statistics');
 var router = express.Router();
 var UAparser = new ua_Parser_js();

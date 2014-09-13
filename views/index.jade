@@ -4,4 +4,7 @@ block content
     div.container
         div.jumbotron
             h1= title
-            p Welcome to #{title}
+            -if(des)
+                p #{des}
+            -else
+                p 欢迎访问此模块，前台暂不开放。

@@ -87,13 +87,11 @@ router.get('/make/chair/:style', function(req, res) {
  * */
 
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
-        }else{
-            res.redirect('/user/login');
-        }
-    });
+    if(req.login){
+        next();
+    }else{
+        res.redirect('/user/login');
+    }
 });
 
 router.get('/api/listCustom', function(req, res) {

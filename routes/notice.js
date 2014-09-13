@@ -1,7 +1,6 @@
 var express = require('express'),
     fs = require('fs'),
     path=require('path'),
-    userSchema = require('../core/schema/user'),
     noticeSchema = require('../core/schema/notice');
 var router = express.Router();
 var renderData = function(data){
@@ -21,20 +20,18 @@ var renderData = function(data){
  * api for users
  * */
 router.use(function(req,res,next){
-    userSchema.checkLogin(req,res,function(login){
-        if(login){
-            next();
+    if(req.login){
+        next();
+    }else{
+        if(req.query.ajax === 'true'){
+            res.json({
+                err:true,
+                des:'请登陆啊亲>_<'
+            });
         }else{
-            if(req.query.ajax === 'true'){
-                res.json({
-                    err:true,
-                    des:'请登陆啊亲>_<'
-                });
-            }else{
-                res.redirect('/user/login');
-            }
+            res.redirect('/user/login');
         }
-    });
+    }
 });
 
 router.get('/api/getUnread', function(req, res) {

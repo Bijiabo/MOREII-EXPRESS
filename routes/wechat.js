@@ -9,16 +9,14 @@ var renderData = function(data){
     if(data===undefined){
         data = {};
     }
-    this.title = data.title || 'Moreii Wechat';
+    this.title = data.title || '微信';
     this.cssfile = data.cssfile || '';
     this.jsfile = data.jsfile ||'';
     this.app = 'wechat';
 }
 
 router.get('/', function(req, res) {
-    var data = new renderData({
-        title : 'Moreii Wechat'
-    });
+    var data = new renderData();
     console.log(res.locals);
     res.render('index', data);
 });

@@ -3,7 +3,6 @@
  */
 var express = require('express'),
     router = express.Router(),
-    userSchema = require('../core/schema/user'),
     noticeSchema = require('../core/schema/notice'),
     crypto = require('crypto');
 /**
