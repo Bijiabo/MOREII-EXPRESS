@@ -320,3 +320,15 @@ a{color: #808080;}
 .tooltip-inner {
     border: 0;
 }
+/*difei*/
+#header-navbar-nav{
+    background-color: rgba(204, 204, 204, 0.14);
+    margin-left: 0;
+    margin-right: 0;
+}
+@media (max-width: 768px) {
+    #header-navbar-nav{
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}

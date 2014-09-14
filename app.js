@@ -73,6 +73,8 @@ app.use(function(req,res,next){
         res.locals.pretty = true;
         res.locals.siteUrl = global.config.siteUrl;
         res.locals.logo = global.config.logo;
+        res.locals.logoImage = global.config.logoImage;
+        res.locals.logoImageResize = global.config.logoImageResize;
         app.locals.csrf = req.csrfToken();
         next();
     });

@@ -1,0 +1,19 @@
+extends ../../layout_console
+block content
+    div#wechat-console-body.col-md-12
+        div.col-md-4#wechat-console-masssendnewspreview
+            div#wechat-console-previewbox
+                p#wechat-console-previewtitle 标题
+                div#wechat-console-previewimage
+        div.col-md-8#wechat-console-masssendnewsform
+            form(role="form")
+                div.form-group
+                    label(for="title") 标题
+                    input.form-control(name="title")
+                div.form-group
+                    label(for="content") 内容
+                    div.wechat-line
+                    div.summernotebox
+                        div.summernote 在此输入内容...
+                    hr
+                    button.btn.btn-default(type="button") 提交

@@ -2,7 +2,11 @@ div.container
     div.row
         div.col-md-12#header-navbar
             div.row
-                div#header-navbar-logo.col-md-12 #{logo}
+                div#header-navbar-logo.col-md-12
+                    -if(logoImage)
+                        img(src="#{siteUrl}#{logoImage}",alt="#{logo}")
+                    -else
+                        span #{logo}
             div.row#header-navbar-nav
                 div.col-xs-8
                     ul.nav.nav-pills(role="tablist")
@@ -24,7 +28,7 @@ div.container
                                 a(href="javascript:;")
                                     //span.fa.fa-circle#header-messagebox-light
                                     span(style="margin-right:4px;") 消息
-                                    span.badge.label-success.pull-right 0
+                                    //span.badge.label-success.pull-right 0
                             li#header-user.dropdown
                                 a.dropdown-toggle(href="#",data-toggle="dropdown")
                                     span#header-user-name #{userData.name}

@@ -173,7 +173,6 @@ $(function(){
         $('#file').click();
     });
     $(document).on('change','#file',function(){
-        console.log($(this).val());
         ajaxFileUpload();
     });
     /*

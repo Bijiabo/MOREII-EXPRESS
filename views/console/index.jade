@@ -20,10 +20,22 @@ block content
                 input.form-control(name="port",type="text",placeholder="port,like 3001",value="#{siteData.port}")
         div.form-group
             label.col-sm-2.control-label(for="logo")
-                span LOGO
+                span LOGO文字
             div.col-sm-10
                 input.form-control(name="logo",type="text",placeholder="logo",value="#{siteData.logo}")
-
+        div.form-group
+            label.col-sm-2.control-label(for="logo")
+                span LOGO图片
+            div.col-sm-10
+                -if(siteData.logoImage)
+                    button.btn.btn-default(type="button")#console-changelogoimage 更改
+                    div#console-logoimagebox(data-path="#{logoImage}",data-resizepath="#{logoImageResize}")
+                        img.img-responsive(src="#{siteUrl}#{logoImage}")
+                -else
+                    button.btn.btn-default(type="button")#console-changelogoimage 上传
+                    div#console-logoimagebox
+        div.hidden
+            input#file(type='file',name='file')
 
         br
         h4 应用配置

@@ -1,6 +1,52 @@
 /**
  * Created by boooo on 14-8-2.
  */
+function ajaxFileUpload(){
+    //starting setting some animation when the ajax starts and completes
+    $(document)
+        .ajaxStart(function(){
+//            $(this).show();
+            basic.stateModal('wait');
+        })
+        .ajaxComplete(function(){
+            basic.stateModal('hide');
+        });
+
+    /*
+     prepareing ajax file upload
+     url: the url of script file handling the uploaded files
+     fileElementId: the file type of input element id and it will be the index of  $_FILES Array()
+     dataType: it support json, xml
+     secureuri:use secure protocol
+     success: call back function when the ajax complete
+     error: callback function when the ajax failed
+
+     */
+    $.ajaxFileUpload({
+        url:siteUrl+'api/upload/console/?savePath=logo&resize=120&ajax=true&_csrf='+$(':input[name="_csrf"]').val(),
+        secureuri:false,
+        fileElementId:'file',
+        dataType: 'json',
+        success: function (data, status)
+        {
+            if(!data.error){
+                basic.stateModal('success');
+                $('#console-logoimagebox').html('');
+                $('#console-logoimagebox').append('<img class="img-responsive" src="'+siteUrl+data.path+'">');
+                $('#console-logoimagebox').data('path',data.path);
+                $('#console-logoimagebox').data('resizepath',data.resizePath);
+            }else{
+                basic.stateModal('error',data.des);
+            }
+        },
+        error: function (data, status, e)
+        {
+            console.log(data);
+            basic.stateModal('error','上传失败，请检查网络。');
+        }
+    });
+    return false;
+}
 var consoleObj = {
     app:'console',
     cache:{
@@ -16,6 +62,8 @@ var consoleObj = {
                 domain:siteInfoForm.find(':input[name="domain"]').val(),
                 port:siteInfoForm.find(':input[name="port"]').val(),
                 logo:siteInfoForm.find(':input[name="logo"]').val(),
+                logoImage:$('#console-logoimagebox').data('path'),
+                logoImageResize:$('#console-logoimagebox').data('resizepath'),
                 app:{}
             };
             consoleObj.cache.siteInfo.siteUrl = 'http://'+consoleObj.cache.siteInfo.domain + ':'+consoleObj.cache.siteInfo.port+'/';
@@ -31,6 +79,7 @@ var consoleObj = {
             return consoleObj.cache.siteInfo;
         },
         updateSiteInfo:function(){
+            basic.stateModal('wait');
             $.ajax({
                 type:'POST',
                 url:siteUrl+consoleObj.app+'/api/modifySiteInfo',
@@ -38,9 +87,6 @@ var consoleObj = {
                     data:consoleObj.function.getSiteInfoFromForm()
                 },
                 dataType:'json',
-                beforeSend:function(XHR){
-                    basic.stateModal('wait');
-                },
                 success:function(data){
                     if(!data.err){
                         basic.stateModal('success');
@@ -99,15 +145,13 @@ var consoleObj = {
             return navArray;
         },
         updateNav:function(){
+            basic.stateModal('wait');
             $.ajax({
                 url:siteUrl+consoleObj.app+'/api/updateNav',
                 type:'post',
                 dataType:'json',
                 data:{
                     navArray:consoleObj.function.getNavArray()
-                },
-                beforeSend:function(XHR){
-                    basic.stateModal('wait');
                 },
                 success:function(data){
                     if(!data.err){
@@ -147,5 +191,12 @@ $(function(){
     });
     $(document).on('click','#console-nav-modifynav-true',function(){
         consoleObj.function.modifyNav($('#console-nav-modifyform'));
+    });
+    //更新logo图片
+    $(document).on('click','#console-changelogoimage',function(){
+        $('#file').click();
+    });
+    $(document).on('change','#file',function(){
+        ajaxFileUpload();
     });
 });

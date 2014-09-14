@@ -11,7 +11,9 @@ var siteSchema = new mongoose.Schema({
     logo:{type:String,default:global.config.logo},
     version:{type:String,default:global.config.version},
     nav:{type:Array,default:global.config.nav},
-    app:{type:Object,default:global.config.app}
+    app:{type:Object,default:global.config.app},
+    logoImage:{type:String},
+    logoImageResize:{type:String}
 });
 var siteModel = db.model('sites',siteSchema);
 
@@ -47,6 +49,8 @@ var recoverFromConfig = function(callback){
             global.config.logo = data.logo;
             global.config.app = data.app;
             global.config.nav = data.nav;
+            global.config.logoImage = data.logoImage;
+            global.config.logoImageResize = data.logoImageResize;
             console.log('>>>>>> recover site configure data successed!');
             cb(err,data);
         }
@@ -70,6 +74,8 @@ module.exports = {
                 odata.port = data.port;
                 odata.logo = data.logo;
                 odata.app = data.app;
+                odata.logoImage = data.logoImage;
+                odata.logoImageResize = data.logoImageResize;
                 odata.save(function(err1,savedData){
                     if(err1===null){
                         refreshSiteConfigure(callback);

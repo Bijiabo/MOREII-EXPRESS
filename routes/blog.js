@@ -750,7 +750,7 @@ router.get('/console/editors/:page?',function(req,res){
             global.userSchema.getListItemCount({'permission.blog.edit':true},function(err1,countData){
                 if(!err1){
                     var data = new renderData({
-                        title:'文章列表',
+                        title:'作者列表',
                         jsfile:'blog_admin.js',
                         cssfile:'blog_console.css',
                         consoleNavActive:'editors'

@@ -4,6 +4,8 @@ var express = require('express'),
 var router = express.Router();
 var token = 'moreiiexpresswechattoken';//微信token
 //测试微信openID o9ryIjmo7OPx6ZM2OMpeiGL72o38
+var API = wechat.API;
+var api = new API('wx79b29da384200d59', '4b00d123c5acf57a897da59a4b430ad8');
 
 var renderData = function(data){
     if(data===undefined){
@@ -24,7 +26,7 @@ var renderData = function(data){
         },
         {
             name:'群发消息',
-            path:'dustbin'
+            path:'mssSendNews'
         },
         {
             name:'关于',
@@ -94,7 +96,6 @@ router.use('/api', wechat(token)
                             }
                         });
                         break;
-
                     default :
                         res.reply('各种功能开发中，请勿扰。');
                 }
@@ -132,6 +133,71 @@ router.use(function(req,res,next){
 router.get('/console',function(req,res){
     var data = new renderData({});
     res.render('wechat/console/index',data);
+});
+router.get('/console/editors/:page?',function(req,res){
+    var page = Number(req.params.page),
+        limitPerPage = 10;
+    if(isNaN(page) || page<1){
+        page=1;
+    }
+    global.userSchema.findUser({'permission.wechat.edit':true},{'_id':-1},(page-1)*limitPerPage,limitPerPage,function(err,userData){
+        if(!err && userData){
+            global.userSchema.getListItemCount({'permission.wechat.edit':true},function(err1,countData){
+                if(!err1){
+                    var data = new renderData({
+                        title:'管理员列表',
+                        consoleNavActive:'editors'
+                    });
+                    data.users = userData;
+                    data.pageUrl = global.config.siteUrl+data.app+'/console/editors/';
+                    data.pageCount = Math.ceil(countData/limitPerPage);
+                    data.pageNow = page;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    console.log(userData);
+                    res.render('wechat/console/editors',data);
+                }else{
+                    res.render('error',{
+                        error:{
+                            title:'错误代码：WECHATCONSOLEEDITOR0002',
+                            des:'分页数据错误，请刷新页面后重试。'
+                        }
+                    });
+                }
+            });
+        }else{
+            res.render('error',{
+                error:{
+                    title:'错误代码：WECHATCONSOLEEDITOR0001',
+                    des:'拉取用户数据错误，请刷新页面后重试。'
+                }
+            });
+        }
+    });
+});
+router.get('/console/mssSendNews',function(req,res){
+    //群发图文消息页面
+    var data = new renderData({
+        title:'群发消息-图文',
+        consoleNavActive:'mssSendNews'
+    });
+    console.log('===============');
+    res.render('wechat/console/masssendnews',data);
+});
+/*
+* 后台管理api
+* */
+router.post('/api/uploadMedia',function(req,res){
+    //上传媒体文件
+    api.uploadMedia(req.body.filePath, req.body.type, function(err,result){
+        console.log('-----------------------');
+        console.log(err);
+        console.log(result);
+    });
+});
+router.post('/api/massSendNews',function(req,res){
+   //群发消息
+//    api.massSend(opts, receivers, callback);
 });
 
 module.exports = router;
