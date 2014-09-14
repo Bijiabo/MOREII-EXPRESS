@@ -17,6 +17,7 @@ var clothConsole = {
         },
         add:function(){
             clothConsole.function.getInfo();
+            basic.stateModal('wait');
             $.ajax({
                 type:'POST',
                 url:siteUrl+app+'/api/add/?ajax=true',
@@ -24,9 +25,6 @@ var clothConsole = {
                     addClothInfo:clothConsole.cache.addClothInfo
                 },
                 dataType:'json',
-                beforeSend:function(XHR){
-                    basic.stateModal('wait');
-                },
                 success:function(r){
                     console.log(r);
                     if(!r.err){
@@ -43,6 +41,7 @@ var clothConsole = {
         },
         update:function(){
             clothConsole.function.getInfo();
+            basic.stateModal('wait');
             $.ajax({
                 type:'POST',
                 url:siteUrl+app+'/console/edit/'+cache.clothEditId+'/?ajax=true',
@@ -50,9 +49,6 @@ var clothConsole = {
                     addClothInfo:clothConsole.cache.addClothInfo
                 },
                 dataType:'json',
-                beforeSend:function(XHR){
-                    basic.stateModal('wait');
-                },
                 success:function(r){
                     if(!r.err){
                         basic.stateModal('success','修改成功，跳转中...');
@@ -73,15 +69,13 @@ var clothConsole = {
                     idArray.push($(item).data('id'));
                 }
             });
+            basic.stateModal('wait');
             $.ajax({
                 url:siteUrl+app+'/api/delete',
                 type:'POST',
                 dataType:'json',
                 data:{
                     idArray:idArray
-                },
-                beforeSend:function(XHR){
-                    basic.stateModal('wait');
                 },
                 success:function(data){
                     if(!data.err){

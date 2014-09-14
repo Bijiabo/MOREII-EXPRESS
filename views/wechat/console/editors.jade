@@ -1,0 +1,45 @@
+extends ../../layout_console
+block content
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th 昵称
+                th 邮箱
+                th 地址
+                th 编辑
+        tbody
+            - for user in userData
+                tr(id="userlist-#{user._id}")
+                    td.userlist-name #{user.name}
+                    td.userlist-mail #{user.mail}
+                    td
+                        if(user.address.length>0)
+                            span #{user.address[0].province.name} #{user.address[0].areaType.name} #{user.address[0].area.name}
+                        else
+                            span 未填写
+                    td.user-console-modifyuser(data-id="#{user._id}",data-name="#{user.name}",data-mail="#{user.mail}")
+                        span.iconfont.icon-edit
+    //- 修改账号模态框
+    div.modal.fade#modify-userdata(role="dialog",aria-labelledby="modify-userdata-title",aria-hidden="true")
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type="button",data-dismiss="modal",aria-hidden="true") &times;
+                    h4.modal-title#modify-userdata-title 修改用户资料
+                div.modal-body
+                    form.form-horizontal(role="form")
+                        div.form-group
+                            label.col-xs-2.control-label(for="address") 昵称
+                            div.col-xs-10
+                                input.form-control#user-modifyuserdata-name(type="text",name="name",value="")
+                        div.form-group
+                            label.col-xs-2.control-label(for="receiver") 邮件
+                            div.col-xs-10
+                                input.form-control#user-modifyuserdata-mail(type="text",name="mail",value="")
+                        br
+                        h4 权限
+                        hr
+                        div#modify-userpermission
+                div.modal-footer(style="margin-top: 0;")
+                    button.btn.btn-default(type="button",data-dismiss="modal") 取消
+                    button.btn.btn-primary.btn-primary-o.mii-ani#user-console-edituserdata(type="button") 修改

@@ -10,14 +10,33 @@ var renderData = function(data){
         data = {};
     }
     this.title = data.title || '微信';
-    this.cssfile = data.cssfile || '';
+    this.cssfile = data.cssfile || 'wechat_console.css';
     this.jsfile = data.jsfile ||'';
     this.app = 'wechat';
+    this.consoleNav = [
+        {
+            name:'管理首页',
+            path:''
+        },
+        {
+            name:'管理员列表',
+            path:'editors'
+        },
+        {
+            name:'群发消息',
+            path:'dustbin'
+        },
+        {
+            name:'关于',
+            path:'about'
+        }
+    ];
+    this.consoleNavActive = data.consoleNavActive || '';
+    this.appVersion = '0.0.1';
 }
 
 router.get('/', function(req, res) {
     var data = new renderData();
-    console.log(res.locals);
     res.render('index', data);
 });
 /**
@@ -85,7 +104,34 @@ router.use('/api', wechat(token)
     }).middlewarify()
 );
 /*
+* 登陆后页面
+* */
+router.use(function(req,res,next){
+    if(req.login){
+        next();
+    }else{
+        global.config.resError(req,res,'请登陆。','/user/login');
+    }
+});
+/*
 * 后台配置界面
 * */
+router.use(function(req,res,next){
+    if(req.userData.permission.user.editUser) {
+        next();
+    }else if(req.userData.permission.wechat){
+        if(req.userData.permission.wechat.edit){
+            next();
+        }else{
+            global.config.resError(req,res,'权限不足');
+        }
+    }else{
+        global.config.resError(req,res,'权限不足');
+    }
+});
+router.get('/console',function(req,res){
+    var data = new renderData({});
+    res.render('wechat/console/index',data);
+});
 
 module.exports = router;
