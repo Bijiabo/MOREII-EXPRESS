@@ -523,8 +523,16 @@ var userApi = {
             }
         });
     },
-    findUserByPermission:function(appName,permissionData){
-
+    findUser:function(find,sort,skip,limit,callback){
+        userModel.find(find)
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec(callback);
+    },
+    getListItemCount:function(find,callback){
+        //统计列表分页数量
+        userModel.find(find).count().exec(callback);
     }
 }
 module.exports = userApi;

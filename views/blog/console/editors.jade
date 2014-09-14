@@ -1,0 +1,26 @@
+extends ../../layout_console
+block content
+    table.table.table-striped.table-hover
+        thead
+            th 昵称
+            th 邮箱
+            th 电话
+            th 移除
+        tbody
+            -for user in users
+                tr
+                    td #{user.name}
+                    td #{user.mail}
+                    td
+                        -if(user.phone)
+                            span #{user.phone}
+                        -else
+                            span 未填写
+                    td
+                        a(href="#{siteUrl}#{app}/search/author/#{user.name}",target="_blank")
+                            span.iconfont.icon-close
+    div.row
+        div.col-md-4
+            btn.btn.btn-default#blog-console-addauthor 添加作者
+        div.col-md-8.text-right
+            include ../../pager

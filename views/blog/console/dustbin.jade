@@ -1,0 +1,92 @@
+extends ../../layout_console
+
+block content
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th
+                    //label.checkbox
+                    input.thead-checkbox(type="checkbox",value="all",data-toggle="checkbox")
+                th 标题
+                th.hidden-xs.hidden-sm 类型
+                th.hidden-xs.hidden-sm 创建时间
+                th.hidden-xs.hidden-sm 最后修改
+                th 作者
+                th.hidden-xs.hidden-sm 最后修订
+                th 版本
+                th 操作
+        tbody#blog-bloglisttable
+            -if(blogData.length>0)
+                -for blogItem in blogData
+                    -var createTime = new Date(blogItem.createTime)
+                    -var lastModifyName = '',lastModifyTime=''
+                    -if(blogItem.modify.length>0)
+                        -lastModifyName = blogItem.modify[blogItem.modify.length-1].name
+                        -lastModifyTime = new Date(blogItem.modify[blogItem.modify.length-1].time)
+                        -lastModifyTime = lastModifyTime.getFullYear()+'年'+(lastModifyTime.getMonth()+1)+'月'+lastModifyTime.getDate()+'日 '+lastModifyTime.getHours()+':'+lastModifyTime.getMinutes()+':'+lastModifyTime.getSeconds();
+                    tr
+                        td
+                            input(type="checkbox",value="#{blogItem._id}",data-toggle="checkbox")
+                        td
+                            a(href="#{siteUrl}#{app}/detail/#{blogItem._id}",target="_blank") #{blogItem.title}
+                        td.hidden-xs.hidden-sm
+                            -if(blogItem.type==="blog")
+                                span 日志
+                            -else
+                                span 页面
+                        td.hidden-xs.hidden-sm #{createTime.getFullYear()}年#{createTime.getMonth()+1}月#{createTime.getDate()}日 #{createTime.getHours()}:#{createTime.getMinutes()}:#{createTime.getSeconds()}
+                        td.hidden-xs.hidden-sm #{lastModifyTime}
+                        td #{blogItem.author.name}
+                        td.hidden-xs.hidden-sm #{lastModifyName}
+                        td #{blogItem.version}
+                        td.blog-tableedit
+                            a.blog-console-preview(href="javascript:;",data-blogid="#{blogItem._id}")
+                                span.fa.fa-eye
+                            a.blog-console-edit(href="javascript:;",data-blogid="#{blogItem._id}")
+                                span.fa.fa-edit
+    div.row
+        div.col-md-4
+            button.btn.btn-default#blog-rblogs(type="button")
+                span.fa.fa-trash-o &nbsp;&nbsp;恢复
+            button#blog-write-new.btn.btn-primary
+                span.fa.fa-plus &nbsp;&nbsp;新建
+        div.col-md-8.text-right
+            include ../../pager
+    //- 文章预览层
+    div#blog-previewblog.console-modal
+        div.fa.fa-times.console-modal-close
+        h3
+        hr
+        div#blog-previewblog-content
+    //- 文章编辑层
+    div#blog-editblog.console-modal
+        div.fa.fa-times.console-modal-close
+        //h6 编辑日志
+        input#blog-editblog-title.form-control(placeholder="文章标题")
+        hr
+        div#blog-editblog-content
+            div.summernote
+        //-textarea#blog-editblog-content.form-control(placeholder="文章标题",rows="20")
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-editblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
+        //-input#blog-editblog-tags.tagsinput(name="tagsinput",value="")
+        hr
+        div
+            button#blog-editblog-submit.btn.btn-primary.console-blog-submit(type="button",data-type="edit",data-id="") 作为日志重新发布
+            button#blog-editpage-submit.btn.btn-default.console-page-submit(type="button",data-type="edit",data-id="") 作为页面重新发布
+    //- 文章书写层
+    div#blog-addblog.console-modal
+        div.fa.fa-times.console-modal-close
+        //h6 新建日志
+        input#blog-addblog-title.form-control(placeholder="文章标题")
+        hr
+        div#blog-addblog-content
+            div.summernote 文章内容...
+        div.input-group
+            span.input-group-addon 标签
+            input#blog-addblog-tags.form-control(name="tagsinput",value="",type="text",placeholder="使用空格分割标签")
+        hr
+        div
+            button#blog-addblog-submit.btn.btn-primary.console-blog-submit(type="button",data-type="add",data-id="") 发布为日志
+            button#blog-addpage-submit.btn.btn-default.console-page-submit(type="button",data-type="add",data-id="") 发布为页面

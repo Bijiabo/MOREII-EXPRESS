@@ -343,10 +343,6 @@ module.exports = {
             .exec(function(err,data){
                 callback(err,data);
             });
-    },
-    //列出编辑们
-    getEditors:function(skip,limit,callback){
-        global.userSchema.find()
     }
 }
 

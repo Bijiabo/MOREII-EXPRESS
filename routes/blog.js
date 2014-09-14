@@ -36,6 +36,10 @@ var limitPerPage = 5,
         {
             name:'作者统计',
             path:'authors'
+        },
+        {
+            name:'作者管理',
+            path:'editors'
         }
     ];
     this.consoleNavActive = data.consoleNavActive || '';
@@ -675,7 +679,7 @@ router.get('/console/dustbin/:page?',function(req,res){
                     data.pageNow = page;
                     data.limitPerPage = limitPerPage;
                     data.pagerLen = 5;//翻页控件显示页数
-                    res.render('blog/console/loglist',data);
+                    res.render('blog/console/dustbin',data);
                 }else{
                     res.redirect(global.config.siteUrl+'500');
                 }
@@ -735,11 +739,46 @@ router.get('/api/getBlogDetail/:id',function(req,res){
     },forEdit);
 });
 //编辑列表
-router.get('/console/editorList/:page?',function(req,res){
+router.get('/console/editors/:page?',function(req,res){
     var page = Number(req.params.page),
         limitPerPage = 10;
     if(isNaN(page) || page<1){
         page=1;
     }
+    global.userSchema.findUser({'permission.blog.edit':true},{'_id':-1},(page-1)*limitPerPage,limitPerPage,function(err,userData){
+        if(!err && userData){
+            global.userSchema.getListItemCount({'permission.blog.edit':true},function(err1,countData){
+                if(!err1){
+                    var data = new renderData({
+                        title:'文章列表',
+                        jsfile:'blog_admin.js',
+                        cssfile:'blog_console.css',
+                        consoleNavActive:'editors'
+                    });
+                    data.users = userData;
+                    data.pageUrl = global.config.siteUrl+data.app+'/console/editors/';
+                    data.pageCount = Math.ceil(countData/limitPerPage);
+                    data.pageNow = page;
+                    data.limitPerPage = limitPerPage;
+                    data.pagerLen = 5;//翻页控件显示页数
+                    res.render('blog/console/editors',data);
+                }else{
+                    res.render('error',{
+                        error:{
+                            title:'错误代码：BLOGCONSOLEEDITOR0005',
+                            des:'分页数据错误，请刷新页面后重试。'
+                        }
+                    });
+                }
+            });
+        }else{
+            res.render('error',{
+                error:{
+                    title:'错误代码：BLOGCONSOLEEDITOR0004',
+                    des:'拉取用户数据错误，请刷新页面后重试。'
+                }
+            });
+        }
+    });
 });
 module.exports = router;
