@@ -60,3 +60,9 @@
 #console-logoimagebox{
     margin-top: 15px;
 }
+.console-index-footeritembox{}
+.console-index-footeritemboxbox{
+    background-color: #f8f8f8;
+    padding: 15px;
+    margin-bottom: 30px;
+}

@@ -75,6 +75,7 @@ app.use(function(req,res,next){
         res.locals.logo = global.config.logo;
         res.locals.logoImage = global.config.logoImage;
         res.locals.logoImageResize = global.config.logoImageResize;
+        res.locals.footerInfo = global.config.footerInfo;
         app.locals.csrf = req.csrfToken();
         next();
     });

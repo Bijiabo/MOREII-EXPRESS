@@ -24,7 +24,7 @@ block content
             div.col-sm-10
                 input.form-control(name="logo",type="text",placeholder="logo",value="#{siteData.logo}")
         div.form-group
-            label.col-sm-2.control-label(for="logo")
+            label.col-sm-2.control-label(for="logoimage")
                 span LOGO图片
             div.col-sm-10
                 -if(siteData.logoImage)
@@ -36,12 +36,86 @@ block content
                     div#console-logoimagebox
         div.hidden
             input#file(type='file',name='file')
-
         br
-        h4 应用配置
+        h4 底部信息
         hr
+        div.row
+            -for(var i=0;i<3;i++)
+                -if(footerInfo && footerInfo.constructor.toString().match('Array'))
+                    -if(footerInfo[i])
+                        div.col-sm-6.col-xs-12.console-index-footeritembox
+                            div.console-index-footeritemboxbox
+                                div.form-group
+                                    label.col-sm-2.control-label(for="cloum") 列标题
+                                    div.col-sm-10
+                                        input.form-control(name="footer_cloum_name_#{i}",type="text",value="#{footerInfo[i].title}").footer_cloum_name
+                                -for(var j=0;j<footerInfo[i].linkArray.length;j++)
+                                    div.footerlinkboxitem
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 文字-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_name_#{i}_#{j}",type="text",value="#{footerInfo[i].linkArray[j].text}").footer-link-text
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 链接-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_href_#{i}_#{j}",type="text",value="#{footerInfo[i].linkArray[j].href}").footer-link-href
+                                -for(var j=0;j<3-footerInfo[i].linkArray.length;j++)
+                                    div.footerlinkboxitem
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 文字-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_name_#{i}_#{j}",type="text").footer-link-text
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 链接-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_href_#{i}_#{j}",type="text").footer-link-href
+                    -else
+                        div.col-sm-6.col-xs-12.console-index-footeritembox
+                            div.console-index-footeritemboxbox
+                                div.form-group
+                                    label.col-sm-2.control-label(for="cloum") 列标题
+                                    div.col-sm-10
+                                        input.form-control(name="footer_cloum_name_#{i}",type="text",value="").footer_cloum_name
+                                -for(var j=0;j<footerInfo[i].linkArray.length;j++)
+                                    div.footerlinkboxitem
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 文字-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_name_#{i}_#{j}",type="text",value="").footer-link-text
+                                        div.form-group
+                                            label.col-sm-2.control-label(for="cloum")
+                                                span 链接-#{j}
+                                            div.col-sm-10
+                                                input.form-control(name="footer_link_href_#{i}_#{j}",type="text",value="").footer-link-href
+                -else
+                    div.col-sm-6.col-xs-12.console-index-footeritembox
+                        div.console-index-footeritemboxbox
+                            div.form-group
+                                label.col-sm-2.control-label(for="cloum") 列标题
+                                div.col-sm-10
+                                    input.form-control(name="footer_cloum_name_#{i}",type="text",value="").footer_cloum_name
+                            -for(var j=0;j<3;j++)
+                                div.footerlinkboxitem
+                                    div.form-group
+                                        label.col-sm-2.control-label(for="cloum")
+                                            span 文字-#{j}
+                                        div.col-sm-10
+                                            input.form-control(name="footer_link_name_#{i}_#{j}",type="text",value="").footer-link-text
+                                    div.form-group
+                                        label.col-sm-2.control-label(for="cloum")
+                                            span 链接-#{j}
+                                        div.col-sm-10
+                                            input.form-control(name="footer_link_href_#{i}_#{j}",type="text",value="").footer-link-href
+
+        h4.hidden 应用配置
+        hr.hidden
         -for appData,key in siteData.app
-            div.form-group.console-appdata(data-app="#{appData.name}",data-ico="#{appData.ico}")
+            div.form-group.console-appdata(data-app="#{appData.name}",data-ico="#{appData.ico}").hidden
                 label.col-sm-2.control-label(for="port") #{appData.name}
                 div.col-sm-10
                     div.input-group

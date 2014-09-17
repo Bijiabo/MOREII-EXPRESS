@@ -76,6 +76,25 @@ var consoleObj = {
                     state:Number($(item).find('.console-appdata-state').val())
                 };
             });
+            //读取footer信息
+            consoleObj.cache.siteInfo.footerInfo = [];
+            var footerInfoItemCache = {
+                title:'',
+                linkArray:[]
+            };
+            $.each($('.console-index-footeritembox'),function(index,item){
+                footerInfoItemCache = {
+                    title:$(item).find('.footer_cloum_name').val(),
+                    linkArray:[]
+                };
+                $.each($(item).find('.footerlinkboxitem'),function(index1,item1){
+                    footerInfoItemCache.linkArray.push({
+                        text:$(item1).find('.footer-link-text').val(),
+                        href:$(item1).find('.footer-link-href').val()
+                    });
+                });
+                consoleObj.cache.siteInfo.footerInfo.push(footerInfoItemCache);
+            });
             return consoleObj.cache.siteInfo;
         },
         updateSiteInfo:function(){
