@@ -1,69 +1,33 @@
 div.console_main
     div.container
         div#footer.hidden-xs.hidden-sm.text-muted.col-md-12
-            div.col-md-4
-                address
-                    strong 新手帮助
-                    br
-                    br
-                    span
-                        a(href="#{siteUrl}user") 注册和登陆
-                    br
-                    span
-                        a(href="#") 订做流程
-                    br
-                    span
-                        a(href="#") 西服知识
-            div.col-md-4
-                address
-                    strong 会员服务
-                    br
-                    br
-                    span
-                        a(href="#{siteUrl}user") 我的账户
-                    br
-                    span
-                        a(href="#") 订单状态
-                    br
-                    span
-                        a(href="#") 发票制度
-            div.col-md-4(style="padding-left:23px;")
-                address
-                    strong 服务支持
-                    br
-                    br
-                    span 地址：北京市海淀区西二旗大街领秀新硅谷
-                    br
-                    span 电话：010-3372115
-                    br
-                    span 邮箱：service@difei-sun.com
+            -if(footerInfo && footerInfo.constructor.toString().match('Array'))
+                -for(var i=0,len=footerInfo.length;i<len;i++)
+                    div.col-md-4
+                        address
+                            strong #{footerInfo[i].title}
+                            br
+                            -for(var j=0,len1=footerInfo[i].linkArray.length;j<len1;j++)
+                                br
+                                -if(footerInfo[i].linkArray[j].href==="")
+                                    span #{footerInfo[i].linkArray[j].text}
+                                -else
+                                    span
+                                        a(href="#{footerInfo[i].linkArray[j].href}") #{footerInfo[i].linkArray[j].text}
         div.row.visible-xs.visible-sm.footer.text-muted
-            div.col-md-4
-                address
-                    strong 新手帮助
-                    br
-                    br
-                    a.btn.btn-default(href="#{siteUrl}user") 注册和登陆
-                    a.btn.btn-default(href="#") 订做流程
-                    a.btn.btn-default(href="#") 西服知识
-            hr
-            div.col-md-4
-                address
-                    strong 会员服务
-                    br
-                    br
-                    a.btn.btn-default(href="#{siteUrl}user") 我的账户
-                    a.btn.btn-default(href="#") 订单状态
-                    a.btn.btn-default(href="#") 发票制度
-            hr
-            div.col-md-4
-                address
-                    strong 服务支持
-                    br
-                    br
-                    span 地址：北京市海淀区西二旗大街领秀新硅谷
-                    br
-                    span 电话：010-3372115
-                    br
-                    span 邮箱：service@difei-sun.com
+            -if(footerInfo && footerInfo.constructor.toString().match('Array'))
+                -for(var i=0,len=footerInfo.length;i<len;i++)
+                    div.col-md-4
+                        address
+                            strong #{footerInfo[i].title}
+                            br
+                            br
+                            -for(var j=0,len1=footerInfo[i].linkArray.length;j<len1;j++)
+                                -if(i!==len-1)
+                                    -if(footerInfo[i].linkArray[j].href==="")
+                                        button.btn.btn-default(type="button") #{footerInfo[i].linkArray[j].text}
+                                    -else
+                                        a.btn.btn-default(href="#{footerInfo[i].linkArray[j].href}") #{footerInfo[i].linkArray[j].text}
+                                -else
+                                    p #{footerInfo[i].linkArray[j].text}
 script(src="#{siteUrl}js/app/statistics.js")
