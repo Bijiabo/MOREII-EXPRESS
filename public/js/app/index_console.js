@@ -20,7 +20,6 @@ function ajaxFileUpload(){
      secureuri:use secure protocol
      success: call back function when the ajax complete
      error: callback function when the ajax failed
-
      */
     $.ajaxFileUpload({
             url:siteUrl+'api/upload/index/?savePath=indexpicture&resize=720&ajax=true&_csrf='+$(':input[name="_csrf"]').val(),

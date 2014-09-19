@@ -59,7 +59,7 @@ app.get('/500',function(req,res){
 * */
 router.use('/console/?*', function(req,res,next){
     if(req.login){
-        global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
+        global.config.checkPermission(req,res,'index','edit',false,function(hasPermission){
             if(hasPermission){
                 next();
             }

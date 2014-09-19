@@ -415,7 +415,7 @@ router.get('/getShareUrl/:id',function(req,res){
  * api
  * */
 router.use(function(req,res,next){
-    global.config.checkPermission(req,res,'blog','edit',true,function(hasPermission){
+    global.config.checkPermission(req,res,'blog','edit',false,function(hasPermission){
         if(hasPermission){
             next();
         }

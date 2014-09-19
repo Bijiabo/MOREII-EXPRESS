@@ -43,7 +43,7 @@ var renderData = function(data){
 }
 //验证后台页面权限接口
 router.get('/api/consolePermission',function(req,res){
-    global.config.checkPermission(req,res,'user','editUser',true,function(hasPermission){
+    global.config.checkPermission(req,res,'user','editUser',false,function(hasPermission){
         if(hasPermission){
             res.json({
                 permission:true

@@ -316,6 +316,9 @@ a{color: #808080;}
     #header-nav-account-dropdown {left: -81px;margin-top: -1px;}
     #header-nav-account-caretup {right: 32px;}
     #header-nav-account-dropdown li{display: inline-block !important;}
+    #header-navbar-logo img{
+        width: 100px;
+    }
 }
 .tooltip-inner {
     border: 0;

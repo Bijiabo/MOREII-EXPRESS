@@ -325,7 +325,7 @@ var userApi = {
                 mail:userData.account,
                 password:userData.password
             },function(err,user){
-                if(user===null){
+                if(!user || err){
                     callback(null);
                 }else{
                     userModel.findOne({mail:userData.account},function(err,user){
@@ -339,7 +339,7 @@ var userApi = {
                 name:userData.account,
                 password:userData.password
             },function(err,user){
-                if(user===null){
+                if(!user || err){
                     callback(null);
                 }else{
                     userModel.findOne({name:userData.account},function(err,user){
