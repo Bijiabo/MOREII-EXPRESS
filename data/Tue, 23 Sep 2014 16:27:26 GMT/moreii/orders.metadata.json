@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "moreii.orders" }, { "v" : 1, "key" : { "goodData" : 1 }, "name" : "goodData_1", "ns" : "moreii.orders", "background" : true } ] }

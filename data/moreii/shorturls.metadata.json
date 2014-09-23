@@ -1,1 +1,0 @@
-{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "moreii.shorturls", "name" : "_id_" }, { "v" : 1, "key" : { "URL" : 1 }, "unique" : true, "ns" : "moreii.shorturls", "name" : "URL_1", "background" : true, "safe" : null }, { "v" : 1, "key" : { "hash" : 1 }, "unique" : true, "ns" : "moreii.shorturls", "name" : "hash_1", "background" : true, "safe" : null } ] }

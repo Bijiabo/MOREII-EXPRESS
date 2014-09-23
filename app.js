@@ -9,8 +9,8 @@ var express = require('express'),
     GithubStrategy = require('passport-github').Strategy,
     csrf = require('csurf');
 //set config
-global.userSchema = require('./core/schema/user');
 global.config = require('./core/config');
+global.userSchema = require('./core/schema/user');
 //get mongoose schema
 var site = require('./core/schema/site'),
     markdown = require('markdown-js');

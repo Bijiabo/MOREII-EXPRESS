@@ -23,7 +23,7 @@ var renderData = function(data){
 };
 //验证后台页面权限接口
 router.get('/api/consolePermission',function(req,res){
-    global.config.checkPermission(req,res,'index','edit',true,function(hasPermission){
+    global.config.checkPermission(req,res,'index','edit',false,function(hasPermission){
         if(hasPermission){
             res.json({
                 permission:true
@@ -46,6 +46,13 @@ router.get('/', function(req, res) {
             res.redirect(global.config.siteUrl+'500');
         }
     });
+});
+//测试横向滚动方案
+router.get('/horizontalScroll',function(req,res){
+    var data = new renderData({
+        cssfile:'horizontalscroll.css'
+    });
+    res.render('index/horizontalScroll',data);
 });
 app.get('/500',function(req,res){
     res.status(500);

@@ -258,6 +258,7 @@ module.exports = {
     logo:logo,
     app:app,
     version:'3.0.1',
+    dbname:'moreii',
     nav:[
         {
             text:'首页',

@@ -1,0 +1,18 @@
+extends ../layout
+block content
+    script(src="#{siteUrl}js/iscroll.js")
+    div#horizontalscrollbox
+        ul
+            -for(var i=0;i<50;i++)
+                li
+
+    script.
+        $(function(){
+            var myScroll = new IScroll('#horizontalscrollbox', {
+                mouseWheel: true,
+                scrollbars: true,
+                freeScroll:true,
+                scrollX: true,
+                scrollY: false
+            });
+        });
