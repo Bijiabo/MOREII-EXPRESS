@@ -88,6 +88,9 @@ var user = {
                         '</div>'
                     ].join('\n');
                     permissionBox.append(html);
+                    setTimeout(function(){
+                        user.loadPermissionLanguagePack();
+                    },10);
                 }
             },
             error:function(err){
@@ -142,6 +145,28 @@ var user = {
                 alert('提交错误，请重试。');
             }
         })
+    },
+    loadPermissionLanguagePack:function(){
+        if(languagePack){
+            if(languagePack.permission){
+                //翻译模块名称
+                $.each($('#modify-userpermission .control-label'),function(index,item){
+                    if(languagePack.module[$(item).text()]){
+                        $(item).text(languagePack.module[$(item).text()]);
+                    }
+                });
+                //翻译权限列表选择组件
+                var optionTextCache,
+                    optionTextHeader;
+                $.each($('#modify-userpermission select option'),function(index,item){
+                    optionTextCache = $(item).text().replace(/^(Ο|×) /,'');
+                    optionTextHeader = $(item).text().replace(optionTextCache,'').replace(/\t/,'');
+                    if(languagePack.permission[optionTextCache]){
+                        $(item).text(optionTextHeader+' '+languagePack.permission[optionTextCache]);
+                    }
+                });
+            }
+        }
     }
 }
 $(function(){

@@ -1,0 +1,32 @@
+/**
+ * Created by boooo on 14-10-1.
+ */
+var languagePack = {
+    module:{
+        index:'首页',
+        user:'用户',
+        message:'消息',
+        blog:'博客',
+        statistics:'统计',
+        console:'控制台',
+        cloth:'面料'
+    },
+    permission:{
+        edit:'编辑',
+        upload:'上传',
+        login:'登陆',
+        editAddress:'编辑地址',
+        changeName:'改名',
+        changeMail:'修改邮箱',
+        changePassword:'修改密码',
+        editUser:'管理用户',
+        read:'读取',
+        send:'发送',
+        remove:'删除',
+        write:'书写',
+        comment:'评论',
+        revise:'修订',
+        view:'查看',
+        memberInfo:'用户信息'
+    }
+};
