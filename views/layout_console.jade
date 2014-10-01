@@ -41,8 +41,8 @@ html(ng-app,lamg="zh")
     body
         include header_console
         div#console_main
+            include nav_console
             div.container
-                include nav_console
                 block content
         script(src="/js/markdown.js")
         script(src="/js/Chart.min.js")

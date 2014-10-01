@@ -1,7 +1,7 @@
 #wechat_home_jumbotron,#wechat-console-body{
     background-color: #ffffff;
     border: 1px solid #2ECC71;
-    border-top: 0;
+    /*border-top: 0;*/
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
     min-height: 120px;
@@ -58,7 +58,7 @@ input.form-control:focus,input.form-control:hover{
     margin-bottom: 10px;
 }
 @media (min-width: 1470px) {
-    #console-appnav{
+    /*#console-appnav{
         margin-bottom: 0;
         background: #ffffff;
         border: 1px solid #2ECC71;
@@ -78,10 +78,9 @@ input.form-control:focus,input.form-control:hover{
     }
     #console-appnav li.active a:after,#console-appnav li.active a:before{
         display: none;
-    }
+    }*/
     #wechat_home_jumbotron{
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        border-top: 0;
     }
 }

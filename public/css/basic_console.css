@@ -123,7 +123,8 @@
 #console_main,.console_main{
     box-sizing: border-box;
     padding-left: 250px;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
+    padding-bottom: 50px;
 }
 #console_main .container,.console_main .container{
     position: relative;
@@ -334,11 +335,11 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 36px;
-        width: 36px;
+        height: 48px;
+        width: 48px;
         font-size: 16px;
         color: #cccccc;
-        line-height: 36px;
+        line-height: 48px;
         text-align: center;
         display: block;
         text-decoration: none;
@@ -385,5 +386,30 @@
         margin-right: 0;
         margin-left: 0;
         padding: 0;
+    }
+    #console-appnav .navbar-nav>li>a,#console-appnav.navbar-toolbar.navbar-default .navbar-brand{
+        padding-top: 12px;
+        line-height: 24px;
+        height: 48px;
+    }
+    #console-appnav{
+        border: none;
+        border-bottom: 1px solid #f4f4f4;
+    }
+    #console-appnav .navbar-nav>li.active{
+        border-bottom: 2px solid #3078eb;
+    }
+    #console-appnav .navbar-nav>li.active a{
+        font-weight: normal;
+    }
+    #console-appnav .navbar-nav>li.active a:before,#console-appnav .navbar-nav>li.active a:after{
+        display: none;
+    }
+    #console-appnav .navbar-nav>li:hover{
+        background: #f8f8f8;
+        border-bottom: 2px solid rgba(48, 120, 235, 0.42);
+    }
+    #console-appnav .navbar-nav>li:hover a{
+        text-decoration: none;
     }
 }
