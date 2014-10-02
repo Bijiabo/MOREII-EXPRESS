@@ -16,11 +16,37 @@ global.userSchema = require('./core/schema/user');
 //get app
 global.app = express();
 var server = require('http').createServer(app);
-io = require('socket.io')(server);
+global.io = require('socket.io')(server);
 server.listen(Number(global.config.port)+1);
+var cookie = require('cookie'),
+    cookieSignature = require('cookie-signature');
+global.io.set('authorization', function (handshakeData, accept) {
+
+    if (handshakeData.headers.cookie) {
+        var cookieCache = cookie.parse(handshakeData.headers.cookie),
+            sid = cookieSignature.unsign(cookieCache.session.slice(2),'speedyCat'),
+            mongoSession = global.userSchema.session();
+        mongoSession.get(sid,function(err,sessionResult){
+            console.log(err);
+            console.log(sessionResult);
+        });
+        /*handshakeData.cookie = cookie.parse(handshakeData.headers.cookie);
+
+        handshakeData.sessionID = connect.utils.parseSignedCookie(handshakeData.cookie['express.sid'], 'secret');
+
+        if (handshakeData.cookie['express.sid'] == handshakeData.sessionID) {
+            return accept('Cookie is invalid.', false);
+        }*/
+
+    } else {
+        return accept('No cookie transmitted.', false);
+    }
+
+    accept(null, true);
+});
 //session.socket.io
-var SessionSockets = require('session.socket.io');
-global.sessionSockets = new SessionSockets(io, global.userSchema.session(), cookieparser);
+//var SessionSockets = require('session.socket.io'),
+//    sessionSockets = new SessionSockets(global.io, global.userSchema.session(), cookieparser);
 //get mongoose schema
 var site = require('./core/schema/site'),
     markdown = require('markdown-js');
