@@ -27,6 +27,7 @@
     "passport-github": "^0.1.5",
     "passport-weibo": "^0.1.0",
     "rd": "*",
+    "session.socket.io": "^0.1.6",
     "short": "*",
     "socket.io": "^1.1.0",
     "static-favicon": "~1.0.0",

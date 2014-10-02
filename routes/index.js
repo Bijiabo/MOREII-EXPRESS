@@ -82,7 +82,7 @@ router.get('/console', function(req, res) {
         cssfile:'index_console.css'
     });
     indexSchema.getUseOne(function(err,indexData){
-        console.log(indexData);
+//        console.log(indexData);
         if(err===null){
             data.data=indexData;
             res.render('index/console/index', data);

@@ -18,22 +18,27 @@ html(ng-app,lamg="zh")
         if(cssfile!=="" && jsfile!==cssfile && cssfile!==undefined)
             each item in css
                 link(rel='stylesheet', href='#{siteUrl}css/app/'+item)
+        script.
+            var siteUrl = '#{siteUrl}',
+                app = '#{app}',
+                domain = '#{domain}',
+                port = #{port},
+                loadTime_Start = new Date();
         script(src='/js/jquery.min.js')
         script(src='/js/bootstrap.js')
         script(src='/js/dropzone.min.js')
         script(src='/js/masonry.pkgd.min.js')
         script(src='/js/summernote.js')
         script(src='/js/summernote-zh-CN.js')
+        //socket.io
+        script(src='http://#{domain}:#{Number(port)+1}/socket.io/socket.io.js')
+        script(src='/js/socket.io.moreii.js')
         script(src='/js/basic.js')
         script(src='/js/main.js')
         -var j = String(jsfile).split(',')
         if(jsfile!=="" && jsfile!==undefind)
             each item in j
                 script(src='#{siteUrl}js/app/'+item)
-        script.
-            var siteUrl = '#{siteUrl}',
-                app = '#{app}',
-                loadTime_Start = new Date();
     body
         include header
         block content

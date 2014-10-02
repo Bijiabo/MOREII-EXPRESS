@@ -401,6 +401,7 @@
     }
     #console-appnav .navbar-nav>li.active a{
         font-weight: normal;
+        background: #f4f4f4;
     }
     #console-appnav .navbar-nav>li.active a:before,#console-appnav .navbar-nav>li.active a:after{
         display: none;

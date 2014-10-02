@@ -7,15 +7,23 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
     GithubStrategy = require('passport-github').Strategy,
-    csrf = require('csurf');
+    csrf = require('csurf'),
+    cookieparser = cookieParser();
 //set config
 global.config = require('./core/config');
+//require user
 global.userSchema = require('./core/schema/user');
+//get app
+global.app = express();
+var server = require('http').createServer(app);
+io = require('socket.io')(server);
+server.listen(Number(global.config.port)+1);
+//session.socket.io
+var SessionSockets = require('session.socket.io');
+global.sessionSockets = new SessionSockets(io, global.userSchema.session(), cookieparser);
 //get mongoose schema
 var site = require('./core/schema/site'),
     markdown = require('markdown-js');
-//get app
-global.app = express();
 //var app = express(),
 // var router = express.Router();
 //set port
@@ -34,7 +42,7 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+app.use(cookieparser);
 app.use(session({
     key: 'session',
     secret: 'speedyCat',
@@ -71,6 +79,8 @@ app.use(function(req,res,next){
         res.locals.nav = global.config.nav;
         res.locals.apps = global.config.app;
         res.locals.pretty = true;
+        res.locals.domain = global.config.domain;
+        res.locals.port = global.config.port;
         res.locals.siteUrl = global.config.siteUrl;
         res.locals.logo = global.config.logo;
         res.locals.logoImage = global.config.logoImage;
@@ -131,5 +141,4 @@ app.use(function(err, req, res, next) {
         errorname:'404'
     })
 });
-
 module.exports = app;

@@ -50,4 +50,19 @@ router.get('/api/getUnread', function(req, res) {
     });
 });
 
+//socket.io 推送消息
+var notice = global.sessionSockets.of('/notice')
+    .on('connection',function(err, socket, session){
+        socket.emit('notice',{
+            type:'test',
+            content:'hi,this is a "notice" message test.'
+        });
+        socket.on('query',function(){
+            socket.emit('notice',{
+                type:'queryNotice',
+                content:'here is query result'
+            });
+        })
+    });
+
 module.exports = router;
