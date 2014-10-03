@@ -20,29 +20,26 @@ global.io = require('socket.io')(server);
 server.listen(Number(global.config.port)+1);
 var cookie = require('cookie'),
     cookieSignature = require('cookie-signature');
-global.io.set('authorization', function (handshakeData, accept) {
-
+global.io.use(function (socket, next) {
+    var handshakeData = socket.request;
     if (handshakeData.headers.cookie) {
         var cookieCache = cookie.parse(handshakeData.headers.cookie),
             sid = cookieSignature.unsign(cookieCache.session.slice(2),'speedyCat'),
             mongoSession = global.userSchema.session();
         mongoSession.get(sid,function(err,sessionResult){
-            console.log(err);
-            console.log(sessionResult);
+            if(err){
+//                return callback(err,false);
+            }else{
+                handshakeData.session = sessionResult;
+//                return callback(null,true);
+            }
+            next();
         });
-        /*handshakeData.cookie = cookie.parse(handshakeData.headers.cookie);
-
-        handshakeData.sessionID = connect.utils.parseSignedCookie(handshakeData.cookie['express.sid'], 'secret');
-
-        if (handshakeData.cookie['express.sid'] == handshakeData.sessionID) {
-            return accept('Cookie is invalid.', false);
-        }*/
-
     } else {
-        return accept('No cookie transmitted.', false);
+//        callback('no session',false);
+        next();
     }
-
-    accept(null, true);
+//    callback(null, true);
 });
 //session.socket.io
 //var SessionSockets = require('session.socket.io'),

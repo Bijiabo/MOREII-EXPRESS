@@ -351,30 +351,6 @@ var userApi = {
         }
     },
     checkLogin:function(req,res,callback){
-        //cookies验证方式
-        /*if(req.cookies.name){
-            userModel.findOne({
-                name:req.cookies.name,
-                mail:req.cookies.mail
-            },function(err,user){
-                if(user!==null){
-                    var mii_login = global.config.encryptCookie({
-                        name:user.name,
-                        mail:user.mail,
-                        password:user.password
-                    });
-                    if(mii_login===req.cookies.mii_login){//logined
-                        callback(true,user);
-                    }else{//unlogined
-                        callback(false);
-                    }
-                }else{
-                    callback(false);
-                }
-            });
-        }else{
-            callback(false);
-        }*/
         //session验证
         if(req.session.user){
             userModel.findOne({
@@ -392,6 +368,29 @@ var userApi = {
                     callback(false);
                 }
             });
+        }else{
+            callback(false);
+        }
+    },
+    socketIoCheckLogin:function(session,callback){
+        if(session){
+            if(session.user){
+                userModel.findOne({
+                    name:session.user.name,
+                    mail:session.user.mail,
+                    password:session.user.pw
+                }).exec(function(err,userData){
+                    if(err===null && userData!==null){
+                        if(userData.state!==0){
+                            callback(true,userData);
+                        }else{
+                            callback(false);
+                        }
+                    }else{
+                        callback(false);
+                    }
+                });
+            }
         }else{
             callback(false);
         }

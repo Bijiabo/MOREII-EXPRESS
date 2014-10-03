@@ -51,13 +51,20 @@ router.get('/api/getUnread', function(req, res) {
 });
 
 //socket.io 推送消息
-var notice = global.io.of('/notice')
+var notice = global.io
+    .of('/notice')
     .on('connection',function(socket){
+        //session
+        var handshake = socket.request;
+        var session = handshake.session;
+        console.log('print session-----------------');
+        console.log(session);
         socket.emit('notice',{
             type:'test',
             content:'hi,this is a "notice" message test.'
         });
         socket.on('query',function(data){
+            console.log(session);
             socket.emit('notice',{
                 type:'queryNotice',
                 content:'here is query result'
