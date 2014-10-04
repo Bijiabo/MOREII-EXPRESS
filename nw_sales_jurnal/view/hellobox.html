@@ -1,0 +1,17 @@
+<!--欢迎界面-->
+<div id="hellobox">
+    <div id="loginbox" ng-controller="loginController">
+        <form role="form" ng-submit="doLogin()">
+            <div class="form-group">
+                <input class="form-control" type="text" name="account" id="login-account" placeholder="账户" ng-model="account" ng-change="checkAccount()"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" id="login-password" placeholder="密码" ng-model="password" ng-change="checkPassword()"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" id="loginbtn">登陆</button>
+            </div>
+            <p class="logintip" ng-bind="tip"></p>
+        </form>
+    </div>
+</div>

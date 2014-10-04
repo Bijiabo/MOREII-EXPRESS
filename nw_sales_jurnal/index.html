@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="moreii">
+<head>
+    <meta charset="utf-8"/>
+    <title>Moreii</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/todc-bootstrap.css"/>
+    <link href='http://fonts.useso.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/main.css"/>
+    <!--<script src="js/jquery-2.0.3.min.js"></script>-->
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <!--angularjs start-->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular-route.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <!--angularjs end-->
+    <script src="js/gui.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body>
+    <nav id="header" class="navbar navbar-default" role="navigation" ng-controller="headerController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">{{title}} {{version}}</a>
+            </div>
+        </div>
+    </nav>
+    <button class="btn btn-default" id="close" ng-click="closeGUI();">&times;</button>
+    <div ng-view></div>
+    <script>
+//        window.location.href = 'http://localhost:3001/blog/console';
+    </script>
+</body>
+</html>
