@@ -23,18 +23,22 @@ var cookie = require('cookie'),
 global.io.use(function (socket, next) {
     var handshakeData = socket.request;
     if (handshakeData.headers.cookie) {
-        var cookieCache = cookie.parse(handshakeData.headers.cookie),
-            sid = cookieSignature.unsign(cookieCache.session.slice(2),'speedyCat'),
-            mongoSession = global.userSchema.session();
-        mongoSession.get(sid,function(err,sessionResult){
-            if(err){
+        var cookieCache = cookie.parse(handshakeData.headers.cookie);
+        if(cookieCache.session){
+            var sid = cookieSignature.unsign(cookieCache.session.slice(2),'speedyCat'),
+                mongoSession = global.userSchema.session();
+            mongoSession.get(sid,function(err,sessionResult){
+                if(err){
 //                return callback(err,false);
-            }else{
-                handshakeData.session = sessionResult;
+                }else{
+                    handshakeData.session = sessionResult;
 //                return callback(null,true);
-            }
+                }
+                next();
+            });
+        }else{
             next();
-        });
+        }
     } else {
 //        callback('no session',false);
         next();
