@@ -90,6 +90,8 @@ app.use(function(req,res,next){
         'X-Powered-By': 'Moreii',
         'Version':'0.0.2'
     });
+    //csrf for AngularJS
+    res.cookie('XSRF-TOKEN', req.csrfToken());
     global.userSchema.checkLogin(req,res,function(login,userData){
         if(login){
             req.login = true;
@@ -129,6 +131,12 @@ for(var item in config.app){
         app.use('/'+config.app[item].path,appRouter[item]);
 //    }
 }
+//client get csrf token
+app.route('/getCsrfToken').all(function(req,res,next){
+    res.json({
+        token:req.csrfToken()
+    });
+});
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
