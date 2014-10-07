@@ -109,12 +109,12 @@ router.post('/login',function(req,res){
             });*/
             res.json({
                 "success":1,
-                "descriotion":'登陆成功。'
+                "description":'登陆成功。'
             });
         }else{
             res.json({
                 "success":0,
-                "descriotion":'帐号或密码错误。'
+                "description":'帐号或密码错误。'
             });
         }
     })
@@ -123,7 +123,7 @@ router.get('/logout',function(req,res){
     req.session.user=null;
     res.json({
         "success":1,
-        "descriotion":'退出成功。'
+        "description":'退出成功。'
     });
 });
 router.get('/iflogin',function(req,res){

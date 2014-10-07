@@ -3,16 +3,12 @@
  */
 var severUrl = 'http://192.168.0.102:3001';
 var moreiiServices = angular.module('moreii',['ngRoute','ui.bootstrap']);
-function moreiiRouteConfig($routeProvider,$httpProvider){
-    $routeProvider
-        .when('/',{
-            templateUrl:'view/hellobox.html'
-        })
-        .otherwise({
-            redirectTo:'/'
-        });
-}
-moreiiServices.config(moreiiRouteConfig);
+moreiiServices.run(function($rootScope){
+    $rootScope.notify={
+        display:false,
+        message:''
+    };
+})
 //添加过滤器
 moreiiServices.filter('mailName',function(){
     //匹配邮箱名
@@ -35,7 +31,6 @@ moreiiServices.factory('$miihttp',function($http){
             promise.then(function(resp){
                 return callback(resp);
             },function(resp){
-                console.log(resp);
                 if(resp.status===403){
                     console.log(resp.status);
                     $http.get(severUrl+'/getCsrfToken').then(function(resp){
@@ -56,7 +51,82 @@ moreiiServices.factory('$miihttp',function($http){
     };
     return miihttp;
 });
+//指令
+moreiiServices.directive('notify',function($rootScope){
+    //设置全局通知指令
+    return {
+        restrict: 'EAC',
+        scope:{
+            display:'=',
+            message:'='
+        },
+        template: '<div ng-show="notify.display">{{notify.message}}</div>',
+        controller:function($scope){
+            $scope.$watch(function(){
+                return $rootScope.notify;
+            },function(){
+                $scope.notify = $rootScope.notify;
+                console.log($scope.notify);
+                if($scope.notify.display){
 
+                }
+            },true);
+        }
+    };
+});
+//设置路由
+function moreiiRouteConfig($routeProvider,$httpProvider){
+    $routeProvider
+        .when('/',{
+            templateUrl:'view/hellobox.html',
+            controller:function($scope,$http,$miihttp,$rootScope){
+                $scope.checkAccount = function(){
+                    if($scope.account===''){
+                        $scope.tip = '请输入账户';
+                    }else{
+                        $scope.tip = '';
+                    }
+                }
+                $scope.checkPassword= function(){
+                    if($scope.account===''){
+                        $scope.tip = '请输入账户';
+                    }else if($scope.password==='') {
+                        $scope.tip = '请输入密码';
+                    }else if($scope.password.length <6){
+                        $scope.tip = '密码长度需大于6位'
+                    }else{
+                        $scope.tip = '';
+                    }
+                }
+                $scope.doLogin = function(){
+                    $miihttp.post(severUrl+'/api/login',{
+                        account:$scope.account,
+                        password:basic.pwdencode($scope.password)
+                    },{},function(resp){
+                        if(resp.status === 200){
+                            //提交成功
+                            console.log(resp.data);
+                            if(resp.data.success){
+                                //登陆成功
+
+                            }else{
+                                //登陆失败
+                                $rootScope.notify.display = true;
+                                $rootScope.notify.message = resp.data.description;
+                            }
+                        }else{
+                            //提交失败
+
+                        }
+                    });
+                }
+            }
+        })
+        .otherwise({
+            redirectTo:'/'
+        });
+}
+moreiiServices.config(moreiiRouteConfig);
 //fengjiejie
 /*
 wb_shop.factory('$wb_http', function($http, $resource) {
@@ -139,40 +209,14 @@ easyBuy : function(goodid, itemid, goodqty) {
 */
 
 //fengjiejie end
-//控制器
-function headerController($scope,$http){
+//控制器------
+moreiiServices.controller('headerController',function($scope,$http){
     $scope.title = 'Moreii';
     $scope.version = '1.0.1';
-}
-moreiiServices.controller('loginController',function($scope,$http,$miihttp){
-    $scope.checkAccount = function(){
-        if($scope.account===''){
-            $scope.tip = '请输入账户';
-        }else{
-            $scope.tip = '';
-        }
-    }
-    $scope.checkPassword= function(){
-        if($scope.account===''){
-            $scope.tip = '请输入账户';
-        }else if($scope.password==='') {
-            $scope.tip = '请输入密码';
-        }else if($scope.password.length <6){
-            $scope.tip = '密码长度需大于6位'
-        }else{
-            $scope.tip = '';
-        }
-    }
-    $scope.doLogin = function(){
-        console.log({
-            account:$scope.account,
-            passworld:basic.pwdencode($scope.password)
-        });
-        $miihttp.post(severUrl+'/api/login',{
-            account:$scope.account,
-            password:basic.pwdencode($scope.password)
-        },{},function(resp){
-            console.log(resp);
-        });
-    }
+});
+moreiiServices.controller('UI',function($scope){
+    //全局ui
+    $scope.closeGUI = function(){
+        win.close();
+    };
 });
