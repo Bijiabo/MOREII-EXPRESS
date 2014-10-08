@@ -1,0 +1,42 @@
+doctype html
+html(ng-app,lamg="zh")
+    head
+        meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+        link(href="#{siteUrl}",rel="dns-prefetch")
+        link(href="#{siteUrl}",rel="prefetch")
+        title= title
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/todc-bootstrap.min.css')
+        link(rel='stylesheet', href='/css/font-awesome.min.css')
+        link(rel='stylesheet', href='/css/basic.css')
+        -var css = String(cssfile).split(',')
+        -if(cssfile!=="" && jsfile!==cssfile && cssfile!==undefined)
+            -each item in css
+                link(rel='stylesheet', href='#{siteUrl}css/app/'+item)
+        script.
+            var siteUrl = '#{siteUrl}',
+                               app = '#{app}',
+                               domain = '#{domain}',
+                               port = #{port},
+                               loadTime_Start = new Date();
+        script(src='/js/angular/angular.js')
+        script(src='/js/angular/angular-route.min.js')
+        //socket.io
+        //script(src='http://#{domain}:#{Number(port)+1}/socket.io/socket.io.js')
+        //script(src='/js/socket.io.moreii.js')
+        //script(src='/js/basic.js')
+        //script(src='/js/main.js')
+        -var j = String(jsfile).split(',')
+        if(jsfile!=="" && jsfile!==undefind)
+            each item in j
+                script(src='#{siteUrl}js/app/'+item)
+    body
+        div.container
+            h2= title
+            hr
+            form(role="form")
+                div.form-group
+                    input.form-control(type="text",placeholder="键入微博内容")
+                div.form-group
+                    button.btn.btn-default(type="button") 发送
+            hr

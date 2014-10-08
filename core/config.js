@@ -132,6 +132,13 @@ var crypto = require('crypto'),
             path:'cloth',
             ico:'fa-male',
             state:1
+        },
+        microblog:{
+            name:'microblog',
+            cnName:'微博',
+            path:'microblog',
+            ico:'fa-slack',
+            state:1
         }
     };
 var im = require('imagemagick');

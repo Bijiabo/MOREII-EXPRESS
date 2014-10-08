@@ -1,5 +1,5 @@
-var express = require('express'),
-    session = require('express-session'),
+global.express = require('express');
+var session = require('express-session'),
     path = require('path'),
     favicon = require('static-favicon'),
     logger = require('morgan'),
@@ -17,7 +17,7 @@ global.db = require('./core/db');
 //require user
 global.userSchema = require('./core/schema/user');
 //get app
-global.app = express();
+global.app = global.express();
 var server = require('http').createServer(app);
 global.io = require('socket.io')(server);
 server.listen(Number(global.config.port)+1);
@@ -54,8 +54,8 @@ global.io.use(function (socket, next) {
 //get mongoose schema
 var site = require('./core/schema/site'),
     markdown = require('markdown-js');
-//var app = express(),
-// var router = express.Router();
+//var app = global.express(),
+// var router = global.express.Router();
 //set port
 app.set('port',3001);
 // view engine setup
@@ -84,7 +84,7 @@ app.use(session({
     store:global.userSchema.session()
 }));
 app.use(csrf());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(global.express.static(path.join(__dirname, 'public')));
 /**
  * 验证登陆 & 权限
  * */
