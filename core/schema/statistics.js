@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var statisticsSchema = new mongoose.Schema({
         url:{
             type:String,
@@ -80,7 +79,7 @@ var statisticsSchema = new mongoose.Schema({
             default:''
         }
     });
-var statisticsModel = db.model('statistic',statisticsSchema);
+var statisticsModel = global.db.model('statistic',statisticsSchema);
 
 module.exports = {
     add:function(data,callback){

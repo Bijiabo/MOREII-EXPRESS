@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-8-23.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var indexSchema = new mongoose.Schema({
     type:{type:String,default:'system',index:true},
     style:{type:String,default:'default',index:true},
@@ -15,7 +14,7 @@ var indexSchema = new mongoose.Schema({
     useTime:{ type : Date, index:true },
     createTime:{ type : Date, default: Date.now }
 });
-var indexModel = db.model('index',indexSchema);
+var indexModel = global.db.model('index',indexSchema);
 
 module.exports = {
     add:function(data,callback){

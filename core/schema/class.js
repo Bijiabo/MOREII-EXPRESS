@@ -2,8 +2,7 @@
  * Created by boooo on 14-5-17.
  */
 var mongoose = require('mongoose'),
-    userModal = require('./user'),
-    db = require('../db');
+    userModal = require('./user');
 //var ObjectId = mongoose.Schema.Types.ObjectId;
 var classSchema = new mongoose.Schema({
     name:String,
@@ -52,9 +51,9 @@ var studentRemarkClassSchema = new mongoose.Schema({
     state:{ type : String, default: '未读' ,index:true},
     createTime:{ type : Date, default: Date.now }
 });
-var classModel = db.model('class',classSchema),
-    studentClassModel = db.model('studentclass',studentClassSchema),
-    teacherClassModel = db.model('teacherclass',teacherClassSchema);
+var classModel = global.db.model('class',classSchema),
+    studentClassModel = global.db.model('studentclass',studentClassSchema),
+    teacherClassModel = global.db.model('teacherclass',teacherClassSchema);
 
 module.exports = {
     add:function(data,callback){

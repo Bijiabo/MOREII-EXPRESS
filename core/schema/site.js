@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-8-2.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var siteSchema = new mongoose.Schema({
     siteName:{type:String,default:global.config.siteName,index:true},
     domain:{type:String,default:global.config.domain,index:true},
@@ -16,7 +15,7 @@ var siteSchema = new mongoose.Schema({
     logoImageResize:{type:String},
     footerInfo:{type:mongoose.Schema.Types.Mixed}
 });
-var siteModel = db.model('sites',siteSchema);
+var siteModel = global.db.model('sites',siteSchema);
 
 /*
 * init/refresh site configure function

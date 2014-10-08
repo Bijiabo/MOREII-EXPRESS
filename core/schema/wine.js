@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-8-23.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var wineSchema = new mongoose.Schema({
     score:{
         type:Number,
@@ -16,7 +15,7 @@ var wineSchema = new mongoose.Schema({
     },
     createTime:{ type : Date, default: Date.now }
 });
-var wineModel = db.model('wines',wineSchema);
+var wineModel = global.db.model('wines',wineSchema);
 
 module.exports = {
     add:function(data,callback){

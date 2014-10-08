@@ -2,8 +2,7 @@
  * Created by boooo on 14-5-17.
  */
 var mongoose = require('mongoose'),
-    crypto = require('crypto'),
-    db = require('../db');
+    crypto = require('crypto');
 var userSchema = new mongoose.Schema({
         name:{
             type:'String',
@@ -111,7 +110,7 @@ var addressSchema = function(data){
     this.name = data.name || '';
     this.tel = data.tel || '';
 };
-var userModel = db.model('user',userSchema);
+var userModel = global.db.model('user',userSchema);
 //定义用户权限
 var appGrade = {
     index:{
@@ -545,7 +544,7 @@ var sessionSchema = new mongoose.Schema({
         },
         session: mongoose.Schema.Types.Mixed
     }),
-    SessionModel = db.model('sessions', sessionSchema);
+    SessionModel = global.db.model('sessions', sessionSchema);
 var MongooseSession = function () {
     this.__proto__ = (require('express-session').Store).prototype;
     this.mongoose = mongoose;

@@ -2,8 +2,7 @@
  * Created by boooo on 14-8-2.
  * 定制模块：面料模块
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var wechatSettingSchema = new mongoose.Schema({
     uid:{type:String,index:true},
     uname:{type:String,index:true},
@@ -20,7 +19,7 @@ var wechatSettingSchema = new mongoose.Schema({
     picture:{type:Array},//图片队列
     previewPicture:{type:String}//预览图片
 });
-var wechatSettingModel = db.model('cloth',wechatSettingSchema);
+var wechatSettingModel = global.db.model('cloth',wechatSettingSchema);
 
 module.exports = {
     add:function(data,callback){

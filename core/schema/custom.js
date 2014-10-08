@@ -1,13 +1,12 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var customSchema = new mongoose.Schema({
     uid:String,
     drawData:Object
 });
-var customModel = db.model('custom',customSchema);
+var customModel = global.db.model('custom',customSchema);
 
 module.exports = {
     add:function(data,callback){

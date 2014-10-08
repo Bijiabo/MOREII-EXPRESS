@@ -11,6 +11,8 @@ var express = require('express'),
     cookieparser = cookieParser();
 //set config
 global.config = require('./core/config');
+//retuire db
+global.db = require('./core/db');
 //require user
 global.userSchema = require('./core/schema/user');
 //get app

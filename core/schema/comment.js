@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var commentSchema = new mongoose.Schema({
     uid:String,
     touid:Array,
@@ -23,7 +22,7 @@ var commentSchema = new mongoose.Schema({
     appPageId:String,
     time:Date
 });
-var commentModel = db.model('comment',commentSchema);
+var commentModel = global.db.model('comment',commentSchema);
 
 module.exports = {
     add:function(data,callback){

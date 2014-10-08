@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var noticeSchema = new mongoose.Schema({
         uid:{
             type:'String',
@@ -28,7 +27,7 @@ var noticeSchema = new mongoose.Schema({
         link:String,
         createTime:{ type : Date, default: Date.now }
     });
-var noticeModel = db.model('notice',noticeSchema);
+var noticeModel = global.db.model('notice',noticeSchema);
 
 module.exports = {
     unreadNotice:function(userData,callback){

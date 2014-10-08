@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var orderSchema = new mongoose.Schema({
     uid:String,
     goodId:String,
@@ -34,7 +33,7 @@ var orderSchema = new mongoose.Schema({
     remark:String,
     state:String
 });
-var orderModel = db.model('order',orderSchema);
+var orderModel = global.db.model('order',orderSchema);
 
 module.exports = {
     add:function(data,callback){

@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 var shopSchema = new mongoose.Schema({
     name:String,
     picture:Array,
@@ -18,7 +17,7 @@ var shopSchema = new mongoose.Schema({
     same_good:Array,
     index:Number
 });
-var shopModel = db.model('shop',shopSchema);
+var shopModel = global.db.model('shop',shopSchema);
 
 module.exports = {
     addGood:function(goodData,callback){

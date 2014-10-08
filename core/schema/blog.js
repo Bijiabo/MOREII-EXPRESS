@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    db = require('../db');
+var mongoose = require('mongoose');
 //var ObjectId = mongoose.Schema.Types.ObjectId;
 var blogSchema = new mongoose.Schema({
     title:String,
@@ -37,8 +36,8 @@ var blogContentSchema = new mongoose.Schema({
     content:String,
     version:{type:Number,index:true}
 });
-var blogModel = db.model('blog',blogSchema);
-var blogContentModel = db.model('blogContent',blogContentSchema);
+var blogModel = global.db.model('blog',blogSchema);
+var blogContentModel = global.db.model('blogContent',blogContentSchema);
 
 module.exports = {
     add:function(data,callback){
