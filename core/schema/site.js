@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-8-2.
  */
-var mongoose = require('mongoose');
-var siteSchema = new mongoose.Schema({
+var siteSchema = new global.mongoose.Schema({
     siteName:{type:String,default:global.config.siteName,index:true},
     domain:{type:String,default:global.config.domain,index:true},
     port:{type:Number,default:global.config.port,index:true},
@@ -13,7 +12,7 @@ var siteSchema = new mongoose.Schema({
     app:{type:Object,default:global.config.app},
     logoImage:{type:String},
     logoImageResize:{type:String},
-    footerInfo:{type:mongoose.Schema.Types.Mixed}
+    footerInfo:{type:global.mongoose.Schema.Types.Mixed}
 });
 var siteModel = global.db.model('sites',siteSchema);
 

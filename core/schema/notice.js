@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var noticeSchema = new mongoose.Schema({
+var noticeSchema = new global.mongoose.Schema({
         uid:{
             type:'String',
             required:true,

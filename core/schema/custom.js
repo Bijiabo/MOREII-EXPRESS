@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var customSchema = new mongoose.Schema({
+var customSchema = new global.mongoose.Schema({
     uid:String,
     drawData:Object
 });

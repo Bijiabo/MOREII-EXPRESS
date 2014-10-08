@@ -2,8 +2,7 @@
  * Created by boooo on 14-8-2.
  * 定制模块：面料模块
  */
-var mongoose = require('mongoose');
-var wechatSettingSchema = new mongoose.Schema({
+var wechatSettingSchema = new global.mongoose.Schema({
     uid:{type:String,index:true},
     uname:{type:String,index:true},
     codeNumber:{type:String,default:'',index:true},

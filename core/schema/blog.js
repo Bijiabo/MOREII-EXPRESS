@@ -1,9 +1,8 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
 //var ObjectId = mongoose.Schema.Types.ObjectId;
-var blogSchema = new mongoose.Schema({
+var blogSchema = new global.mongoose.Schema({
     title:String,
     content:String,
     tag:{type:Array,index:true},
@@ -30,7 +29,7 @@ var blogSchema = new mongoose.Schema({
         }
     ]
 });
-var blogContentSchema = new mongoose.Schema({
+var blogContentSchema = new global.mongoose.Schema({
     blogId:{type:String,index:true},
     contentIndex:{type:Number,index:true},
     content:String,

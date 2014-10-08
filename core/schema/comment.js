@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var commentSchema = new mongoose.Schema({
+var commentSchema = new global.mongoose.Schema({
     uid:String,
     touid:Array,
     userData:{

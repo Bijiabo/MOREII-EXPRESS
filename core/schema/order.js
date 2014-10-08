@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var orderSchema = new mongoose.Schema({
+var orderSchema = new global.mongoose.Schema({
     uid:String,
     goodId:String,
     goodData:{

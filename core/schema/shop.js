@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var shopSchema = new mongoose.Schema({
+var shopSchema = new global.mongoose.Schema({
     name:String,
     picture:Array,
     description:String,

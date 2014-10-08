@@ -1,12 +1,11 @@
 /**
  * Created by boooo on 14-8-23.
  */
-var mongoose = require('mongoose');
-var indexSchema = new mongoose.Schema({
+var indexSchema = new global.mongoose.Schema({
     type:{type:String,default:'system',index:true},
     style:{type:String,default:'default',index:true},
-    image:mongoose.Schema.Types.Mixed,
-    text:mongoose.Schema.Types.Mixed,
+    image:global.mongoose.Schema.Types.Mixed,
+    text:global.mongoose.Schema.Types.Mixed,
     user:{
         "_id":{type:String,index:true},
         name:{type:String,index:true}

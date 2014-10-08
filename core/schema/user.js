@@ -1,9 +1,8 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    crypto = require('crypto');
-var userSchema = new mongoose.Schema({
+var crypto = require('crypto');
+var userSchema = new global.mongoose.Schema({
         name:{
             type:'String',
             required:true,
@@ -537,17 +536,17 @@ module.exports = userApi;
 /*
 * session
 * */
-var sessionSchema = new mongoose.Schema({
+var sessionSchema = new global.mongoose.Schema({
         sid: {
             type:String,
             index:true
         },
-        session: mongoose.Schema.Types.Mixed
+        session: global.mongoose.Schema.Types.Mixed
     }),
     SessionModel = global.db.model('sessions', sessionSchema);
 var MongooseSession = function () {
     this.__proto__ = (require('express-session').Store).prototype;
-    this.mongoose = mongoose;
+    this.mongoose = global.mongoose;
     this.get = function(sid, callback) {
         var self = this;
         SessionModel.findOne({ sid: sid })

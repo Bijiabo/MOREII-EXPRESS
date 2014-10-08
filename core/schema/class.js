@@ -1,10 +1,9 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose'),
-    userModal = require('./user');
+var userModal = require('./user');
 //var ObjectId = mongoose.Schema.Types.ObjectId;
-var classSchema = new mongoose.Schema({
+var classSchema = new global.mongoose.Schema({
     name:String,
     intro:String,
     students:[
@@ -19,7 +18,7 @@ var classSchema = new mongoose.Schema({
     startTime:Date,
     endTime:Date
 });
-var studentClassSchema = new mongoose.Schema({
+var studentClassSchema = new global.mongoose.Schema({
     uid:{type:String,index:true},
     name:{type:String,index:true},
     course:[
@@ -34,7 +33,7 @@ var studentClassSchema = new mongoose.Schema({
     className:{type:String,index:true},
     state:{ type : String, default: '在校' ,index:true}
 });
-var teacherClassSchema = new mongoose.Schema({
+var teacherClassSchema = new global.mongoose.Schema({
     uid:{type:String,index:true},
     name:{type:String,index:true},
     class:[
@@ -44,7 +43,7 @@ var teacherClassSchema = new mongoose.Schema({
         }
     ]
 });
-var studentRemarkClassSchema = new mongoose.Schema({
+var studentRemarkClassSchema = new global.mongoose.Schema({
     uid:{type:String,index:true},
     name:{type:String,index:true},
     remark:String,

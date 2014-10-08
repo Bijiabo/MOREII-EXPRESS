@@ -1,8 +1,7 @@
 /**
  * Created by boooo on 14-5-17.
  */
-var mongoose = require('mongoose');
-var statisticsSchema = new mongoose.Schema({
+var statisticsSchema = new global.mongoose.Schema({
         url:{
             type:String,
             required:true,
