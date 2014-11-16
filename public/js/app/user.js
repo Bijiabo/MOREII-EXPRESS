@@ -206,7 +206,7 @@ $(function(){
             if(data.success=== 1){
                 window.location.href = siteUrl;
             }else if(data.success === 0){
-                alert(data.descriotion);
+                alert(data.description);
             }else{
                 alert('登陆失败，请检查表单后重试。');
             }

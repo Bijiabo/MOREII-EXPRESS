@@ -290,12 +290,23 @@ var userApi = {
     register:function (userData,callback){
         userModel.findOne({name:userData.name},function(err,user){
             if(user===null){
-                userModel.findOne({mail:userData.mail},function(err,user){
-                   if(user===null){
-                       userData.permission = userGrade.user;
-                       var addUserData = new userModel(userData);
-                       addUserData.save(function(err){
-                           callback(err);
+                userModel.findOne({mail:userData.mail},function(err1,user2){
+                   if(user2===null){
+                       //检测是否为创始用户
+                       userModel.findOne({},function(err2,user2){
+                           console.log(user2);
+                           if (!err2 && user2===null) {
+                               //第一个用户，创始人
+                               userData.permission = userGrade.admin;
+                           }
+                           else{
+                               //普通用户
+                               userData.permission = userGrade.user;
+                           }
+                           var addUserData = new userModel(userData);
+                           addUserData.save(function(err3){
+                                callback(err3);
+                           });
                        });
                    }else{
                        callback({success:0,description:'该邮件地址已被注册。'});
